@@ -33,6 +33,7 @@ export class IntroSlider {
   /* To load login page on button click*/
   navigateToLogin(){
     this._logger.log('navLogin() clicked');
-    this.navCtrl.push('Login');
+    this.navCtrl.setRoot('Login');
+    
   }
 }

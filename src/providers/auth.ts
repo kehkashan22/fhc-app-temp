@@ -42,7 +42,15 @@ export class AuthProvider {
     });
   }
 
-  authenticateAndLogin(){}
+  authenticateAndLogin(user){
+    this.logger.log('authenticateAndLogin()');
+    this.logger.log('User in authenticateAndLogin() '+user);
+
+    let phoneNumber = user.phoneNumber;
+    let password = user.password;
+
+    return this.af.auth.signInWithPhoneNumber(phoneNumber, password);
+  }
 
   forgetPassword(){}
 

@@ -3,9 +3,10 @@
   Functionality - For registering of users using firebase.
   Author - Shantanu Kamdi
   Date - 07/06/2017
+  Updated - 08/06/2017
 */
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 /* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /* Logger Service */
@@ -30,19 +31,20 @@ export class SignUp {
               public navParams: NavParams,
               public formBuilder: FormBuilder,
               private _logger: Logger,
-              private _auth: AuthProvider
+              private _auth: AuthProvider,
+              private loadingCtrl: LoadingController
   ) {
     /* Creating form using formBuilder module and applying validations. Need to validate fields and make hash password */
     this.form = formBuilder.group({
-        fullName: [ '', Validators.compose([Validators.required])],
+        fullName: [ '', Validators.required],
         emailId: [''],
         phoneNumber: [ '', Validators.compose([Validators.required, Validators.maxLength(10)])],
         password: [ '', Validators.required],
         address: ['', Validators.required],
         attemptNo: ['', Validators.required],
-        pincode: [ '', Validators.compose([Validators.required, Validators.maxLength(6)])],
+        pincode: [ '', Validators.minLength(6)],
         attemptDate: ['', Validators.required],
-        dob: ['', Validators.required]
+        dob: ['']
     });
   }
 
@@ -53,7 +55,7 @@ export class SignUp {
   /* Signup user method which is called in click */
   signupUser(){
     this._logger.log('signupUser() method');
-
+    
     /* Creating user object using form values*/
     let userData = {
       fullName: this.form.value.fullName,
@@ -66,23 +68,29 @@ export class SignUp {
       attemptDate: this.form.value.attemptDate,
       dob: this.form.value.dob
     }
+
+    /* Loader */
+    let loader = this.loadingCtrl.create({
+      content: 'Registering User'
+    });
+
+    loader.present();
+    
     /* Auth service registerUser method */
-    this._auth.registerUser(userData);
+    this._auth.registerUser(userData).then(() => {
+      /* Resetting the form once everything is done */
+      this.form.reset();
+      /* Setting the stack root to login */
+      this.navCtrl.setRoot('Login');
+      /* Dismissing the loader */
+      loader.dismiss();
+    });
   }
 
   /* Navigate back to login */
   navigateToLogin(){
     this._logger.log('navigateToLogin() method');
-    this.navCtrl.push('Login');
+    /* For avoiding the stacking of the same page again and again */
+    this.navCtrl.setRoot('Login');
   }
 }
-
-
-
-
-
-
-
-
-
-

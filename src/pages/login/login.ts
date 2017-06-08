@@ -7,13 +7,13 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CheckNetwork } from '../../providers/check-network';
-/* Custom Toast Service */
-import { CustomToast } from '../../providers/custom-toast';
-/* Network */
-import { Network } from '@ionic-native/network';
-/* Logger Service*/
+/* Forms module */
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+/* Logger Service */
 import { Logger } from '../../providers/logger';
+/* Auth Service */
+import { AuthProvider } from '../../providers/auth';
+
 
 @IonicPage()
 @Component({
@@ -22,13 +22,21 @@ import { Logger } from '../../providers/logger';
 })
 export class Login {
 
+  private loginForm: FormGroup;
+
+  /* For Validation purposes */
+  private submitAttempt: boolean = false;
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private _toast: CustomToast,
-              private _checkNetwork: CheckNetwork,
-              private network: Network,
+              public formBuilder: FormBuilder,
+              private _auth: AuthProvider,
               private _logger: Logger
   ) {
+    this.loginForm = formBuilder.group({
+      phoneNumber: [ '', Validators.compose([Validators.required, Validators.maxLength(10)])],
+      password: [ '', Validators.required],
+    });
   }
   /* Check for Network - Remaining*/
   ionViewDidLoad() {
@@ -38,7 +46,20 @@ export class Login {
   /* Navigate to Signup */
   navigateToSignup(){
     this._logger.log('navigateToSignup()');
-    this.navCtrl.push('SignUp');
+    this.navCtrl.setRoot('SignUp');
   }
 
+  /* Login Method */
+  login(){
+    this._logger.log('login()');
+    let loginUserData = {
+      phoneNumber: this.loginForm.value.phoneNumber,
+      password: this.loginForm.value.password
+    };
+
+    this._auth.authenticateAndLogin(loginUserData).then(authData => {
+      console.log(authData);
+      this.navCtrl.setRoot('HomePage');
+    });
+  }
 }
