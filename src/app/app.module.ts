@@ -18,6 +18,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
+/* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
     apiKey: "AIzaSyBTWVR9YYEkE7xLDyCtThZJhW_CLiM4Ka0",
     authDomain: "fhc-app-47154.firebaseapp.com",
@@ -34,6 +35,7 @@ const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
+      //for limiting scrolling of the page when keyboard is up
       scrollAssist: false
     }),
     AngularFireModule.initializeApp(firebaseConfig),

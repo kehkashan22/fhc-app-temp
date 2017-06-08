@@ -1,8 +1,16 @@
+/* 
+  Name - Signup Component
+  Functionality - For registering of users using firebase.
+  Author - Shantanu Kamdi
+  Date - 07/06/2017
+*/
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+/* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+/* Logger Service */
 import { Logger } from '../../providers/logger';
+/* Auth Service */
 import { AuthProvider } from '../../providers/auth';
 
 
@@ -13,8 +21,9 @@ import { AuthProvider } from '../../providers/auth';
 })
 export class SignUp {
 
-
+  /* FormGroup which will be used in html */
   private form: FormGroup;
+  /* For Validation purposes */
   private submitAttempt: boolean = false;
 
   constructor(public navCtrl: NavController, 
@@ -23,6 +32,7 @@ export class SignUp {
               private _logger: Logger,
               private _auth: AuthProvider
   ) {
+    /* Creating form using formBuilder module and applying validations. Need to validate fields and make hash password */
     this.form = formBuilder.group({
         fullName: [ '', Validators.compose([Validators.required])],
         emailId: [''],
@@ -40,8 +50,11 @@ export class SignUp {
     console.log('ionViewDidLoad SignUp');
   }
 
+  /* Signup user method which is called in click */
   signupUser(){
     this._logger.log('signupUser() method');
+
+    /* Creating user object using form values*/
     let userData = {
       fullName: this.form.value.fullName,
       emailId: this.form.value.emailId,
@@ -53,13 +66,11 @@ export class SignUp {
       attemptDate: this.form.value.attemptDate,
       dob: this.form.value.dob
     }
-
+    /* Auth service registerUser method */
     this._auth.registerUser(userData);
-
-
-
   }
 
+  /* Navigate back to login */
   navigateToLogin(){
     this._logger.log('navigateToLogin() method');
     this.navCtrl.push('Login');
