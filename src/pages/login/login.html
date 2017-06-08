@@ -1,5 +1,5 @@
-<ion-content padding>
-  <h6><b>Welcome Back!</b></h6><hr>
+<ion-content padding class="bg">
+  <h6><b><span style="color: white">Welcome Back!</span></b></h6><hr>
   
   <form [formGroup] = "loginForm">
 
@@ -29,8 +29,12 @@
   </form>
 
   <div>
-    <button ion-button block (tap) = "login()">LOGIN</button>
-    <button ion-button block clear (tap) = "navigateToSignup()">SIGNUP</button>
+    <button ion-button color = "btn-login" block (tap) = "login()">LOGIN</button>
+    <button ion-button block clear (tap) = "navigateToSignup()" style="color: white;">Forgot your Password ?</button>
+
+    <div style="height: 80px;"></div>
+
+    <button ion-button block clear (tap) = "navigateToSignup()" style="color: white;">CREATE AN ACCOUNT</button>
   </div>
   
 

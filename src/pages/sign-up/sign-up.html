@@ -1,5 +1,5 @@
-<ion-content padding>
-  <h6><b>Create an Account</b></h6><hr>
+<ion-content padding class="bg">
+  <h6><b><span style="color: white;">Create an Account</span></b></h6><hr>
 
   <form [formGroup] = "form">
   <ion-list>
@@ -83,8 +83,8 @@
   </ion-list>
 
   <div>
-    <button ion-button full color = "primary" (tap) = "signupUser()">SIGN UP</button><hr>
-    <button ion-button full clear (tap) = "navigateToLogin()">LOGIN</button>
+    <button ion-button full color = "btn-login" (tap) = "signupUser()">SIGN UP</button><hr>
+    <button ion-button full clear (tap) = "navigateToLogin()" style="color: white;">LOGIN</button>
   </div>
 </form>
 </ion-content>

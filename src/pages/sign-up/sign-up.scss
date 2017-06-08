@@ -10,4 +10,17 @@ page-sign-up {
     ion-content{
         position: absolute;
     }
+    .bg {
+        background-color:#035E7B;
+        color: black;
+    }
+    .item.item-input {
+        background-color: transparent;
+        color: white;
+    }
+    .item.item-datetime {
+        background-color: transparent;
+        color: white;
+    }
+    
 }
