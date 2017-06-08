@@ -7,7 +7,7 @@
     <ion-label>
         <ion-icon name="person"></ion-icon>
       </ion-label>
-      <ion-input type="text" placeholder="ENTER FULLNAME" formControlName = "fullName" [class.invalid] = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)"></ion-input>
+      <ion-input type="text" placeholder="FULLNAME" formControlName = "fullName" [class.invalid] = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)" >
     <p>Please enter fullName</p>
@@ -17,7 +17,7 @@
     <ion-label>
         <ion-icon name="mail"></ion-icon>
       </ion-label>
-      <ion-input type="email" placeholder="ENTER EMAIL" formControlName = "emailId" [class.invalid] = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)"></ion-input>
+      <ion-input type="email" placeholder="EMAIL" formControlName = "emailId" [class.invalid] = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)" >
     <p>Please enter emailId</p>
@@ -27,7 +27,7 @@
     <ion-label>
         <ion-icon name="call"></ion-icon>
       </ion-label>
-      <ion-input type="number" placeholder="ENTER PHONE NUMBER" formControlName = "phoneNumber" [class.invalid] = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
+      <ion-input type="number" placeholder="PHONE NUMBER" formControlName = "phoneNumber" [class.invalid] = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)" >
     <p>Please enter phone number</p>
@@ -37,7 +37,7 @@
     <ion-label>
         <ion-icon name="planet"></ion-icon>
     </ion-label>
-      <ion-input type="text" placeholder="ENTER ADDRESS" formControlName = "address" [class.invalid] = "!form.controls.address.valid && (form.controls.address.dirty || submitAttempt)"></ion-input>
+      <ion-input type="text" placeholder="ADDRESS" formControlName = "address" [class.invalid] = "!form.controls.address.valid && (form.controls.address.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.address.valid && (form.controls.address.dirty || submitAttempt)" >
     <p>Please enter address</p>
@@ -47,7 +47,7 @@
     <ion-label>
         <ion-icon name="locate"></ion-icon>
     </ion-label>
-    <ion-input type="number" placeholder = "ENTER PINCODE" formControlName = "pincode" [class.invalid] = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)"></ion-input>
+    <ion-input type="number" placeholder = "PINCODE" formControlName = "pincode" [class.invalid] = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)" >
     <p>Please enter pincode</p>
@@ -57,7 +57,7 @@
     <ion-label>
         <ion-icon name="lock"></ion-icon>
     </ion-label>
-    <ion-input type="password" placeholder = "ENTER PASSWORD" formControlName = "password" [class.invalid] = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)"></ion-input>
+    <ion-input type="password" placeholder = "PASSWORD" formControlName = "password" [class.invalid] = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)" >
     <p>Please enter password</p>
@@ -67,18 +67,18 @@
     <ion-label>
         <ion-icon name="help"></ion-icon>
     </ion-label>
-    <ion-input type="number" placeholder = "ENTER ATTEMPT NUMBER" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
+    <ion-input type="number" placeholder = "ATTEMPT NUMBER" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)" >
     <p>Please enter pincode</p>
   </ion-item>
 
   <ion-item>
-    <ion-datetime placeholder = "ENTER ATTEMPT DATE" displayFormat="DD-MM-YYYY" formControlName="attemptDate"></ion-datetime>
+    <ion-datetime placeholder = "ATTEMPT DATE" displayFormat="DD-MM-YYYY" formControlName="attemptDate"></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-datetime placeholder = "ENTER DATE OF BIRTH" displayFormat="DD-MM-YYYY" formControlName="dob"></ion-datetime>
+    <ion-datetime placeholder = "DATE OF BIRTH" displayFormat="DD-MM-YYYY" formControlName="dob"></ion-datetime>
   </ion-item>
   </ion-list>
 
