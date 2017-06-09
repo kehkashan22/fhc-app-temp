@@ -19,7 +19,7 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.backgroundColorByHexString('#1976D2');
+      statusBar.backgroundColorByHexString('#035E7B');
       splashScreen.hide();
       keyboard.disableScroll(true);
     });
