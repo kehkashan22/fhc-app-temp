@@ -6,7 +6,7 @@
 */
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 /* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /* Logger Service */
@@ -20,7 +20,7 @@ import { AuthProvider } from '../../providers/auth';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class Login {
+export class LoginWithEmailPage {
 
   private loginForm: FormGroup;
 
@@ -31,10 +31,12 @@ export class Login {
               public navParams: NavParams,
               public formBuilder: FormBuilder,
               private _auth: AuthProvider,
-              private _logger: Logger
+              private _logger: Logger,
+              private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController
   ) {
     this.loginForm = formBuilder.group({
-      phoneNumber: [ '', Validators.compose([Validators.required, Validators.maxLength(10)])],
+      emailId: [ '', Validators.compose([Validators.required])],
       password: [ '', Validators.required],
     });
   }
@@ -53,13 +55,36 @@ export class Login {
   login(){
     this._logger.log('login()');
     let loginUserData = {
-      phoneNumber: this.loginForm.value.phoneNumber,
+      emailId: this.loginForm.value.emailId,
       password: this.loginForm.value.password
     };
 
+     /* Loader */
+    let loader = this.loadingCtrl.create({
+      content: 'Authenticating User'
+    });
+
+    loader.present();
+
     this._auth.authenticateAndLogin(loginUserData).then(authData => {
       console.log(authData);
+      loader.dismiss();
+
       this.navCtrl.setRoot('HomePage');
-    });
+    }, (error) => {
+        console.log('Error is '+error);
+
+        loader.dismiss();
+        const alert = this.alertCtrl.create({
+          title: 'ERROR',
+          message: error.message,
+          buttons: ['Ok']
+        });
+        alert.present();
+      });
+  }
+
+  forgotPassword(){
+    this.navCtrl.push('ForgetPasswordPage');
   }
 }

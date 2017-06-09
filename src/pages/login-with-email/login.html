@@ -1,0 +1,41 @@
+<ion-content padding>
+  <h6><b>Welcome Back!</b></h6><hr>
+  
+  <form [formGroup] = "loginForm">
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating>
+        Email
+      </ion-label>
+     <ion-input type="text" formControlName = "emailId" [class.invalid] = "!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)"></ion-input>
+  </ion-item>
+  <ion-item *ngIf = "!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)" >
+    <p>Please enter email id</p>
+  </ion-item>
+  </ion-list> 
+  
+  <ion-list>
+    <ion-item>
+      <ion-label floating>
+        Password
+      </ion-label>
+      <ion-input type="password" formControlName = "password" [class.invalid] = "!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" >
+      <p>Please enter password</p>
+    </ion-item>
+  </ion-list>
+  </form>
+
+  <div>
+    <button ion-button color = "btn-login" block (tap) = "login()">LOGIN</button>
+    <button ion-button block clear (tap) = "forgotPassword()">Forgot your Password ?</button>
+
+    <div style="height: 80px;"></div>
+
+    <button ion-button block clear (tap) = "navigateToSignup()">CREATE AN ACCOUNT</button>
+  </div>
+  
+
+</ion-content>
