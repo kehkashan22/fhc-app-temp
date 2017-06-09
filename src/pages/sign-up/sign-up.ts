@@ -6,7 +6,7 @@
   Updated - 08/06/2017
 */
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 /* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /* Logger Service */
@@ -32,7 +32,8 @@ export class SignUp {
               public formBuilder: FormBuilder,
               private _logger: Logger,
               private _auth: AuthProvider,
-              private loadingCtrl: LoadingController
+              private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController
   ) {
     /* Creating form using formBuilder module and applying validations. Need to validate fields and make hash password */
     this.form = formBuilder.group({
@@ -44,7 +45,9 @@ export class SignUp {
         attemptNo: ['', Validators.required],
         pincode: [ '', Validators.minLength(6)],
         attemptDate: ['', Validators.required],
-        dob: ['']
+        dob: [''],
+        gender: [''],
+        typeOfCourse: ['']
     });
   }
 
@@ -66,7 +69,8 @@ export class SignUp {
       attemptNo: this.form.value.attemptNo,
       pincode: this.form.value.pincode,
       attemptDate: this.form.value.attemptDate,
-      dob: this.form.value.dob
+      dob: this.form.value.dob,
+      favoriteVideos: []
     }
 
     /* Loader */
@@ -84,6 +88,15 @@ export class SignUp {
       this.navCtrl.setRoot('Login');
       /* Dismissing the loader */
       loader.dismiss();
+    }, (error) => {
+      /* handle the errors in any */
+      loader.dismiss();
+       const alert = this.alertCtrl.create({
+          title: 'Something went wrong!!',
+          message: error.message,
+          buttons: ['Ok']
+        });
+        alert.present();
     });
   }
 
@@ -91,6 +104,6 @@ export class SignUp {
   navigateToLogin(){
     this._logger.log('navigateToLogin() method');
     /* For avoiding the stacking of the same page again and again */
-    this.navCtrl.setRoot('Login');
+    this.navCtrl.setRoot('LoginWithEmailPage');
   }
 }

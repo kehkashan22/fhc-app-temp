@@ -37,7 +37,7 @@ export class AuthProvider {
                           .ref('/users')
                           .child(newUser.uid)
                           .set({
-                            user: user
+                            uid: user
                           });
     });
   }
@@ -46,12 +46,21 @@ export class AuthProvider {
     this.logger.log('authenticateAndLogin()');
     this.logger.log('User in authenticateAndLogin() '+user);
 
-    let phoneNumber = user.phoneNumber;
+    let emailId = user.emailId;
     let password = user.password;
 
-    return this.af.auth.signInWithPhoneNumber(phoneNumber, password);
+    return this.af.auth.signInWithEmailAndPassword(emailId, password);
   }
 
-  forgetPassword(){}
+  forgotPassword(userEmailId): firebase.Promise<void> {
 
+    let email = userEmailId.emailId;
+
+    return firebase.auth().sendPasswordResetEmail(email);
+    
+  }
+
+  logout(): firebase.Promise<any>{
+    return this.af.auth.signOut();
+  }
 }
