@@ -1,0 +1,45 @@
+<ion-content padding class="bg" scroll="false">
+  
+  <img src="assets/logo/logo.png" alt="">
+  
+  <h6><b>Welcome</b></h6><hr>
+  
+  <form [formGroup] = "loginForm">
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating>
+        Email
+      </ion-label>
+     <ion-input type="email" formControlName = "emailId" [class.invalid] = "!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)"></ion-input>
+  </ion-item>
+  <ion-item *ngIf = "!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)" >
+    <p>Please enter email id</p>
+  </ion-item>
+  </ion-list> 
+  
+  <ion-list>
+    <ion-item>
+      <ion-label floating>
+        Password
+      </ion-label>
+      <ion-input type="password" formControlName = "password" [class.invalid] = "!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" >
+      <p>Please enter password</p>
+    </ion-item>
+  </ion-list>
+  </form>
+
+  <div>
+    <button ion-button color = "btn-login" style="color: white;" block (tap) = "login()">LOGIN</button>
+    <div style="height: 20px;"></div>
+    <button ion-button block color = "btn-login" clear (tap) = "forgotPassword()"><b>Forgot your Password?</b></button>
+
+    <div style="height: 80px;"></div>
+
+    <button ion-button block color = "btn-login" outline (tap) = "navigateToSignup()">SIGN UP</button>
+  </div>
+  
+
+</ion-content>

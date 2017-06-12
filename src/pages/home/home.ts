@@ -1,23 +1,20 @@
 import { QuizService } from './../../services/quiz';
-import { QuizPage } from './../quiz/quiz';
 import { VideosService } from './../../services/videos';
 import { VideosProvider } from './../../providers/videos';
-import { AnalysisPage } from './../analysis/analysis';
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { LibraryPage } from "../library/library";
+import { Component,  } from '@angular/core';
+import { NavController, IonicPage } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
-
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
   providers: []
 })
 export class HomePage {
-  analysisPage = AnalysisPage;
-  libraryPage = LibraryPage;
-  quizPage = QuizPage;
+  analysisPage = 'AnalysisPage';
+  libraryPage = 'LibraryPage';
+  quizPage = 'QuizPage';
   quizCollection : Quiz[];
   imgPath = "assets/img/"
   imgType = ".jpeg"
