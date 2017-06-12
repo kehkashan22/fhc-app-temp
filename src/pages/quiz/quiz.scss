@@ -1,0 +1,25 @@
+page-quiz {
+
+#tsc_player {
+   z-index: 9999;
+}
+
+.tscplayer_inline {
+	position:static;
+	margin: 30px;
+	width: 100%;
+	height: 480px;
+	z-index:auto;
+}
+
+.tscplayer_fullframe {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	z-index: 9999;
+}
+
+
+}

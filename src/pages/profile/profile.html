@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>My Account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background" padding>
+<div id="profile-bg"></div>
+      <div id="content">
+        <div id="profile-info">
+            <img id="profile-image" src="assets/img/avatar-cher.png" >
+            <h3 id="profile-name">User</h3>
+          <span id="profile-description"> Email: user@gmail.com </span>
+          <br>
+          <span id="profile-description"> Mob: 9372658410 </span>
+          <br>
+         <button ion-button outline>Edit Profile</button>
+        </div>
+      </div>
+
+<ion-card>
+  <ion-list>
+    <button
+    ion-item
+    (click)="onGoToStarred()">
+      <ion-icon name="star" item-left></ion-icon>
+      Starred Videos
+    </button>
+  </ion-list>
+</ion-card>
+
+
+</ion-content>

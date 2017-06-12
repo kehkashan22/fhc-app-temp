@@ -1,1 +1,62 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="nav">
+  <ion-header>
+    <ion-toolbar>
+      <!--<ion-title>Welcome!</ion-title>-->
+      <ion-list no-lines>
+        <ion-item >
+          <ion-avatar item-left height="100px">
+            <img src="assets/img/avatar-cher.png">
+          </ion-avatar>
+          <h1>User</h1>
+          <p>user@gmail.com</p>
+        </ion-item>
+
+        <button ion-item (click)="onLoad(profilePage)">
+          View Profile
+        </button>
+      </ion-list>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="onLoad(rootPage)">
+        <ion-icon name="home" item-left></ion-icon>
+        Home
+      </button>
+
+      <button ion-item (click)="onLoad(libraryPage)">
+        <ion-icon name="book" item-left></ion-icon>
+        Video Library
+      </button>
+
+      <button ion-item (click)="onLoad(starredPage)">
+        <ion-icon name="star" item-left></ion-icon>
+        Starred Videos
+      </button>
+
+
+      <button ion-item (click)="goToStore()">
+          <ion-icon name="cart" item-left></ion-icon>
+          Store
+      </button>
+
+      <button ion-item (click)="onLoad(contactPage)">
+        <ion-icon name="help-circle" item-left></ion-icon>
+        Contact Us
+      </button>
+
+      <button ion-item (click)="onLoad(aboutPage)">
+        <ion-icon name="pulse" item-left></ion-icon>
+        About
+      </button>
+
+      <button ion-item (click)="onLoad(settingsPage)">
+        <ion-icon name="settings" item-left></ion-icon>
+        Settings
+      </button>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #nav></ion-nav>

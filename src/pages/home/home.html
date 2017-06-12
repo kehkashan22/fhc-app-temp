@@ -2,11 +2,65 @@
 
   <ion-navbar>
     <ion-title>home</ion-title>
+
+<ion-header no-border>
+
+  <ion-navbar no-border color="headerColor">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Farooq Haque Classes
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <button ion-button (tap) = "logout();">Logout</button>
+<ion-content class="card-background-page background" scroll="false">
+  <!--Add a visit store functionality in slider portion-->
+  <div class="slider">
+    <ion-slides pager>
+      <ion-slide *ngFor="let slide of slides">
+        <img [src]="slide.url">
+      </ion-slide>
+    </ion-slides>
+
+  </div>
+
+
+  <ion-card>
+    <img src="assets/img/card-saopaolo.jpeg"/>
+    <div class="card-title">Analyse Yourself</div>
+    <div class="card-subtitle">
+      Take this simple test to find out where you stand
+      <button
+      ion-button
+      [navPush]="quizPage"
+      color="light"
+      outline>Click Here</button>
+    </div>
+  </ion-card>
+
+  <ion-card>
+    <img src="assets/img/card-amsterdam.jpg"/>
+    <div class="card-title">Demo Videos</div>
+    <div class="card-subtitle">
+      Watch the best videos for Direct and Indirect Tax here <hr>
+      <button
+      ion-button
+      (click)="onGoToVideos()"
+      color="light"
+      outline>Click Here</button>
+    </div>
+  </ion-card>
+
+  <ion-card>
+    <img src="assets/img/card-sf.jpg"/>
+    <div class="card-title">Ammendments and Case Laws</div>
+    <!--<div class="card-subtitle">Find all ammendments here</div>-->
+  </ion-card>
+
 </ion-content>

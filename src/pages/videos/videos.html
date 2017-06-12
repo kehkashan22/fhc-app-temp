@@ -1,0 +1,42 @@
+<ion-header color="headerColor">
+
+  <ion-navbar color="headerColor">
+    <ion-title>{{videoGroup.category}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="card-background-page background" scroll="false">
+  <ion-card *ngFor="let video of videoGroup.videos; let i = index">
+    <ion-card-header>
+      {{ video.text }}
+    </ion-card-header>
+    <ion-card-content>
+      <iframe
+      width="100%"
+      height="250"
+      [src]="video.url | youtube"
+      frameborder="0" allowfullscreen>
+      </iframe>
+    </ion-card-content>
+    <ion-row>
+      <ion-col text-right>
+        <ion-icon name="thumbs-up" item-left></ion-icon>
+        <button
+          ion-button
+          clear
+          small
+          (click)="onAddToFavorites(video)"
+          *ngIf="!isFavorite(video)">Favorite</button>
+        <button
+          ion-button
+          clear
+          small
+          color="danger"
+          (click)="onRemoveFromFavorites(video)"
+          *ngIf="isFavorite(video)">Unfavorite</button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

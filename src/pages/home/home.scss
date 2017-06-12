@@ -1,3 +1,78 @@
 page-home {
 
+<<<<<<< HEAD
+=======
+  ion-header, ion-navbar {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+    opacity: 0.85;
+
+    ion-title{
+        img{
+          height: 30 px;
+          width: 100px;
+        }
+    }
+}
+
+  .slider{
+    ion-slide{
+      position: relative;
+      text-align: center;
+    }
+
+    img{
+      width: 100%;
+      height: 200px;
+    }
+
+    // .slide-title{
+    //   font-size: 1.0em;
+    //   position: absolute;
+    //   top: 52%;
+    //   width: 100%;
+    //   color: #fff;
+    // }
+
+  }
+
+  .card-background-page {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+    background-color: black;
+
+    img{
+      opacity: 0.7;
+    }
+  }
+
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+    padding-top: 5px;
+  }
+
+  }
+
+  .background{
+    background: silver no-repeat;
+    background-size: cover;
+  }
+>>>>>>> kk-branch/master
 }
