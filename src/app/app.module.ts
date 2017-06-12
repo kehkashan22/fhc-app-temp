@@ -10,7 +10,6 @@ import { Network } from '@ionic-native/network';
 import { MyApp } from './app.component';
 import { Logger } from '../providers/logger';
 import { CustomToast } from '../providers/custom-toast';
-import { CheckNetwork } from '../providers/check-network';
 import { AuthProvider } from '../providers/auth';
 
 /* For Firebase Related */
@@ -53,7 +52,6 @@ const firebaseConfig = {
     Logger,
     CustomToast,
     Network,
-    CheckNetwork,
     AuthProvider,
     AngularFireDatabase
   ]

@@ -4,7 +4,6 @@
   Author - Shantanu Kamdi
   Date - 06/06/2017
 */
-
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 /* Forms module */
@@ -35,6 +34,7 @@ export class LoginWithEmailPage {
               private alertCtrl: AlertController,
               private loadingCtrl: LoadingController
   ) {
+    /* Building form  */
     this.loginForm = formBuilder.group({
       emailId: [ '', Validators.compose([Validators.required])],
       password: [ '', Validators.required],
@@ -54,6 +54,7 @@ export class LoginWithEmailPage {
   /* Login Method */
   login(){
     this._logger.log('login()');
+    /* Building user */
     let loginUserData = {
       emailId: this.loginForm.value.emailId,
       password: this.loginForm.value.password
@@ -66,13 +67,18 @@ export class LoginWithEmailPage {
 
     loader.present();
 
+    /* Calling Auth service method to login the user */
     this._auth.authenticateAndLogin(loginUserData).then(authData => {
-      console.log(authData);
-      loader.dismiss();
+      
+      this._logger.log("Successfully logged in ");
 
+      loader.dismiss();
+      
+      /* Navigate to Home Component */    
       this.navCtrl.setRoot('HomePage');
+
     }, (error) => {
-        console.log('Error is '+error);
+        console.log('Error in logging in '+error);
 
         loader.dismiss();
         const alert = this.alertCtrl.create({
@@ -84,6 +90,7 @@ export class LoginWithEmailPage {
       });
   }
 
+  /* Navigate to Forget Password Component */
   forgotPassword(){
     this.navCtrl.push('ForgetPasswordPage');
   }

@@ -5,8 +5,6 @@
   Author - Shantanu Kamdi
   Date - 06/06/2017
 */
-
-
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -33,7 +31,6 @@ export class IntroSlider {
   /* To load login page on button click*/
   navigateToLogin(){
     this._logger.log('navLogin() clicked');
-    this.navCtrl.setRoot('MainLoginPage');
-    
+    this.navCtrl.setRoot('LoginWithEmailPage');
   }
 }

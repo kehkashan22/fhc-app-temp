@@ -3,7 +3,6 @@
   Functionality - For registering of users using firebase.
   Author - Shantanu Kamdi
   Date - 07/06/2017
-  Updated - 08/06/2017
 */
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
@@ -35,7 +34,7 @@ export class SignUp {
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController
   ) {
-    /* Creating form using formBuilder module and applying validations. Need to validate fields and make hash password */
+    /* Creating form using formBuilder module and applying validations.*/
     this.form = formBuilder.group({
         fullName: [ '', Validators.required],
         emailId: ['', Validators.required],

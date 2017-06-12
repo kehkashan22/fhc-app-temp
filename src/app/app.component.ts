@@ -29,7 +29,7 @@ export class MyApp {
           this.rootPage = 'HomePage';
           authObserver.unsubscribe();
         }else{
-          this.rootPage = 'LoginWithEmailPage';
+          this.rootPage = 'IntroSlider';
           authObserver.unsubscribe();
         }
       });

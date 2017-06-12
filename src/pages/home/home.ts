@@ -49,6 +49,7 @@ export class HomePage {
       alert('Token not stored');
     });
   }
+  
   tokenSetup(){
     var promise = new Promise((resolve, reject) => {
       FCMPlugin.getToken((token) => {
@@ -60,8 +61,10 @@ export class HomePage {
     });
     return promise;
   }
+
   logout(){
+    this.afd.list(this.fireStore).remove(firebase.auth().currentUser.uid);
     this._auth.logout();
-    this.navCtrl.setRoot('MainLoginPage');
+    this.navCtrl.setRoot('LoginWithEmailPage');
   }
 }
