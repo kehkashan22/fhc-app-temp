@@ -1,16 +1,11 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { Keyboard } from '@ionic-native/keyboard';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, NavController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ContactPage } from './../pages/contact/contact';
 import { LibraryPage } from './../pages/library/library';
 import { AboutPage } from './../pages/about/about';
 import { StarredPage } from './../pages/starred/starred';
-import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,7 +24,6 @@ declare var FCMPlugin;
 export class MyApp {
 
 	 rootPage:any = 'IntroSlider';
-	 rootPage:any = HomePage;
 	 profilePage = ProfilePage;
 	 settingsPage = SettingsPage;
 	 starredPage = StarredPage;
@@ -38,12 +32,12 @@ export class MyApp {
 	 contactPage = ContactPage;
 	  
 	@ViewChild('nav') nav: NavController;
-  constructor(platform: Platform, 
+  constructor(
+              platform: Platform, 
               statusBar: StatusBar,   
               splashScreen: SplashScreen,
-              keyboard: Keyboard,
               private afAuth: AngularFireAuth,
-			  private menuCtrl : MenuController,
+			        private menuCtrl : MenuController,
               private iab: InAppBrowser
 
     ) {
@@ -64,7 +58,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByHexString('#00BFE5');
       splashScreen.hide();
-      keyboard.disableScroll(true);
+        
     });
   }
   onLoad(page: any) {

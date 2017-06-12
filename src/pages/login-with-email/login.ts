@@ -13,7 +13,7 @@ import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
 
-
+import {Md5} from 'ts-md5/dist/md5';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -57,7 +57,7 @@ export class LoginWithEmailPage {
     /* Building user */
     let loginUserData = {
       emailId: this.loginForm.value.emailId,
-      password: this.loginForm.value.password
+      password: Md5.hashStr(this.loginForm.value.password)
     };
 
      /* Loader */

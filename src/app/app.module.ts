@@ -1,22 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { Keyboard } from '@ionic-native/keyboard';
-/* For Network Detection*/
-import { Network } from '@ionic-native/network';
-
-import { MyApp } from './app.component';
-import { Logger } from '../providers/logger';
-import { CustomToast } from '../providers/custom-toast';
-import { AuthProvider } from '../providers/auth';
-
-/* For Firebase Related */
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-
 import { QuizService } from './../services/quiz';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,10 +30,20 @@ import { CallNumber } from '@ionic-native/call-number';
 
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+
 import { YoutubePipe } from '../pipes/youtube';
 import { VideosProvider } from '../providers/videos';
 
+/* Shantanu */
+import { Logger } from '../providers/logger';
+import { CustomToast } from '../providers/custom-toast';
+import { AuthProvider } from '../providers/auth';
+import { Keyboard } from '@ionic-native/Keyboard';
+
+/* For Firebase Related */
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
@@ -66,21 +57,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp, {
-      //for limiting scrolling of the page when keyboard is up
-      scrollAssist: false
-    }),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
-
-@NgModule({
-  declarations: [
     MyApp,
-    HomePage,
     LibraryPage,
     AboutPage,
     AnalysisPage,
@@ -97,16 +74,19 @@ const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpModule,
-    BrowserAnimationsModule
-
+    BrowserAnimationsModule,
+     IonicModule.forRoot(MyApp, {
+      //for limiting scrolling of the page when keyboard is up
+      scrollAssist: false
+    }),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     LibraryPage,
     AboutPage,
     AnalysisPage,
@@ -119,17 +99,10 @@ const firebaseConfig = {
     SignupPage,
     QuizPage,
     ContactPage
-],
+  ],
   providers: [
     StatusBar,
     SplashScreen,
-    Keyboard,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Logger,
-    CustomToast,
-    Network,
-    AuthProvider,
-    AngularFireDatabase
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VideosService,
     AuthService,
@@ -138,7 +111,12 @@ const firebaseConfig = {
     VideosProvider,
     EmailComposer,
     InAppBrowser,
-    CallNumber
+    CallNumber,
+    Logger,
+    CustomToast,
+    AuthProvider,
+    AngularFireDatabase,
+    Keyboard
   ]
 })
 export class AppModule {}
