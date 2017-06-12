@@ -6,6 +6,8 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
+declare var FCMPlugin;
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -27,17 +29,18 @@ export class MyApp {
           this.rootPage = 'HomePage';
           authObserver.unsubscribe();
         }else{
-          this.rootPage = 'MainLoginPage';
+          this.rootPage = 'LoginWithEmailPage';
           authObserver.unsubscribe();
         }
       });
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.backgroundColorByHexString('#035E7B');
+      statusBar.backgroundColorByHexString('#00BFE5');
       splashScreen.hide();
       keyboard.disableScroll(true);
     });
   }
+  
 }
 

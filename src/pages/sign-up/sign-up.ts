@@ -38,16 +38,16 @@ export class SignUp {
     /* Creating form using formBuilder module and applying validations. Need to validate fields and make hash password */
     this.form = formBuilder.group({
         fullName: [ '', Validators.required],
-        emailId: [''],
-        phoneNumber: [ '', Validators.compose([Validators.required, Validators.maxLength(10)])],
+        emailId: ['', Validators.required],
+        phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10)])],
         password: [ '', Validators.required],
-        address: ['', Validators.required],
+        address: [''],
         attemptNo: ['', Validators.required],
         pincode: [ '', Validators.minLength(6)],
         attemptDate: ['', Validators.required],
         dob: [''],
         gender: [''],
-        typeOfCourse: ['']
+        typeOfCourse: ['', Validators.required]
     });
   }
 
@@ -70,7 +70,9 @@ export class SignUp {
       pincode: this.form.value.pincode,
       attemptDate: this.form.value.attemptDate,
       dob: this.form.value.dob,
-      favoriteVideos: []
+      favoriteVideos: [],
+      gender: this.form.value.gender,
+      typeOfCourse: this.form.value.typeOfCourse
     }
 
     /* Loader */
@@ -85,7 +87,7 @@ export class SignUp {
       /* Resetting the form once everything is done */
       this.form.reset();
       /* Setting the stack root to login */
-      this.navCtrl.setRoot('Login');
+      this.navCtrl.setRoot('MainLoginPage');
       /* Dismissing the loader */
       loader.dismiss();
     }, (error) => {

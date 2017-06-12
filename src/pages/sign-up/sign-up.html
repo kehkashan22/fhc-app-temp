@@ -1,11 +1,11 @@
-<ion-content>
-  <h6><b>Create an Account</b></h6><hr>
+<ion-content padding class="bg">
+  <h6><b>Sign Up</b></h6><hr>
 
   <form [formGroup] = "form">
   <ion-list>
   <ion-item>
     <ion-label floating>
-        Full Name
+        Full Name*
     </ion-label>
       <ion-input type="text" formControlName = "fullName" [class.invalid] = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -15,7 +15,7 @@
 
   <ion-item>
     <ion-label floating>
-        Email
+        Email*
       </ion-label>
       <ion-input type="email"  formControlName = "emailId" [class.invalid] = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -25,7 +25,7 @@
 
   <ion-item>
     <ion-label floating>
-        Phone Number
+        Phone Number*
       </ion-label>
       <ion-input type="number"  formControlName = "phoneNumber" [class.invalid] = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -55,7 +55,7 @@
 
   <ion-item>
     <ion-label floating>
-        Password
+        Password*
     </ion-label>
     <ion-input type="password" formControlName = "password" [class.invalid] = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -65,7 +65,7 @@
 
   <ion-item>
     <ion-label floating>
-        Attempt Number
+        Attempt Number*
     </ion-label>
     <ion-input type="number" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -74,17 +74,23 @@
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Attempt Date</ion-label>
+    <ion-label floating>
+        Attempt Date*
+    </ion-label>
     <ion-datetime displayFormat="DD-MM-YYYY" formControlName="attemptDate"></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Date of Birth</ion-label>
+    <ion-label floating>
+        Date of Birth
+    </ion-label>
     <ion-datetime displayFormat="DD-MM-YYYY" formControlName="dob"></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-label>Type of Course</ion-label>
+    <ion-label>
+        Type of Course*
+    </ion-label>
     <ion-select formControlName = "typeOfCourse" interface="popover">
       <ion-option value="ca">CA</ion-option>
       <ion-option value="cs">CS</ion-option>
@@ -93,7 +99,9 @@
   </ion-item>
 
   <ion-item>
-    <ion-label>Gender</ion-label>
+    <ion-label>
+        Gender
+    </ion-label>
     <ion-select formControlName = "gender" interface="popover">
       <ion-option value="f">Female</ion-option>
       <ion-option value="m">Male</ion-option>
@@ -103,8 +111,8 @@
   </ion-list>
 
   <div>
-    <button ion-button full color = "btn-login" (tap) = "signupUser()">SIGN UP</button><hr>
-    <button ion-button full clear (tap) = "navigateToLogin()">LOGIN</button>
+    <button ion-button block color = "btn-login" (tap) = "signupUser()">SIGN UP</button><hr>
+    <button ion-button block color = "btn-login" outline (tap) = "navigateToLogin()">LOGIN</button>
   </div>
 </form>
 </ion-content>

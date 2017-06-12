@@ -8,5 +8,13 @@ page-login {
         width: 30px;
         border-bottom: 1px solid #2196F3;
     }
-    
+    .item.item-input {
+        background-color: transparent;
+    }
+    img{
+        height: 20vh;
+        width: auto;
+        margin: auto;
+        display: block;
+    }
 }

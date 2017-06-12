@@ -43,6 +43,7 @@ export class AuthProvider {
   }
 
   authenticateAndLogin(user){
+    
     this.logger.log('authenticateAndLogin()');
     this.logger.log('User in authenticateAndLogin() '+user);
 
