@@ -1,5 +1,4 @@
 import { IonicPage } from 'ionic-angular';
-import { VideoPage } from './../video/video';
 import { VideosService } from '../../services/videos';
 import { Video } from './../../data/video.interface';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +16,7 @@ export class StarredPage implements OnInit{
 
 
   videos: Video[];
-  starredPage: StarredPage;
+  starredPage: 'StarredPage';
   constructor(private videosService: VideosService,
               private modalCtrl: ModalController) {
 
@@ -28,7 +27,7 @@ export class StarredPage implements OnInit{
 //    }
 
   onViewVideo(video: Video) {
-    const modal = this.modalCtrl.create(VideoPage, video);
+    const modal = this.modalCtrl.create('VideoPage', video);
     modal.present();
     modal.onDidDismiss((remove: boolean) => {
       if (remove) {

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Network } from '@ionic-native/network';
 
 /*
 
@@ -7,7 +6,7 @@ import { Network } from '@ionic-native/network';
 @Injectable()
 export class CheckNetwork {
 
-  constructor(private network: Network) {
+  constructor() {
     console.log('Hello CheckNetwork Provider');
   }
 

@@ -1,4 +1,3 @@
-import { StarredPage } from './../starred/starred';
 import { Component } from '@angular/core';
 import { IonicPage, NavController} from 'ionic-angular';
 
@@ -9,7 +8,7 @@ import { IonicPage, NavController} from 'ionic-angular';
 })
 export class ProfilePage {
 
-  starredPage = StarredPage;
+  starredPage = 'StarredPage';
   constructor(private navCtrl: NavController) {}
 
     onGoToStarred(){

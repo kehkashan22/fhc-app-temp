@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:108315354380:android:08df404de14ca906",
         "android_client_info": {
-          "package_name": "com.ionicframework.fhcapp585995"
+          "package_name": "io.ionic.starter"
         }
       },
       "oauth_client": [
