@@ -12,7 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
-
+/* MD5 hash module */
+import {Md5} from 'ts-md5/dist/md5';
 
 @IonicPage()
 @Component({
@@ -63,7 +64,7 @@ export class SignUp {
       fullName: this.form.value.fullName,
       emailId: this.form.value.emailId,
       phoneNumber: this.form.value.phoneNumber,
-      password: this.form.value.password,
+      password: Md5.hashStr(this.form.value.password),
       address: this.form.value.address,
       attemptNo: this.form.value.attemptNo,
       pincode: this.form.value.pincode,
@@ -86,7 +87,7 @@ export class SignUp {
       /* Resetting the form once everything is done */
       this.form.reset();
       /* Setting the stack root to login */
-      this.navCtrl.setRoot('MainLoginPage');
+      this.navCtrl.setRoot('LoginWithEmailPage');
       /* Dismissing the loader */
       loader.dismiss();
     }, (error) => {

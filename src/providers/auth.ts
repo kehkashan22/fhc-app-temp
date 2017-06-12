@@ -33,12 +33,18 @@ export class AuthProvider {
     let password = user.password;
 
     return this.af.auth.createUserWithEmailAndPassword(email, password).then(newUser => {
+                  let newUserId = newUser.uid;
                   firebase.database()
                           .ref('/users')
                           .child(newUser.uid)
                           .set({
-                            uid: user
+                            newUserId : user
                           });
+                  firebase.auth().currentUser.sendEmailVerification().then(() => {
+                      console.log("Verification email sent");
+                  }).catch((error) => {
+                      console.log("Failed to send verification email");
+                  });
     });
   }
 

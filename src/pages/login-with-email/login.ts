@@ -69,14 +69,25 @@ export class LoginWithEmailPage {
 
     /* Calling Auth service method to login the user */
     this._auth.authenticateAndLogin(loginUserData).then(authData => {
-      
-      this._logger.log("Successfully logged in ");
-
       loader.dismiss();
-      
-      /* Navigate to Home Component */    
-      this.navCtrl.setRoot('HomePage');
+      if(authData.emailVerified){
+        this._logger.log("Successfully logged in ");
 
+        /* Navigate to Home Component */    
+        this.navCtrl.setRoot('HomePage');
+
+      }else{
+
+          const alert = this.alertCtrl.create({
+          title: 'Email not verified',
+          message: "Please verify your email address",
+          buttons: ['Ok']
+
+        });
+
+         alert.present();
+         
+      }
     }, (error) => {
         console.log('Error in logging in '+error);
 
