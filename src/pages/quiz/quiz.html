@@ -1,0 +1,63 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Quiz</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<!--<iframe width="100%" height="250" src="https://edpuzzle.com/embed/assignments/593be25bb95cac48689dbd3c/watch" frameborder="0" allowfullscreen></iframe>-->
+    <!--CONTROL DIV HERE
+    <div *ngIf="!trigger">
+        <ion-card>
+      <ion-card-title>Directions:</ion-card-title>
+      <ion-card-content>
+        <ol>
+          <li>Watch the video in its entirety, make notes as you wish.</li>
+          <li>Once you finish watching, click on the next button.</li>
+          <li>You will be redirected to a small quiz.</li>
+          <li>Answer to the best of you ability.</li>
+        </ol>
+      </ion-card-content>
+
+      <button
+      ion-button
+      block
+      (click)="thisPlay()"> Proceed to Test </button>
+      </ion-card>
+    </div>-->
+
+      <!--QUIZ DIV HERE-->
+    <div *ngIf="question ; else quizEnd" [@myvisibility]="visibleState">
+      <ion-card>
+        <ion-card-content>{{currentQuestion.question}}</ion-card-content>
+      </ion-card>
+
+      <ion-list radio-group mode="ios">
+        <ion-item *ngFor="let answer of currentQuestion.answers" mode="ios">
+          <ion-label>{{answer.answerKey}}) {{answer.answerText}}</ion-label>
+          <ion-radio [value]="answer" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <!--<ion-list>
+        <button ion-item *ngFor="let answer of currentQuestion.answers" (click)="changeQuestion(answer)">
+            {{answer.answerText}}
+        </button>
+      </ion-list>-->
+      </div>
+      <ng-template #quizEnd>
+        <h1>You have successfully completed the quiz</h1>
+        <button ion-button block outline (click)="analysis()">See how you did</button>
+        <div *ngIf = "answers">
+            <h1>{{marks}}/4</h1>
+        </div>
+      </ng-template>
+
+      <!--<div class="media">
+        <iframe class="tscplayer_inline" id="embeddedSmartPlayerInstance" src="assets/yo/yo_player.html?embedIFrameId=embeddedSmartPlayerInstance" scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+      </div>-->
+</ion-content>
