@@ -1,3 +1,10 @@
+/*
+  Name - Videos Provider
+  Functionality - Provider for all videos and ammendments fetched from server database
+  Author - Kehkashan Fazal
+  Date - 08/06/2017
+*/
+
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
