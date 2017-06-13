@@ -3,7 +3,6 @@ import { LoadingController } from 'ionic-angular';
 import { VideosProvider } from './../../providers/videos';
 import { Component } from '@angular/core';
 import { IonicPage} from 'ionic-angular';
-import { VideosPage } from "../videos/videos";
 //import { Video } from "../../data/video.interface";
 import videos from "../../data/videos";
 
@@ -16,7 +15,7 @@ export class LibraryPage {
 
   videoCollection: Videos[];
   tempVideos: Videos[]
-  videosPage = VideosPage;
+  videosPage = 'VideosPage';
 
   constructor(private videosProvider:  VideosProvider,
               private loadingController: LoadingController) {}

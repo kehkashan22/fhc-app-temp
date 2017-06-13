@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Videos } from "../../data/videos.interface";
-import { VideosPage } from "../videos/videos";
 import { VideosProvider } from "../../providers/videos";
-import { LoadingController } from "ionic-angular";
+import { LoadingController, IonicPage } from "ionic-angular";
 
+@IonicPage()
 @Component({
   selector: 'page-ammendments',
   templateUrl: 'ammendments.html',
@@ -12,7 +12,7 @@ export class AmmendmentsPage {
 
    videoCollection: Videos[];
   tempVideos: Videos[]
-  videosPage = VideosPage;
+  videosPage = 'VideosPage';
 
   constructor(private videosProvider:  VideosProvider,
               private loadingController: LoadingController) {}

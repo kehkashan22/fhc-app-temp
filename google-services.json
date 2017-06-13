@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "108315354380",
+    "firebase_url": "https://fhc-app-47154.firebaseio.com",
+    "project_id": "fhc-app-47154",
+    "storage_bucket": "fhc-app-47154.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108315354380:android:08df404de14ca906",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "108315354380-r02616c93kbc3kshakvjrqvsjn9sib07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_otJq83uyPbHfWjnXOgJWYHNMMXXI7QA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

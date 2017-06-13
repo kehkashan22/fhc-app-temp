@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { CallNumber } from '@ionic-native/call-number';
+import { IonicPage } from 'ionic-angular';
 
+@IonicPage()
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html',
