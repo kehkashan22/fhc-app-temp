@@ -1,4 +1,5 @@
-import { VideosService } from '../../services/videos';
+import { Videos } from './../../data/videos.interface';
+import { VideosService } from '../../providers/fav-videos';
 import { Video } from './../../data/video.interface';
 
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,7 @@ import { AlertController, IonicPage, NavParams } from 'ionic-angular';
   templateUrl: 'videos.html',
 })
 export class VideosPage implements OnInit {
-  videoGroup: {category: string, videos: Video[], icon: string};
+  videoGroup: Videos;
 
   constructor(
     private navParams: NavParams,

@@ -1,6 +1,6 @@
 {"videodb" : [
   {
-    "category": "Direct Tax Laws",
+    " setId": "Direct Tax Laws",
     "videos": [
       {
         "id": "1",
@@ -21,7 +21,7 @@
     "icon": "brush"
   },
   {
-    "category": "Indirect Tax Laws",
+    " setId": "Indirect Tax Laws",
     "videos": [
       {
         "id": "4",
@@ -37,7 +37,7 @@
     "icon": "bicycle"
   },
   {
-    "category": "GST",
+    " setId": "GST",
     "videos": [
       {
         "id": "6",
@@ -53,7 +53,7 @@
     "icon": "battery-charging"
   },
   {
-    "category": "Income Tax Act",
+    " setId": "Income Tax Act",
     "videos": [
       {
         "id": "8",

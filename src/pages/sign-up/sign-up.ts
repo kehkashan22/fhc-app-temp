@@ -64,7 +64,6 @@ export class SignUp {
       fullName: this.form.value.fullName,
       emailId: this.form.value.emailId,
       phoneNumber: this.form.value.phoneNumber,
-      password: Md5.hashStr(this.form.value.password),
       address: this.form.value.address,
       attemptNo: this.form.value.attemptNo,
       pincode: this.form.value.pincode,
@@ -75,6 +74,8 @@ export class SignUp {
       typeOfCourse: this.form.value.typeOfCourse
     }
 
+    let userPassword = Md5.hashStr(this.form.value.password);
+
     /* Loader */
     let loader = this.loadingCtrl.create({
       content: 'Registering User...'
@@ -83,7 +84,7 @@ export class SignUp {
     loader.present();
 
     /* Auth service registerUser method */
-    this.authProvider.registerUser(userData).then(() => {
+    this.authProvider.registerUser(userData, userPassword).then(() => {
       /* Resetting the form once everything is done */
       this.form.reset();
       /* Setting the stack root to login */

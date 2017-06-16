@@ -3,10 +3,10 @@ export interface User {
       emailId: string,
       phoneNumber: string,
       address: string,
-      attemptNo: number,
       pincode: string,
-      attemptDate: Date,
-      dob: Date,
+      dob: string,
       gender: string,
+      attemptNo: number,
+      attemptDate: string,
       typeOfCourse: string
 }

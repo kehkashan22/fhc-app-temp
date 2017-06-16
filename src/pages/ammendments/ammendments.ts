@@ -1,5 +1,6 @@
+import { Videos } from './../../data/videos.interface';
+import { Library } from './../../data/library.interface';
 import { Component } from '@angular/core';
-import { Videos } from "../../data/videos.interface";
 import { VideosProvider } from "../../providers/videos";
 import { LoadingController, IonicPage } from "ionic-angular";
 
@@ -10,53 +11,37 @@ import { LoadingController, IonicPage } from "ionic-angular";
 })
 export class AmmendmentsPage {
 
-   videoCollection: Videos[];
-  tempVideos: Videos[]
+  library2 = 'Library2Page';
+
+   libraryCollection: Library[];
+  tempVideos: Library[];
+  videoCollection: Videos[];
   videosPage = 'VideosPage';
+  courseId : string = '';
 
   constructor(private videosProvider:  VideosProvider,
               private loadingController: LoadingController) {}
 
   ngOnInit() {
-    // this.videoCollection = videos;
-    const loading = this.loadingController.create({
+    // this.libraryCollection = videos;
+    const loader = this.loadingController.create({
       content: "Loading Videos..."
     });
-    this.videosProvider.getAmmendments().then((data: Videos[]) => {
+    loader.present();
+    this.videosProvider.getNewVideos().then((data: Library[]) => {
       console.log(data);
+      loader.dismiss();
       if(data){
-        this.videoCollection = data;
-        this.tempVideos = this.videoCollection;
+        this.libraryCollection = data;
+        this.tempVideos = this.libraryCollection;
       }else{
-        this.videoCollection = [];
+        this.libraryCollection = [];
         this.tempVideos = [];
       }
-
     });
 
   }
-
-   ionViewDidLoad(){
-
-    // this.videosProvider.getVideos().then((data) => {
-    //   console.log(data);
-    //   this.videoCollection = data;
-    // });
-
-  }
-
-  getVideoCategoryByTitle(event: any){
-    this.videoCollection = this.tempVideos;
-    // Reset items back to all of the items
-    //this.videoCollection = videos;
-
-    let val = event.target.value;
-
-    if (val && val.trim() != '') {
-      this.videoCollection = this.videoCollection.filter((videoCollection) => {
-        return (videoCollection.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+    goTo(courseId : string){
+        this.courseId = courseId;
     }
-  }
-
 }

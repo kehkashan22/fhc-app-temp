@@ -1,5 +1,5 @@
 /*
-  Name - Toast Service 
+  Name - Toast Service
   Functionality - Shows Native Toast which is a small message.
   Author - Shantanu Kamdi
   Date - 07/06/2017
@@ -13,12 +13,10 @@ export class CustomToast {
   /* Options for custom toast messages like message, duration, etc */
   toastOptions: ToastOptions;
 
-  constructor(private toast: ToastController) {
-    console.log('Hello Toast Provider');
-  }
+  constructor(private toast: ToastController) {}
 
   /* show() which accepts a custom message that will be passed to the toast.create() method
-     and shows the toast for 2 secs 
+     and shows the toast for 2 secs
   */
   show(message: string){
     this.toastOptions = {

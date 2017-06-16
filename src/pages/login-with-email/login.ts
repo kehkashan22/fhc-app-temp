@@ -1,4 +1,4 @@
-/* 
+/*
   Name - Login Component
   Functionality - For authentication of users using firebase.
   Author - Shantanu Kamdi
@@ -14,6 +14,7 @@ import { Logger } from '../../providers/logger';
 import { AuthProvider } from '../../providers/auth';
 
 import {Md5} from 'ts-md5/dist/md5';
+import { HomePage } from "../home/home";
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -26,7 +27,7 @@ export class LoginWithEmailPage {
   /* For Validation purposes */
   private submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
               private _auth: AuthProvider,
@@ -39,10 +40,12 @@ export class LoginWithEmailPage {
       emailId: [ '', Validators.compose([Validators.required])],
       password: [ '', Validators.required],
     });
+
   }
   /* Check for Network - Remaining*/
   ionViewDidLoad() {
     console.log('ionViewDidLoad Login');
+
   }
 
   /* Navigate to Signup */
@@ -62,7 +65,8 @@ export class LoginWithEmailPage {
 
      /* Loader */
     let loader = this.loadingCtrl.create({
-      content: 'Authenticating User'
+      spinner: 'bubbles',
+      content: 'Signing you in...'
     });
 
     loader.present();
@@ -73,8 +77,8 @@ export class LoginWithEmailPage {
       if(authData.emailVerified){
         this._logger.log("Successfully logged in ");
 
-        /* Navigate to Home Component */    
-        this.navCtrl.setRoot('HomePage');
+        /* Navigate to Home Component */
+        this.navCtrl.setRoot(HomePage);
 
       }else{
 
@@ -86,7 +90,7 @@ export class LoginWithEmailPage {
         });
 
          alert.present();
-         
+
       }
     }, (error) => {
         console.log('Error in logging in '+error);

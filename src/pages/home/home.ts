@@ -1,9 +1,11 @@
+import { User } from './../../data/user.interface';
+import { AuthProvider } from './../../providers/auth';
 import { UserProvider } from './../../providers/user';
-import { QuizService } from './../../services/quiz';
-import { VideosService } from './../../services/videos';
+import { QuizService } from './../../providers/quiz';
+import { VideosService } from './../../providers/fav-videos';
 import { VideosProvider } from './../../providers/videos';
 import { Component,  } from '@angular/core';
-import { NavController, IonicPage, Events } from 'ionic-angular';
+import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
 @IonicPage()
@@ -16,10 +18,12 @@ export class HomePage {
   analysisPage = 'AnalysisPage';
   libraryPage = 'LibraryPage';
   quizPage = 'QuizPage';
+  rootLibraryPage = 'RootLibraryPage';
+  quizLibraryPage = 'QuizLibraryPage';
   quizCollection : Quiz[];
   imgPath = "assets/img/";
   imgType = ".jpeg";
-   userData: any;
+  userData: User;
 
   slides:any[]=[
               {url: this.imgPath + "slide1.jpg", text: "Test Slide1"},
@@ -32,33 +36,28 @@ export class HomePage {
                private videosService: VideosService,
                private quizService: QuizService,
                private userProvider : UserProvider,
-               private events : Events){}
-
-  ionViewWillLoad() {
-    // console.log("User called here!");
-    // this.events.publish('user:created', this.userData);
-  }
+               private events : Events,
+               private menuCtrl: MenuController,
+               private authProvider : AuthProvider,
+               private loader : LoadingController,
+               private app : App){}
 
   ngOnInit() {
     this.videosService.loadFavoriteVideos();
-    this.quizService.loadQuiz().then((data: Quiz[]) => {
-       this.quizCollection = data;
-        this.quizService.setQuiz(this.quizCollection);
-     });
-
+    // this.videosProvider.loadLibrary().then((data) => {
+    //    console.log(data);
+    //  });
 
   }
 
   ionViewDidLoad(){
-     this.videosProvider.getVideos().then((data) => {
-       console.log(data);
-     });
-
-  this.userProvider.getUser().then((data) => {
+    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
+      this.userProvider.getUser(token).subscribe((data) => {
            this.userData = data;
            //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
             this.events.publish('user:created', this.userData);
-     });
+       });
+    });
 
   }
 
@@ -66,16 +65,4 @@ export class HomePage {
         console.log('****on page will enter messages pane');
 
     }
-
-  onGoToVideos(){
-    this.navCtrl.push(this.libraryPage)
-      .catch((error) => console.log('Access denied, Argument was ' + error));
-  }
-
-  goToQuiz(){
-    console.log("============================================QUIZ============================================");
-     console.log(this.quizCollection);
-     this.navCtrl.push(this.quizPage)
-       .catch((error) => console.log('Access denied, Argument was ' + error));
-  }
 }

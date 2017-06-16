@@ -1,10 +1,9 @@
+import { AuthProvider } from './../../providers/auth';
 import { Videos } from './../../data/videos.interface';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, NavParams } from 'ionic-angular';
 import { VideosProvider } from './../../providers/videos';
 import { Component } from '@angular/core';
-import { IonicPage} from 'ionic-angular';
-//import { Video } from "../../data/video.interface";
-import videos from "../../data/videos";
+import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -17,47 +16,53 @@ export class LibraryPage {
   tempVideos: Videos[]
   videosPage = 'VideosPage';
 
-  constructor(private videosProvider:  VideosProvider,
-              private loadingController: LoadingController) {}
+  constructor(private videosProvider: VideosProvider,
+    private loadingController: LoadingController,
+    private authProvider: AuthProvider,
+    private navParams : NavParams) { }
 
   ngOnInit() {
-    this.videoCollection = videos;
-    const loading = this.loadingController.create({
+   //this.getVideosFromDB();
+        this.videoCollection = this.navParams.data;
+          this.tempVideos = this.videoCollection;
+  }
+
+  doRefresh(refresher) {
+    this.getVideosFromDB();
+    setTimeout(() => {
+      //console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
+  getVideosFromDB(){
+     const loading = this.loadingController.create({
       content: "Loading Videos..."
     });
-    this.videosProvider.getVideos().then((data: Videos[]) => {
-      console.log(data);
-      if(data){
-        this.videoCollection = data;
-        this.tempVideos = this.videoCollection;
-      }else{
-        this.videoCollection = [];
-        this.tempVideos = [];
-      }
-
+    loading.present();
+    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
+      this.videosProvider.getVideos(token).then((data: Videos[]) => {
+        loading.dismiss();
+        if (data) {
+          this.videoCollection = data;
+          this.tempVideos = this.videoCollection;
+        } else {
+          this.videoCollection = [];
+          this.tempVideos = [];
+        }
+      });
     });
-
   }
 
-   ionViewDidLoad(){
-
-    // this.videosProvider.getVideos().then((data) => {
-    //   console.log(data);
-    //   this.videoCollection = data;
-    // });
-
-  }
-
-  getVideoCategoryByTitle(event: any){
+  getVideoCategoryByTitle(event: any) {
     this.videoCollection = this.tempVideos;
-// Reset items back to all of the items
-    //this.videoCollection = videos;
+    // Reset items back to all of the items
 
     let val = event.target.value;
 
     if (val && val.trim() != '') {
       this.videoCollection = this.videoCollection.filter((videoCollection) => {
-        return (videoCollection.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (videoCollection.setId.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }

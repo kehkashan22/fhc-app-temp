@@ -1,3 +1,4 @@
+import { HomePage } from './../pages/home/home';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -7,15 +8,19 @@ import { VideoPlayer } from '@ionic-native/video-player';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-//import { AuthService } from './../services/auth';
-import { VideosService } from './../services/videos';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
-import { QuizService } from './../services/quiz';
 
+
+// Providers
 import { VideosProvider } from '../providers/videos';
+import { UserProvider } from '../providers/user';
+import { LoaderProvider } from '../providers/loader';
+import { VideosService } from './../providers/fav-videos';
+import { QuizService } from './../providers/quiz';
 
 /* Shantanu's modules */
 import { Logger } from '../providers/logger';
@@ -26,7 +31,7 @@ import { Keyboard } from '@ionic-native/Keyboard';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { UserProvider } from '../providers/user';
+
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
@@ -40,7 +45,8 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -57,6 +63,7 @@ const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    HomePage
   ],
   providers: [
     StatusBar,
@@ -73,7 +80,8 @@ const firebaseConfig = {
     AuthProvider,
     AngularFireDatabase,
     Keyboard,
-    UserProvider
+    UserProvider,
+    LoaderProvider
 
   ]
 })

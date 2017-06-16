@@ -69,9 +69,13 @@ page-home {
 
   }
 
-  .background{
-    background: silver no-repeat;
-    background-size: cover;
-  }
+   .background{
+     background: #D3D3D3 no-repeat;
+     background-size: cover;
+   }
+
+  // .scroll-content {
+  //           background-color: map-get($colors, light);
+  //       }
 
 }
