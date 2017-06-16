@@ -1,5 +1,5 @@
 import { IonicPage } from 'ionic-angular';
-import { VideosService } from '../../services/videos';
+import { VideosService } from '../../providers/fav-videos';
 import { Video } from './../../data/video.interface';
 import { Component, OnInit } from '@angular/core';
 import { ModalController} from 'ionic-angular';

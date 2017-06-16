@@ -1,10 +1,11 @@
-import { QuizService } from './../../services/quiz';
+import { LoadingController } from 'ionic-angular';
+import { AuthProvider } from './../../providers/auth';
+import { QuizService } from './../../providers/quiz';
 import { VideoPlayer } from '@ionic-native/video-player';
 import { Answer } from './../../data/answer.interface';
 import { Quiz } from './../../data/quiz.interface';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import quiz from '../../data/quiz';
 import { trigger, state, style, transition, animate } from "@angular/animations";
 
 @IonicPage()
@@ -23,10 +24,10 @@ import { trigger, state, style, transition, animate } from "@angular/animations"
     ])
   ]
 })
-export class QuizPage implements OnInit{
+export class QuizPage implements OnInit {
 
 
-  visibleState : string = 'visible';
+  visibleState: string = 'visible';
   index: number = 0;
   marks: number = 0;
   quizCollection: Quiz[];
@@ -35,58 +36,80 @@ export class QuizPage implements OnInit{
   answers: boolean = false;
   trigger: boolean = false;
   url: string = '';
+  analysisPage = 'AnalysisPage';
+
+  analysis : {quizId: string, quizNumber: any, marks: number}[] = [];
 
   constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                 private videoPlayer: VideoPlayer,
-                 private quizService : QuizService) {
+    public navParams: NavParams,
+    private videoPlayer: VideoPlayer,
+    private quizService: QuizService,
+    private authProvider: AuthProvider,
+    private loader : LoadingController) {
   }
 
   ngOnInit() {
-
-     this.quizCollection=this.quizService.getQuiz();
-     console.log("QUIZ PAGE");
-     console.log(this.quizCollection);
-     this.currentQuestion = this.quizCollection[0];
-     console.log(this.currentQuestion);
-
+    const loader = this.loader.create({
+      spinner: 'bubbles',
+      content: "Loading Quiz..."
+    });
+    loader.present();
+    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
+      this.quizService.loadQuiz(token).subscribe((data: Quiz[]) => {
+        setTimeout(() => {
+          loader.dismiss();
+        }, 1000);
+        this.quizCollection = data;
+        this.currentQuestion = this.quizCollection[0];
+      });
+    },
+    error => {
+      console.log(error);
+    });
   }
 
-  changeQuestion(answer: Answer){
-      this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
-      console.log(answer);
-      var answerIndex=this.quizCollection[this.index].answers.indexOf(answer);
-      this.quizCollection[this.index].answers[answerIndex].selected=true;
-      //console.log(this.quizCollection);
-      setTimeout(
-        () => {
-           this.visibleState = 'visible';
-           if(this.index+1 < this.quizCollection.length){
-            this.currentQuestion = this.quizCollection[++this.index];
-            }else{
-              this.question = false;
-            }
-        } , 500);
-    }
+  changeQuestion(answer: Answer) {
+    this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
+    console.log(answer);
+    var answerIndex = this.quizCollection[this.index].answers.indexOf(answer);
+    this.quizCollection[this.index].answers[answerIndex].selected = true;
+    setTimeout(
+      () => {
+        this.visibleState = 'visible';
+        if (this.index + 1 < this.quizCollection.length) {
+          this.currentQuestion = this.quizCollection[++this.index];
+        } else {
+          this.question = false;
+        }
+      }, 500);
+  }
 
-    analysis(){
-      this.marks = 0;
-      this.answers = true;
-      for(var i = 0; i < this.quizCollection.length ; i++){
-        for(var j = 0; j < (this.quizCollection[i].answers).length ; j++){
-          if(this.quizCollection[i].answers[j].selected && this.quizCollection[i].answers[j].correct){
-              ++this.marks;
-          }
+  analysisFunc() {
+    this.marks = 0;
+    this.answers = true;
+    for (var i = 0; i < this.quizCollection.length; i++) {
+      for (var j = 0; j < (this.quizCollection[i].answers).length; j++) {
+        if (this.quizCollection[i].answers[j].selected && this.quizCollection[i].answers[j].correct) {
+          ++this.marks;
         }
       }
     }
 
-    thisPlay(){
-    this.url="http://techslides.com/demos/sample-videos/small.mp4";
+    this.analysis =[
+      {quizId: 'DT', quizNumber: 1, marks: this.marks},
+      {quizId: 'DT', quizNumber: 2, marks: 5},
+       {quizId: 'IDT', quizNumber: 1, marks: 2},
+      {quizId: 'IDT', quizNumber: 2, marks: 5},
+    ];
+
+  }
+
+  thisPlay() {
+    this.url = "http://techslides.com/demos/sample-videos/small.mp4";
     this.videoPlayer.play(this.url).then(() => {
-			this.trigger=true;
+      this.trigger = true;
     }).catch(err => {
-     console.log(err);
+      console.log(err);
     });
   }
 }

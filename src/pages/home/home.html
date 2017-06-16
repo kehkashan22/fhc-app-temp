@@ -26,36 +26,29 @@
   </div>
 
 
-  <ion-card>
+  <ion-card [navPush]="quizPage">
     <img src="assets/img/card-saopaolo.jpeg"/>
     <div class="card-title">Analyse Yourself</div>
     <div class="card-subtitle">
       Take this simple test to find out where you stand
-      <button
-      ion-button
-      [navPush]="quizPage"
-      color="light"
-      outline>Click Here</button>
     </div>
   </ion-card>
 
-  <ion-card>
+  <ion-card [navPush]="rootLibraryPage">
     <img src="assets/img/card-amsterdam.jpg"/>
     <div class="card-title">Demo Videos</div>
     <div class="card-subtitle">
-      Watch the best videos for Direct and Indirect Tax here <hr>
-      <button
-      ion-button
-      (click)="onGoToVideos()"
-      color="light"
-      outline>Click Here</button>
+      Demo Videos for CA and CS students
     </div>
   </ion-card>
 
-  <ion-card>
+  <!--<ion-card>
     <img src="assets/img/card-sf.jpg"/>
-    <div class="card-title">Ammendments and Case Laws</div>
-    <!--<div class="card-subtitle">Find all ammendments here</div>-->
-  </ion-card>
-
+    <div class="card-title">Case Laws</div>
+    <button
+      ion-button
+      [navPush]="rootLibraryPage"
+      color="light"
+      outline>Click Here</button>
+  </ion-card>-->
 </ion-content>

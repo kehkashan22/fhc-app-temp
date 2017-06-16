@@ -1,5 +1,5 @@
 /*
-  Name - Logger Service 
+  Name - Logger Service
   Functionality - Logs Messages, Errors, and Information.
   Author - Shantanu Kamdi
   Date - 07/06/2017
@@ -13,7 +13,6 @@ export class Logger {
   private currentDate: Date ;
 
   constructor() {
-    console.log('Hello Logger Provider');
     // Setting the current date
     this.currentDate = new Date();
 

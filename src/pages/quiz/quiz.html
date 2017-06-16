@@ -31,33 +31,25 @@
     </div>-->
 
       <!--QUIZ DIV HERE-->
-    <div *ngIf="question ; else quizEnd" [@myvisibility]="visibleState">
+    <div *ngIf="question; else quizEnd" [@myvisibility]="visibleState">
       <ion-card>
-        <ion-card-content>{{currentQuestion.question}}</ion-card-content>
+        <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
       </ion-card>
 
       <ion-list radio-group mode="ios">
-        <ion-item *ngFor="let answer of currentQuestion.answers" mode="ios">
+        <ion-item *ngFor="let answer of currentQuestion?.answers" mode="ios">
           <ion-label>{{answer.answerKey}}) {{answer.answerText}}</ion-label>
           <ion-radio [value]="answer" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
         </ion-item>
       </ion-list>
-      <!--<ion-list>
-        <button ion-item *ngFor="let answer of currentQuestion.answers" (click)="changeQuestion(answer)">
-            {{answer.answerText}}
-        </button>
-      </ion-list>-->
       </div>
       <ng-template #quizEnd>
         <h1>You have successfully completed the quiz</h1>
-        <button ion-button block outline (click)="analysis()">See how you did</button>
+        <button ion-button block outline (click)="analysisFunc()">See how you did</button>
         <div *ngIf = "answers">
             <h1>{{marks}}/4</h1>
         </div>
+
+        <button ion-button block outline [navPush]="analysisPage" [navParams]="analysis">To Charts and Beyond!</button>
       </ng-template>
-
-      <!--<div class="media">
-        <iframe class="tscplayer_inline" id="embeddedSmartPlayerInstance" src="assets/yo/yo_player.html?embedIFrameId=embeddedSmartPlayerInstance" scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-      </div>-->
 </ion-content>

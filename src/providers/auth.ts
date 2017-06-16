@@ -18,27 +18,24 @@ export class AuthProvider {
 
   constructor(private af: AngularFireAuth,
               private logger: Logger
-  ) {
-    console.log('Hello AuthProvider Provider');
-  }
+  ) {}
 
   /* Register method
      params: user - fullName, emailId,phoneNumber, password, address, pincode, attemptNumber, attemptDate, dob
   */
-  registerUser(user): firebase.Promise<any>{
+  registerUser(user, password): firebase.Promise<any>{
     this.logger.log('registerUser()');
     this.logger.log('User in registerUser() '+user);
 
     let email = user.emailId;
-    let password = user.password;
+
 
     return this.af.auth.createUserWithEmailAndPassword(email, password).then(newUser => {
-                  let newUserId = newUser.uid;
                   firebase.database()
                           .ref('/users')
                           .child(newUser.uid)
                           .set({
-                            newUserId : user
+                            user : user
                           });
                   firebase.auth().currentUser.sendEmailVerification().then(() => {
                       console.log("Verification email sent");

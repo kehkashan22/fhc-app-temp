@@ -1,6 +1,6 @@
-/* 
-  Name - Intro Slider Component 
-  Functionality - Intro Sliding Component. To be shown only when the user opens the app for first time. 
+/*
+  Name - Intro Slider Component
+  Functionality - Intro Sliding Component. To be shown only when the user opens the app for first time.
                   Need to look into performance factor.
   Author - Shantanu Kamdi
   Date - 06/06/2017
@@ -18,14 +18,14 @@ import { Logger } from '../../providers/logger';
 })
 export class IntroSlider {
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public _logger: Logger
   ) {
   }
 
   ionViewDidLoad() {
-    this._logger.log('ionDidViewLoad intro-slider');
+    this._logger.log('ionViewDidLoad intro-slider');
   }
 
   /* To load login page on button click*/

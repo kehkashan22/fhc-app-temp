@@ -1,0 +1,30 @@
+<ion-header color="headerColor">
+
+  <ion-navbar color="headerColor">
+    <ion-title>Quiz Library</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+    <div class="slider">
+      <img src="assets/img/Choose-Your-Topic.png" alt="Choose Your Topic">
+    </div>
+
+    <button ion-item [navPush]="quizPage"
+      [navParams]="quizCollection">
+      <h3>DT</h3>
+    </button>
+
+    <ion-card>
+      <ion-card-title text-center>IDT</ion-card-title>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-title text-center>CA</ion-card-title>
+    </ion-card>
+
+    <button ion-button block outline [navPush]="analysisPage">To Charts and Beyond!</button>
+
+</ion-content>

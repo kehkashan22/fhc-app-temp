@@ -1,9 +1,7 @@
 <ion-content padding class="bg" scroll="false">
-  
+
   <img src="assets/logo/logo.png" alt="">
-  
-  <h6><b>Welcome</b></h6><hr>
-  
+
   <form [formGroup] = "loginForm">
 
   <ion-list>
@@ -16,8 +14,8 @@
   <ion-item *ngIf = "!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)" >
     <p>Please enter email id</p>
   </ion-item>
-  </ion-list> 
-  
+  </ion-list>
+
   <ion-list>
     <ion-item>
       <ion-label floating>
@@ -34,12 +32,18 @@
   <div>
     <button ion-button color = "btn-login" style="color: white;" block (tap) = "login()">LOGIN</button>
     <div style="height: 20px;"></div>
-    <button ion-button block color = "btn-login" clear (tap) = "forgotPassword()"><b>Forgot your Password?</b></button>
+    <button ion-button color = "btn-login" clear (tap) = "forgotPassword()">Forgot your Password?</button>
 
-    <div style="height: 80px;"></div>
-
-    <button ion-button block color = "btn-login" outline (tap) = "navigateToSignup()">SIGN UP</button>
+    <button ion-button color = "btn-login" outline (tap) = "navigateToSignup()">Create an account</button>
   </div>
-  
+
 
 </ion-content>
+
+<ion-footer>
+
+  <ion-item no-lines>
+      <p text-center text-wrap >By registering I accept the
+    <b> Terms and Conditions</b> and <b>Privacy Policy</b></p>
+  </ion-item>
+</ion-footer>

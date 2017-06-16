@@ -14,6 +14,15 @@
 
 <ion-content
  class="card-background-page" scroll="false">
+
+   <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
  <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar>
     <ion-list>
     <button
@@ -22,7 +31,7 @@
       [navPush]="videosPage"
       [navParams]="videoGroup">
       <ion-icon [name]="videoGroup.icon" item-left></ion-icon>
-      <h2>{{ videoGroup.category | uppercase }}</h2>
+      <h2>{{ videoGroup.setId | uppercase }}</h2>
       <p>{{ videoGroup.videos.length }} Videos</p>
     </button>
   </ion-list>

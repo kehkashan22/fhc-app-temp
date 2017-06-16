@@ -6,7 +6,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Ammendments Library</ion-title>
+    <ion-title>Library</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,18 +14,14 @@
 
 <ion-content
  class="card-background-page" scroll="false">
- <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar>
-    <ion-list>
+  <ion-list>
     <button
       ion-item
-      *ngFor="let videoGroup of videoCollection"
-      [navPush]="videosPage"
+      *ngFor="let videoGroup of libraryCollection"
+      [navPush]="library2"
       [navParams]="videoGroup">
-      <ion-icon [name]="videoGroup.icon" item-left></ion-icon>
-      <h2>{{ videoGroup.category | uppercase }}</h2>
-      <p>{{ videoGroup.videos.length }} Videos</p>
+      <h2>{{ videoGroup.courseId | uppercase }}</h2>
     </button>
   </ion-list>
- <!--</ion-card>-->
 </ion-content>
 
