@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { VideoPage } from './video';
-import { YoutubePipe } from './../../pipes/youtube';
+import { PipesModule } from "../../pipes/pipes.module";
 
 @NgModule({
   declarations: [
-    VideoPage,
-    YoutubePipe
+    VideoPage
   ],
   imports: [
     IonicPageModule.forChild(VideoPage),
+    PipesModule
   ],
   exports: [
     VideoPage

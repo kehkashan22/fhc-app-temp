@@ -1,3 +1,10 @@
+/*
+  Name - Favorite Service
+  Functionality - A video service to fetch, store, load and delete favorite videos
+  Author - Kehkashan Fazal
+  Date - 08/06/2017
+*/
+
 import { Injectable } from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { Video } from "../data/video.interface";

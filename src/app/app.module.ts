@@ -26,15 +26,16 @@ import { Keyboard } from '@ionic-native/Keyboard';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { UserProvider } from '../providers/user';
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
-    apiKey: "AIzaSyBTWVR9YYEkE7xLDyCtThZJhW_CLiM4Ka0",
-    authDomain: "fhc-app-47154.firebaseapp.com",
-    databaseURL: "https://fhc-app-47154.firebaseio.com",
-    projectId: "fhc-app-47154",
-    storageBucket: "fhc-app-47154.appspot.com",
-    messagingSenderId: "108315354380"
+    apiKey: "AIzaSyAUWpg8GzdSQajiUBsfk780wnYX-q-gJHM",
+    authDomain: "ionic-fhc-app.firebaseapp.com",
+    databaseURL: "https://ionic-fhc-app.firebaseio.com",
+    projectId: "ionic-fhc-app",
+    storageBucket: "ionic-fhc-app.appspot.com",
+    messagingSenderId: "10023112054"
 };
 
 @NgModule({
@@ -71,8 +72,9 @@ const firebaseConfig = {
     Logger,
     AuthProvider,
     AngularFireDatabase,
-    Keyboard
-    
+    Keyboard,
+    UserProvider
+
   ]
 })
 export class AppModule {}
