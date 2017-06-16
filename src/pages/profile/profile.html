@@ -16,11 +16,11 @@
 <div id="profile-bg"></div>
       <div id="content">
         <div id="profile-info">
-            <img id="profile-image" src="assets/img/avatar-cher.png" >
-            <h3 id="profile-name">User</h3>
-          <span id="profile-description"> Email: user@gmail.com </span>
+            <img id="profile-image" [src]="profilePicture" >
+            <h3 id="profile-name">{{fullname}}</h3>
+          <span id="profile-description"> Email: {{email}} </span>
           <br>
-          <span id="profile-description"> Mob: 9372658410 </span>
+          <span id="profile-description"> Mob: {{phone}} </span>
           <br>
          <button ion-button outline>Edit Profile</button>
         </div>

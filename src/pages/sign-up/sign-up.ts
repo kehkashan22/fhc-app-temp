@@ -1,4 +1,4 @@
-/* 
+/*
   Name - Signup Component
   Functionality - For registering of users using firebase.
   Author - Shantanu Kamdi
@@ -27,11 +27,11 @@ export class SignUp {
   /* For Validation purposes */
   private submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
-              private _logger: Logger,
-              private _auth: AuthProvider,
+              private logger: Logger,
+              private authProvider: AuthProvider,
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController
   ) {
@@ -57,8 +57,8 @@ export class SignUp {
 
   /* Signup user method which is called in click */
   signupUser(){
-    this._logger.log('signupUser() method');
-    
+    this.logger.log('signupUser() method');
+
     /* Creating user object using form values*/
     let userData = {
       fullName: this.form.value.fullName,
@@ -77,13 +77,13 @@ export class SignUp {
 
     /* Loader */
     let loader = this.loadingCtrl.create({
-      content: 'Registering User'
+      content: 'Registering User...'
     });
 
     loader.present();
-    
+
     /* Auth service registerUser method */
-    this._auth.registerUser(userData).then(() => {
+    this.authProvider.registerUser(userData).then(() => {
       /* Resetting the form once everything is done */
       this.form.reset();
       /* Setting the stack root to login */
@@ -104,7 +104,7 @@ export class SignUp {
 
   /* Navigate back to login */
   navigateToLogin(){
-    this._logger.log('navigateToLogin() method');
+    this.logger.log('navigateToLogin() method');
     /* For avoiding the stacking of the same page again and again */
     this.navCtrl.setRoot('LoginWithEmailPage');
   }

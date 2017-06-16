@@ -5,10 +5,10 @@
       <ion-list no-lines>
         <ion-item >
           <ion-avatar item-left height="100px">
-            <img src="assets/img/avatar-cher.png">
+            <img [src]="profilePicture">
           </ion-avatar>
-          <h1>User</h1>
-          <p>user@gmail.com</p>
+          <h1>{{fullname}}</h1>
+          <p>{{email}}</p>
         </ion-item>
 
         <button ion-item (click)="onLoad(profilePage)">
@@ -19,7 +19,7 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item (click)="onLoad(rootPage)">
+      <button ion-item (click)="onLoad(homePage)">
         <ion-icon name="home" item-left></ion-icon>
         Home
       </button>
@@ -53,6 +53,11 @@
       <button ion-item (click)="onLoad(settingsPage)">
         <ion-icon name="settings" item-left></ion-icon>
         Settings
+      </button>
+
+      <button ion-item (click)="logout()">
+        <ion-icon name="log-out" item-left></ion-icon>
+        Logout
       </button>
 
     </ion-list>

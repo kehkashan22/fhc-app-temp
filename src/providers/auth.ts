@@ -1,5 +1,5 @@
-/* 
-  Name - Auth Service 
+/*
+  Name - Auth Service
   Functionality - Firebase Authentication (login, register, forget password)
   Author - Shantanu Kamdi
   Date - 08/06/2017
@@ -17,12 +17,12 @@ import { Logger } from './logger';
 export class AuthProvider {
 
   constructor(private af: AngularFireAuth,
-              private logger: Logger      
+              private logger: Logger
   ) {
     console.log('Hello AuthProvider Provider');
   }
 
-  /* Register method 
+  /* Register method
      params: user - fullName, emailId,phoneNumber, password, address, pincode, attemptNumber, attemptDate, dob
   */
   registerUser(user): firebase.Promise<any>{
@@ -49,7 +49,7 @@ export class AuthProvider {
   }
 
   authenticateAndLogin(user){
-    
+
     this.logger.log('authenticateAndLogin()');
     this.logger.log('User in authenticateAndLogin() '+user);
 
@@ -64,10 +64,14 @@ export class AuthProvider {
     let email = userEmailId.emailId;
 
     return firebase.auth().sendPasswordResetEmail(email);
-    
+
   }
 
   logout(): firebase.Promise<any>{
     return this.af.auth.signOut();
+  }
+
+  getActiveUser(){
+    return firebase.auth().currentUser;
   }
 }

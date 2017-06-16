@@ -111,8 +111,19 @@
   </ion-list>
 
   <div>
-    <button ion-button block color = "btn-login" (tap) = "signupUser()">SIGN UP</button><hr>
-    <button ion-button block color = "btn-login" outline (tap) = "navigateToLogin()">LOGIN</button>
+    <button
+    ion-button
+    block
+    color = "btn-login"
+    (tap) = "signupUser()"
+    [disabled]="!form.valid">SIGN UP</button><hr>
+    <button
+    ion-button
+    block
+    color = "btn-login"
+    outline
+    (tap) = "navigateToLogin()"
+    >LOGIN</button>
   </div>
 </form>
 </ion-content>
