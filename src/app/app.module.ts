@@ -3,7 +3,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { VideoPlayer } from '@ionic-native/video-player';
+
+//Videogular
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
+
+//Native
 import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -52,7 +59,13 @@ const firebaseConfig = {
     IonicStorageModule.forRoot(),
     HttpModule,
     BrowserAnimationsModule,
-     IonicModule.forRoot(MyApp, {
+    // //Videogular
+    // VgCoreModule,
+    // VgControlsModule,
+    // VgOverlayPlayModule,
+    // VgBufferingModule,
+
+    IonicModule.forRoot(MyApp, {
       //for limiting scrolling of the page when keyboard is up
       scrollAssist: false
     }),
@@ -69,7 +82,6 @@ const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VideosService,
     QuizService,
-    VideoPlayer,
     VideosProvider,
     EmailComposer,
     InAppBrowser,

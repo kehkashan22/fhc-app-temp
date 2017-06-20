@@ -2,48 +2,54 @@
 
   <img src="assets/logo/logo.png" alt="">
 
-  <form [formGroup] = "loginForm">
+  <form [formGroup]="loginForm">
 
-  <ion-list>
-    <ion-item>
-      <ion-label floating>
-        Email
-      </ion-label>
-     <ion-input type="email" formControlName = "emailId" [class.invalid] = "!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)" >
-    <p>Please enter email id</p>
-  </ion-item>
-  </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>
+          Email
+        </ion-label>
+        <ion-input type="email" formControlName="emailId" [class.invalid]="!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)">
+        <p>Please enter email id</p>
+      </ion-item>
+    </ion-list>
 
-  <ion-list>
-    <ion-item>
-      <ion-label floating>
-        Password
-      </ion-label>
-      <ion-input type="password" formControlName = "password" [class.invalid] = "!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
-    </ion-item>
-    <ion-item *ngIf = "!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" >
-      <p>Please enter password</p>
-    </ion-item>
-  </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>
+          Password
+        </ion-label>
+        <ion-input type="password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)">
+        <p>Please enter password</p>
+      </ion-item>
+    </ion-list>
   </form>
 
   <div>
-    <button ion-button color = "btn-login" style="color: white;" block (tap) = "login()">LOGIN</button>
+    <button ion-button color="btn-login" style="color: white;" block (tap)="login()">LOGIN</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 offset-5>
+          <button ion-button small color="btn-login" clear (tap)="forgotPassword()">Forgot your Password?</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <div style="height: 20px;"></div>
-    <button ion-button color = "btn-login" clear (tap) = "forgotPassword()">Forgot your Password?</button>
 
-    <button ion-button color = "btn-login" outline (tap) = "navigateToSignup()">Create an account</button>
   </div>
 
 
+  <button ion-button color="btn-login" outline (tap)="navigateToSignup()" block >Create an account</button>
 </ion-content>
 
 <ion-footer>
 
   <ion-item no-lines>
-      <p text-center text-wrap >By registering I accept the
-    <b> Terms and Conditions</b> and <b>Privacy Policy</b></p>
+    <p text-center text-wrap>By registering I accept the
+      <b> Terms and Conditions</b> and <b>Privacy Policy</b></p>
   </ion-item>
 </ion-footer>

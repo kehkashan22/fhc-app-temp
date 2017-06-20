@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { QuizPage } from './quiz';
+import { AnalyseMePage } from './analyse-me';
 
 //Videogular
 import {VgCoreModule} from 'videogular2/core';
@@ -10,17 +10,17 @@ import {VgBufferingModule} from 'videogular2/buffering';
 
 @NgModule({
   declarations: [
-    QuizPage,
+    AnalyseMePage,
   ],
   imports: [
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    IonicPageModule.forChild(QuizPage),
+    IonicPageModule.forChild(AnalyseMePage),
   ],
   exports: [
-    QuizPage,
+    AnalyseMePage
   ]
 })
-export class QuizPageModule {}
+export class AnalyseMePageModule {}

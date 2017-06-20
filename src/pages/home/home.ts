@@ -18,6 +18,7 @@ export class HomePage {
   analysisPage = 'AnalysisPage';
   libraryPage = 'LibraryPage';
   quizPage = 'QuizPage';
+  analyseMePage = 'AnalyseMePage';
   rootLibraryPage = 'RootLibraryPage';
   quizLibraryPage = 'QuizLibraryPage';
   quizCollection : Quiz[];
@@ -44,7 +45,7 @@ export class HomePage {
 
   ngOnInit() {
     this.videosService.loadFavoriteVideos();
-    // this.videosProvider.loadLibrary().then((data) => {
+    // this.quizService.loadQuizLibrary().then((data) => {
     //    console.log(data);
     //  });
 
