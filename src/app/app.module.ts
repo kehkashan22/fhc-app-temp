@@ -1,4 +1,3 @@
-import { HomePage } from './../pages/home/home';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -33,6 +32,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 
+
 /* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
     apiKey: "AIzaSyAUWpg8GzdSQajiUBsfk780wnYX-q-gJHM",
@@ -45,8 +45,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -62,8 +61,7 @@ const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   providers: [
     StatusBar,

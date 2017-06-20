@@ -1,4 +1,3 @@
-import { HomePage } from './../pages/home/home';
 import { LoadingController, App } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { UserProvider } from './../providers/user';
@@ -24,7 +23,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  homePage = HomePage;
+  homePage = 'HomePage';
   profilePage = 'ProfilePage';
   settingsPage = 'SettingsPage';
   starredPage = 'StarredPage';
@@ -61,7 +60,7 @@ export class MyApp {
       const authObserver = afAuth.authState.subscribe(user => {
         this.zone.run(() => {
           if (user) {
-            this.rootPage = HomePage;
+            this.rootPage = 'HomePage';
             authObserver.unsubscribe();
           } else {
             this.rootPage = 'LoginWithEmailPage';
@@ -76,7 +75,7 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Home', component: HomePage, icon: 'home'},
+      { title: 'Home', component: 'HomePage', icon: 'home'},
       { title: 'Video Library', component: 'RootLibraryPage', icon: 'book'},
       { title: 'Starred Videos', component: 'StarredPage', icon: 'star'},
       { title: 'Store', component: 'store', icon: 'cart'},
