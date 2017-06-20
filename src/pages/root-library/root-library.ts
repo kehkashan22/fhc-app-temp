@@ -11,16 +11,20 @@ import { LoadingController, IonicPage } from "ionic-angular";
 })
 export class RootLibraryPage {
 
-  library2 = 'Library2Page';
+  library = 'LibraryPage';
 
-   libraryCollection: Library[];
+  libraryCollection: Library[];
   tempVideos: Library[];
   videoCollection: Videos[];
   videosPage = 'VideosPage';
-  courseId : string = '';
+  courseId: string = '';
+  course: string = "ca";
+  show: string = '';
+  caGroup : any;
+  csGroup : any;
 
-  constructor(private videosProvider:  VideosProvider,
-              private loadingController: LoadingController) {}
+  constructor(private videosProvider: VideosProvider,
+    private loadingController: LoadingController) { }
 
   ngOnInit() {
     // this.libraryCollection = videos;
@@ -32,18 +36,29 @@ export class RootLibraryPage {
     this.videosProvider.getNewVideos().then((data: Library[]) => {
       console.log(data);
       loader.dismiss();
-      if(data){
+      if (data) {
         this.libraryCollection = data;
         this.tempVideos = this.libraryCollection;
-      }else{
+       this.caGroup = this.libraryCollection[0];
+        this.csGroup = this.libraryCollection[1];
+      } else {
         this.libraryCollection = [];
         this.tempVideos = [];
       }
     });
 
+
   }
-    goTo(courseId : string){
-        this.courseId = courseId;
+  goTo(courseId: string) {
+    this.courseId = courseId;
+  }
+
+  toggleDetails(data: string) {
+    if (this.show === data) {
+      this.show = '';
+    } else {
+      this.show = data;
     }
+  }
 }
 

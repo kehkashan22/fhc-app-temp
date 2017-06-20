@@ -1,8 +1,8 @@
 export default [
   {
     questionNumber: 1,
-    tested: 'Reading',
     question: 'Question 1',
+    explanation: 'Long winded text about how everything is right or wrong...',
     answers: [
       {
         answerKey: 'A',
@@ -32,8 +32,8 @@ export default [
   },
   {
     questionNumber: 2,
-    tested: 'Learning',
     question: 'Question 2',
+    explanation: 'Long winded text about how everything is right or wrong...',
     answers: [
       {
         answerKey: 'A',
@@ -63,8 +63,8 @@ export default [
   },
   {
     questionNumber: 3,
-    tested: 'Writing',
     question: 'Question 3',
+    explanation: 'Long winded text about how everything is right or wrong...',
     answers: [
       {
         answerKey: 'A',
@@ -94,8 +94,8 @@ export default [
   },
   {
     questionNumber: 4,
-    tested: 'Understanding',
     question: 'Question 4',
+    explanation: 'Long winded text about how everything is right or wrong...',
     answers: [
       {
         answerKey: 'A',

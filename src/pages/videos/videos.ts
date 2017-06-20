@@ -20,6 +20,7 @@ export class VideosPage implements OnInit {
 
   ngOnInit() {
     this.videoGroup = this.navParams.data;
+    console.log(this.videoGroup);
   }
 
   onAddToFavorites(selectedvideo: Video) {
@@ -52,6 +53,6 @@ export class VideosPage implements OnInit {
   }
 
   isFavorite(video: Video) {
-    return this.videosService.isVideoFavorite(video);
+    return this.videosService.isVideoFavorite(video) != -1 ? true : false;
   }
 }

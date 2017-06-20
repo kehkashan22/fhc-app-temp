@@ -10,4 +10,12 @@ page-login {
         margin: auto;
         display: block;
     }
+    .grid{
+      padding: 0px;
+    }
+    ion-grid{
+      [col-12] {
+          padding: 0px;
+      }
+    }
 }

@@ -1,6 +1,6 @@
+import { QuizLibrary } from './../../data/quiz-library.interface';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, LoadingController } from 'ionic-angular';
-import { VideoPlayer } from "@ionic-native/video-player";
 import { QuizService } from "../../providers/quiz";
 import { AuthProvider } from "../../providers/auth";
 import { Quiz } from "../../data/quiz.interface";
@@ -12,11 +12,17 @@ import { Quiz } from "../../data/quiz.interface";
 })
 export class QuizLibraryPage implements OnInit{
 
+  quizLibrary : QuizLibrary[];
+  caLibrary : QuizLibrary;
+  csLibrary : QuizLibrary;
   quizCollection: Quiz[];
-  analysisPage: 'AnalysisPage';
+  quizPage = 'QuizPage';
+  show: string = '';
+  courseId: string = '';
+  course: string = "ca";
+  chaptersPage = 'ChaptersPage';
 
   constructor(public navCtrl: NavController,
-              private videoPlayer: VideoPlayer,
               private quizService: QuizService,
               private authProvider: AuthProvider,
               private loader : LoadingController) {
@@ -31,12 +37,15 @@ export class QuizLibraryPage implements OnInit{
       content: "Loading Quiz..."
     });
     loader.present();
+
     this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.quizService.loadQuiz(token).subscribe((data: Quiz[]) => {
+      this.quizService.getQuizLibrary(token).subscribe((data: QuizLibrary[]) => {
         setTimeout(() => {
           loader.dismiss();
         }, 1000);
-        this.quizCollection = data;
+        this.quizLibrary = data;
+        this.caLibrary = this.quizLibrary[0];
+        this.csLibrary = this.quizLibrary[1];
       });
     },
     error => {
@@ -44,7 +53,16 @@ export class QuizLibraryPage implements OnInit{
     });
   }
 
-  // toQuiz(){
-  //   this.navCtrl.push(this.quizPage, this.quizCollection);
-  // }
+    goTo(courseId: string) {
+    this.courseId = courseId;
+  }
+
+  toggleDetails(data: string) {
+    if (this.show === data) {
+      this.show = '';
+    } else {
+      this.show = data;
+    }
+  }
+
 }
