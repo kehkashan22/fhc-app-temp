@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header color="headerColor">
 
-  <ion-navbar>
+  <ion-navbar color="headerColor">
     <ion-title>Quiz</ion-title>
   </ion-navbar>
 
@@ -8,30 +8,9 @@
 
 
 <ion-content padding>
+  <!--QUIZ DIV HERE-->
+  <div *ngIf="question; else quizEnd" [@myvisibility]="visibleState">
 
-<!--<iframe width="100%" height="250" src="https://edpuzzle.com/embed/assignments/593be25bb95cac48689dbd3c/watch" frameborder="0" allowfullscreen></iframe>-->
-    <!--CONTROL DIV HERE
-    <div *ngIf="!trigger">
-        <ion-card>
-      <ion-card-title>Directions:</ion-card-title>
-      <ion-card-content>
-        <ol>
-          <li>Watch the video in its entirety, make notes as you wish.</li>
-          <li>Once you finish watching, click on the next button.</li>
-          <li>You will be redirected to a small quiz.</li>
-          <li>Answer to the best of you ability.</li>
-        </ol>
-      </ion-card-content>
-
-      <button
-      ion-button
-      block
-      (click)="thisPlay()"> Proceed to Test </button>
-      </ion-card>
-    </div>-->
-
-      <!--QUIZ DIV HERE-->
-    <div *ngIf="question; else quizEnd" [@myvisibility]="visibleState">
       <ion-card>
         <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
       </ion-card>
@@ -42,14 +21,17 @@
           <ion-radio [value]="answer" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
         </ion-item>
       </ion-list>
-      </div>
-      <ng-template #quizEnd>
-        <h1>You have successfully completed the quiz</h1>
-        <button ion-button block outline (click)="analysisFunc()">See how you did</button>
-        <div *ngIf = "answers">
-            <h1>{{marks}}/4</h1>
-        </div>
 
-        <button ion-button block outline [navPush]="analysisPage" [navParams]="analysis">To Charts and Beyond!</button>
-      </ng-template>
+  </div>
+
+  <!--To Analysis-->
+  <ng-template #quizEnd>
+    <h1>You have successfully completed the quiz</h1>
+    <button ion-button block outline (click)="analysisFunc()">See how you did</button>
+    <div *ngIf="answers">
+      <h1>{{marks}}/4</h1>
+    </div>
+
+    <button ion-button block outline [navPush]="analysisPage" [navParams]="analysis">To Charts and Beyond!</button>
+  </ng-template>
 </ion-content>

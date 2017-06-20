@@ -31,9 +31,8 @@
       [navPush]="videosPage"
       [navParams]="videoGroup">
       <ion-icon [name]="videoGroup.icon" item-left></ion-icon>
-      <h2>{{ videoGroup.setId | uppercase }}</h2>
+      <h2 text-wrap>{{ videoGroup.setId | uppercase }}</h2>
       <p>{{ videoGroup.videos.length }} Videos</p>
     </button>
   </ion-list>
- <!--</ion-card>-->
 </ion-content>

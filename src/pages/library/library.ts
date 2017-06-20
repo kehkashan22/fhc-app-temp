@@ -28,30 +28,11 @@ export class LibraryPage {
   }
 
   doRefresh(refresher) {
-    this.getVideosFromDB();
+    //this.getVideosFromDB();
     setTimeout(() => {
       //console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
-  }
-
-  getVideosFromDB(){
-     const loading = this.loadingController.create({
-      content: "Loading Videos..."
-    });
-    loading.present();
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.videosProvider.getVideos(token).then((data: Videos[]) => {
-        loading.dismiss();
-        if (data) {
-          this.videoCollection = data;
-          this.tempVideos = this.videoCollection;
-        } else {
-          this.videoCollection = [];
-          this.tempVideos = [];
-        }
-      });
-    });
   }
 
   getVideoCategoryByTitle(event: any) {

@@ -10,8 +10,9 @@ import { VgAPI } from 'videogular2/core';
 
 @IonicPage()
 @Component({
-  selector: 'page-quiz',
-  templateUrl: 'quiz.html',
+  selector: 'page-analyse-me',
+  templateUrl: 'analyse-me.html',
+
   animations: [
     trigger('myvisibility', [
       state('visible', style({
@@ -24,9 +25,8 @@ import { VgAPI } from 'videogular2/core';
     ])
   ]
 })
-export class QuizPage implements OnInit {
 
-
+export class AnalyseMePage implements OnInit {
   visibleState: string = 'visible';
   index: number = 0;
   marks: number = 0;
@@ -37,6 +37,7 @@ export class QuizPage implements OnInit {
   trigger: boolean = false;
   url: string = '';
   analysisPage = 'AnalysisPage';
+  video: boolean = true;
 
   analysis: { quizId: string, quizNumber: any, marks: number }[] = [];
 
@@ -49,10 +50,23 @@ export class QuizPage implements OnInit {
   }
 
   ngOnInit() {
-    this.quizCollection = this.navParams.data;
-    if (this.quizCollection.length != -1) {
-      this.currentQuestion = this.quizCollection[0];
-    }
+     const loader = this.loader.create({
+      spinner: 'bubbles',
+      content: "Loading Quiz..."
+    });
+    loader.present();
+    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
+      this.quizService.loadQuiz(token).subscribe((data: Quiz[]) => {
+        setTimeout(() => {
+          loader.dismiss();
+        }, 1000);
+        this.quizCollection = data;
+        this.currentQuestion = this.quizCollection[0];
+      });
+    },
+    error => {
+      console.log(error);
+    });
   }
 
   changeQuestion(answer: Answer) {
@@ -82,4 +96,19 @@ export class QuizPage implements OnInit {
       }
     }
   }
+
+  thisPlay() {
+    this.video = false;
+  }
+
+  onPlayerReady(api: VgAPI) {
+    this.api = api;
+
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(
+      () => {
+        this.thisPlay();
+      }
+    );
+  }
 }
+
