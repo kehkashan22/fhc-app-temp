@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ViewController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController, LoadingController, AlertController } from 'ionic-angular';
 /* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthProvider } from '../../providers/auth';
+
+import { Md5 } from 'ts-md5/dist/md5';
 
 import firebase from 'firebase';
 
@@ -25,12 +27,13 @@ export class EditProfilePage {
               private viewCtrl: ViewController,
               private _auth: AuthProvider,
               private formBuilder: FormBuilder,
-              private loadingCtrl: LoadingController
+              private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController
   ) {
     this.form = formBuilder.group({
         fullName: [ '', Validators.required],
         emailId: ['', Validators.required],
-        phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10)])],
+        phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
         password: [ '', Validators.required],
         address: [''],
         attemptNo: ['', Validators.required],
@@ -41,6 +44,7 @@ export class EditProfilePage {
         typeOfCourse: ['', Validators.required]
     });
     
+    this.db = firebase.database();
     
   }
 
@@ -92,8 +96,45 @@ export class EditProfilePage {
   }
 
   update(){
+    /* Loader */
+    let loader = this.loadingCtrl.create({
+      spinner: "bubbles",
+      content: 'Updating'
+    });
+    loader.present();
+
+    let user = {
+        fullName: this.form.value.fullName,
+        emailId: this.form.value.emailId,
+        phoneNumber: this.form.value.phoneNumber,
+        address: this.form.value.address,
+        attemptNo: this.form.value.attemptNo,
+        pincode: this.form.value.pincode,
+        attemptDate: this.form.value.attemptDate,
+        dob: this.form.value.dob,
+        gender: this.form.value.gender,
+        typeOfCourse: this.form.value.typeOfCourse
+      }
+
+    console.log("Updated Info");
+    console.log(user);
+
+    this.updateUserProfile(user).then(() => {
+      loader.dismiss();
+      this.viewCtrl.dismiss();
+    }, (err) => {
+      console.log(err);
+    });
 
   }
+
+  updateUserProfile(user): Promise<any>{
+
+    let currentUser = firebase.auth().currentUser;
+    return this.db.ref("users/"+currentUser.uid).update( { newUserId: user });
+    
+  }
+
 
   getUserProfile(): Promise<any>{
     return new Promise((resolve, reject) => {
@@ -105,4 +146,78 @@ export class EditProfilePage {
       })
     });
   }
+
+  updatePassword(){
+    let updatePasswordAlertCtrl = this.alertCtrl.create({
+      title: 'Update Password',
+      inputs: [
+        {
+          name: 'new_password',
+          placeholder: 'enter new password',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('User clicked on cancel');
+          }
+        },
+        {
+          text: 'Update',
+          
+          handler: (data) => {
+            
+            if(data.new_password === ""){
+              return false;
+            }else{
+              console.log('Update password');
+              console.log(data.new_password);
+              let newPassword = ""+Md5.hashStr(data.new_password);
+              
+              let user = firebase.auth().currentUser;
+
+              user.updatePassword(newPassword).then(() => {
+                console.log('Successfully updated password');
+
+              }, (err) => {
+                console.log('Error in updation');
+                console.log(err);
+                let alert = this.alertCtrl.create({
+                  title: 'Error',
+                  message: err.message,
+                  buttons: 
+                  [
+                    {
+                      text: 'Ok',
+                      handler: () => {
+                        this._auth.logout();
+                        this.navCtrl.setRoot('LoginWithEmailPage');
+                      }
+                    }
+                  ]
+                });
+                alert.present();
+              });
+            }
+            
+
+          }
+        }
+      ]
+    });
+    updatePasswordAlertCtrl.present();
+  }
+
+
 }
+
+
+
+
+
+
+
+

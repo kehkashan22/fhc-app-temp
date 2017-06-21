@@ -90,7 +90,7 @@
     
         </ion-col>
         <ion-col col-8>
-          <ion-input type="password" formControlName = "password" [class.invalid] = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)"></ion-input>
+          <button ion-button clear color = "dark" (tap) = "updatePassword()">click to update password</button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -177,7 +177,7 @@
     block
     color = "btn-login"
     (tap) = "update()"
-    [disabled]="!form.valid">UPDATE</button>
+    >UPDATE</button>
   </div>
 </form>
 </ion-content>
