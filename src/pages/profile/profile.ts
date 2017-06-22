@@ -42,8 +42,9 @@ export class ProfilePage {
   }
 
   editProfile(){
-    let updateModal = this.modalCtrl.create('EditProfilePage');
-    updateModal.present();
+    //let updateModal = this.modalCtrl.create('EditProfilePage');
+    //updateModal.present();
+    this.navCtrl.push('EditProfilePage');
   }
 
 

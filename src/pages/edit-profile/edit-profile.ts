@@ -63,18 +63,18 @@ export class EditProfilePage {
     this.getUserProfile().then(data => {
       this.user = data;
       
-      console.log("data", this.user.newUserId);
+      console.log("data", this.user.user);
       let user = {
-        fullName: this.user.newUserId.fullName,
-        emailId: this.user.newUserId.emailId,
-        phoneNumber: this.user.newUserId.phoneNumber,
-        address: this.user.newUserId.address,
-        attemptNo: this.user.newUserId.attemptNo,
-        pincode: this.user.newUserId.pincode,
-        attemptDate: this.user.newUserId.attemptDate,
-        dob: this.user.newUserId.dob,
-        gender: this.user.newUserId.gender,
-        typeOfCourse: this.user.newUserId.typeOfCourse
+        fullName: this.user.user.fullName,
+        emailId: this.user.user.emailId,
+        phoneNumber: this.user.user.phoneNumber,
+        address: this.user.user.address,
+        attemptNo: this.user.user.attemptNo,
+        pincode: this.user.user.pincode,
+        attemptDate: this.user.user.attemptDate,
+        dob: this.user.user.dob,
+        gender: this.user.user.gender,
+        typeOfCourse: this.user.user.typeOfCourse
       }
       this.form.get('fullName').setValue(user.fullName);
       this.form.get('emailId').setValue(user.emailId);
@@ -89,10 +89,6 @@ export class EditProfilePage {
 
       loader.dismiss();
     });
-  }
-
-  closeModal(){
-    this.viewCtrl.dismiss();
   }
 
   update(){
@@ -131,7 +127,7 @@ export class EditProfilePage {
   updateUserProfile(user): Promise<any>{
 
     let currentUser = firebase.auth().currentUser;
-    return this.db.ref("users/"+currentUser.uid).update( { newUserId: user });
+    return this.db.ref("users/"+currentUser.uid).update( { user: user });
     
   }
 
@@ -148,67 +144,8 @@ export class EditProfilePage {
   }
 
   updatePassword(){
-    let updatePasswordAlertCtrl = this.alertCtrl.create({
-      title: 'Update Password',
-      inputs: [
-        {
-          name: 'new_password',
-          placeholder: 'enter new password',
-          type: 'password'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('User clicked on cancel');
-          }
-        },
-        {
-          text: 'Update',
-          
-          handler: (data) => {
-            
-            if(data.new_password === ""){
-              return false;
-            }else{
-              console.log('Update password');
-              console.log(data.new_password);
-              let newPassword = ""+Md5.hashStr(data.new_password);
-              
-              let user = firebase.auth().currentUser;
-
-              user.updatePassword(newPassword).then(() => {
-                console.log('Successfully updated password');
-
-              }, (err) => {
-                console.log('Error in updation');
-                console.log(err);
-                let alert = this.alertCtrl.create({
-                  title: 'Error',
-                  message: err.message,
-                  buttons: 
-                  [
-                    {
-                      text: 'Ok',
-                      handler: () => {
-                        this._auth.logout();
-                        this.navCtrl.setRoot('LoginWithEmailPage');
-                      }
-                    }
-                  ]
-                });
-                alert.present();
-              });
-            }
-            
-
-          }
-        }
-      ]
-    });
-    updatePasswordAlertCtrl.present();
+    let modal = this.modalCtrl.create('UpdatePasswordPage');
+    modal.present();
   }
 
 

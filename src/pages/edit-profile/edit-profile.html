@@ -2,11 +2,7 @@
 
   <ion-navbar color="headerColor">
     <ion-title>Edit Profile</ion-title>
-    <ion-buttons end>
-      <button ion-button (tap)="closeModal()">
-      Close
-      </button>
-    </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>
@@ -84,21 +80,6 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4>
-          <ion-label>
-        *Password
-    </ion-label>
-    
-        </ion-col>
-        <ion-col col-8>
-          <button ion-button clear color = "dark" (tap) = "updatePassword()">click to update password</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
-
-    <ion-grid>
-      <ion-row>
-        <ion-col col-4>
           <ion-label  >
         *Attempt Number
     </ion-label>
@@ -170,7 +151,22 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-        
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+            *Password
+          </ion-label>
+    
+        </ion-col>
+        <ion-col col-8>
+          <button ion-button clear color = "dark" (tap) = "updatePassword()">Click to update password</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
   <div>
     <button
     ion-button

@@ -42,12 +42,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
-    apiKey: "AIzaSyAUWpg8GzdSQajiUBsfk780wnYX-q-gJHM",
-    authDomain: "ionic-fhc-app.firebaseapp.com",
-    databaseURL: "https://ionic-fhc-app.firebaseio.com",
-    projectId: "ionic-fhc-app",
-    storageBucket: "ionic-fhc-app.appspot.com",
-    messagingSenderId: "10023112054"
+    apiKey: "AIzaSyAutL08qJ8hTPM2860x-LHEAnDmgDEObRA",
+    authDomain: "fhc-ionic-app.firebaseapp.com",
+    databaseURL: "https://fhc-ionic-app.firebaseio.com",
+    projectId: "fhc-ionic-app",
+    storageBucket: "fhc-ionic-app.appspot.com",
+    messagingSenderId: "928506390872"
 };
 
 @NgModule({
