@@ -78,12 +78,12 @@ export class LoginWithEmailPage {
         this._logger.log("Successfully logged in ");
 
         /* Navigate to Home Component */
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot('HomePage');
 
       }else{
 
           const alert = this.alertCtrl.create({
-          title: 'Email not verified',
+          title: 'EMAIL NOT VERIFIED',
           message: "Please verify your email address",
           buttons: ['Ok']
 

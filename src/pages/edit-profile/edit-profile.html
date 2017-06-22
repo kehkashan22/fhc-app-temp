@@ -1,7 +1,8 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>edit-profile</ion-title>
+  <ion-navbar color="headerColor">
+    <ion-title>Edit Profile</ion-title>
+    
   </ion-navbar>
 
 </ion-header>
@@ -9,4 +10,170 @@
 
 <ion-content padding>
 
+  <form [formGroup] = "form">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+            Full Name
+          </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-input type="text" formControlName = "fullName" [class.invalid] = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+            *Email
+          </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-input type="email" [disabled] = "true" formControlName = "emailId" [class.invalid] = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+            *Phone Number
+          </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-input type="number"  formControlName = "phoneNumber" [class.invalid] = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+            Address
+          </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-input type="text" formControlName = "address" [class.invalid] = "!form.controls.address.valid && (form.controls.address.dirty || submitAttempt)"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label  >
+              *Pincode
+          </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-input type="number" formControlName = "pincode" [class.invalid] = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label  >
+        *Attempt Number
+    </ion-label>
+    
+        </ion-col>
+        <ion-col col-8>
+          <ion-input type="number" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label  >
+        *Attempt Date
+    </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-datetime displayFormat="DD-MM-YYYY" formControlName="attemptDate"></ion-datetime>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+        Date of Birth
+    </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-datetime displayFormat="DD-MM-YYYY" formControlName="dob"></ion-datetime>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+            Type of Course*
+          </ion-label>
+        </ion-col>
+        <ion-col col-8>
+          <ion-select formControlName = "typeOfCourse" interface="popover">
+            <ion-option value="ca">CA</ion-option>
+            <ion-option value="cs">CS</ion-option>
+            <ion-option value="bcom">B.COM HONS</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+              Gender
+          </ion-label>
+    
+        </ion-col>
+        <ion-col col-8>
+          <ion-select formControlName = "gender" interface="popover">
+            <ion-option value="f">Female</ion-option>
+            <ion-option value="m">Male</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label>
+            *Password
+          </ion-label>
+    
+        </ion-col>
+        <ion-col col-8>
+          <button ion-button clear color = "dark" (tap) = "updatePassword()">Click to update password</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  <div>
+    <button
+    ion-button
+    block
+    color = "btn-login"
+    (tap) = "update()"
+    >UPDATE</button>
+  </div>
+</form>
 </ion-content>
