@@ -15,6 +15,9 @@ import { AuthProvider } from '../../providers/auth';
 
 import {Md5} from 'ts-md5/dist/md5';
 import { HomePage } from "../home/home";
+
+declare var FCMPlugin;
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -80,6 +83,8 @@ export class LoginWithEmailPage {
         /* Navigate to Home Component */
         this.navCtrl.setRoot('HomePage');
 
+       
+
       }else{
 
           const alert = this.alertCtrl.create({
@@ -109,4 +114,6 @@ export class LoginWithEmailPage {
   forgotPassword(){
     this.navCtrl.push('ForgetPasswordPage');
   }
+
+  
 }

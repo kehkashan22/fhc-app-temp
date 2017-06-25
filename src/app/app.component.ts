@@ -10,6 +10,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AuthProvider } from "../providers/auth";
 
+import firebase from 'firebase';
+
 declare var FCMPlugin;
 
 @Component({
@@ -72,6 +74,8 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByHexString('#00A1DF');
       splashScreen.hide();
+      
+  
     });
 
     this.pages = [
@@ -109,12 +113,16 @@ export class MyApp {
   }
 
   logout() {
+
     const loading = this.loader.create({
       spinner: 'bubbles',
       content: 'Signing you out...'
     });
     loading.present();
+    firebase.database().ref('/pushTokens').child(firebase.auth().currentUser.uid).remove();
+
     this.authProvider.logout().then(() => {
+      
       setTimeout(() => {
         loading.dismiss();
       }, 3000);
@@ -124,7 +132,8 @@ export class MyApp {
       }, 3000);
 
     });
-
   }
+
+  
 }
 
