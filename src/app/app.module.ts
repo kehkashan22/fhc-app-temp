@@ -5,12 +5,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-//Videogular
-import {VgCoreModule} from 'videogular2/core';
-import {VgControlsModule} from 'videogular2/controls';
-import {VgOverlayPlayModule} from 'videogular2/overlay-play';
-import {VgBufferingModule} from 'videogular2/buffering';
-
 //Native
 import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
@@ -38,6 +32,7 @@ import { Keyboard } from '@ionic-native/Keyboard';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { GlobalsProvider } from '../providers/globals/globals';
 
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
@@ -60,12 +55,6 @@ const firebaseConfig = {
     IonicStorageModule.forRoot(),
     HttpModule,
     BrowserAnimationsModule,
-    // //Videogular
-    // VgCoreModule,
-    // VgControlsModule,
-    // VgOverlayPlayModule,
-    // VgBufferingModule,
-
     IonicModule.forRoot(MyApp, {
       //for limiting scrolling of the page when keyboard is up
       scrollAssist: false
@@ -93,7 +82,8 @@ const firebaseConfig = {
     AngularFireDatabase,
     Keyboard,
     UserProvider,
-    LoaderProvider
+    LoaderProvider,
+    GlobalsProvider
 
   ]
 })

@@ -1,10 +1,97 @@
 page-quiz {
-  vg-player {
-      font-family: 'videogular';
-      position: relative;
-      display: flex;
-      height: 75vh;
-      overflow: hidden;
-      background-color: black;
+  @import "../../assets/scss/_circle.scss";
+  .results{
+    padding: 16px;
   }
+
+  #solutions{
+    #resultGrid{
+          padding: 0px !important;
+      }
+
+      ion-label.label.label-md, ion-label.label.label-ios{
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+      }
+  }
+
+
+  #quiz-bg {
+        position: fixed;
+        left: 0;
+        top: 44px;
+        width: 100%;
+        height: 175px;
+        //background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/bg.jpg') no-repeat transparent;
+        background-size: 100%;
+        background-position: 50% 20%;
+
+        text-align: center;
+      }
+
+      #content {
+        position: relative;
+        margin-top: 75px;
+        background-color: transparent;
+        box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
+        padding-top: 200px;
+      }
+
+      #quiz-info {
+        position: absolute;
+        top: -95px;
+        width: 100%;
+        z-index: 2;
+        text-align: center;
+      }
+      #quiz-name {
+        color: #444;
+        font-size: 26px;
+      }
+      #quiz-description {
+        font-size: 20px;
+        color: #888;
+      }
+
+      #quiz-image {
+        display: block;
+        border-radius: 100px;
+        //border: 1px solid #fff;
+        width: 123px;
+        height: 120px;
+        margin: 30px auto 0;
+        //box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+      }
+
+      .choices{
+          div {
+            max-height: 200px;
+            height: 70px;
+            line-height: 70px;
+            //text-align: center;
+            //border: 2px dashed #f69c55;
+            overflow-y: scroll;
+          }
+          span {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+          }
+      }
+
+      .right{
+          background-color: rgba(144, 238, 144, 0.3);
+          color: #32db64;
+      }
+
+      .wrong{
+          background-color: rgba(240, 128, 128, 0.3);
+          color: red;
+      }
+
+      .question{
+        height: 200px;
+        overflow: scroll;
+      }
+
 }

@@ -1,12 +1,32 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="headerColor">
     <ion-title text-wrap>{{chapters?.chapterID}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let quiz of chapters?.quiz; let i = index" (click)="toQuiz(quiz.questions)"  col-6>
+        <ion-card >
+          <ion-card-header text-center>
+            <b>{{ quiz.quizId }}</b>
+          </ion-card-header>
+          <ion-card-content>
+                <p text-center>{{quiz.questions.length}} Questions</p>
+                <ion-chip>
+                  <ion-icon name="md-time" color="btn-login"></ion-icon>
+                  <ion-label>10:00 mins</ion-label>
+                </ion-chip>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

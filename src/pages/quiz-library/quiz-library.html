@@ -32,7 +32,8 @@
           {{subject.subjectId | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
-              <button ion-item [navPush]="chaptersPage" [navParams]="fa">
+              <button ion-item
+              (click)="toChapters(fa, subject.subjectId)">
                 {{fa.faId | uppercase}}
               </button>
             </ion-list>
@@ -48,7 +49,7 @@
           {{subject.subjectId | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
-              <button ion-item>
+              <button ion-item [navPush]="chaptersPage" [navParams]="fa">
                 {{fa.faId | uppercase}}
               </button>
             </ion-list>

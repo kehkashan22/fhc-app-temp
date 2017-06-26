@@ -1,9 +1,11 @@
+import { GlobalsProvider } from './globals/globals';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Quiz } from "../data/quiz.interface";
 import quiz from '../data/quiz';
 import quizLibrary from '../data/quiz-library';
+import { Answer } from "../data/answer.interface";
 
 @Injectable()
 export class QuizService {
@@ -12,7 +14,7 @@ export class QuizService {
   quizCollection: Quiz[];
   data: any;
   quizData: any;
-  constructor(public http: Http) {
+  constructor(public http: Http, private g: GlobalsProvider) {
     this.data = null;
   }
 
@@ -20,7 +22,7 @@ export class QuizService {
   //ANALYSIS QUIZ HERE!!
   loadQuiz(token: string) {
 
-    return this.http.get('https://ionic-fhc-app.firebaseio.com/quizdb.json?auth=' + token)
+    return this.http.get(this.g.firebase_url+'quizdb.json?auth=' + token)
       .map((res) => res.json())
       .do((data) => {
         this.data = data;
@@ -29,9 +31,13 @@ export class QuizService {
   }
 
   setQuiz(quizData) {
-    if (quizData) {
-      this.quizCollection = quizData;
+    var quiz: Quiz[] = [];
+    quiz = quizData.slice();
+    for (var i = 0; i < quizData.length; i++) {
+      quiz[i].answers = quizData[i].answers.slice();
     }
+
+    this.quizCollection = quizData;
   }
 
   getQuiz() {
@@ -45,7 +51,7 @@ export class QuizService {
       return Promise.resolve(this.data);
     }
     return new Promise(resolve => {
-      this.http.put('https://ionic-fhc-app.firebaseio.com/quiz-library.json', this.libraryCollection)
+      this.http.put(this.g.firebase_url+'quiz-library.json', this.libraryCollection)
         .map(res => res.json())
         .subscribe(() => {
           console.log("Success!");
@@ -59,7 +65,7 @@ export class QuizService {
 
   //COMPLETE QUIZ LIBRARY HERE GET
   getQuizLibrary(token: string) {
-    return this.http.get('https://ionic-fhc-app.firebaseio.com/quiz-library.json?auth=' + token)
+    return this.http.get(this.g.firebase_url+'quiz-library.json?auth=' + token)
       .map((res) => res.json())
       .do((data) => {
         this.data = data;

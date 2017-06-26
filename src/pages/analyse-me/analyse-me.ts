@@ -52,7 +52,7 @@ export class AnalyseMePage implements OnInit {
   ngOnInit() {
      const loader = this.loader.create({
       spinner: 'bubbles',
-      content: "Loading Quiz..."
+      content: "Loading Test..."
     });
     loader.present();
     this.authProvider.getActiveUser().getIdToken().then((token: string) => {
@@ -81,6 +81,7 @@ export class AnalyseMePage implements OnInit {
           this.currentQuestion = this.quizCollection[++this.index];
         } else {
           this.question = false;
+          this.analysisFunc();
         }
       }, 500);
   }

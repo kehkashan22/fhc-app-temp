@@ -10,11 +10,11 @@ import { Quiz } from "../../data/quiz.interface";
   selector: 'page-quiz-library',
   templateUrl: 'quiz-library.html',
 })
-export class QuizLibraryPage implements OnInit{
+export class QuizLibraryPage implements OnInit {
 
-  quizLibrary : QuizLibrary[];
-  caLibrary : QuizLibrary;
-  csLibrary : QuizLibrary;
+  quizLibrary: QuizLibrary[];
+  caLibrary: QuizLibrary;
+  csLibrary: QuizLibrary;
   quizCollection: Quiz[];
   quizPage = 'QuizPage';
   show: string = '';
@@ -23,15 +23,15 @@ export class QuizLibraryPage implements OnInit{
   chaptersPage = 'ChaptersPage';
 
   constructor(public navCtrl: NavController,
-              private quizService: QuizService,
-              private authProvider: AuthProvider,
-              private loader : LoadingController) {
+    private quizService: QuizService,
+    private authProvider: AuthProvider,
+    private loader: LoadingController) {
   }
 
   ionViewDidLoad() {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     const loader = this.loader.create({
       spinner: 'bubbles',
       content: "Loading Quiz..."
@@ -40,20 +40,18 @@ export class QuizLibraryPage implements OnInit{
 
     this.authProvider.getActiveUser().getIdToken().then((token: string) => {
       this.quizService.getQuizLibrary(token).subscribe((data: QuizLibrary[]) => {
-        setTimeout(() => {
-          loader.dismiss();
-        }, 1000);
+        loader.dismiss();
         this.quizLibrary = data;
         this.caLibrary = this.quizLibrary[0];
         this.csLibrary = this.quizLibrary[1];
       });
     },
-    error => {
-      console.log(error);
-    });
+      error => {
+        console.log(error);
+      });
   }
 
-    goTo(courseId: string) {
+  goTo(courseId: string) {
     this.courseId = courseId;
   }
 
@@ -63,6 +61,13 @@ export class QuizLibraryPage implements OnInit{
     } else {
       this.show = data;
     }
+  }
+
+  toChapters(fa: any, subjectId: string) {
+    this.navCtrl.push(this.chaptersPage, {
+      fa: fa,
+      subjectId: subjectId
+    });
   }
 
 }
