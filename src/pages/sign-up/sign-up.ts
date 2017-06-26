@@ -15,6 +15,12 @@ import { AuthProvider } from '../../providers/auth';
 /* MD5 hash module */
 import {Md5} from 'ts-md5/dist/md5';
 
+import { AngularFireDatabase } from 'angularfire2/database';
+
+import firebase from 'firebase';
+
+declare var FCMPlugin;
+
 @IonicPage()
 @Component({
   selector: 'page-sign-up',
@@ -26,6 +32,8 @@ export class SignUp {
   private form: FormGroup;
   /* For Validation purposes */
   private submitAttempt: boolean = false;
+
+  fireStore = firebase.database().ref('/pushTokens');
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -91,6 +99,9 @@ export class SignUp {
       this.navCtrl.setRoot('LoginWithEmailPage');
       /* Dismissing the loader */
       loader.dismiss();
+
+      
+
     }, (error) => {
       /* handle the errors in any */
       loader.dismiss();
@@ -109,4 +120,5 @@ export class SignUp {
     /* For avoiding the stacking of the same page again and again */
     this.navCtrl.setRoot('LoginWithEmailPage');
   }
+
 }

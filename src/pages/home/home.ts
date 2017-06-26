@@ -8,6 +8,10 @@ import { Component,  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
+import firebase from 'firebase';
+
+declare var FCMPlugin;
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -41,7 +45,11 @@ export class HomePage {
                private menuCtrl: MenuController,
                private authProvider : AuthProvider,
                private loader : LoadingController,
-               private app : App){}
+               private app : App){
+         this.tokenSetup().then((token) => {
+          this.storeToken(token);
+        });              
+  }
 
   ngOnInit() {
     this.videosService.loadFavoriteVideos();
@@ -65,5 +73,32 @@ export class HomePage {
   onPageWillEnter(){
         console.log('****on page will enter messages pane');
 
-    }
+  }
+
+  navigateToAnnouncements(){
+    this.navCtrl.push('AnnouncementsPage');
+  }
+
+  storeToken(token){
+    firebase.database().ref('/pushTokens').child(firebase.auth().currentUser.uid).set({
+      uid: firebase.auth().currentUser.uid,
+      devToken: token
+    }).then(() => {
+      console.log('Token Stored');
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  tokenSetup(){
+    var promise = new Promise((resolve, reject) => {
+      FCMPlugin.getToken((token) => {
+        resolve(token);
+      }, (err) => {
+        reject(err);
+      });
+      
+    });
+    return promise;
+  }
 }

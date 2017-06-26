@@ -15,7 +15,7 @@ export class UserProvider {
 
   getUser(token : string) {
     const userId = this.authProvider.getActiveUser().uid;
-    return this.http.get('https://ionic-fhc-app.firebaseio.com/users/' + userId + '/user.json?auth=' + token)
+    return this.http.get('https://fhc-ionic-app.firebaseio.com/users/' + userId + '/user.json?auth=' + token)
       .map((res) => res.json())
       .do((data) => {
         this.data = data;
