@@ -1,3 +1,4 @@
+import { GlobalsProvider } from './globals/globals';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -12,30 +13,19 @@ export class QuizService {
   quizCollection: Quiz[];
   data: any;
   quizData: any;
-  constructor(public http: Http) {
+  constructor(public http: Http, private g: GlobalsProvider) {
     this.data = null;
   }
 
 
   //ANALYSIS QUIZ HERE!!
   loadQuiz(token: string) {
-
-    return this.http.get('https://ionic-fhc-app.firebaseio.com/quizdb.json?auth=' + token)
+    return this.http.get(this.g.firebase_url+'quizdb.json?auth=' + token)
       .map((res) => res.json())
       .do((data) => {
         this.data = data;
       });
 
-  }
-
-  setQuiz(quizData) {
-    if (quizData) {
-      this.quizCollection = quizData;
-    }
-  }
-
-  getQuiz() {
-    return this.quizCollection;
   }
 
   //COMPLETE QUIZ LIBRARY HERE PUT
@@ -45,7 +35,7 @@ export class QuizService {
       return Promise.resolve(this.data);
     }
     return new Promise(resolve => {
-      this.http.put('https://ionic-fhc-app.firebaseio.com/quiz-library.json', this.libraryCollection)
+      this.http.put(this.g.firebase_url+'quiz-library.json', this.libraryCollection)
         .map(res => res.json())
         .subscribe(() => {
           console.log("Success!");
@@ -59,11 +49,12 @@ export class QuizService {
 
   //COMPLETE QUIZ LIBRARY HERE GET
   getQuizLibrary(token: string) {
-    return this.http.get('https://ionic-fhc-app.firebaseio.com/quiz-library.json?auth=' + token)
+    return this.http.get(this.g.firebase_url+'quiz-library.json?auth=' + token)
       .map((res) => res.json())
       .do((data) => {
         this.data = data;
       });
   }
+
 
 }

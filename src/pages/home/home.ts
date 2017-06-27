@@ -1,3 +1,4 @@
+import { QuizStoreProvider } from './../../providers/quiz-store';
 import { User } from './../../data/user.interface';
 import { AuthProvider } from './../../providers/auth';
 import { UserProvider } from './../../providers/user';
@@ -44,6 +45,7 @@ export class HomePage {
                private videosProvider: VideosProvider,
                private videosService: VideosService,
                private quizService: QuizService,
+               private quizStore: QuizStoreProvider,
                private userProvider : UserProvider,
                private events : Events,
                private menuCtrl: MenuController,
@@ -58,10 +60,10 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.videosService.loadFavoriteVideos();
-    // this.quizService.loadQuizLibrary().then((data) => {
-    //    console.log(data);
-    //  });
+   this.videosService.loadFavoriteVideos();
+    this.quizService.loadQuizLibrary().then((data) => {
+       console.log(data);
+     });
 
   }
 

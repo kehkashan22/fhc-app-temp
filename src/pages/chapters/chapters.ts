@@ -10,6 +10,7 @@ import { Quiz } from "../../data/quiz.interface";
 export class ChaptersPage {
 
   fa: any;
+  subjectId: string;
   chapters: {
     chapterID: string, quiz: {
       quizId: string,
@@ -22,7 +23,8 @@ export class ChaptersPage {
   }
 
   ionViewDidLoad() {
-    this.fa = this.navParams.data;
+    this.subjectId = this.navParams.get('subjectId');
+    this.fa = this.navParams.get('fa');
     if (this.fa) {
       this.chapters = this.fa.chapters;
     }

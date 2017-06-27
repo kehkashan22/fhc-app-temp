@@ -5,4 +5,5 @@ export interface Quiz {
   tested: string;
   question:string;
   answers: Answer[];
+  explanation: string;
 }

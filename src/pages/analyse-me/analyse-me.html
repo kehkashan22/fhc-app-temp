@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="card-background-page background" scroll="false">
 
   <!--VIDEO HERE-->
   <div *ngIf="question; else quizEnd" [@myvisibility]="visibleState">
@@ -39,9 +39,9 @@
         </video>
       </vg-player>
 
-    <!--QUIZ PORTION-->
+      <!--QUIZ PORTION-->
     </ng-template>
-    <div *ngIf="!video; else videoTag">
+    <div *ngIf="!video; else videoTag" class="quiz">
       <ion-card>
         <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
       </ion-card>
@@ -57,13 +57,21 @@
 
   <!--To Analysis-->
   <ng-template #quizEnd>
-    <h1>You have successfully completed the quiz</h1>
-    <button ion-button block outline (click)="analysisFunc()">See how you did</button>
-    <div *ngIf="answers">
-      <h1>{{marks}}/4</h1>
+    <div class="quiz">
+      <h1>You have successfully completed the quiz</h1>
+      <!--<div id="profile-bg"></div>-->
+      <div id="content">
+        <div id="profile-info">
+          <div id="profile-image">10%</div>
+          <h3 id="profile-name">Total: {{marks}}</h3>
+          <span id="profile-description"> Correct Answers : 3 </span>
+          <br>
+          <span id="profile-description"> Incorrect Answers : 2</span>
+        </div>
+      </div>
+
+      <button ion-button block outline [navPush]="analysisPage" [navParams]="analysis">To Charts and Beyond!</button>
     </div>
 
-    <button ion-button block outline [navPush]="analysisPage" [navParams]="analysis">To Charts and Beyond!</button>
   </ng-template>
 </ion-content>
-

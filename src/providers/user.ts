@@ -1,3 +1,4 @@
+import { GlobalsProvider } from './globals/globals';
 import { AuthProvider } from './auth';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -9,13 +10,13 @@ export class UserProvider {
 
   data: any;
   constructor(public http: Http,
-    private authProvider: AuthProvider) {
+    private authProvider: AuthProvider, private g: GlobalsProvider) {
     this.data = null;
   }
 
   getUser(token : string) {
     const userId = this.authProvider.getActiveUser().uid;
-    return this.http.get('https://fhc-ionic-app.firebaseio.com/users/' + userId + '/user.json?auth=' + token)
+    return this.http.get(this.g.firebase_url+'users/' + userId + '/user.json?auth=' + token)
       .map((res) => res.json())
       .do((data) => {
         this.data = data;

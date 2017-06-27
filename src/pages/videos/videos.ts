@@ -2,7 +2,7 @@ import { Videos } from './../../data/videos.interface';
 import { VideosService } from '../../providers/fav-videos';
 import { Video } from './../../data/video.interface';
 
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { AlertController, IonicPage, NavParams } from 'ionic-angular';
 
 @IonicPage()
@@ -10,7 +10,7 @@ import { AlertController, IonicPage, NavParams } from 'ionic-angular';
   selector: 'page-videos',
   templateUrl: 'videos.html',
 })
-export class VideosPage implements OnInit {
+export class VideosPage{
   videoGroup: Videos;
 
   constructor(
@@ -18,9 +18,8 @@ export class VideosPage implements OnInit {
     private alertCtrl: AlertController,
     private videosService: VideosService) {}
 
-  ngOnInit() {
+  ionViewDidLoad() {
     this.videoGroup = this.navParams.data;
-    console.log(this.videoGroup);
   }
 
   onAddToFavorites(selectedvideo: Video) {
@@ -53,6 +52,6 @@ export class VideosPage implements OnInit {
   }
 
   isFavorite(video: Video) {
-    return this.videosService.isVideoFavorite(video) != -1 ? true : false;
+    return this.videosService.isVideoFavorite(video);
   }
 }
