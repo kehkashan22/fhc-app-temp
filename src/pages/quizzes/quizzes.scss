@@ -5,5 +5,26 @@ page-quizzes {
 
   ion-card{
     background: rgba(0, 161, 223, 0.3) !important;
+
+  }
+
+  ion-card {
+    position: relative;
+    text-align: center;
+  }
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 13px;
+  }
+
+  .solved{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    font-size: 1.5em;
+    color: #fff;
+    background-color: white;
   }
 }

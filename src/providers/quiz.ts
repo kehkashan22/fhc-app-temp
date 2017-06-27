@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import { Quiz } from "../data/quiz.interface";
 import quiz from '../data/quiz';
 import quizLibrary from '../data/quiz-library';
-import { Answer } from "../data/answer.interface";
 
 @Injectable()
 export class QuizService {
@@ -21,27 +20,12 @@ export class QuizService {
 
   //ANALYSIS QUIZ HERE!!
   loadQuiz(token: string) {
-
     return this.http.get(this.g.firebase_url+'quizdb.json?auth=' + token)
       .map((res) => res.json())
       .do((data) => {
         this.data = data;
       });
 
-  }
-
-  setQuiz(quizData) {
-    var quiz: Quiz[] = [];
-    quiz = quizData.slice();
-    for (var i = 0; i < quizData.length; i++) {
-      quiz[i].answers = quizData[i].answers.slice();
-    }
-
-    this.quizCollection = quizData;
-  }
-
-  getQuiz() {
-    return this.quizCollection;
   }
 
   //COMPLETE QUIZ LIBRARY HERE PUT
@@ -71,5 +55,6 @@ export class QuizService {
         this.data = data;
       });
   }
+
 
 }

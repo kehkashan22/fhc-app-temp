@@ -22,6 +22,7 @@ import { UserProvider } from '../providers/user';
 import { LoaderProvider } from '../providers/loader';
 import { VideosService } from './../providers/fav-videos';
 import { QuizService } from './../providers/quiz';
+import { QuizStoreProvider } from '../providers/quiz-store';
 
 /* Shantanu's modules */
 import { Logger } from '../providers/logger';
@@ -33,6 +34,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalsProvider } from '../providers/globals/globals';
+
 
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
@@ -83,7 +85,8 @@ const firebaseConfig = {
     Keyboard,
     UserProvider,
     LoaderProvider,
-    GlobalsProvider
+    GlobalsProvider,
+    QuizStoreProvider
 
   ]
 })

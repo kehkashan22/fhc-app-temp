@@ -2,23 +2,23 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ExplanationPage page.
+ * Generated class for the SolvedQuizzesPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-explanation',
-  templateUrl: 'explanation.html',
+  selector: 'page-solved-quizzes',
+  templateUrl: 'solved-quizzes.html',
 })
-export class ExplanationPage {
+export class SolvedQuizzesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ExplanationPage');
+    console.log('ionViewDidLoad SolvedQuizzesPage');
   }
 
 }

@@ -1,3 +1,5 @@
+import { QuizStoreProvider } from './../../providers/quiz-store';
+import { Quizzes } from './../../data/quizzes.interface';
 import { LoadingController, AlertController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
@@ -32,9 +34,11 @@ export class QuizPage implements OnInit{
   marks: number = 0;
   quizCollection: Quiz[] = [];
   currentQuestion: Quiz;
+  quizHeading: string = '';
+
   question: boolean = true;
   answers: boolean = false;
-  trigger: boolean = false;
+  storeQuiz: boolean = true;
   url: string = '';
   analysisPage = 'AnalysisPage';
   percentage: any;
@@ -43,7 +47,10 @@ export class QuizPage implements OnInit{
   secondQuestion: boolean = false;
   progressIndex: number = 1;
   quizTime: number = 0;
-
+  iconForChip : string = '';
+  percentClass: string = 'c100 p50';
+  quiz: Quizzes;
+  tempQuiz: Quizzes;
   analysis: { quizId: string, quizNumber: any, marks: number }[] = [];
 
   constructor(public navCtrl: NavController,
@@ -51,20 +58,40 @@ export class QuizPage implements OnInit{
     private quizService: QuizService,
     private authProvider: AuthProvider,
     private loader: LoadingController,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private quizStore: QuizStoreProvider) {
   }
 
   ngOnInit(){
-    let quiz = this.quizService.getQuiz();
-    //Needed deep cloning, because here we were making changes to answer object nested inside an
-    //nested inside another object array, tried slice() but it gave only a shallow copy and the Answers array
-    //was still getting modified at the source
-    //_.lodash() is being used to improve performance of JSON parse
-    this.quizCollection = _.cloneDeep(quiz);
-   // this.quizCollection = JSON.parse(JSON.stringify(quiz));
+
+    let isSolved: boolean = this.navParams.get('isSolved');
+     this.tempQuiz = _.cloneDeep(this.navParams.get('quiz'));
+    if(isSolved){
+      this.quiz= _.cloneDeep(this.quizStore.getSolvedQuiz(this.tempQuiz));
+    }else{
+      this.quiz=this.tempQuiz;
+    }
+
+    this.quizHeading = this.quiz.quizHeading;
+    this.quizTime = +this.quiz.timeInMins*60;
+
+    this.quizCollection = _.cloneDeep(this.quiz.questions);
+
     if(this.quizCollection){
       this.currentQuestion = this.quizCollection[0];
     }
+
+    if(isSolved){
+      this.question = false;
+      this.storeQuiz = !this.storeQuiz;
+      this.analysisFunc(this.storeQuiz);
+    }
+    //Needed deep cloning, because here we were making changes to answer object nested inside an
+    //nested inside another object array, tried slice() but it gave only a shallow copy and the Answers array
+    //was still getting modified at the source
+    //_.lodash() is being used to improve performance over JSON parse
+
+
   }
 
   ionViewDidLoad() {
@@ -82,7 +109,7 @@ export class QuizPage implements OnInit{
           role: 'cancel',
           handler: () => {
             this.question=false;
-            this.analysisFunc();
+            this.analysisFunc(this.storeQuiz);
           }
         }
       ]
@@ -91,6 +118,7 @@ export class QuizPage implements OnInit{
   }
 
   changeQuestion(answer: Answer) {
+    console.log(answer);
     this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
     var answerIndex = this.quizCollection[this.index].answers.indexOf(answer);
     this.quizCollection[this.index].answers[answerIndex].selected = true;
@@ -101,12 +129,13 @@ export class QuizPage implements OnInit{
           this.currentQuestion = this.quizCollection[++this.index];
         } else {
           this.question = false;
-          this.analysisFunc();
+          this.analysisFunc(this.storeQuiz);
         }
       }, 500);
   }
 
-  analysisFunc() {
+ //MARKS CALCULATED HERE
+  analysisFunc(store: boolean) {
     this.marks = 0;
     this.answers = true;
     for (var i = 0; i < this.quizCollection.length; i++) {
@@ -117,14 +146,27 @@ export class QuizPage implements OnInit{
         }
       }
     }
-    this.percentage = this.marks*100/this.quizCollection.length;
+    this.percentage = this.marks*100/this.quizCollection.length | 0;
+    this.getClassString(this.percentage);
     this.answeredQuestion = this.quizCollection[0];
     this.index=0;
+    if(store){
+      this.addToQuizStore();
+    }
+
+
+
   }
 
-  getClassString(per: string){
+  private addToQuizStore(){
+      this.quiz.marks = this.marks;
+      this.quiz.questions=this.quizCollection;
+      this.quizStore.addQuizAsSolved(_.cloneDeep(this.quiz));
+  }
+
+  private getClassString(per: string){
     let perInt = +per | 0;
-    return 'c100 p'+ perInt;
+    this.percentClass = 'c100 p'+ perInt;
   }
 
   toExplanation(){
@@ -132,6 +174,36 @@ export class QuizPage implements OnInit{
      this.answeredQuestion=this.quizCollection[0];
     this.index=0;
     this.secondQuestion = false;
+  }
+
+  toResetScore(){
+    const alert = this.alertCtrl.create({
+      title: 'Re-take Quiz?',
+      subTitle: 'Are you sure?',
+      message: 'Retaking the quiz will reset your old score',
+      buttons: [
+        {
+          text: 'Yes, go ahead',
+          handler: () => {
+            this.quizStore.removeQuizFromSolved(this.quiz);
+            this.quizCollection = _.cloneDeep(this.tempQuiz.questions);
+            this.currentQuestion = this.quizCollection[0];
+            this.storeQuiz = true;
+            this.index=0;
+            this.question=true;
+          }
+        },
+        {
+          text: 'No, I changed my mind!',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelled!');
+          }
+        }
+      ]
+    });
+
+    alert.present();
   }
 
   changeExplanation(direction: string){
@@ -183,6 +255,17 @@ export class QuizPage implements OnInit{
     if(answer.correct){
       return 'right';
     }
+  }
+
+  thisAnswer(answeredQuestion : Quiz){
+    answeredQuestion.answers
+
+    for (var j = 0; j < (answeredQuestion.answers).length; j++) {
+        if (answeredQuestion.answers[j].selected && answeredQuestion.answers[j].correct) {
+          return true;
+        }
+      }
+      return false;
   }
 
 }

@@ -16,7 +16,10 @@ export interface QuizLibrary {
                   chapterId: string,
                   quiz: [
                     {
-                      quizId: string,
+                      quizId: number;
+                      quizTitle: string,
+                      quizHeading: string,
+                      timeInMins: number,
                       questions: Quiz[]
                     }
                   ]

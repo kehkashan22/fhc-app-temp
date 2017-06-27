@@ -4,6 +4,10 @@ page-quiz {
     padding: 16px;
   }
 
+  ion-item.quiz, ion-item.item.item-block.item-radio.item-ios, ion-item.item-md, ion-item.item-wp{
+    font-size: 1.7rem !important;
+  }
+
   #solutions{
     #resultGrid{
           padding: 0px !important;
@@ -66,12 +70,12 @@ page-quiz {
       .choices{
           div {
             max-height: 200px;
-            height: 70px;
-            line-height: 70px;
+            height: 40px;
+            line-height: 40px;
             //text-align: center;
             //border: 2px dashed #f69c55;
             overflow-y: scroll;
-            font-size: 0.8em;
+            font-size: 1.6rem;
           }
           span {
             display: inline-block;
@@ -90,9 +94,26 @@ page-quiz {
           color: red;
       }
 
-      .question{
-        height: 200px;
-        overflow: scroll;
+      // .question{
+      //   height: 20rem;
+      //   overflow: scroll;
+      // }
+
+         ion-card-title.card-title.card-title-md, ion-card-title.card-title.card-title-ios,
+          ion-card-title.card-title.card-title-wp{
+            font-size: 1.7rem !important;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-left: 16px !important;
+            padding-right: 16px!important;
+            padding-top: 0px;
+            padding-bottom: 0px;
+          }
+
+      .background{
+        background: rgba(0, 161, 223, 0.3) !important;
+
       }
 
 }
