@@ -10,6 +10,8 @@ import { Quiz } from "../../data/quiz.interface";
 
 import firebase from 'firebase';
 
+import { AngularFireDatabase } from 'angularfire2/database';
+
 declare var FCMPlugin;
 
 @IonicPage()
@@ -30,6 +32,8 @@ export class HomePage {
   imgType = ".jpeg";
   userData: User;
 
+  fireStore = firebase.database().ref("/pushtokens");
+
   slides:any[]=[
               {url: this.imgPath + "slide1.jpg", text: "Test Slide1"},
               {url: this.imgPath + "slide2.jpg", text: "Test Slide2"},
@@ -45,7 +49,9 @@ export class HomePage {
                private menuCtrl: MenuController,
                private authProvider : AuthProvider,
                private loader : LoadingController,
-               private app : App){
+               private app : App,
+               private afd: AngularFireDatabase           
+    ){
          this.tokenSetup().then((token) => {
           this.storeToken(token);
         });              
@@ -67,6 +73,18 @@ export class HomePage {
             this.events.publish('user:created', this.userData);
        });
     });
+    FCMPlugin.onNotification((data) => {
+      
+      if(data.wasTapped){
+        this.navCtrl.push('AnnouncementsPage');
+      }else{
+        alert( JSON.stringify(data) );
+      }
+    });
+
+    FCMPlugin.onTokenRefresh((token) => {
+      alert(token);
+    });
 
   }
 
@@ -80,16 +98,15 @@ export class HomePage {
   }
 
   storeToken(token){
-    firebase.database().ref('/pushTokens').child(firebase.auth().currentUser.uid).set({
+    this.fireStore.child(firebase.auth().currentUser.uid).set({
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-      console.log('Token Stored');
+      alert('Token Stored');
     }).catch((err) => {
-      console.error(err);
+      alert(err);
     });
   }
-
   tokenSetup(){
     var promise = new Promise((resolve, reject) => {
       FCMPlugin.getToken((token) => {
