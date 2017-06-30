@@ -101,4 +101,6 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2">
         <variable name="locator" value="https://github.com/Rohfosho/CordovaCallNumberPlugin.git" />
     </plugin>
+    <plugin name="cordova-plugin-file" spec="^4.3.3" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
 </widget>

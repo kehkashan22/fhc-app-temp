@@ -34,6 +34,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalsProvider } from '../providers/globals/globals';
 
+/* For Downloading files*/
+import { Transfer  } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 
 
 
