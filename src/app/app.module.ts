@@ -87,8 +87,9 @@ const firebaseConfig = {
     UserProvider,
     LoaderProvider,
     GlobalsProvider,
-    QuizStoreProvider
-
+    QuizStoreProvider,
+    Transfer, 
+    File
   ]
 })
 export class AppModule {}
