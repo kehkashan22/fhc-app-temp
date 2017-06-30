@@ -1,4 +1,5 @@
 import { Quiz } from './quiz.interface';
+import { Quizzes } from "./quizzes.interface";
 
 export interface QuizLibrary {
   courseId: string, //ca or cs
@@ -14,15 +15,7 @@ export interface QuizLibrary {
               chapters: [
                 {
                   chapterId: string,
-                  quiz: [
-                    {
-                      quizId: number;
-                      quizTitle: string,
-                      quizHeading: string,
-                      timeInMins: number,
-                      questions: Quiz[]
-                    }
-                  ]
+                  quiz: Quizzes[]
                 }
               ]
             }
