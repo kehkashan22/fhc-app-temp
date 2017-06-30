@@ -15,7 +15,7 @@
       *ngFor="let chapter of chapters"
       [navPush]="quizzesPage"
       [navParams]="chapter">
-      <h2 text-wrap>{{ chapter.chapterID | titlecase }}</h2>
+      <h2 text-wrap>{{ chapter.chapterId | titlecase }}</h2>
       <p>{{ chapter.quiz.length }} Quizzes</p>
     </button>
   </ion-list>

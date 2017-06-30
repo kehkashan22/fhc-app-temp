@@ -4,12 +4,14 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Quiz } from "../data/quiz.interface";
 import quiz from '../data/quiz';
+import quizLib from '../data/quiz-lib-2';
 import quizLibrary from '../data/quiz-library';
 
 @Injectable()
 export class QuizService {
 
   libraryCollection: any;
+  quizLib2: any;
   quizCollection: Quiz[];
   data: any;
   quizData: any;
@@ -31,6 +33,7 @@ export class QuizService {
   //COMPLETE QUIZ LIBRARY HERE PUT
   loadQuizLibrary() {
     this.libraryCollection = quizLibrary;
+    this.quizLib2 = quizLib;
     if (this.data) {
       return Promise.resolve(this.data);
     }

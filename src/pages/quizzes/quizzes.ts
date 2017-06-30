@@ -12,9 +12,14 @@ import { Quiz } from "../../data/quiz.interface";
 })
 export class QuizzesPage implements OnInit{
 
-  chapters: { chapterID: string, quiz: { quizId: string, questions: Quiz[] }[] };
+  chapters: { chapterId: string, quiz: Quizzes[] };
   quizPage = 'QuizPage';
   quiz : Quizzes;
+  nature = 'application';
+
+  applicationQuiz: Quizzes[] = [];
+  speedQuiz: Quizzes[] = [];
+  memoryQuiz: Quizzes[] = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -24,10 +29,23 @@ export class QuizzesPage implements OnInit{
 
   ngOnInit() {
     this.quizStore.loadSolvedQuizzes();
+    this.chapters = this.navParams.data;
+
   }
 
   ionViewDidLoad() {
-    this.chapters = this.navParams.data;
+
+    //division by nature
+    for(let i=this.chapters.quiz.length-1; i >= 0; i--){
+      let quizEl = this.chapters.quiz[i];
+      if(quizEl.nature === 'application'){
+        this.applicationQuiz.push(quizEl);
+      }else if(quizEl.nature === 'speed'){
+        this.speedQuiz.push(quizEl);
+      }else if(quizEl.nature === 'memory'){
+        this.memoryQuiz.push(quizEl);
+      }
+    }
   }
 
   toQuiz(quiz: Quizzes){
@@ -41,5 +59,7 @@ export class QuizzesPage implements OnInit{
   isSolved(quiz: Quizzes) {
     return this.quizStore.isQuizSolved(quiz);
   }
+
+
 
 }

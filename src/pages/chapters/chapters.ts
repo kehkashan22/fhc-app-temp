@@ -12,7 +12,7 @@ export class ChaptersPage {
   fa: any;
   subjectId: string;
   chapters: {
-    chapterID: string, quiz: {
+    chapterId: string, quiz: {
       quizId: string,
       questions: Quiz[]
     }
@@ -38,7 +38,7 @@ export class ChaptersPage {
 
     if (val && val.trim() != '') {
       this.chapters = this.chapters.filter((chapters) => {
-        return (chapters.chapterID.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (chapters.chapterId.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }

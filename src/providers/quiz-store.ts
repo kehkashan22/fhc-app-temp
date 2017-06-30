@@ -26,7 +26,7 @@ export class QuizStoreProvider {
 
   removeQuizFromSolved(quiz: Quizzes) {
     const position = this.quiz.findIndex((quizEl: Quizzes) => {
-      return quizEl.quizId == quiz.quizId;
+      return quizEl.quizId === quiz.quizId;
     });
     this.quiz.splice(position, 1);
     this.storage.set('quizzes', this.quiz)
