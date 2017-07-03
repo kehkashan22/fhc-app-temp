@@ -26,14 +26,15 @@
 <!--CS VIDEOS-->
   <div [ngSwitch]="course">
     <ion-list *ngSwitchCase="'ca'">
-      <ion-item-group *ngFor="let stage of caGroup?.stage">
+      <ion-item-group *ngFor="let stage of caGroup">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
-          {{subject.subjectId | titlecase}}
+          {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
-              <button ion-item [navPush]="library" [navParams]="type.sets">
-                {{type.typeId | titlecase}}
+              <button ion-item (click)="goToVideos(course, stage.stageId, subject.subjectId, type)">
+                <!--[navPush]="library" [navParams]="type.sets"-->
+                {{type | titlecase}}
               </button>
             </ion-list>
           </div>
@@ -43,14 +44,15 @@
 
 <!--CS VIDEOS-->
     <ion-list *ngSwitchCase="'cs'">
-      <ion-item-group *ngFor="let stage of csGroup?.stage">
+      <ion-item-group *ngFor="let stage of csGroup">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
-          {{subject.subjectId | titlecase}}
+          {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
-              <button ion-item [navPush]="library" [navParams]="type.sets">
-                {{type.typeId | titlecase}}
+              <button ion-item (click)="goToVideos()">
+                <!--[navPush]="library" [navParams]="type.sets"-->
+                {{type | titlecase}}
               </button>
             </ion-list>
           </div>

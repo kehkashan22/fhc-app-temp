@@ -1,3 +1,4 @@
+import { LoaderProvider } from './../../providers/loader';
 import { AuthProvider } from './../../providers/auth';
 import { Videos } from './../../data/videos.interface';
 import { LoadingController, NavParams } from 'ionic-angular';
@@ -12,19 +13,33 @@ import { IonicPage } from 'ionic-angular';
 })
 export class LibraryPage {
 
-  videoCollection: Videos[];
-  tempVideos: Videos[]
+  videoCollection: Videos[] = [];
+  tempVideos: Videos[] = [];
   videosPage = 'VideosPage';
 
-  constructor(private videosProvider: VideosProvider,
-    private loadingController: LoadingController,
-    private authProvider: AuthProvider,
+  constructor(private _video: VideosProvider,
+    private _loader: LoadingController,
+    private _auth: AuthProvider,
     private navParams : NavParams) { }
 
   ngOnInit() {
-   //this.getVideosFromDB();
-        this.videoCollection = this.navParams.data;
+    const loader = this._loader.create({
+      spinner: "bubbles",
+      content: "Loading Videos..."
+    });
+      let url = this.navParams.data;
+      loader.present();
+      this._video.loadVideos(url).then(snapshot => {
+       //let sets: Videos[]  = snapshot;
+        if (snapshot){
+          console.log(snapshot);
+          this.videoCollection = snapshot;
           this.tempVideos = this.videoCollection;
+        }
+        loader.dismiss();
+      });
+
+
   }
 
   doRefresh(refresher) {

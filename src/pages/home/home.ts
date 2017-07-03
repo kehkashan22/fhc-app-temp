@@ -47,9 +47,12 @@ export class HomePage {
 
   ngOnInit() {
    this.videosService.loadFavoriteVideos();
-    this.quizService.loadQuizLibrary().then((data) => {
-       console.log(data);
-     });
+    // this.quizService.loadQuizLibrary().then((data) => {
+    //    console.log(data);
+    //  });
+    // this.videosProvider.loadLibrary().then((data) => {
+    //    console.log(data);
+    //  });
 
   }
 
