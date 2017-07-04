@@ -1,8 +1,9 @@
+import { GlobalsProvider } from './../../providers/globals/globals';
 import { Videos } from './../../data/videos.interface';
 import { Library } from './../../data/library.interface';
 import { Component } from '@angular/core';
 import { VideosProvider } from "../../providers/videos";
-import { LoadingController, IonicPage } from "ionic-angular";
+import { LoadingController, IonicPage, NavController } from "ionic-angular";
 
 @IonicPage()
 @Component({
@@ -20,32 +21,38 @@ export class RootLibraryPage {
   courseId: string = '';
   course: string = "ca";
   show: string = '';
-  caGroup : any;
+  caGroup: any;
   csGroup : any;
 
-  constructor(private videosProvider: VideosProvider,
-    private loadingController: LoadingController) { }
+  constructor(private _videos: VideosProvider,
+    private _loader: LoadingController, private _globals: GlobalsProvider,
+    private navCtrl : NavController) { }
 
   ngOnInit() {
     // this.libraryCollection = videos;
-    const loader = this.loadingController.create({
-      spinner: "bubbles",
-      content: "Loading Videos..."
-    });
-    loader.present();
-    this.videosProvider.getNewVideos().then((data: Library[]) => {
-      console.log(data);
-      loader.dismiss();
-      if (data) {
-        this.libraryCollection = data;
-        this.tempVideos = this.libraryCollection;
-       this.caGroup = this.libraryCollection[0];
-        this.csGroup = this.libraryCollection[1];
-      } else {
-        this.libraryCollection = [];
-        this.tempVideos = [];
-      }
-    });
+    // const loader = this._loader.create({
+    //   spinner: "bubbles",
+    //   content: "Loading Videos..."
+    // });
+    // loader.present();
+    // this._videos.getNewVideos().then((data: Library[]) => {
+    //   console.log(data);
+    //   loader.dismiss();
+    //   if (data) {
+    //     this.libraryCollection = data;
+    //     this.tempVideos = this.libraryCollection;
+    //    this.caGroup = this.libraryCollection[0];
+    //     this.csGroup = this.libraryCollection[1];
+    //   } else {
+    //     this.libraryCollection = [];
+    //     this.tempVideos = [];
+    //   }
+    // });
+
+    this.caGroup = this._globals.caCollection;
+    console.log(this.caGroup);
+    this.csGroup = this._globals.csCollection;
+    console.log(this.csGroup);
 
 
   }
@@ -59,6 +66,15 @@ export class RootLibraryPage {
     } else {
       this.show = data;
     }
+  }
+
+  goToVideos(course, stage, subject, type){
+    if(type==="case laws"){
+      type = 'case_laws';
+    }
+    const url = '/vid-lib2/'+course+'/'+stage+'/'+subject+'/'+type;
+    console.log(url);
+    this.navCtrl.push(this.library, url)
   }
 }
 
