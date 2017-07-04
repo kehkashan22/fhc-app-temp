@@ -119,7 +119,7 @@ export class MyApp {
       content: 'Signing you out...'
     });
     loading.present();
-    firebase.database().ref('/pushTokens').child(firebase.auth().currentUser.uid).remove();
+    firebase.database().ref('/pushtokens').child(firebase.auth().currentUser.uid).remove();
 
     this.authProvider.logout().then(() => {
       

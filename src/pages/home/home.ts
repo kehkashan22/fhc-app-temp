@@ -81,7 +81,9 @@ export class HomePage {
     FCMPlugin.onNotification((data) => {
       
       if(data.wasTapped){
-        this.navCtrl.push('AnnouncementsPage');
+        var self = this;
+        //self.navCtrl.setRoot('Home');
+        self.navCtrl.setRoot('AnnouncementsPage');
       }else{
         alert( JSON.stringify(data) );
       }
