@@ -5,9 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthProvider } from '../../providers/auth';
 
-import { Md5 } from 'ts-md5/dist/md5';
+import * as sha1  from 'sha1';
 
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({

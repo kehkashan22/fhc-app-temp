@@ -12,14 +12,13 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from
 import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
-/* MD5 hash module */
-import {Md5} from 'ts-md5/dist/md5';
+
+import * as sha1  from 'sha1';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
-declare var FCMPlugin;
 
 @IonicPage()
 @Component({
@@ -83,7 +82,7 @@ export class SignUp {
       typeOfCourse: this.form.value.typeOfCourse
     }
 
-    let userPassword = Md5.hashStr(this.form.value.password);
+    let userPassword = sha1(this.form.value.password);
 
     /* Loader */
     let loader = this.loadingCtrl.create({
@@ -94,6 +93,14 @@ export class SignUp {
 
     /* Auth service registerUser method */
     this.authProvider.registerUser(userData, userPassword).then(() => {
+      
+      const alert = this.alertCtrl.create({
+          title: 'Success',
+          message: 'Please validate your email address',
+          buttons: ['Ok']
+        });
+        alert.present();
+      
       /* Resetting the form once everything is done */
       this.form.reset();
       /* Setting the stack root to login */
