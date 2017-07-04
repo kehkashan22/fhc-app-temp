@@ -2,7 +2,7 @@ import { AuthProvider } from './../../providers/auth';
 import { Md5 } from 'ts-md5/dist/md5';
 import { UserProvider } from './../../providers/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Events } from 'ionic-angular';
+import { IonicPage, NavController, Events, ModalController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -17,9 +17,11 @@ export class ProfilePage {
   phone = '';
   profilePicture: any = '';
   constructor(private navCtrl: NavController,
-    private userProvider: UserProvider,
-    private events: Events,
-    private authProvider: AuthProvider) { }
+              private userProvider: UserProvider,
+              private events: Events,
+              private authProvider: AuthProvider,
+              private modalCtrl: ModalController
+  ) { }
 
   ionViewWillEnter(): void {
     this.authProvider.getActiveUser().getIdToken().then((token: string) => {
@@ -38,5 +40,12 @@ export class ProfilePage {
     this.navCtrl.push(this.starredPage)
       .catch((error) => console.log('Access denied, Argument was ' + error));
   }
+
+  editProfile(){
+    //let updateModal = this.modalCtrl.create('EditProfilePage');
+    //updateModal.present();
+    this.navCtrl.push('EditProfilePage');
+  }
+
 
 }
