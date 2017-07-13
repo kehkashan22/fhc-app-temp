@@ -16,7 +16,7 @@ export class LibraryPage {
   videoCollection: Videos[] = [];
   tempVideos: Videos[] = [];
   videosPage = 'VideosPage';
-
+  url = '';
   constructor(private _video: VideosProvider,
     private _loader: LoadingController,
     private _auth: AuthProvider,
@@ -27,9 +27,9 @@ export class LibraryPage {
       spinner: "bubbles",
       content: "Loading Videos..."
     });
-      let url = this.navParams.data;
+      this.url = this.navParams.data;
       loader.present();
-      this._video.loadVideos(url).then(snapshot => {
+      this._video.loadVideos(this.url).then(snapshot => {
        //let sets: Videos[]  = snapshot;
         if (snapshot){
           console.log(snapshot);
@@ -38,14 +38,18 @@ export class LibraryPage {
         }
         loader.dismiss();
       });
-
-
   }
 
   doRefresh(refresher) {
-    //this.getVideosFromDB();
+   this._video.loadVideos(this.url).then(snapshot => {
+       //let sets: Videos[]  = snapshot;
+        if (snapshot){
+          console.log(snapshot);
+          this.videoCollection = snapshot;
+          this.tempVideos = this.videoCollection;
+        }
+      });
     setTimeout(() => {
-      //console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
   }

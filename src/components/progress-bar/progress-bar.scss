@@ -6,9 +6,9 @@
         margin: 10px 2%;
         padding: 3px;
         text-align: center;
-        background-color: #f4f4f4;
+        background-color: map-get($colors, light);
         border: 1px solid #dcdcdc;
-        color: #fff;
+        color: map-get($colors, backgroundColor);
         border-radius: 20px;
     }
 

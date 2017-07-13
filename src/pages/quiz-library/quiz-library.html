@@ -20,21 +20,21 @@
 
 <ion-content class="background">
   <div class="slider">
-    <img src="assets/img/Choose-Your-Topic.png" alt="Choose Your Topic">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/Choose-your-Topic.png" alt="Choose Your Topic">
   </div>
 
 
   <div [ngSwitch]="course">
     <ion-list *ngSwitchCase="'ca'">
-      <ion-item-group *ngFor="let stage of caLibrary?.stage">
+      <ion-item-group *ngFor="let stage of caLibrary">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
-          {{subject.subjectId | titlecase}}
+          {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
               <button ion-item
-              (click)="toChapters(fa, subject.subjectId)">
-                {{fa.faId | uppercase}}
+              (click)="toChapters(course, stage.stageId, subject.subjectName, subject.subjectId, fa)">
+                {{fa | uppercase}}
               </button>
             </ion-list>
           </div>
@@ -43,14 +43,14 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'cs'">
-      <ion-item-group *ngFor="let stage of csLibrary?.stage">
+      <ion-item-group *ngFor="let stage of csLibrary">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
-          {{subject.subjectId | titlecase}}
+          {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
-              <button ion-item [navPush]="chaptersPage" [navParams]="fa">
-                {{fa.faId | uppercase}}
+              <button ion-item (click)="toChapters(course, stage.stageId, subject.subjectName, subject.subjectId, fa)">
+                {{fa | uppercase}}
               </button>
             </ion-list>
           </div>

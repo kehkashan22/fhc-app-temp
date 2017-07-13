@@ -1,10 +1,10 @@
 <ion-header>
 
   <ion-navbar color="headerColor">
-    <ion-title text-wrap>{{chapters?.chapterId}}</ion-title>
+    <ion-title text-wrap>{{chapter?.chapterId | titlecase}}</ion-title>
   </ion-navbar>
 
-  <ion-toolbar no-border-top>
+  <ion-toolbar no-border-top >
     <ion-segment  [(ngModel)]="nature" color="headerColor"> <!-->[(ngModel)]="nature"-->
       <ion-segment-button value="application" color="headerColor" text-wrap>
         Application
@@ -32,8 +32,7 @@
         <ion-card >
           <div class="solved" *ngIf="isSolved(quiz)">
             <ion-chip>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <ion-label>Solved</ion-label>
+               <ion-icon name="checkmark" color="btn-login"></ion-icon>
             </ion-chip>
            </div>
           <ion-card-header text-center>
@@ -61,9 +60,10 @@
         <ion-card >
           <div class="solved" *ngIf="isSolved(quiz)">
             <ion-chip>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <ion-label>Solved</ion-label>
+                    <ion-icon name="checkmark" color="btn-login"></ion-icon>
+                    <!--<ion-label color="dark">Solved</ion-label>-->
             </ion-chip>
+
            </div>
           <ion-card-header text-center>
             <b>{{ quiz.quizTitle }}</b>
@@ -90,8 +90,8 @@
         <ion-card >
           <div class="solved" *ngIf="isSolved(quiz)">
             <ion-chip>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <ion-label>Solved</ion-label>
+                    <ion-icon name="checkmark" color="btn-login"></ion-icon>
+
             </ion-chip>
            </div>
           <ion-card-header text-center>
@@ -112,3 +112,11 @@
   </ion-grid>
   </div>
 </ion-content>
+
+<ion-footer>
+  <button ion-button
+    block
+    clear
+    color="headerColor"
+    (click)="toAnalysis()">Get Analysis of this Chapter</button>
+</ion-footer>

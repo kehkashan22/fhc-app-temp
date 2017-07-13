@@ -1,3 +1,4 @@
+import { QuizStore } from './../../data/quiz/quiz-store.interface';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Quizzes } from './../../data/quizzes.interface';
 import { LoadingController, AlertController } from 'ionic-angular';
@@ -52,6 +53,11 @@ export class QuizPage implements OnInit{
   quiz: Quizzes;
   tempQuiz: Quizzes;
   analysis: { quizId: string, quizNumber: any, marks: number }[] = [];
+  subjectId: string = '';
+  chapterId: string = '';
+  chapterType: string = '';
+
+  review: string = '';
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,17 +65,26 @@ export class QuizPage implements OnInit{
     private authProvider: AuthProvider,
     private loader: LoadingController,
     private alertCtrl: AlertController,
-    private quizStore: QuizStoreProvider) {
+    private _quizStore: QuizStoreProvider) {
   }
 
   ngOnInit(){
 
     let isSolved: boolean = this.navParams.get('isSolved');
+     this.subjectId = this.navParams.get('subjectId');
+     this.chapterId = this.navParams.get('chapterId');
      this.tempQuiz = _.cloneDeep(this.navParams.get('quiz'));
+    this.chapterType = this.navParams.get('chapterType');
     if(isSolved){
-      this.quiz= _.cloneDeep(this.quizStore.getSolvedQuiz(this.tempQuiz));
+      let tempQuizStore: QuizStore = {
+       subjectId: this.subjectId,
+       chapterId: this.chapterId,
+       chapterType: this.chapterType,
+       quiz: this.tempQuiz
+     };
+      this.quiz= _.cloneDeep(this._quizStore.getSolvedQuizFromStore(tempQuizStore));
     }else{
-      this.quiz=this.tempQuiz;
+      this.quiz=_.cloneDeep(this.tempQuiz);
     }
 
     this.quizHeading = this.quiz.quizHeading;
@@ -118,7 +133,6 @@ export class QuizPage implements OnInit{
   }
 
   changeQuestion(answer: Answer) {
-    console.log(answer);
     this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
     var answerIndex = this.quizCollection[this.index].answers.indexOf(answer);
     this.quizCollection[this.index].answers[answerIndex].selected = true;
@@ -148,6 +162,13 @@ export class QuizPage implements OnInit{
     }
     this.percentage = this.marks*100/this.quizCollection.length | 0;
     this.getClassString(this.percentage);
+    if(this.percentage < 40){
+      this.review = "Gotta work on them skills Amigo!";
+    }else if(this.percentage > 60){
+      this.review = "Whoa there ma boi! Youzz Rockkksss";
+    }else{
+      this.review = "Hmmm...Not Bad, I Guess...";
+    }
     this.answeredQuestion = this.quizCollection[0];
     this.index=0;
     if(store){
@@ -161,7 +182,13 @@ export class QuizPage implements OnInit{
   private addToQuizStore(){
       this.quiz.marks = this.marks;
       this.quiz.questions=this.quizCollection;
-      this.quizStore.addQuizAsSolved(_.cloneDeep(this.quiz));
+      let quizStore: QuizStore = {
+        subjectId: this.subjectId,
+        chapterId: this.chapterId,
+        chapterType: this.chapterType,
+        quiz: _.cloneDeep(this.quiz),
+      };
+      this._quizStore.addToQuizCollection(quizStore);
   }
 
   private getClassString(per: string){
@@ -185,12 +212,19 @@ export class QuizPage implements OnInit{
         {
           text: 'Yes, go ahead',
           handler: () => {
-            this.quizStore.removeQuizFromSolved(this.quiz);
+            let remQuizStore: QuizStore = {
+              subjectId: this.subjectId,
+              chapterId: this.chapterId,
+              chapterType: this.chapterType,
+              quiz: this.quiz
+            };
+            this._quizStore.removefromQuizCollection(remQuizStore);
             this.quizCollection = _.cloneDeep(this.tempQuiz.questions);
             this.currentQuestion = this.quizCollection[0];
             this.storeQuiz = true;
             this.index=0;
             this.question=true;
+            this.results=true;
           }
         },
         {
@@ -258,7 +292,7 @@ export class QuizPage implements OnInit{
   }
 
   thisAnswer(answeredQuestion : Quiz){
-    answeredQuestion.answers
+    //answeredQuestion.answers
 
     for (var j = 0; j < (answeredQuestion.answers).length; j++) {
         if (answeredQuestion.answers[j].selected && answeredQuestion.answers[j].correct) {

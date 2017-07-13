@@ -1,3 +1,5 @@
+import { PipesModule } from './../../pipes/pipes.module';
+import { YoutubePipe } from './../../pipes/youtube';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { AnalyseMePage } from './analyse-me';
@@ -18,6 +20,7 @@ import {VgBufferingModule} from 'videogular2/buffering';
     VgOverlayPlayModule,
     VgBufferingModule,
     IonicPageModule.forChild(AnalyseMePage),
+    PipesModule
   ],
   exports: [
     AnalyseMePage

@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>{{subjectId | uppercase}} Report Card</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header text-center>
+      Report Card
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas height="250px"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header text-center>
+      Performance
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas height="250px"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

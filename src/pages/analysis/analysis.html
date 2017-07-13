@@ -1,20 +1,59 @@
-<ion-header color = 'headerColor'>
+<ion-header color='headerColor'>
 
-  <ion-navbar color = 'headerColor'>
+  <ion-navbar color='headerColor'>
     <ion-title>Analysis</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <!--
+  <div>
+    <img src="../assets/img/report-card-3.jpg" alt="Report Card">
+  </div>-->
 
-  <ion-card>
+  <!--<ion-card>
     <ion-card-header>
       Test Scores for All Tests
     </ion-card-header>
     <ion-card-content>
       <canvas #barCanvas></canvas>
     </ion-card-content>
+  </ion-card>-->
+
+  <ion-card>
+    <ion-card-header text-center>
+      Memory %
+    </ion-card-header>
+    <ion-card-content>
+      <p text-center>You have solved <b>{{memorySolved}}</b> Memory Based Quiz</p>
+      <canvas #memoryCanvas></canvas>
+    </ion-card-content>
   </ion-card>
+
+
+  <ion-card>
+    <ion-card-header text-center>
+      Application %
+    </ion-card-header>
+    <ion-card-content>
+      <p text-center>You have solved <b>{{applicationSolved}}</b> Application Based Quiz</p>
+      <canvas #applicationCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header text-center>
+      Speed %
+    </ion-card-header>
+    <ion-card-content>
+      <p text-center>You have solved <b>{{speedSolved}}</b> Speed Based Quiz</p>
+      <canvas #speedCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+
+
 </ion-content>

@@ -1,7 +1,12 @@
 page-quiz {
   @import "../../assets/scss/_circle.scss";
+
+  .scroll-content {
+      background-color: map-get($colors, backgroundColor);
+  }
+
   .results{
-    padding: 16px;
+    padding: 12px;
   }
 
   ion-item.quiz, ion-item.item.item-block.item-radio.item-ios, ion-item.item-md, ion-item.item-wp{
@@ -20,25 +25,25 @@ page-quiz {
   }
 
 
-  #quiz-bg {
-        position: fixed;
-        left: 0;
-        top: 44px;
-        width: 100%;
-        height: 175px;
-        //background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/bg.jpg') no-repeat transparent;
-        background-size: 100%;
-        background-position: 50% 20%;
+  // #quiz-bg {
+  //       position: fixed;
+  //       left: 0;
+  //       top: 44px;
+  //       width: 100%;
+  //       height: 175px;
+  //       //background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/bg.jpg') no-repeat transparent;
+  //       background-size: 100%;
+  //       background-position: 50% 20%;
 
-        text-align: center;
-      }
+  //       text-align: center;
+  //     }
 
       #content {
         position: relative;
-        margin-top: 75px;
-        background-color: transparent;
+        margin-top: 100px;
+        background-color: map-get($colors, light);
         box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
-        padding-top: 200px;
+        padding-top: 180px;
       }
 
       #quiz-info {
@@ -67,6 +72,20 @@ page-quiz {
         //box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
       }
 
+      #correct{
+        font-size: 18px;
+        color: #57A773;
+      }
+
+      #incorrect{
+        font-size: 18px;
+        color: #EE6352;
+      }
+
+      ion-footer{
+        background-color: map-get($colors, backgroundColor);
+      }
+
       .choices{
           div {
             max-height: 200px;
@@ -86,12 +105,12 @@ page-quiz {
 
       .right{
           background-color: rgba(144, 238, 144, 0.3);
-          color: #32db64;
+          color: map-get($colors, secondary);
       }
 
       .wrong{
           background-color: rgba(240, 128, 128, 0.3);
-          color: red;
+          color: map-get($colors, danger);
       }
 
       // .question{
@@ -111,9 +130,6 @@ page-quiz {
             padding-bottom: 0px;
           }
 
-      .background{
-        background: rgba(0, 161, 223, 0.3) !important;
 
-      }
 
 }

@@ -24,8 +24,8 @@ export class VideosPage{
 
   onAddToFavorites(selectedvideo: Video) {
     const alert = this.alertCtrl.create({
-      title: 'Add video',
-      subTitle: 'Are you sure?',
+      title: 'Add video to Starred?',
+      //subTitle: 'This video ',
       message: 'Are you sure you want to add the video?',
       buttons: [
         {
@@ -48,10 +48,34 @@ export class VideosPage{
   }
 
   onRemoveFromFavorites(video: Video) {
-    this.videosService.removeVideoFromFavorites(video);
+    const alert = this.alertCtrl.create({
+      title: 'Remove video from Starred Videos?',
+      subTitle: 'Are you sure?',
+      message: 'This will remove videos from your Starred Videos',
+      buttons: [
+        {
+          text: 'Yes, go ahead',
+          handler: () => {
+            this.videosService.removeVideoFromFavorites(video);
+          }
+        },
+        {
+          text: 'No, I changed my mind!',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelled!');
+          }
+        }
+      ]
+    });
+
+    alert.present();
+
+
   }
 
   isFavorite(video: Video) {
     return this.videosService.isVideoFavorite(video);
   }
+
 }

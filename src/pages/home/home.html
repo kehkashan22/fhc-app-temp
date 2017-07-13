@@ -26,8 +26,8 @@
   </div>
 
 
-  <ion-card [navPush]="analyseMePage">
-    <img src="assets/img/card-saopaolo.jpeg"/>
+  <ion-card (click)="toAnalysisPage()">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/card-saopaolo.jpeg"/>
     <div class="card-title">Analyse Yourself</div>
     <div class="card-subtitle">
       Take this simple test to find out where you stand
@@ -35,7 +35,7 @@
   </ion-card>
 
    <ion-card [navPush]="quizLibraryPage">
-    <img src="assets/img/card-sf.jpg"/>
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/card-sf.jpg"/>
     <div class="card-title">Quizes Galore!</div>
     <div class="card-subtitle">
       Practice makes perfect!
@@ -43,7 +43,7 @@
   </ion-card>
 
   <ion-card [navPush]="rootLibraryPage">
-    <img src="assets/img/card-amsterdam.jpg"/>
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/card-amsterdam.jpg"/>
     <div class="card-title">Demo Videos</div>
     <div class="card-subtitle">
       Demo Videos for CA and CS students

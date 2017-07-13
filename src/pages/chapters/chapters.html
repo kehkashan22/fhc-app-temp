@@ -1,22 +1,44 @@
 <ion-header>
 
-  <ion-navbar color = "headerColor">
-    <ion-title>{{subjectId | titlecase}}</ion-title>
+  <ion-navbar color="headerColor">
+    <ion-title>{{subjectName | titlecase}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
+<ion-content class="background">
   <ion-searchbar (ionInput)="getChapterByTitle($event)"></ion-searchbar>
-    <ion-list>
-    <button
-      ion-item
-      *ngFor="let chapter of chapters"
-      [navPush]="quizzesPage"
-      [navParams]="chapter">
+  <ion-list>
+    <button ion-item *ngFor="let chapter of chapters"
+
+    (click) = "toQuizzes(chapter)">
+    <ion-avatar item-start [ngClass]="chapter.chapterType">
+
+    </ion-avatar>
+      <!--[navParams]="chapter" >-->
       <h2 text-wrap>{{ chapter.chapterId | titlecase }}</h2>
       <p>{{ chapter.quiz.length }} Quizzes</p>
     </button>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <button ion-button
+    block outline
+    color="btn-login"
+    (click)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="a">
+        Most Important
+      </ion-col>
+      <ion-col class="b">
+        Important
+      </ion-col>
+      <ion-col class="c">
+        General
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

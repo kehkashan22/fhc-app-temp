@@ -1,3 +1,20 @@
 page-chapters {
+    .a{
+        background-color: map-get($colors, chapterA);
+    }
 
+    .b{
+      background-color: map-get($colors, chapterB);
+    }
+
+    .c{
+      background-color: map-get($colors, chapterC);
+    }
+
+    .background{
+      background-color: map-get($colors, backgroundColor);
+    }
+    ion-footer{
+      color: map-get($colors, backgroundColor);
+    }
 }

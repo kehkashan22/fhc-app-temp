@@ -1,18 +1,20 @@
 <ion-header>
 
-  <ion-navbar  color="headerColor">
+  <ion-navbar color="headerColor">
     <ion-title text-wrap>QUIZ</ion-title>
   </ion-navbar>
 
 </ion-header>
-<ion-content >
+<ion-content>
   <!--QUIZ DIV HERE-->
-  <div *ngIf="question; else quizEnd;" [@myvisibility]="visibleState" class="results">
+  <div *ngIf="question; else quizEnd;" [@myvisibility]="visibleState">
+
+    <progress-bar [progress]="index+1" [total]="quizCollection?.length"></progress-bar>
 
     <timer #timer [timeInSeconds]="quizTime" (timeUp)="handleTimeUp($event)"></timer>
 
 
-    <progress-bar [progress]="index+1" [total]="quizCollection?.length"></progress-bar>
+
     <ion-card class="questionCard">
       <ion-card-header><b>Question {{index + 1}}</b></ion-card-header>
       <ion-card-title>{{quizHeading}}</ion-card-title>
@@ -23,10 +25,10 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-list radio-group mode="ios">
+    <ion-list radio-group mode="ios" class="results">
       <ion-item *ngFor="let answer of currentQuestion?.answers" mode="ios">
 
-        <ion-label text-wrap  class="quiz">
+        <ion-label text-wrap class="quiz">
           <ion-grid>
             <ion-row>
               <ion-col col-2>
@@ -48,7 +50,7 @@
   <!--To Analysis-->
   <ng-template #quizEnd>
     <div *ngIf="results" class="results">
-      <div id="quiz-bg"></div>
+      <!--<div id="quiz-bg"></div>-->
       <div id="content">
         <div id="quiz-info">
           <div id="quiz-image">
@@ -63,15 +65,13 @@
           <br>
           <span id="quiz-description"> Total Questions : {{quizCollection?.length}} </span>
           <br>
-          <span id="quiz-description"> Correct Answers : {{marks}} </span>
+          <span id="correct"> <b>Correct Answers</b> : {{marks}} </span>
           <br>
-          <span id="quiz-description"> Incorrect Answers :{{quizCollection?.length - marks}}</span>
+          <span id="incorrect"> <b>Incorrect Answers</b> : {{quizCollection?.length - marks}}</span>
+          <hr>
+          <span>Quiz Review:</span> <span>{{review}} </span>
         </div>
       </div>
-
-      <button ion-button block outline color="btn-login" (click)="toExplanation()">Check your Answers</button>
-      <button ion-button block outline color="btn-login" (click)="toQuizList()">Back to Quiz List</button>
-      <button ion-button block outline color="btn-login" (click)="toResetScore()">Re-take Quiz</button>
     </div>
 
     <!--EXPLANATION AND ANALYSIS HERE-->
@@ -105,16 +105,16 @@
       <progress-bar [progress]="progressIndex" [total]="quizCollection?.length"></progress-bar>
 
 
-        <ion-chip *ngIf="thisAnswer(answeredQuestion); else wrong;">
-          <ion-icon name="md-checkmark" color="secondary"></ion-icon>
-          <ion-label>Correct</ion-label>
-        </ion-chip>
-        <ng-template #wrong>
-          <ion-chip >
+      <ion-chip *ngIf="thisAnswer(answeredQuestion); else wrong;">
+        <ion-icon name="md-checkmark" color="secondary"></ion-icon>
+        <ion-label>Correct</ion-label>
+      </ion-chip>
+      <ng-template #wrong>
+        <ion-chip>
           <ion-icon name="md-close" color="danger"></ion-icon>
           <ion-label>Incorrect</ion-label>
         </ion-chip>
-        </ng-template>
+      </ng-template>
       <div>
         <ion-card class="questionCard">
           <ion-card-header>Question {{index+1}}</ion-card-header>
@@ -160,7 +160,7 @@
         <!--Indication of right or wrong-->
 
 
-        <ion-card>
+        <ion-card *ngIf="answeredQuestion?.explanation !== 'noexp'">
           <ion-card-header><b>Explanation:</b></ion-card-header>
           <ion-card-content>
             {{answeredQuestion?.explanation}}
@@ -171,3 +171,25 @@
 
   </ng-template>
 </ion-content>
+
+
+<ion-footer *ngIf="!question && results">
+  <div id="actions">
+        <p text-center>
+          <b>Congratulations!</b>
+          You have completed the quiz. You can review your quiz choices or retry the quiz.
+        </p>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="light" (click)="toResetScore()">Retry Quiz</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block color="light" (click)="toExplanation()">Review Quiz</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+</ion-footer>
+

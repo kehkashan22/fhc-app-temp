@@ -6,7 +6,7 @@ import { QuizService } from './../../providers/quiz';
 import { VideosService } from './../../providers/fav-videos';
 import { VideosProvider } from './../../providers/videos';
 import { Component,  } from '@angular/core';
-import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
+import { NavController, IonicPage, Events, MenuController, LoadingController, App, NavParams } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
 @IonicPage()
@@ -22,8 +22,9 @@ export class HomePage {
   analyseMePage = 'AnalyseMePage';
   rootLibraryPage = 'RootLibraryPage';
   quizLibraryPage = 'QuizLibraryPage';
+  reportCardPage = 'ReportCardPage';
   quizCollection : Quiz[];
-  imgPath = "assets/img/";
+  imgPath = "https://s3-ap-southeast-1.amazonaws.com/fhc.app/";
   imgType = ".jpeg";
   userData: User;
 
@@ -42,26 +43,31 @@ export class HomePage {
                private events : Events,
                private menuCtrl: MenuController,
                private authProvider : AuthProvider,
-               private loader : LoadingController,
+               private _loader : LoadingController,
+               private quizProvider: QuizService,
                private app : App){}
 
   ngOnInit() {
    this.videosService.loadFavoriteVideos();
-    // this.quizService.loadQuizLibrary().then((data) => {
-    //    console.log(data);
-    //  });
-    // this.videosProvider.loadLibrary().then((data) => {
-    //    console.log(data);
-    //  });
+   this.quizStore.loadSolvedQuizCollection();
+   //this.quizProvider.putAnalysis();
 
   }
 
   ionViewDidLoad(){
+    const loader = this._loader.create({
+      spinner: "bubbles",
+      content: "Loading..."
+    });
+    if(!this.userData){
+      loader.present();
+    }
     this.authProvider.getActiveUser().getIdToken().then((token: string) => {
       this.userProvider.getUser(token).subscribe((data) => {
            this.userData = data;
            //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
             this.events.publish('user:created', this.userData);
+            loader.dismiss();
        });
     });
 
@@ -70,5 +76,13 @@ export class HomePage {
   onPageWillEnter(){
         console.log('****on page will enter messages pane');
 
+    }
+
+    toAnalysisPage(){
+      this.navCtrl.push(this.analyseMePage, {
+        // analysisBy: 'subject',
+        // analysisId: 'dt'
+        subjectId: 'dt'
+      });
     }
 }
