@@ -1,27 +1,18 @@
 <ion-header color='headerColor'>
 
   <ion-navbar color='headerColor'>
-    <ion-title>Analysis</ion-title>
+    <ion-title text-center>Your Average Scores</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <!--
-  <div>
-    <img src="../assets/img/report-card-3.jpg" alt="Report Card">
-  </div>-->
-
-  <!--<ion-card>
-    <ion-card-header>
-      Test Scores for All Tests
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #barCanvas></canvas>
-    </ion-card-content>
-  </ion-card>-->
-
   <ion-card>
     <ion-card-header text-center>
       Memory %
@@ -57,3 +48,7 @@
 
 
 </ion-content>
+
+<ion-footer>
+  <button ion-button block outline color="btn-login" (click)="onClose()">Go Back</button>
+</ion-footer>

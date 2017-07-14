@@ -1,9 +1,10 @@
 import { Quizzes } from './../../data/quizzes.interface';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavParams, ViewController, IonicPage } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { QuizStore } from "../../data/quiz/quiz-store.interface";
+
 @IonicPage()
 @Component({
   selector: 'page-analysis',
@@ -32,6 +33,8 @@ export class AnalysisPage implements OnInit {
   applicationSolved = 0;
   speedPercent = 0;
 
+  plugin: any;
+
   options = {
     legend: {
       display: false
@@ -59,9 +62,9 @@ export class AnalysisPage implements OnInit {
 
   analysisBy: string = '';
 
-  constructor(public navCtrl: NavController,
-    private navParams: NavParams,
-    private _quizStore: QuizStoreProvider) { }
+  constructor(private navParams: NavParams,
+    private _quizStore: QuizStoreProvider,
+    private viewCtrl: ViewController) { }
 
   ngOnInit(): void {
     let analysisId = this.navParams.get('analysisId');
@@ -197,7 +200,7 @@ export class AnalysisPage implements OnInit {
 
     });
 
-    Chart.pluginService.register({
+    this.plugin = {
       beforeDraw: function (chart) {
         var width = chart.chart.width,
           height = chart.chart.height,
@@ -215,7 +218,9 @@ export class AnalysisPage implements OnInit {
         ctx.fillText(text, textX, textY);
         ctx.save();
       }
-    });
+    };
+
+    Chart.pluginService.register(this.plugin);
 
 
 
@@ -229,6 +234,11 @@ export class AnalysisPage implements OnInit {
       }else{
         return "Kaiku beech mein rehre? Kaam karo kaam";
       }
+  }
+
+  onClose(){
+    Chart.pluginService.unregister(this.plugin);
+    this.viewCtrl.dismiss();
   }
 
 

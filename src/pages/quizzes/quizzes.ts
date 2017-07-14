@@ -2,7 +2,7 @@ import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Quizzes } from './../../data/quizzes.interface';
 import { QuizService } from './../../providers/quiz';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { QuizStore } from "../../data/quiz/quiz-store.interface";
 import { Chapter } from "../../data/chapter.interface";
 
@@ -28,7 +28,8 @@ export class QuizzesPage implements OnInit {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private quizService: QuizService,
-    private quizStore: QuizStoreProvider) {
+    private quizStore: QuizStoreProvider,
+    private modalCtrl: ModalController) {
   }
 
   ngOnInit() {
@@ -77,9 +78,12 @@ export class QuizzesPage implements OnInit {
   }
 
   toAnalysis() {
-    this.navCtrl.push(this.analysisPage, {
+   const modal = this.modalCtrl.create(this.analysisPage, {
       analysisId: this.chapter.chapterId
     });
-  }
+    modal.present();
+    modal.onDidDismiss(() => {
 
+    });
+  }
 }
