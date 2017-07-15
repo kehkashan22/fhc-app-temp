@@ -39,7 +39,7 @@ page-home {
 
   .card-background-page {
 
-  ion-card {
+  ion-card, .cards {
     position: relative;
     text-align: center;
     background-color: map-get($colors, dark);
@@ -52,7 +52,7 @@ page-home {
   .card-title {
     position: absolute;
     top: 36%;
-    font-size: 2.0em;
+    font-size: 1.3em;
     width: 100%;
     font-weight: bold;
     color: map-get($colors, light);
@@ -77,5 +77,10 @@ page-home {
   // .scroll-content {
   //           background-color: map-get($colors, light);
   //       }
+
+  .iconic{
+    width: 33%;
+    height: 100px;
+  }
 
 }

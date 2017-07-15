@@ -6,7 +6,7 @@ import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
 import { Answer } from './../../data/answer.interface';
 import { Quiz } from './../../data/quiz.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { trigger, state, style, transition, animate } from "@angular/animations";
 import _ from "lodash";
@@ -15,6 +15,9 @@ import _ from "lodash";
 @Component({
   selector: 'page-quiz',
   templateUrl: 'quiz.html',
+  host: {
+    '[@myvisibility]': 'true',
+  },
   animations: [
     trigger('myvisibility', [
       state('visible', style({
@@ -59,13 +62,21 @@ export class QuizPage implements OnInit{
 
   review: string = '';
 
+  disabled = false;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private quizService: QuizService,
     private authProvider: AuthProvider,
     private loader: LoadingController,
     private alertCtrl: AlertController,
-    private _quizStore: QuizStoreProvider) {
+    private _quizStore: QuizStoreProvider,
+    private cdRef:ChangeDetectorRef) {
+  }
+
+  ngAfterViewChecked()
+  {
+    this.cdRef.detectChanges();
   }
 
   ngOnInit(){
@@ -98,6 +109,7 @@ export class QuizPage implements OnInit{
 
     if(isSolved){
       this.question = false;
+      this.results = true;
       this.storeQuiz = !this.storeQuiz;
       this.analysisFunc(this.storeQuiz);
     }
@@ -247,7 +259,7 @@ export class QuizPage implements OnInit{
     }else if(direction==="previous" && this.index > 0){
       this.index=this.index-1;
     }
-    this.checkButtonVisibility();
+
     setTimeout(
       () => {
         this.visibleState = 'visible';
@@ -259,6 +271,7 @@ export class QuizPage implements OnInit{
           this.progressIndex=1;
         }
       }, 500);
+      this.checkButtonVisibility();
   }
 
   toQuizList(){
@@ -300,6 +313,20 @@ export class QuizPage implements OnInit{
         }
       }
       return false;
+  }
+
+  toResults(){
+    this.results = true;
+  }
+
+  onDone($event) {
+    this.disabled = false;
+    console.log('the end of the animation');
+  }
+
+  onStart($event){
+    this.disabled = true;
+    console.log('the start of the animation');
   }
 
 }

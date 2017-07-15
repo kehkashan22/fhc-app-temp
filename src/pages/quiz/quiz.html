@@ -1,17 +1,29 @@
 <ion-header>
 
-  <ion-navbar color="headerColor">
-    <ion-title text-wrap>QUIZ</ion-title>
+   <ion-navbar color="headerColor">
+
+      <ion-title text-wrap>Quiz</ion-title>
+    <ion-buttons right *ngIf="question;">
+      <button ion-button>
+        <timer #timer [timeInSeconds]="quizTime" (timeUp)="handleTimeUp($event)"></timer>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
+
+
 
 </ion-header>
 <ion-content>
+   <!--  -->
   <!--QUIZ DIV HERE-->
-  <div *ngIf="question; else quizEnd;" [@myvisibility]="visibleState">
+  <div *ngIf="question; else quizEnd;" [@myvisibility]="visibleState"
+                (@myvisibility.start)="onStart($event)"
+                (@myvisibility.done)="onDone($event)">
 
     <progress-bar [progress]="index+1" [total]="quizCollection?.length"></progress-bar>
 
-    <timer #timer [timeInSeconds]="quizTime" (timeUp)="handleTimeUp($event)"></timer>
+    <!-- <timer #timer [timeInSeconds]="quizTime" (timeUp)="handleTimeUp($event)"></timer> -->
 
 
 
@@ -41,7 +53,7 @@
           </ion-grid>
 
         </ion-label>
-        <ion-radio [value]="answer" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
+        <ion-radio [value]="answer"  [disabled]="disabled" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
       </ion-item>
     </ion-list>
 
@@ -49,7 +61,8 @@
 
   <!--To Analysis-->
   <ng-template #quizEnd>
-    <div *ngIf="results" class="results">
+    <div *ngIf="results" class="marks">
+
       <!--<div id="quiz-bg"></div>-->
       <div id="content">
         <div id="quiz-info">
@@ -72,6 +85,24 @@
           <span>Quiz Review:</span> <span>{{review}} </span>
         </div>
       </div>
+
+      <div id="actions">
+        <p text-center>
+          <b>Congratulations!</b>
+          You have completed the quiz. You can review your quiz choices or retry the quiz.
+        </p>
+      </div>
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="light" (click)="toResetScore()">Retry Quiz</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block color="light" (click)="toExplanation()">Review Quiz</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
     </div>
 
     <!--EXPLANATION AND ANALYSIS HERE-->
@@ -79,10 +110,21 @@
       <ion-grid>
         <ion-row>
           <ion-col align-self-start>
-            <div *ngIf="secondQuestion">
+            <div>
               <ion-buttons left>
-                <button ion-button icon-only clear small (click)="changeExplanation('previous')" color="btn-login">
+                <button [disabled]="!secondQuestion" ion-button icon-only clear small (click)="changeExplanation('previous')" color="btn-login">
                   PREV
+                  <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
+                </button>
+              </ion-buttons>
+
+            </div>
+          </ion-col>
+          <ion-col align-self-center>
+            <div text-center>
+              <ion-buttons left>
+                <button ion-button icon-only clear small (click)="toResults()" color="btn-login">
+                  TO RESULTS
                   <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
                 </button>
               </ion-buttons>
@@ -173,23 +215,7 @@
 </ion-content>
 
 
-<ion-footer *ngIf="!question && results">
-  <div id="actions">
-        <p text-center>
-          <b>Congratulations!</b>
-          You have completed the quiz. You can review your quiz choices or retry the quiz.
-        </p>
+ <!-- <ion-footer *ngIf="!question && results">  -->
 
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <button ion-button block color="light" (click)="toResetScore()">Retry Quiz</button>
-            </ion-col>
-            <ion-col>
-              <button ion-button block color="light" (click)="toExplanation()">Review Quiz</button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-</ion-footer>
+ <!-- </ion-footer>  -->
 

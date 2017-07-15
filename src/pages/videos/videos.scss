@@ -1,6 +1,5 @@
 page-videos {
-  .background{
-    background: silver no-repeat;
-    background-size: cover;
+  .scroll-content{
+    background: map-get($colors, backgroundColor);
   }
 }

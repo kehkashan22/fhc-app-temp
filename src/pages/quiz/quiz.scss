@@ -2,11 +2,16 @@ page-quiz {
   @import "../../assets/scss/_circle.scss";
 
   .scroll-content {
-      background-color: map-get($colors, backgroundColor);
+      background-color: #ADCAD6;
   }
 
   .results{
     padding: 12px;
+  }
+
+  .marks{
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   ion-item.quiz, ion-item.item.item-block.item-radio.item-ios, ion-item.item-md, ion-item.item-wp{
@@ -26,7 +31,7 @@ page-quiz {
 
 
   // #quiz-bg {
-  //       position: fixed;
+  //
   //       left: 0;
   //       top: 44px;
   //       width: 100%;
@@ -37,13 +42,16 @@ page-quiz {
 
   //       text-align: center;
   //     }
+      #actions{
+        padding-top: 16px;
+      }
 
       #content {
         position: relative;
         margin-top: 100px;
         background-color: map-get($colors, light);
         box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
-        padding-top: 180px;
+        padding-top: 200px;
       }
 
       #quiz-info {

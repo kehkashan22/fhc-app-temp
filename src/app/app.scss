@@ -26,3 +26,21 @@
     max-width: 300px !important;  //any size
     max-height: 500px !important; //any size
 }
+
+#menu-head, #menu-toolbar{
+  .item, .toolbar-content, .toolbar-background{
+       background: #173753 !important;
+       h1, p, button{
+         color: #DBE4EE;
+       }
+  }
+  color: map-get($colors, light);
+}
+#menu-content{
+  .list, .item{
+    background: #EFF5FB !important;
+    color: #09141F !important;
+  }
+  background: #EFF5FB !important;
+
+}

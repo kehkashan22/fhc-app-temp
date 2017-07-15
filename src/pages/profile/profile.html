@@ -22,7 +22,7 @@
           <br>
           <span id="profile-description"> Mob: {{phone}} </span>
           <br>
-         <button ion-button outline>Edit Profile</button>
+         <button ion-button outline color="btn-login">Edit Profile</button>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
     </button>
     <button
     ion-item
-    [navPush]="analysisPage">
+    (click)="showSubjectsModal()">
       <ion-icon name="book" item-left></ion-icon>
       Report Card
     </button>

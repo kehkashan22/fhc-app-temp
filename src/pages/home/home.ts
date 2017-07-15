@@ -29,9 +29,9 @@ export class HomePage {
   userData: User;
 
   slides:any[]=[
-              {url: this.imgPath + "slide1.jpg", text: "Test Slide1"},
-              {url: this.imgPath + "slide2.jpg", text: "Test Slide2"},
-              {url: this.imgPath + "slide3.jpg", text: "Test Slide3"}
+              {url: this.imgPath + "slides4.jpg", text: "Test Slide1"},
+              {url: this.imgPath + "slides2.jpg", text: "Test Slide2"},
+              {url: this.imgPath + "slides5.jpg", text: "Test Slide3"}
               ];
 
   constructor(public navCtrl: NavController,

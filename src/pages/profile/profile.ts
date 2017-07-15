@@ -13,7 +13,7 @@ import { IonicPage, NavController, Events } from 'ionic-angular';
 export class ProfilePage {
 
   starredPage = 'StarredPage';
-  analysisPage = 'AnalysisPage';
+  reportCard = 'ReportCardPage';
   fullname = '';
   email = '';
   phone = '';
@@ -46,6 +46,10 @@ export class ProfilePage {
   onGoToStarred() {
     this.navCtrl.push(this.starredPage)
       .catch((error) => console.log('Access denied, Argument was ' + error));
+  }
+
+  showSubjectsModal(){
+
   }
 
 }

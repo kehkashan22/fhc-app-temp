@@ -25,6 +25,7 @@
 <ion-content class="card-background-page background" scroll="false">
 <!--CS VIDEOS-->
   <div [ngSwitch]="course">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/bg.jpg" alt="Video Library">
     <ion-list *ngSwitchCase="'ca'">
       <ion-item-group *ngFor="let stage of caGroup">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>

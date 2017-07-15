@@ -31,11 +31,13 @@
       (click)="toQuiz(quiz)" col-6>
         <ion-card >
           <div class="solved" *ngIf="isSolved(quiz)">
-            <ion-chip>
-               <ion-icon name="checkmark" color="btn-login"></ion-icon>
-            </ion-chip>
+            <ion-fab center middle>
+              <button ion-fab mini color="btn-login">
+                <ion-icon name="checkmark"></ion-icon>
+              </button>
+            </ion-fab>
            </div>
-          <ion-card-header text-center>
+          <ion-card-header text-center text-wrap>
             <b>{{ quiz.quizTitle }}</b>
           </ion-card-header>
           <ion-card-content>
@@ -59,13 +61,14 @@
       (click)="toQuiz(quiz)" col-6>
         <ion-card >
           <div class="solved" *ngIf="isSolved(quiz)">
-            <ion-chip>
-                    <ion-icon name="checkmark" color="btn-login"></ion-icon>
-                    <!--<ion-label color="dark">Solved</ion-label>-->
-            </ion-chip>
+            <ion-fab center middle>
+              <button ion-fab mini color="btn-login">
+                <ion-icon name="checkmark"></ion-icon>
+              </button>
+            </ion-fab>
 
            </div>
-          <ion-card-header text-center>
+          <ion-card-header text-center text-wrap>
             <b>{{ quiz.quizTitle }}</b>
           </ion-card-header>
           <ion-card-content>
@@ -89,10 +92,11 @@
       (click)="toQuiz(quiz)" col-6>
         <ion-card >
           <div class="solved" *ngIf="isSolved(quiz)">
-            <ion-chip>
-                    <ion-icon name="checkmark" color="btn-login"></ion-icon>
-
-            </ion-chip>
+            <ion-fab center middle>
+              <button ion-fab mini color="btn-login">
+                <ion-icon name="checkmark"></ion-icon>
+              </button>
+            </ion-fab>
            </div>
           <ion-card-header text-center>
             <b>{{ quiz.quizTitle }}</b>
@@ -100,7 +104,7 @@
           <ion-card-content>
                 <p text-center>{{quiz.questions.length}} Questions</p>
                 <div class="center">
-                  <ion-chip text-center>
+                  <ion-chip text-center text-wrap>
                     <ion-icon name="md-time" color="btn-login"></ion-icon>
                     <ion-label>{{quiz.timeInMins}}:00 mins</ion-label>
                   </ion-chip>

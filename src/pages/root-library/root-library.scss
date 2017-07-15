@@ -1,6 +1,6 @@
 page-root-library {
-    .background{
-     background: #D3D3D3 no-repeat;
+    .scroll-content{
+     background: map-get($colors, backgroundColor);
      background-size: cover;
    }
 

@@ -5,15 +5,17 @@ page-quizzes {
   }
   .col{
     padding: 0px !important;
+    align-self: center;
   }
 
   ion-card{
     background: rgba(0, 161, 223, 0.3) !important;
-
+    //height: 100%;
   }
 
   ion-card {
     position: relative;
+    height: inherit;
     text-align: center;
   }
   .center {
