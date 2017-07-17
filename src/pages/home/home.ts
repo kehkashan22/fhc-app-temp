@@ -90,7 +90,7 @@ export class HomePage {
     });
 
     FCMPlugin.onTokenRefresh((token) => {
-      alert(token);
+      this.storeToken(token);
     });
 
   }
