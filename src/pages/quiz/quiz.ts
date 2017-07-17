@@ -214,7 +214,15 @@ export class QuizPage implements OnInit {
 
   private getClassString(per: string) {
     let perInt = +per | 0;
-    this.percentClass = 'c100 p' + perInt;
+
+    if(perInt > 60){
+        this.percentClass = 'c100 p' + perInt+ ' green ';
+    }else if(perInt < 40){
+        this.percentClass = 'c100 p' + perInt;
+    }else{
+        this.percentClass = 'c100 p' + perInt+ ' orange ';
+    }
+
   }
 
   toExplanation() {

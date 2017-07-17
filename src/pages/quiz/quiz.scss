@@ -111,13 +111,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', end
       }
 
       #correct{
+        font-weight: bold;
         font-size: 16px;
-        color: #2BA84A;
+        color: #3BC14A;
       }
 
       #incorrect{
+        font-weight: bold;
         font-size: 16px;
-        color: #CE4257;
+        color: #F93943;
       }
 
       .choices{

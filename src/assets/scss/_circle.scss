@@ -157,6 +157,48 @@ $primary-color-orange-dark: #e08833;
 		&.p#{$j} .bar {
 			@include rotate((360/100*$j) + deg);
 		}
+  }
+
+  &.green{
+
+		.bar, .fill { border-color: $primary-color-green !important;}
+
+		&:hover{
+			> span { color: $primary-color-green;}
+		}
+
 	}
+
+		&.green.dark{
+
+			.bar, .fill { border-color: $primary-color-green-dark !important;}
+
+			&:hover{
+				> span { color: $primary-color-green-dark;}
+			}
+
+		}
+
+
+	// orange skin
+	&.orange{
+
+		.bar, .fill { border-color: $primary-color-orange !important;}
+
+		&:hover{
+			> span { color: $primary-color-orange;}
+		}
+
+	}
+
+		&.orange.dark{
+
+			.bar, .fill { border-color: $primary-color-orange-dark !important;}
+
+			&:hover{
+				> span { color: $primary-color-orange-dark;}
+			}
+
+		}
 
 }
