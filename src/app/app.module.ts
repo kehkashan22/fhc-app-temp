@@ -4,7 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { VideoPlayer } from '@ionic-native/video-player';
+
+//Native
 import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -21,6 +22,7 @@ import { UserProvider } from '../providers/user';
 import { LoaderProvider } from '../providers/loader';
 import { VideosService } from './../providers/fav-videos';
 import { QuizService } from './../providers/quiz';
+import { QuizStoreProvider } from '../providers/quiz-store';
 
 /* Shantanu's modules */
 import { Logger } from '../providers/logger';
@@ -31,6 +33,8 @@ import { Keyboard } from '@ionic-native/Keyboard';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { GlobalsProvider } from '../providers/globals/globals';
+
 
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
@@ -53,7 +57,7 @@ const firebaseConfig = {
     IonicStorageModule.forRoot(),
     HttpModule,
     BrowserAnimationsModule,
-     IonicModule.forRoot(MyApp, {
+    IonicModule.forRoot(MyApp, {
       //for limiting scrolling of the page when keyboard is up
       scrollAssist: false
     }),
@@ -71,7 +75,6 @@ const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VideosService,
     QuizService,
-    VideoPlayer,
     VideosProvider,
     EmailComposer,
     InAppBrowser,
@@ -81,7 +84,9 @@ const firebaseConfig = {
     AngularFireDatabase,
     Keyboard,
     UserProvider,
-    LoaderProvider
+    LoaderProvider,
+    GlobalsProvider,
+    QuizStoreProvider
 
   ]
 })

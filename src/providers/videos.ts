@@ -11,9 +11,14 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
+import * as firebase from 'firebase/app';
+
+// These imports load individual services into the firebase namespace.
+import 'firebase/auth';
+import 'firebase/database';
+
 @Injectable()
 export class VideosProvider {
-
   libraryCollection : any;
   data: any;
   constructor(public http: Http) {
@@ -37,6 +42,15 @@ export class VideosProvider {
     });
   }
 
+  loadVideos(url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      firebase.database()
+        .ref(url).child('/sets').on('value', snapshot => {
+          resolve(snapshot.val());
+        });
+    });
+  }
+
   getNewVideos() {
 
     if (this.data) {
@@ -55,22 +69,23 @@ export class VideosProvider {
 
   }
 
-     loadLibrary(){
-      this.libraryCollection = library;
-     if (this.data) {
-       return Promise.resolve(this.data);
-     }
-   return new Promise(resolve => {
+  //    loadLibrary(){
+  //     this.libraryCollection = library;
+  //    if (this.data) {
+  //      return Promise.resolve(this.data);
+  //    }
+  //     return new Promise(resolve => {
 
-       this.http.put('https://ionic-fhc-app.firebaseio.com/video-library.json', this.libraryCollection)
-         .map(res => res.json())
-         .subscribe(() => {
-           console.log("Success!");
-         },
-         (error)=>{
-           console.log(error.json());
-         });
-     });
+  //     //  this.http.put('https://ionic-fhc-app.firebaseio.com/video-library.json', this.libraryCollection)
+  //     this.http.put('https://ionic-fhc-app.firebaseio.com/vid-lib2.json', this.vidLib)
+  //        .map(res => res.json())
+  //        .subscribe(() => {
+  //          console.log("Success!");
+  //        },
+  //        (error)=>{
+  //          console.log(error.json());
+  //        });
+  //    });
 
-   }
+  //  }
 }

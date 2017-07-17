@@ -5,7 +5,7 @@
   <ion-list>
   <ion-item>
     <ion-label floating>
-        Full Name*
+        *Full Name
     </ion-label>
       <ion-input type="text" formControlName = "fullName" [class.invalid] = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -15,17 +15,17 @@
 
   <ion-item>
     <ion-label floating>
-        Email*
+        *Email
       </ion-label>
       <ion-input type="email"  formControlName = "emailId" [class.invalid] = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)" >
-    <p>Please enter emailId</p>
+    <p>Please enter email</p>
   </ion-item>
 
   <ion-item>
     <ion-label floating>
-        Phone Number*
+        *Phone Number
       </ion-label>
       <ion-input type="number"  formControlName = "phoneNumber" [class.invalid] = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -45,7 +45,7 @@
 
   <ion-item>
     <ion-label floating>
-        Pincode
+        *Pincode
     </ion-label>
     <ion-input type="number" formControlName = "pincode" [class.invalid] = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -55,7 +55,7 @@
 
   <ion-item>
     <ion-label floating>
-        Password*
+        *Password
     </ion-label>
     <ion-input type="password" formControlName = "password" [class.invalid] = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -65,7 +65,7 @@
 
   <ion-item>
     <ion-label floating>
-        Attempt Number*
+        *Attempt Number
     </ion-label>
     <ion-input type="number" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
   </ion-item>
@@ -75,7 +75,7 @@
 
   <ion-item>
     <ion-label floating>
-        Attempt Date*
+        *Attempt Date
     </ion-label>
     <ion-datetime displayFormat="DD-MM-YYYY" formControlName="attemptDate"></ion-datetime>
   </ion-item>

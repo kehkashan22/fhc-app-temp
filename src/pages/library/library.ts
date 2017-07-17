@@ -1,3 +1,4 @@
+import { LoaderProvider } from './../../providers/loader';
 import { AuthProvider } from './../../providers/auth';
 import { Videos } from './../../data/videos.interface';
 import { LoadingController, NavParams } from 'ionic-angular';
@@ -12,46 +13,49 @@ import { IonicPage } from 'ionic-angular';
 })
 export class LibraryPage {
 
-  videoCollection: Videos[];
-  tempVideos: Videos[]
+  videoCollection: Videos[] = [];
+  tempVideos: Videos[] = [];
   videosPage = 'VideosPage';
-
-  constructor(private videosProvider: VideosProvider,
-    private loadingController: LoadingController,
-    private authProvider: AuthProvider,
-    private navParams : NavParams) { }
+  nothing: boolean = false;
+  url = '';
+  constructor(private _video: VideosProvider,
+    private _loader: LoadingController,
+    private _auth: AuthProvider,
+    private navParams: NavParams) { }
 
   ngOnInit() {
-   //this.getVideosFromDB();
-        this.videoCollection = this.navParams.data;
-          this.tempVideos = this.videoCollection;
+    const loader = this._loader.create({
+      spinner: "bubbles",
+      content: "Loading Videos..."
+    });
+    this.url = this.navParams.data;
+    loader.present();
+    this._video.loadVideos(this.url).then(snapshot => {
+      //let sets: Videos[]  = snapshot;
+      if (snapshot) {
+        console.log(snapshot);
+        this.videoCollection = snapshot;
+        this.tempVideos = this.videoCollection;
+      }
+       if (this.videoCollection.length === 0) {
+          this.nothing = true;
+        }
+      loader.dismiss();
+    });
   }
 
   doRefresh(refresher) {
-    this.getVideosFromDB();
+    this._video.loadVideos(this.url).then(snapshot => {
+      //let sets: Videos[]  = snapshot;
+      if (snapshot) {
+        console.log(snapshot);
+        this.videoCollection = snapshot;
+        this.tempVideos = this.videoCollection;
+      }
+    });
     setTimeout(() => {
-      //console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
-  }
-
-  getVideosFromDB(){
-     const loading = this.loadingController.create({
-      content: "Loading Videos..."
-    });
-    loading.present();
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.videosProvider.getVideos(token).then((data: Videos[]) => {
-        loading.dismiss();
-        if (data) {
-          this.videoCollection = data;
-          this.tempVideos = this.videoCollection;
-        } else {
-          this.videoCollection = [];
-          this.tempVideos = [];
-        }
-      });
-    });
   }
 
   getVideoCategoryByTitle(event: any) {

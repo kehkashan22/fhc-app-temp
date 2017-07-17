@@ -6,23 +6,62 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Library</ion-title>
+    <ion-title>Video Library</ion-title>
   </ion-navbar>
 
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="course" color="headerColor">
+      <ion-segment-button value="ca" color="headerColor">
+        CA
+      </ion-segment-button>
+      <ion-segment-button value="cs" color="headerColor">
+        CS
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content
- class="card-background-page background" scroll="false">
-  <ion-list>
-    <button
-      ion-item
-      *ngFor="let videoGroup of libraryCollection"
-      [navPush]="library2"
-      [navParams]="videoGroup">
-      <h2>{{ videoGroup.courseId | uppercase }}</h2>
-    </button>
-  </ion-list>
+<ion-content class="card-background-page background" scroll="false">
+<!--CS VIDEOS-->
+  <div [ngSwitch]="course">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/bg.jpg" alt="Video Library">
+    <ion-list *ngSwitchCase="'ca'">
+      <ion-item-group *ngFor="let stage of caGroup">
+        <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
+        <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+          {{subject.subjectName | titlecase}}
+          <div *ngIf="show === subject.subjectId">
+            <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
+              <button ion-item (click)="goToVideos(course, stage.stageId, subject.subjectId, type)">
+                <!--[navPush]="library" [navParams]="type.sets"-->
+                {{type | titlecase}}
+              </button>
+            </ion-list>
+          </div>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+
+<!--CS VIDEOS-->
+    <ion-list *ngSwitchCase="'cs'">
+      <ion-item-group *ngFor="let stage of csGroup">
+        <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
+        <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+          {{subject.subjectName | titlecase}}
+          <div *ngIf="show === subject.subjectId">
+            <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
+              <button ion-item (click)="goToVideos(course, stage.stageId, subject.subjectId, type)">
+                <!--[navPush]="library" [navParams]="type.sets"-->
+                {{type | titlecase}}
+              </button>
+            </ion-list>
+          </div>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+  </div>
+
+
 
 </ion-content>
-

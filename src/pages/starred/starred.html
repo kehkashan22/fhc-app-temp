@@ -22,7 +22,7 @@
       *ngFor="let video of videos">
       <ion-item
         (click)="onViewVideo(video)">
-        <h2>{{ video.text }}</h2>
+        <h2 text-wrap>{{ video.text }}</h2>
         <p>{{ video.text }}</p>
       </ion-item>
       <ion-item-options>

@@ -26,7 +26,6 @@ export class VideosService {
             this.favoriteVideos.splice(this.favoriteVideos.indexOf(video), 1);
           }
         );
-    console.log(this.favoriteVideos);
   }
 
   removeVideoFromFavorites(video: Video) {
@@ -47,7 +46,7 @@ export class VideosService {
     return this.favoriteVideos.slice();
   }
 
-  isVideoFavorite(video: Video) {
+   isVideoFavorite(video: Video) {
     return this.favoriteVideos.find((videoEl: Video) => {
       return videoEl.id == video.id;
     });
@@ -76,4 +75,5 @@ export class VideosService {
             }
         );
   }
+
 }

@@ -39,10 +39,10 @@ page-home {
 
   .card-background-page {
 
-  ion-card {
+  ion-card, .cards {
     position: relative;
     text-align: center;
-    background-color: black;
+    background-color: map-get($colors, dark);
 
     img{
       opacity: 0.7;
@@ -52,10 +52,10 @@ page-home {
   .card-title {
     position: absolute;
     top: 36%;
-    font-size: 2.0em;
+    font-size: 1.3em;
     width: 100%;
     font-weight: bold;
-    color: #fff;
+    color: map-get($colors, light);
   }
 
   .card-subtitle {
@@ -63,19 +63,24 @@ page-home {
     position: absolute;
     top: 52%;
     width: 100%;
-    color: #fff;
+    color: map-get($colors, light);
     padding-top: 5px;
   }
 
   }
 
    .background{
-     background: #D3D3D3 no-repeat;
+     background: map-get($colors, backgroundColor) no-repeat;
      background-size: cover;
    }
 
   // .scroll-content {
   //           background-color: map-get($colors, light);
   //       }
+
+  .iconic{
+    width: 33%;
+    height: 100px;
+  }
 
 }

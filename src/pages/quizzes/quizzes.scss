@@ -1,0 +1,52 @@
+page-quizzes {
+
+  .scroll-content {
+      background-color: map-get($colors, backgroundColor);
+  }
+  .col{
+    padding: 0px !important;
+    align-self: center;
+  }
+
+  ion-card{
+    background: rgba(0, 161, 223, 0.3) !important;
+    //height: 100%;
+  }
+
+  ion-card {
+    position: relative;
+    height: inherit;
+    text-align: center;
+  }
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 13px;
+  }
+
+  .solved{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+    color: #fff;
+    background-color: rgba(255,	192,	203, 0.7);
+    padding: 0;
+     ion-chip {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+     }
+
+  }
+
+  ion-footer{
+    background: map-get($colors, backgroundColor);
+  }
+}

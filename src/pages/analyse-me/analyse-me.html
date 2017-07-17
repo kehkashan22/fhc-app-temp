@@ -1,0 +1,74 @@
+<ion-header color="headerColor">
+
+  <ion-navbar color="headerColor">
+    <ion-title>Analyse Yourself!</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content scroll="false">
+
+  <!--VIDEO HERE-->
+  <div *ngIf="question; else quizEnd" [@myvisibility]="visibleState">
+    <ng-template #videoTag>
+      <vg-player (onPlayerReady)="onPlayerReady($event)">
+        <vg-overlay-play></vg-overlay-play>
+        <vg-buffering></vg-buffering>
+
+        <vg-controls>
+          <vg-play-pause></vg-play-pause>
+          <vg-playback-button></vg-playback-button>
+
+          <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+          <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+          </vg-scrub-bar>
+          <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+          <vg-mute></vg-mute>
+          <vg-volume></vg-volume>
+
+          <vg-fullscreen></vg-fullscreen>
+        </vg-controls>
+
+        <video [vgMedia]="media" #media [src]= "analysisVideo" id="singleVideo"  preload="auto">
+
+        </video>
+      </vg-player>
+
+      <!--QUIZ PORTION-->
+    </ng-template>
+    <div *ngIf="!video; else videoTag" class="quiz">
+      <ion-card>
+        <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
+      </ion-card>
+
+      <ion-list radio-group mode="ios">
+        <ion-item *ngFor="let answer of currentQuestion?.answers" mode="ios">
+          <ion-label>{{answer.answerKey}}) {{answer.answerText}}</ion-label>
+          <ion-radio [value]="answer" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <!--To Analysis-->
+  <ng-template #quizEnd>
+    <div class="quiz">
+      <h1>You have successfully completed the quiz</h1>
+      <ion-card>
+        <ion-card-header text-center>
+          Compare your two scores!
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barCanvas></canvas>
+        </ion-card-content>
+      </ion-card>
+      <button ion-button (click)="getExplanation()">Get Explanation</button>
+    </div>
+
+  </ng-template>
+</ion-content>

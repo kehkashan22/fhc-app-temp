@@ -1,6 +1,18 @@
 page-library {
-    // .backgroud{
-    //   background: silver no-repeat;
-    //   background-size: cover;
-    // }
+    .scroll-content{
+      background: map-get($colors, backgroundColor)
+    }
+
+    .nothing{
+      position: absolute;
+      padding-top: 100px;
+      width: 75%;
+      right: 0;
+      bottom: 0;
+      //height: 25%;
+      .img{
+        max-width:100%;
+        max-height:100%;
+      }
+    }
 }

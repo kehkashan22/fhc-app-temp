@@ -1,25 +1,169 @@
 page-quiz {
+  @import "../../assets/scss/_circle.scss";
 
-#tsc_player {
-   z-index: 9999;
-}
+  .scroll-content {
+    background-color: #2C2C34;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7d7e7d+0,2C2C34+100;Black+3D */
+background: #7d7e7d; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdkN2U3ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwZTBlMGUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #7d7e7d 0%, #2C2C34 100%); /* FF3.6-15 */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#2C2C34)); /* Chrome4-9,Safari4-5 */
+background: -webkit-linear-gradient(top,  #7d7e7d 0%,#2C2C34 100%); /* Chrome10-25,Safari5.1-6 */
+background: -o-linear-gradient(top,  #7d7e7d 0%,#2C2C34 100%); /* Opera 11.10-11.50 */
+background: -ms-linear-gradient(top,  #7d7e7d 0%,#2C2C34 100%); /* IE10 preview */
+background: linear-gradient(to bottom,  #7d7e7d 0%,#2C2C34 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#2C2C34',GradientType=0 ); /* IE6-8 */
 
-.tscplayer_inline {
-	position:static;
-	margin: 30px;
-	width: 100%;
-	height: 480px;
-	z-index:auto;
-}
+  }
 
-.tscplayer_fullframe {
-	position:absolute;
-	top: 0px;
-	left: 0px;
-	margin: 0px;
-	padding: 0px;
-	z-index: 9999;
-}
+  .results{
+    padding: 12px;
+  }
+
+  .marks{
+    padding-right: 20px;
+    padding-left: 20px;
+     //background-color: #2C2C34;
+  }
+
+  ion-item.quiz, ion-item.item.item-block.item-radio.item-ios, ion-item.item-md, ion-item.item-wp{
+    font-size: 1.7rem !important;
+  }
+
+  #solutions{
+    #resultGrid{
+          padding: 0px !important;
+      }
+
+      ion-label.label.label-md, ion-label.label.label-ios{
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+      }
+  }
+
+
+  // #quiz-bg {
+  //
+  //       left: 0;
+  //       top: 44px;
+  //       width: 100%;
+  //       height: 175px;
+  //       //background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/bg.jpg') no-repeat transparent;
+  //       background-size: 100%;
+  //       background-position: 50% 20%;
+
+  //       text-align: center;
+  //     }
+      #actions{
+          .newhr {
+              border-top: 1px dashed #D1D1D1;
+          }
+          h3{
+            font-family: 'Roboto Mono';
+          }
+      }
+
+      #content {
+        position: relative;
+        margin-top: 100px;
+        // background-color: map-get($colors, light);
+        // box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
+        padding-top: 200px;
+      }
+
+      .quiz-content{
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        padding-top: 60px;
+      }
+
+      #quiz-info {
+        position: absolute;
+        top: -95px;
+        width: 100%;
+        z-index: 2;
+        text-align: center;
+      }
+
+      .quiz-description {
+        font-size: 18px;
+        color: #C8C8C8;
+      }
+
+      #quiz-image {
+        display: block;
+        border-radius: 100px;
+        //border: 1px solid #fff;
+        width: 175px;
+        height: 120px;
+        margin: 30px auto 0;
+        //box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+      }
+
+      .quiz-text{
+         color: map-get($colors, light)
+      }
+
+      hr.divider{
+       border-top: 1px dashed #D1D1D1;
+      }
+
+      #correct{
+        font-size: 16px;
+        color: #2BA84A;
+      }
+
+      #incorrect{
+        font-size: 16px;
+        color: #CE4257;
+      }
+
+      .choices{
+          div {
+            max-height: 200px;
+            height: 40px;
+            line-height: 40px;
+            //text-align: center;
+            //border: 2px dashed #f69c55;
+            overflow-y: scroll;
+            font-size: 1.6rem;
+          }
+          span {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+          }
+      }
+
+      .right{
+          background-color: rgba(144, 238, 144, 0.3);
+          color: map-get($colors, secondary);
+      }
+
+      .wrong{
+          background-color: rgba(240, 128, 128, 0.3);
+          color: map-get($colors, danger);
+      }
+
+      // .question{
+      //   height: 20rem;
+      //   overflow: scroll;
+      // }
+
+         ion-card-title.card-title.card-title-md, ion-card-title.card-title.card-title-ios,
+          ion-card-title.card-title.card-title-wp{
+            font-size: 1.7rem !important;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-left: 16px !important;
+            padding-right: 16px!important;
+            padding-top: 0px;
+            padding-bottom: 0px;
+          }
+
 
 
 }
