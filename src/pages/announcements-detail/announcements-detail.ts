@@ -55,20 +55,23 @@ export class AnnouncementsDetailPage {
   download() {
     const fileTransfer: TransferObject = this.transfer.create();
     let url = this.announcementDetail.downloadLink;
-    fileTransfer.download(url, this.storageDirectory  + 'Node.pdf').then((entry) => {
+    let fileTokens:Array<any> = url.split('/');
+    const fileName = fileTokens[fileTokens.length - 1];
+    console.log(fileName);
+    
+    fileTransfer.download(url, this.storageDirectory  + fileName).then((entry) => {
         let t = this.toast.create({
           message: 'Downloading started...',
           duration: 2000
-        });
-        t.present();
+        }).present();
 
         if (entry) {
             console.log('download complete: ' + entry.toURL());
-            t = this.toast.create({
+            this.toast.create({
               message: 'Downloading completed',
               duration: 2000
-            }); 
-            t.present();
+            }).present(); 
+            
             /*let alert = this.alertCtrl.create({
                 title: 'Downloaded Successfully',
                 message: 'successfully downloaded at '+entry.toURL(),
@@ -77,7 +80,6 @@ export class AnnouncementsDetailPage {
                 }]
             });
             alert.present();*/
-
         }
         else {
             let alert = this.alertCtrl.create({
