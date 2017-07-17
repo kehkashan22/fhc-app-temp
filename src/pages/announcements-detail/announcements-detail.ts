@@ -56,16 +56,28 @@ export class AnnouncementsDetailPage {
     const fileTransfer: TransferObject = this.transfer.create();
     let url = this.announcementDetail.downloadLink;
     fileTransfer.download(url, this.storageDirectory  + 'Node.pdf').then((entry) => {
+        let t = this.toast.create({
+          message: 'Downloading started...',
+          duration: 2000
+        });
+        t.present();
+
         if (entry) {
             console.log('download complete: ' + entry.toURL());
-            let alert = this.alertCtrl.create({
+            t = this.toast.create({
+              message: 'Downloading completed',
+              duration: 2000
+            }); 
+            t.present();
+            /*let alert = this.alertCtrl.create({
                 title: 'Downloaded Successfully',
                 message: 'successfully downloaded at '+entry.toURL(),
                 buttons: [{
                     text: 'Ok',
                 }]
             });
-            alert.present();
+            alert.present();*/
+
         }
         else {
             let alert = this.alertCtrl.create({
