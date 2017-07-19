@@ -9,7 +9,7 @@ import { Component,  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -81,14 +81,16 @@ export class HomePage {
     FCMPlugin.onNotification((data) => {
       
       if(data.wasTapped){
-        this.navCtrl.push('AnnouncementsPage');
+        var self = this;
+        //self.navCtrl.setRoot('Home');
+        self.navCtrl.setRoot('AnnouncementsPage');
       }else{
         alert( JSON.stringify(data) );
       }
     });
 
     FCMPlugin.onTokenRefresh((token) => {
-      alert(token);
+      this.storeToken(token);
     });
 
   }

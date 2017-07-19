@@ -7,19 +7,18 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 /* Forms module */
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 /* Logger Service */
 import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
-/* MD5 hash module */
-import {Md5} from 'ts-md5/dist/md5';
+
+import * as sha1  from 'sha1';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
-declare var FCMPlugin;
 
 @IonicPage()
 @Component({
@@ -45,13 +44,14 @@ export class SignUp {
   ) {
     /* Creating form using formBuilder module and applying validations.*/
     this.form = formBuilder.group({
-        fullName: [ '', Validators.required],
-        emailId: ['', Validators.required],
-        phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10)])],
-        password: [ '', Validators.required],
+        fullName: [ '', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+        emailId: ['', Validators.compose([Validators.required, Validators.email])],
+        phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
+        password: [ '', Validators.compose([Validators.required, Validators.minLength(6)])],
+        confirmPassword: [ '', Validators.required, this.validatePasswordConfirmation.bind(this)],
         address: [''],
         attemptNo: ['', Validators.required],
-        pincode: [ '', Validators.minLength(6)],
+        pincode: [ '', Validators.compose([Validators.minLength(6), Validators.maxLength(6)])],
         attemptDate: ['', Validators.required],
         dob: [''],
         gender: [''],
@@ -82,7 +82,7 @@ export class SignUp {
       typeOfCourse: this.form.value.typeOfCourse
     }
 
-    let userPassword = Md5.hashStr(this.form.value.password);
+    let userPassword = sha1(this.form.value.password);
 
     /* Loader */
     let loader = this.loadingCtrl.create({
@@ -93,6 +93,14 @@ export class SignUp {
 
     /* Auth service registerUser method */
     this.authProvider.registerUser(userData, userPassword).then(() => {
+      
+      const alert = this.alertCtrl.create({
+          title: 'Success',
+          message: 'Please validate your email address',
+          buttons: ['Ok']
+        });
+        alert.present();
+      
       /* Resetting the form once everything is done */
       this.form.reset();
       /* Setting the stack root to login */
@@ -120,5 +128,10 @@ export class SignUp {
     /* For avoiding the stacking of the same page again and again */
     this.navCtrl.setRoot('LoginWithEmailPage');
   }
+  validatePasswordConfirmation(control: FormControl): any {
+  if(this.form) {
+    return Promise.resolve(control.value === this.form.get('password').value ? null : { notSame: true});
+  }
+}
 
 }

@@ -1,5 +1,5 @@
 import { AuthProvider } from './../../providers/auth';
-import { Md5 } from 'ts-md5/dist/md5';
+import * as sha1  from 'sha1';
 import { UserProvider } from './../../providers/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Events, ModalController } from 'ionic-angular';
@@ -30,7 +30,7 @@ export class ProfilePage {
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
-          Md5.hashStr(this.email.toLowerCase());
+          sha1(this.email.toLowerCase());
       });
     });
 

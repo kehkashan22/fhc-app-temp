@@ -19,7 +19,7 @@
         </p>
       </ion-card-content>
 
-      <ion-row no-padding>
+      <ion-row no-padding *ngIf="announcementDetail.downloadLink">
         <ion-col text-center>
           <button ion-button clear (tap)="download();">Download</button>
         </ion-col>

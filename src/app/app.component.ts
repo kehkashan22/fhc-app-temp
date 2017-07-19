@@ -1,5 +1,5 @@
 import { LoadingController, App } from 'ionic-angular';
-import { Md5 } from 'ts-md5/dist/md5';
+import * as sha1  from 'sha1';
 import { UserProvider } from './../providers/user';
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
@@ -10,9 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AuthProvider } from "../providers/auth";
 
-import firebase from 'firebase';
-
-declare var FCMPlugin;
+import * as firebase from 'firebase';
 
 @Component({
   templateUrl: 'app.html'
@@ -93,7 +91,7 @@ export class MyApp {
       this.fullname = user.fullName;
       this.email = user.emailId;
       this.profilePicture = "https://www.gravatar.com/avatar/" +
-        Md5.hashStr(this.email.toLowerCase())
+        sha1(this.email.toLowerCase())
     });
   }
 
@@ -119,7 +117,7 @@ export class MyApp {
       content: 'Signing you out...'
     });
     loading.present();
-    firebase.database().ref('/pushTokens').child(firebase.auth().currentUser.uid).remove();
+    firebase.database().ref('/pushtokens').child(firebase.auth().currentUser.uid).remove();
 
     this.authProvider.logout().then(() => {
       

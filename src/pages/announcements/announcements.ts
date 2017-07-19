@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
@@ -11,27 +11,40 @@ export class AnnouncementsPage {
   
   announcements: Array<any>;
 
+  
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private afd: AngularFireDatabase
+              private afd: AngularFireDatabase,
+              private loadingCtrl: LoadingController
               
   ) {
     
   }
   ionViewDidLoad(){
-    this.getData().subscribe((data) => {
-      this.announcements = data;
-      console.log(this.announcements);
+    let loader = this.loadingCtrl.create({
+      content: 'Loading...',
+      spinner: 'bubbles'
     });
+
+    loader.present();
+
+    this.afd.list('/posts', {
+      query: {
+        orderByChild: 'date'
+      }
+    }).subscribe(data => {
+      data = data.reverse();
+      this.announcements = data;
+      loader.dismiss();  
+    });
+
   }
   navigateToAnnouncement(announcement){
     this.navCtrl.push('AnnouncementsDetailPage', {
       announcements: announcement
     });
   }
-  getData(){
-    return this.afd.list('/posts');
-  }
+  
   
 
 }

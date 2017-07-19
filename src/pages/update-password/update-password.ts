@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController, T
 
 import { AuthProvider } from '../../providers/auth';
 
-import { Md5 } from 'ts-md5/dist/md5';
+import * as sha1  from 'sha1';
 
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -43,7 +43,7 @@ export class UpdatePasswordPage {
 
     loading.present();
 
-    let newPass = ""+Md5.hashStr(this.newPassword);
+    let newPass = ""+sha1(this.newPassword);
 
     let user = firebase.auth().currentUser;
 
