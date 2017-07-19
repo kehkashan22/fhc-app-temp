@@ -1,9 +1,9 @@
 import { LoadingController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
-import { Md5 } from 'ts-md5/dist/md5';
+import * as sha1  from 'sha1';
 import { UserProvider } from './../../providers/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Events } from 'ionic-angular';
+import { IonicPage, NavController, Events, ModalController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -19,10 +19,12 @@ export class ProfilePage {
   phone = '';
   profilePicture: any = '';
   constructor(private navCtrl: NavController,
-    private userProvider: UserProvider,
-    private events: Events,
-    private authProvider: AuthProvider,
-    private _loader: LoadingController) { }
+              private userProvider: UserProvider,
+              private events: Events,
+              private authProvider: AuthProvider,
+              private modalCtrl: ModalController,
+              private _loader: LoadingController
+  ) { }
 
   ionViewWillEnter(): void {
     const loader = this._loader.create({
@@ -36,7 +38,7 @@ export class ProfilePage {
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
-          Md5.hashStr(this.email.toLowerCase());
+          sha1(this.email.toLowerCase());
       });
       loader.dismiss();
     });
@@ -48,8 +50,11 @@ export class ProfilePage {
       .catch((error) => console.log('Access denied, Argument was ' + error));
   }
 
-  showSubjectsModal(){
-
+  editProfile(){
+    //let updateModal = this.modalCtrl.create('EditProfilePage');
+    //updateModal.present();
+    this.navCtrl.push('EditProfilePage');
   }
+
 
 }

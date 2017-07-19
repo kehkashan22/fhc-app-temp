@@ -10,7 +10,7 @@
       <ion-input type="text" formControlName = "fullName" [class.invalid] = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)" >
-    <p>Please enter fullName</p>
+    <p>Please enter proper Full Name</p>
   </ion-item>
 
   <ion-item>
@@ -20,7 +20,7 @@
       <ion-input type="email"  formControlName = "emailId" [class.invalid] = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)" >
-    <p>Please enter email</p>
+    <p>Please enter proper Email</p>
   </ion-item>
 
   <ion-item>
@@ -30,7 +30,7 @@
       <ion-input type="number"  formControlName = "phoneNumber" [class.invalid] = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)" >
-    <p>Please enter phone number</p>
+    <p>Phone Number should be 10 digits long</p>
   </ion-item>
 
   <ion-item>
@@ -50,7 +50,7 @@
     <ion-input type="number" formControlName = "pincode" [class.invalid] = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)" >
-    <p>Please enter pincode</p>
+    <p>Pin code should be 6 digits long</p>
   </ion-item>
 
   <ion-item>
@@ -60,7 +60,17 @@
     <ion-input type="password" formControlName = "password" [class.invalid] = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)" >
-    <p>Please enter password</p>
+    <p>Password should be atleast 6 characters long</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>
+        *Confirm Password
+    </ion-label>
+    <ion-input type="password" formControlName = "confirmPassword" [class.invalid] = "!form.controls.confirmPassword.valid && (form.controls.confirmPassword.dirty || submitAttempt)"></ion-input>
+  </ion-item>
+   <ion-item *ngIf="form.controls.confirmPassword.hasError('notSame')">
+    <p>Passwords do not match!</p>
   </ion-item>
 
   <ion-item>
@@ -70,7 +80,7 @@
     <ion-input type="number" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)" >
-    <p>Please enter pincode</p>
+    <p>Please enter attempt number</p>
   </ion-item>
 
   <ion-item>

@@ -30,7 +30,7 @@ import _ from "lodash";
     ])
   ]
 })
-export class QuizPage implements OnInit {
+export class QuizPage implements OnInit{
 
 
   visibleState: string = 'visible';

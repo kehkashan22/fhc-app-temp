@@ -9,6 +9,12 @@ import { Component,  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App, NavParams } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
+import * as firebase from 'firebase';
+
+import { AngularFireDatabase } from 'angularfire2/database';
+
+declare var FCMPlugin;
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -28,6 +34,8 @@ export class HomePage {
   imgType = ".jpeg";
   userData: User;
 
+  fireStore = firebase.database().ref("/pushtokens");
+
   slides:any[]=[
               {url: this.imgPath + "slides4.jpg", text: "Test Slide1"},
               {url: this.imgPath + "slides2.jpg", text: "Test Slide2"},
@@ -44,8 +52,14 @@ export class HomePage {
                private menuCtrl: MenuController,
                private authProvider : AuthProvider,
                private _loader : LoadingController,
-               private quizProvider: QuizService,
-               private app : App){}
+               private app : App,
+                private quizProvider: QuizService,
+               private afd: AngularFireDatabase
+    ){
+         this.tokenSetup().then((token) => {
+          this.storeToken(token);
+        });
+  }
 
   ngOnInit() {
    this.videosService.loadFavoriteVideos();
@@ -70,19 +84,59 @@ export class HomePage {
             loader.dismiss();
        });
     });
+    FCMPlugin.onNotification((data) => {
+
+      if(data.wasTapped){
+        var self = this;
+        //self.navCtrl.setRoot('Home');
+        self.navCtrl.setRoot('AnnouncementsPage');
+      }else{
+        alert( JSON.stringify(data) );
+      }
+    });
+
+    FCMPlugin.onTokenRefresh((token) => {
+      this.storeToken(token);
+    });
 
   }
 
   onPageWillEnter(){
         console.log('****on page will enter messages pane');
 
-    }
+  }
 
-    toAnalysisPage(){
+  toAnalysisPage(){
       this.navCtrl.push(this.analyseMePage, {
         // analysisBy: 'subject',
         // analysisId: 'dt'
         subjectId: 'dt'
       });
     }
+
+  navigateToAnnouncements(){
+    this.navCtrl.push('AnnouncementsPage');
+  }
+
+  storeToken(token){
+    this.fireStore.child(firebase.auth().currentUser.uid).set({
+      uid: firebase.auth().currentUser.uid,
+      devToken: token
+    }).then(() => {
+      alert('Token Stored');
+    }).catch((err) => {
+      alert(err);
+    });
+  }
+  tokenSetup(){
+    var promise = new Promise((resolve, reject) => {
+      FCMPlugin.getToken((token) => {
+        resolve(token);
+      }, (err) => {
+        reject(err);
+      });
+
+    });
+    return promise;
+  }
 }
