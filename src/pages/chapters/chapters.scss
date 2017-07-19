@@ -1,4 +1,12 @@
 page-chapters {
+   @import "../../assets/scss/_nothing.scss";
+   $color: map-get($colors, backgroundColor);
+   .scroll-content{
+      background-color: $color;
+    }
+    ion-col{
+       color: $color;
+    }
     .a{
         background-color: map-get($colors, chapterA);
     }
@@ -10,11 +18,7 @@ page-chapters {
     .c{
       background-color: map-get($colors, chapterC);
     }
-
-    .background{
-      background-color: map-get($colors, backgroundColor);
-    }
     ion-footer{
-      color: map-get($colors, backgroundColor);
+      background-color: $color;
     }
 }

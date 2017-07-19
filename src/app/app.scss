@@ -37,10 +37,20 @@
   color: map-get($colors, light);
 }
 #menu-content{
-  .list, .item{
+  .list, .item, .content{
     background: #EFF5FB !important;
     color: #09141F !important;
   }
   background: #EFF5FB !important;
 
+}
+
+#menu{
+  .scroll-content{
+    background: #EFF5FB;
+  }
+}
+
+.scroll-content{
+  background: map-get($colors, backgroundColor);
 }

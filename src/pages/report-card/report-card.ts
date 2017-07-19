@@ -116,8 +116,8 @@ export class ReportCardPage implements OnInit {
         datasets: [{
           label: 'Memory',
           data: this.memoryData,
-          backgroundColor: 'rgba(239, 71, 111, 0.2)',
-          borderColor: 'rgba(239, 71, 111, 1)',
+          backgroundColor: 'rgba(0, 92, 156, 0.5)',
+          borderColor: 'rgba(0, 92, 156, 1)',
           borderWidth: 1
         },
         {

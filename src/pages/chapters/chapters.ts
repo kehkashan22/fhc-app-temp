@@ -1,5 +1,4 @@
 import { QuizService } from './../../providers/quiz';
-import { Quizzes } from './../../data/quizzes.interface';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
@@ -13,7 +12,7 @@ export class ChaptersPage implements OnInit{
 
   fa: any;
   subjectName: string;
-  chapters;
+  chapters: any[] = [];
   tempChapters: any[] = [];
   url = '';
   quizzesPage='QuizzesPage';
@@ -26,6 +25,7 @@ export class ChaptersPage implements OnInit{
       fa: string,
       url: string
     }
+  nothing: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
                 private _loader: LoadingController,
@@ -35,7 +35,7 @@ export class ChaptersPage implements OnInit{
  ngOnInit() {
     const loader = this._loader.create({
       spinner: "bubbles",
-      content: "Loading Quiz..."
+      content: "Loading Chapters..."
     });
     this.data = this.navParams.data;
     console.log(this.data);
@@ -47,7 +47,9 @@ export class ChaptersPage implements OnInit{
           console.log(snapshot);
           this.chapters = snapshot;
           this.tempChapters = this.chapters;
+          console.log(this.chapters.length);
         }
+        this.nothing = this.chapters.length > 0 ? false : true;
         loader.dismiss();
       });
   }

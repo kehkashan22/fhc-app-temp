@@ -54,7 +54,11 @@ export class RootLibraryPage {
     }
     const url = '/vid-lib2/'+course+'/'+stage+'/'+subject+'/'+type;
     console.log(url);
-    this.navCtrl.push(this.library, url)
+    this.navCtrl.push(this.library, {
+        url: url,
+        subject: subject,
+        type: type
+    });
   }
 }
 

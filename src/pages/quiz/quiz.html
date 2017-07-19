@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border color="headerColor">
 
-  <ion-navbar color="headerColor">
+  <ion-navbar color="headerColor" transparent>
 
     <ion-title text-wrap>Quiz</ion-title>
     <ion-buttons right *ngIf="question">
@@ -14,7 +14,7 @@
 
 
 </ion-header>
-<ion-content>
+<ion-content fullscreen>
   <!--  -->
   <!--QUIZ DIV HERE-->
   <div *ngIf="question; else quizEnd;" [@myvisibility]="visibleState" (@myvisibility.start)="onStart($event)" (@myvisibility.done)="onDone($event)">
@@ -94,9 +94,10 @@
         <h3 text-center>{{review}}</h3>
         <p text-center>{{subreview}}</p>
         <hr class="divider">
-        <p text-left>
-          You can now review...
-        </p>
+        <div style = "padding-top: 20px;"></div>
+        <h4 text-left>
+          Why not review...
+        </h4>
       </div>
       <ion-grid>
         <ion-row>

@@ -6,30 +6,21 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Video Library</ion-title>
+    <ion-title>{{subject | uppercase}} - {{type | titlecase }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content
- class="card-background-page" scroll="false">
+<ion-content scroll="false">
 
-   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
- <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar>
-    <ion-list *ngIf="!nothing; else noVids;">
-    <button
-      ion-item
-      *ngFor="let videoGroup of videoCollection"
-      [navPush]="videosPage"
-      [navParams]="videoGroup">
+  <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar>
+  <ion-list *ngIf="!nothing; else noVids;">
+    <button ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
       <ion-icon [name]="videoGroup.icon" item-left></ion-icon>
       <h2 text-wrap>{{ videoGroup.setId }}</h2>
       <p>{{ videoGroup.videos.length }} Videos</p>
@@ -37,9 +28,21 @@
   </ion-list>
 
   <ng-template #noVids>
-    Nothing to see here! I am sorry!
+
     <div class="nothing" ion-fixed no-bounce>
-       <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/nothing.png" alt="Nothing Cat">
+      <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/catbg.png" alt="Sorry Cat">
     </div>
+
+
   </ng-template>
 </ion-content>
+
+<ion-footer *ngIf="nothing" no-border>
+  <div class="container">
+      <h5>
+        No Videos uploaded yet :(
+      </h5>
+      <p>Why don't you try again after the cat finishes it's song?</p>
+    </div>
+
+</ion-footer>

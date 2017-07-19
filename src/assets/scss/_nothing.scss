@@ -1,0 +1,33 @@
+// Compass utilities
+@import "../../../node_modules/compass-mixins/lib/compass";
+@import "../../../node_modules/compass-sass-mixins/lib/compass";
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Oswald|Roboto');
+$p-font: 'Oswald';
+$h2-font: 'Raleway';
+
+ .nothing{
+      padding-top: 20px;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+
+    }
+
+    .container {
+      margin: 0 auto;
+      position: relative;
+      width: 90%;
+      p, span{
+        font-family: $h2-font;
+      }
+      h5{
+        color: #D46D1F;
+        font-family: $p-font;
+      }
+    }
+

@@ -18,6 +18,8 @@ export class LibraryPage {
   videosPage = 'VideosPage';
   nothing: boolean = false;
   url = '';
+  subject = '';
+  type = '';
   constructor(private _video: VideosProvider,
     private _loader: LoadingController,
     private _auth: AuthProvider,
@@ -28,7 +30,9 @@ export class LibraryPage {
       spinner: "bubbles",
       content: "Loading Videos..."
     });
-    this.url = this.navParams.data;
+    this.url = this.navParams.get('url');
+    this.subject = this.navParams.get('subject');
+    this.type = this.navParams.get('type');
     loader.present();
     this._video.loadVideos(this.url).then(snapshot => {
       //let sets: Videos[]  = snapshot;
