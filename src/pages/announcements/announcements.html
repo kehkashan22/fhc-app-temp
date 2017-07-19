@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar color = "headerColor">
+    <ion-title>Announcements</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+
+<ion-card *ngFor = "let annoucement of announcements" (tap) = "navigateToAnnouncement(annoucement);">
+  <ion-card-header>
+    <h2>{{annoucement.title}}</h2>
+  </ion-card-header>
+  <ion-card-content>
+    <h3>{{annoucement.message}}</h3>
+    <p>{{annoucement.date | amTimeAgo}}</p>
+  </ion-card-content>
+</ion-card>
+</ion-content>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalsProvider {
-  firebase_url: string = 'https://ionic-fhc-app.firebaseio.com/';
+  firebase_url: string = 'https://fhc-ionic-app.firebaseio.com/';
   courses: ['ca', 'cs'];
   caCollection = [
     {

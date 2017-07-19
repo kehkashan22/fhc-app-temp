@@ -13,8 +13,11 @@ import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
 
-import {Md5} from 'ts-md5/dist/md5';
+import * as sha1  from 'sha1';
+
 import { HomePage } from "../home/home";
+
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -60,7 +63,7 @@ export class LoginWithEmailPage {
     /* Building user */
     let loginUserData = {
       emailId: this.loginForm.value.emailId,
-      password: Md5.hashStr(this.loginForm.value.password)
+      password: sha1(this.loginForm.value.password)
     };
 
      /* Loader */
@@ -78,12 +81,14 @@ export class LoginWithEmailPage {
         this._logger.log("Successfully logged in ");
 
         /* Navigate to Home Component */
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot('HomePage');
+
+       
 
       }else{
 
           const alert = this.alertCtrl.create({
-          title: 'Email not verified',
+          title: 'EMAIL NOT VERIFIED',
           message: "Please verify your email address",
           buttons: ['Ok']
 
@@ -109,4 +114,6 @@ export class LoginWithEmailPage {
   forgotPassword(){
     this.navCtrl.push('ForgetPasswordPage');
   }
+
+  
 }
