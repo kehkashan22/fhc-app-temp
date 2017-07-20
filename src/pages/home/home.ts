@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-declare var FCMPlugin;
+//declare var FCMPlugin;
 
 @IonicPage()
 @Component({
@@ -33,7 +33,9 @@ export class HomePage {
   imgType = ".jpeg";
   userData: User;
 
-  fireStore = firebase.database().ref("/pushtokens");
+  diff: number = 0;
+
+//  fireStore = firebase.database().ref("/pushtokens");
 
   slides:any[]=[
               {url: this.imgPath + "slide1.jpg", text: "Test Slide1"},
@@ -54,9 +56,9 @@ export class HomePage {
                private app : App,
                private afd: AngularFireDatabase           
     ){
-         this.tokenSetup().then((token) => {
-          this.storeToken(token);
-        });              
+      //   this.tokenSetup().then((token) => {
+     //     this.storeToken(token);
+    //    });              
   }
 
   ngOnInit() {
@@ -78,7 +80,7 @@ export class HomePage {
             this.events.publish('user:created', this.userData);
        });
     });
-    FCMPlugin.onNotification((data) => {
+ /*   FCMPlugin.onNotification((data) => {
       
       if(data.wasTapped){
         var self = this;
@@ -92,7 +94,7 @@ export class HomePage {
     FCMPlugin.onTokenRefresh((token) => {
       this.storeToken(token);
     });
-
+*/
   }
 
   onPageWillEnter(){
@@ -104,7 +106,11 @@ export class HomePage {
     this.navCtrl.push('AnnouncementsPage');
   }
 
-  storeToken(token){
+  emittedDifference(difference: number){
+    console.log('Difference in home page',difference);
+  }
+
+ /* storeToken(token){
     this.fireStore.child(firebase.auth().currentUser.uid).set({
       uid: firebase.auth().currentUser.uid,
       devToken: token
@@ -124,5 +130,5 @@ export class HomePage {
       
     });
     return promise;
-  }
+  }*/
 }
