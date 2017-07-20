@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, Platform, AlertCo
 
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 declare var cordova: any;
 
@@ -17,22 +18,23 @@ export class AnnouncementsDetailPage {
 
   storageDirectory: string = '';
 
-  fileTransfer: TransferObject = this.transfer.create();
-
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
+  constructor(private navCtrl: NavController, 
+              private navParams: NavParams,
               private transfer: Transfer, 
               private file: File,
               private toast: ToastController,
-              public platform: Platform,
-              public alertCtrl: AlertController,) {
+              private platform: Platform,
+              private alertCtrl: AlertController,
+              private localNotifications: LocalNotifications
+              
+      ) {
     // getting the passed parameters
     this.announcementDetail = this.navParams.get('announcements');
     console.log(this.announcementDetail);  
     
     // defining storage directory
     this.platform.ready().then(() => {
-      // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
+      
       if(!this.platform.is('cordova')) {
         return false;
       }
@@ -43,7 +45,6 @@ export class AnnouncementsDetailPage {
         this.storageDirectory = cordova.file.externalDataDirectory;
       }
       else {
-        // exit otherwise, but you could add further types here e.g. Windows
         return false;
       }
     });
@@ -60,26 +61,22 @@ export class AnnouncementsDetailPage {
     console.log(fileName);
     
     fileTransfer.download(url, this.storageDirectory  + fileName).then((entry) => {
-        let t = this.toast.create({
-          message: 'Downloading started...',
-          duration: 2000
-        }).present();
-
+        let notification;
         if (entry) {
-            console.log('download complete: ' + entry.toURL());
-            this.toast.create({
-              message: 'Downloading completed',
-              duration: 2000
-            }).present(); 
-            
-            /*let alert = this.alertCtrl.create({
-                title: 'Downloaded Successfully',
-                message: 'successfully downloaded at '+entry.toURL(),
-                buttons: [{
-                    text: 'Ok',
-                }]
-            });
-            alert.present();*/
+          notification = {
+            title: 'Download Complete!',
+            text: 'Location: Android/data/io.ionic.starter/files '
+          }
+          this.localNotifications.schedule(notification);
+          
+          /*let alert = this.alertCtrl.create({
+              title: 'Downloaded Successfully',
+              message: 'successfully downloaded at '+entry.toURL(),
+              buttons: [{
+                  text: 'Ok',
+              }]
+          });
+          alert.present();*/
         }
         else {
             let alert = this.alertCtrl.create({

@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
@@ -10,7 +10,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class AnnouncementsPage {
   
   private announcements: Array<any> = [];
-  private  old: Array<any> = [];
+  
   private difference: number;
 
   @Output() emittedValue: EventEmitter<any> = new EventEmitter<any>();
@@ -18,13 +18,18 @@ export class AnnouncementsPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private afd: AngularFireDatabase,
-              private loadingCtrl: LoadingController
+              private loadingCtrl: LoadingController,
+              private events: Events
               
   ) {
-    
+    this.getAnnouncements();
   }
   ionViewDidLoad(){
-    let loader = this.loadingCtrl.create({
+    
+  }
+
+getAnnouncements(){
+  let loader = this.loadingCtrl.create({
       content: 'Loading...',
       spinner: 'bubbles'
     });
@@ -37,7 +42,10 @@ export class AnnouncementsPage {
       }
     }).subscribe(data => {
       this.difference = data.length - this.announcements.length;
+      
+      //publishing the data
       this.emittedValue.emit(this.difference);
+
       data = data.reverse();
       this.announcements = data;
       
@@ -47,7 +55,8 @@ export class AnnouncementsPage {
       loader.dismiss();  
     });
 
-  }
+}
+    
   navigateToAnnouncement(announcement){
     this.navCtrl.push('AnnouncementsDetailPage', {
       announcements: announcement
