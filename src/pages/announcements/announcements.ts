@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
@@ -11,15 +11,10 @@ export class AnnouncementsPage {
   
   private announcements: Array<any> = [];
   
-  private difference: number;
-
-  @Output() emittedValue: EventEmitter<any> = new EventEmitter<any>();
-
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private afd: AngularFireDatabase,
               private loadingCtrl: LoadingController,
-              private events: Events
               
   ) {
     this.getAnnouncements();
@@ -41,28 +36,14 @@ getAnnouncements(){
         orderByChild: 'date'
       }
     }).subscribe(data => {
-      this.difference = data.length - this.announcements.length;
-      
-      //publishing the data
-      this.emittedValue.emit(this.difference);
-
       data = data.reverse();
       this.announcements = data;
-      
-      
-      console.log('Difference in announcements',this.difference);
-      
       loader.dismiss();  
     });
-
 }
-    
   navigateToAnnouncement(announcement){
     this.navCtrl.push('AnnouncementsDetailPage', {
       announcements: announcement
     });
   }
-  
-  
-
 }

@@ -5,10 +5,10 @@ import { UserProvider } from './../../providers/user';
 import { QuizService } from './../../providers/quiz';
 import { VideosService } from './../../providers/fav-videos';
 import { VideosProvider } from './../../providers/videos';
-import { Component,  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
-
+import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -56,7 +56,8 @@ export class HomePage {
                private authProvider : AuthProvider,
                private loader : LoadingController,
                private app : App,
-               private afd: AngularFireDatabase           
+               private afd: AngularFireDatabase,
+               private storage: Storage           
     ){
         this.tokenSetup().then((token) => {
           this.storeToken(token);
@@ -119,7 +120,7 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-      alert('Token Stored');
+      console.log('Token stored');
     }).catch((err) => {
       alert(err);
     });
