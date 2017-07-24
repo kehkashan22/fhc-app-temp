@@ -9,19 +9,22 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class AnnouncementsPage {
   
-  announcements: Array<any>;
-
+  private announcements: Array<any> = [];
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private afd: AngularFireDatabase,
-              private loadingCtrl: LoadingController
+              private loadingCtrl: LoadingController,
               
   ) {
-    
+    this.getAnnouncements();
   }
   ionViewDidLoad(){
-    let loader = this.loadingCtrl.create({
+    
+  }
+
+getAnnouncements(){
+  let loader = this.loadingCtrl.create({
       content: 'Loading...',
       spinner: 'bubbles'
     });
@@ -37,14 +40,10 @@ export class AnnouncementsPage {
       this.announcements = data;
       loader.dismiss();  
     });
-
-  }
+}
   navigateToAnnouncement(announcement){
     this.navCtrl.push('AnnouncementsDetailPage', {
       announcements: announcement
     });
   }
-  
-  
-
 }
