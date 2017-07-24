@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { AnnouncementsDetailPage } from './announcements-detail';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { AnnouncementsDetailPage } from './announcements-detail';
   ],
   exports: [
     AnnouncementsDetailPage
-  ]
+  ],
+  providers: [ LocalNotifications ]
 })
 export class AnnouncementsDetailPageModule {}

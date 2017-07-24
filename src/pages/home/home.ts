@@ -5,10 +5,10 @@ import { UserProvider } from './../../providers/user';
 import { QuizService } from './../../providers/quiz';
 import { VideosService } from './../../providers/fav-videos';
 import { VideosProvider } from './../../providers/videos';
-import { Component,  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
-
+import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -33,6 +33,10 @@ export class HomePage {
   imgType = ".jpeg";
   userData: User;
 
+  diff: number = 0;
+
+  announcements: Array<any> = [];
+
   fireStore = firebase.database().ref("/pushtokens");
 
   slides:any[]=[
@@ -52,9 +56,10 @@ export class HomePage {
                private authProvider : AuthProvider,
                private loader : LoadingController,
                private app : App,
-               private afd: AngularFireDatabase           
+               private afd: AngularFireDatabase,
+               private storage: Storage           
     ){
-         this.tokenSetup().then((token) => {
+        this.tokenSetup().then((token) => {
           this.storeToken(token);
         });              
   }
@@ -102,6 +107,12 @@ export class HomePage {
 
   navigateToAnnouncements(){
     this.navCtrl.push('AnnouncementsPage');
+    this.diff = 0;
+  }
+
+  emittedDifference(difference: number){
+    console.log('Difference in home page',difference);
+    this.diff = difference;
   }
 
   storeToken(token){
@@ -109,7 +120,7 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-      alert('Token Stored');
+      console.log('Token stored');
     }).catch((err) => {
       alert(err);
     });

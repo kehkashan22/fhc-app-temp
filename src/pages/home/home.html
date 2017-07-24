@@ -10,9 +10,11 @@
       Farooq Haque Classes
     </ion-title>
     <ion-buttons end>
-      <button ion-button (tap) = "navigateToAnnouncements()">
-        <ion-icon name="notifications"></ion-icon>
-      </button>
+      <button id="notification-button" ion-button clear (tap) = "navigateToAnnouncements()">
+        <ion-icon name="notifications">
+          <ion-badge id="notifications-badge" color="danger"> 2 </ion-badge>
+        </ion-icon>              
+    </button>
     </ion-buttons>
   </ion-navbar>
 
