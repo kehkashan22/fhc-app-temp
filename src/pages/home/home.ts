@@ -76,14 +76,15 @@ export class HomePage {
     });
     if(!this.userData){
       loader.present();
-    }
-
-    this.userProvider.getUser().then((data: User) => {
+      this.userProvider.getUser().then((data: User) => {
            this.userData = data;
            //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
             this.events.publish('user:created', this.userData);
 
       });
+    }
+
+
 
     FCMPlugin.onNotification((data) => {
 
