@@ -8,7 +8,6 @@ import { VideosProvider } from './../../providers/videos';
 import { Component  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
-import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
