@@ -1,3 +1,4 @@
+import { ConcatPipe } from './concat';
 import { TitlecasePipe } from './titlecase';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
@@ -8,14 +9,16 @@ import { SortByDatePipe } from './sortByDate.pipe';
   declarations: [
       YoutubePipe,
       TitlecasePipe,
-      SortByDatePipe
+      SortByDatePipe,
+      ConcatPipe
   ],
   imports: [
   ],
   exports: [
       YoutubePipe,
       TitlecasePipe,
-      SortByDatePipe
+      SortByDatePipe,
+      ConcatPipe
   ]
 })
 export class PipesModule {}

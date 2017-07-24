@@ -71,27 +71,28 @@ export class HomePage {
   ionViewDidLoad(){
     const loader = this._loader.create({
       spinner: "bubbles",
-      content: "Loading..."
+      content:'Please wait while we finish loading...',
+      duration: 3000
     });
     if(!this.userData){
       loader.present();
     }
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.userProvider.getUser(token).subscribe((data) => {
+
+    this.userProvider.getUser().then((data: User) => {
            this.userData = data;
            //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
             this.events.publish('user:created', this.userData);
-            loader.dismiss();
-       });
-    });
+
+      });
+
     FCMPlugin.onNotification((data) => {
 
       if(data.wasTapped){
-        var self = this;
+        const self = this;
         //self.navCtrl.setRoot('Home');
         self.navCtrl.setRoot('AnnouncementsPage');
       }else{
-        alert( JSON.stringify(data) );
+        //alert( JSON.stringify(data) );
       }
     });
 
@@ -107,11 +108,7 @@ export class HomePage {
   }
 
   toAnalysisPage(){
-      this.navCtrl.push(this.analyseMePage, {
-        // analysisBy: 'subject',
-        // analysisId: 'dt'
-        subjectId: 'dt'
-      });
+      this.navCtrl.push(this.analyseMePage);
     }
 
   navigateToAnnouncements(){
@@ -123,7 +120,7 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-      alert('Token Stored');
+      //alert('Token Stored');
     }).catch((err) => {
       alert(err);
     });

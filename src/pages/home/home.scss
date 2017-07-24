@@ -27,13 +27,6 @@ page-home {
       height: 200px;
     }
 
-    // .slide-title{
-    //   font-size: 1.0em;
-    //   position: absolute;
-    //   top: 52%;
-    //   width: 100%;
-    //   color: #fff;
-    // }
 
   }
 
@@ -69,18 +62,26 @@ page-home {
 
   }
 
-   .background{
-     background: map-get($colors, backgroundColor) no-repeat;
-     background-size: cover;
-   }
-
-  // .scroll-content {
-  //           background-color: map-get($colors, light);
-  //       }
-
   .iconic{
     width: 33%;
     height: 100px;
   }
+
+  #notification-button {
+            position: relative;
+            width: 42px;
+            top:1px;
+            right: 1px;
+            overflow: visible!important;
+        }
+
+
+   #notifications-badge {
+            background-color: #EF476F;
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            border-radius: 100%;
+        }
 
 }

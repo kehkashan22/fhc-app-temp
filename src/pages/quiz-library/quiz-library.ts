@@ -69,7 +69,7 @@ export class QuizLibraryPage implements OnInit {
   }
 
   toChapters(course, stage, subject, subjectId, fa) {
-    const url = '/quiz-lib3/'+course+'/'+stage+'/'+subjectId+'/'+fa;
+    const url = '/quiz-library/'+course+'/'+stage+'/'+subjectId+'/'+fa;
     let data = {
       course: course,
       stage: stage,

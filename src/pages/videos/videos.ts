@@ -1,7 +1,7 @@
 import { Videos } from './../../data/videos.interface';
 import { VideosService } from '../../providers/fav-videos';
 import { Video } from './../../data/video.interface';
-
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'
 import { Component} from '@angular/core';
 import { AlertController, IonicPage, NavParams } from 'ionic-angular';
 
@@ -16,7 +16,8 @@ export class VideosPage{
   constructor(
     private navParams: NavParams,
     private alertCtrl: AlertController,
-    private videosService: VideosService) {}
+    private videosService: VideosService,
+  private youtube: YoutubeVideoPlayer) {}
 
   ionViewDidLoad() {
     this.videoGroup = this.navParams.data;
@@ -76,6 +77,10 @@ export class VideosPage{
 
   isFavorite(video: Video) {
     return this.videosService.isVideoFavorite(video);
+  }
+
+  openVideo(id){
+    this.youtube.openVideo(id);
   }
 
 }

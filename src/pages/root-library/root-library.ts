@@ -52,7 +52,7 @@ export class RootLibraryPage {
     if(type==="case laws"){
       type = 'case_laws';
     }
-    const url = '/vid-lib2/'+course+'/'+stage+'/'+subject+'/'+type;
+    const url = '/video-library/'+course+'/'+stage+'/'+subject+'/'+type;
     console.log(url);
     this.navCtrl.push(this.library, {
         url: url,

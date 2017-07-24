@@ -1,3 +1,5 @@
+import { User } from './../../data/user.interface';
+import { Md5 } from 'ts-md5/dist/md5';
 import { LoadingController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
 import * as sha1  from 'sha1';
@@ -32,16 +34,15 @@ export class ProfilePage {
       content: "Loading Profile..."
     });
     loader.present();
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.userProvider.getUser(token).subscribe((data) => {
+      this.userProvider.getUser().then((data: User) => {
         this.fullname = data.fullName;
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
-          sha1(this.email.toLowerCase());
+          Md5.hashStr(this.email.toLowerCase());
+          loader.dismiss();
       });
-      loader.dismiss();
-    });
+
 
   }
 
