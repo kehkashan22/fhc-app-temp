@@ -1,6 +1,6 @@
-<ion-header color="headerColor">
+<ion-header>
 
-  <ion-navbar color="headerColor">
+  <ion-navbar>
     <ion-title>{{videoGroup?.setId | titlecase}}</ion-title>
   </ion-navbar>
 
@@ -23,7 +23,7 @@
       <ion-row>
         <ion-col text-right>
           <ion-chip (click)="onAddToFavorites(video)" *ngIf="!isFavorite(video)">
-            <ion-icon name="heart" color="btn-login"></ion-icon>
+            <ion-icon name="heart" color="btn"></ion-icon>
             <ion-label>Favourite</ion-label>
           </ion-chip>
 

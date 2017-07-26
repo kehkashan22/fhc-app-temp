@@ -1,6 +1,6 @@
 page-chapters {
    @import "../../assets/scss/_nothing.scss";
-   $color: map-get($colors, backgroundColor);
+   $color: map-get($colors, bg);
    .scroll-content{
       background-color: $color;
     }

@@ -8,7 +8,7 @@
         text-align: center;
         background-color: map-get($colors, light);
         border: 1px solid #dcdcdc;
-        color: map-get($colors, backgroundColor);
+        color: map-get($colors, bg);
         border-radius: 20px;
     }
 
@@ -18,7 +18,7 @@
         overflow: hidden;
         //padding: 5px;
         border-radius: 20px;
-        background-color: map-get($colors, btn-login);
+        background-color: map-get($colors, btn);
     }
 
 }

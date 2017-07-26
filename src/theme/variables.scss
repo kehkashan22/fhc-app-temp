@@ -24,14 +24,13 @@ $font-path: "../assets/fonts";
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #005C9C,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  btn-login: #222E50,
-  headerColor: #005C9C,
-  backgroundColor: #E6E6EA,
+  btn:        #222E50,
+  bg:       #E6E6EA,
   chapterA: #0A2463,
   chapterB: #FB3640,
   chapterC: #605F5E
@@ -65,7 +64,10 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-
+$toolbar-background: map-get($colors, primary);
+$toolbar-active-color:                 #fff;
+$toolbar-inactive-color:               #fff;
+$segment-button-text-color-activated:  #fff;
 @import "ionic.theme.default";
 
 

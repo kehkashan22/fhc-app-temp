@@ -81,6 +81,7 @@ export class MyApp {
       { title: 'Home', component: this.homePage, icon: 'home'},
       { title: 'Video Library', component: 'RootLibraryPage', icon: 'book'},
       { title: 'Starred Videos', component: 'StarredPage', icon: 'star'},
+      { title: 'Quiz Library', component: 'QuizLibraryPage', icon: 'school'},
        { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications'},
       { title: 'Store', component: 'store', icon: 'cart'},
       { title: 'Contact Us', component: 'ContactPage', icon: 'help-circle'},
@@ -109,7 +110,7 @@ export class MyApp {
   }
 
   goToStore() {
-    this.iab.create('http://www.fhconline.in/');
+    this.iab.create('http://www.fhconline.in/', "_system", "location=yes");
   }
 
   logout() {
