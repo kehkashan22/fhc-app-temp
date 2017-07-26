@@ -9,6 +9,12 @@ import { Component,  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App, NavParams } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
+import firebase from 'firebase';
+
+import { AngularFireDatabase } from 'angularfire2/database';
+
+declare var FCMPlugin;
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -27,6 +33,8 @@ export class HomePage {
   imgPath = "https://s3-ap-southeast-1.amazonaws.com/fhc.app/";
   imgType = ".jpeg";
   userData: User;
+
+  fireStore = firebase.database().ref("/pushtokens");
 
   slides:any[]=[
               {url: this.imgPath + "slides4.jpg", text: "Test Slide1"},
@@ -69,6 +77,18 @@ export class HomePage {
             this.events.publish('user:created', this.userData);
             loader.dismiss();
        });
+    });
+    FCMPlugin.onNotification((data) => {
+      
+      if(data.wasTapped){
+        this.navCtrl.push('AnnouncementsPage');
+      }else{
+        alert( JSON.stringify(data) );
+      }
+    });
+
+    FCMPlugin.onTokenRefresh((token) => {
+      alert(token);
     });
 
   }

@@ -70,7 +70,7 @@
     <ion-input type="number" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
   </ion-item>
   <ion-item *ngIf = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)" >
-    <p>Please enter pincode</p>
+    <p>Please enter attempt number</p>
   </ion-item>
 
   <ion-item>

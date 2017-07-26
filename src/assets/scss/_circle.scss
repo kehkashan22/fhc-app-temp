@@ -1,7 +1,19 @@
+<<<<<<< HEAD
+=======
+/****************************************************************
+ *
+ * CSS Percentage Circle
+ * Author: Andre Firchow
+ *
+*****************************************************************/
+
+
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
 // Compass utilities
 @import "../../../node_modules/compass-mixins/lib/compass";
 @import "../../../node_modules/compass-sass-mixins/lib/compass";
 
+<<<<<<< HEAD
 // VARS
 $circle-width: 0.02em;
 $circle-width-hover: 0.02em;
@@ -10,6 +22,17 @@ $circle-width-hover: 0.02em;
 $primary-color: #F44858;
 $secondary-color: #2c2c34;
 $bg-color: #737474;
+=======
+
+// VARS
+$circle-width: 0.04em;
+$circle-width-hover: 0.08em;
+
+// colors default
+$primary-color: #307bbb;
+$secondary-color: #ccc;
+$bg-color: #f5f5f5;
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
 
 $primary-color-green: #4db53c;
 $primary-color-orange: #dd9d22;
@@ -55,7 +78,11 @@ $primary-color-orange-dark: #e08833;
 	}
 
 	position: relative;
+<<<<<<< HEAD
 	font-size: 175px;
+=======
+	font-size: 120px;
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
 	width: 1em;
 	height: 1em;
 	border-radius: 50%;
@@ -91,10 +118,16 @@ $primary-color-orange-dark: #e08833;
 		// font-size: 0.2em;
 		// color: $secondary-color;
     width: 3.33em;
+<<<<<<< HEAD
     line-height: 3.33em;
     font-size: 0.3em;
     font-family: 'sans-serif-thin';
     color: map-get($colors, light);
+=======
+			line-height: 3.33em;
+			font-size: 0.3em;
+			color: $primary-color;
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
 		display: block;
 		text-align: center;
 		white-space: nowrap;
@@ -157,6 +190,7 @@ $primary-color-orange-dark: #e08833;
 		&.p#{$j} .bar {
 			@include rotate((360/100*$j) + deg);
 		}
+<<<<<<< HEAD
   }
 
   &.green{
@@ -202,3 +236,82 @@ $primary-color-orange-dark: #e08833;
 		}
 
 }
+=======
+	}
+
+	// // override colors for the dark skin
+	// &.dark {
+
+	// 	background-color: $secondary-color-dark;
+
+	// 	.bar,
+	// 	.fill{
+	// 		border-color: $primary-color-dark !important;
+	// 	}
+
+	// 	> span {
+	// 		color: $secondary-color-dark;
+	// 	}
+
+
+	// 	&:after{
+	// 		background-color: $bg-color-dark;
+	// 	}
+
+	// 	&:hover{
+
+	// 		> span {
+	// 			color: $primary-color-dark;
+	// 		}
+
+	// 	}
+
+	// }
+
+
+	// // green skin
+	// &.green{
+
+	// 	.bar, .fill { border-color: $primary-color-green !important;}
+
+	// 	&:hover{
+	// 		> span { color: $primary-color-green;}
+	// 	}
+
+	// }
+
+	// 	&.green.dark{
+
+	// 		.bar, .fill { border-color: $primary-color-green-dark !important;}
+
+	// 		&:hover{
+	// 			> span { color: $primary-color-green-dark;}
+	// 		}
+
+	// 	}
+
+
+	// // orange skin
+	// &.orange{
+
+	// 	.bar, .fill { border-color: $primary-color-orange !important;}
+
+	// 	&:hover{
+	// 		> span { color: $primary-color-orange;}
+	// 	}
+
+	// }
+
+	// 	&.orange.dark{
+
+	// 		.bar, .fill { border-color: $primary-color-orange-dark !important;}
+
+	// 		&:hover{
+	// 			> span { color: $primary-color-orange-dark;}
+	// 		}
+
+	// 	}
+
+
+}
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae

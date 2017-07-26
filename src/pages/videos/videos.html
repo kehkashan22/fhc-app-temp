@@ -1,7 +1,11 @@
 <ion-header color="headerColor">
 
   <ion-navbar color="headerColor">
+<<<<<<< HEAD
     <ion-title>{{videoGroup?.setId | titlecase}}</ion-title>
+=======
+    <ion-title>{{videoGroup?.setId | uppercase}}</ion-title>
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
   </ion-navbar>
 
 </ion-header>
@@ -9,8 +13,13 @@
 
 <ion-content class="card-background-page background" scroll="false">
   <ion-card *ngFor="let video of videoGroup?.videos; let i = index">
+<<<<<<< HEAD
     <ion-card-header text-wrap>
       {{ video.text | titlecase}}
+=======
+    <ion-card-header>
+      {{ video.text }}
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
     </ion-card-header>
     <ion-card-content>
       <iframe width="100%" height="250" [src]="video.url | youtube" frameborder="0" allowfullscreen>

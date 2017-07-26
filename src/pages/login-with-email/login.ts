@@ -15,6 +15,9 @@ import { AuthProvider } from '../../providers/auth';
 
 import {Md5} from 'ts-md5/dist/md5';
 import { HomePage } from "../home/home";
+
+declare var FCMPlugin;
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -78,12 +81,14 @@ export class LoginWithEmailPage {
         this._logger.log("Successfully logged in ");
 
         /* Navigate to Home Component */
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot('HomePage');
+
+       
 
       }else{
 
           const alert = this.alertCtrl.create({
-          title: 'Email not verified',
+          title: 'EMAIL NOT VERIFIED',
           message: "Please verify your email address",
           buttons: ['Ok']
 
@@ -109,4 +114,6 @@ export class LoginWithEmailPage {
   forgotPassword(){
     this.navCtrl.push('ForgetPasswordPage');
   }
+
+  
 }

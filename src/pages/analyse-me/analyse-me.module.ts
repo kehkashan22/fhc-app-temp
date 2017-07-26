@@ -20,7 +20,10 @@ import {VgBufferingModule} from 'videogular2/buffering';
     VgOverlayPlayModule,
     VgBufferingModule,
     IonicPageModule.forChild(AnalyseMePage),
+<<<<<<< HEAD
     PipesModule
+=======
+>>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
   ],
   exports: [
     AnalyseMePage

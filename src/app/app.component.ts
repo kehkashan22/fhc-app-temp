@@ -1,4 +1,3 @@
-import { HomePage } from './../pages/home/home';
 import { LoadingController, App } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { UserProvider } from './../providers/user';
@@ -10,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AuthProvider } from "../providers/auth";
+
+import firebase from 'firebase';
 
 declare var FCMPlugin;
 
@@ -24,7 +25,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  homePage = HomePage;
+  homePage = 'HomePage';
   profilePage = 'ProfilePage';
   settingsPage = 'SettingsPage';
   starredPage = 'StarredPage';
@@ -61,7 +62,7 @@ export class MyApp {
       const authObserver = afAuth.authState.subscribe(user => {
         this.zone.run(() => {
           if (user) {
-            this.rootPage = HomePage;
+            this.rootPage = 'HomePage';
             authObserver.unsubscribe();
           } else {
             this.rootPage = 'LoginWithEmailPage';
@@ -73,10 +74,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByHexString('#005C9C');
       splashScreen.hide();
+      
+  
     });
 
     this.pages = [
-      { title: 'Home', component: HomePage, icon: 'home'},
+      { title: 'Home', component: 'HomePage', icon: 'home'},
       { title: 'Video Library', component: 'RootLibraryPage', icon: 'book'},
       { title: 'Starred Videos', component: 'StarredPage', icon: 'star'},
       { title: 'Store', component: 'store', icon: 'cart'},
@@ -110,12 +113,16 @@ export class MyApp {
   }
 
   logout() {
+
     const loading = this.loader.create({
       spinner: 'bubbles',
       content: 'Signing you out...'
     });
     loading.present();
+    firebase.database().ref('/pushTokens').child(firebase.auth().currentUser.uid).remove();
+
     this.authProvider.logout().then(() => {
+      
       setTimeout(() => {
         loading.dismiss();
       }, 3000);
@@ -125,7 +132,8 @@ export class MyApp {
       }, 3000);
 
     });
-
   }
+
+  
 }
 

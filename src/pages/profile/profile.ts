@@ -3,7 +3,7 @@ import { AuthProvider } from './../../providers/auth';
 import { Md5 } from 'ts-md5/dist/md5';
 import { UserProvider } from './../../providers/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Events } from 'ionic-angular';
+import { IonicPage, NavController, Events, ModalController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
