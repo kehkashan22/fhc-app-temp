@@ -34,9 +34,14 @@ $colors: (
   backgroundColor: #E6E6EA,
   chapterA: #0A2463,
   chapterB: #FB3640,
-  chapterC: #605F5E
+  chapterC: #605F5E,
+  icons: #757780
 );
 
+$popover-md-width: 100%;
+$popover-md-height: 100%;
+$popover-ios-width: 320px;
+$popover-wp-width: 320px;
 
 // App iOS Variables
 // --------------------------------------------------

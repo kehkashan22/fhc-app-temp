@@ -10,8 +10,44 @@
   </ion-navbar>
 
 </ion-header>
-
-
-<ion-content padding>
-
+<ion-content class="card-background-page">
+  <div class="main-head">
+    <img src="assets/images/fhc1.png" alt="">
+  </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <div class="box" tappable (click)="openModal(1)">
+             <button ion-button  icon-only clear large color="dark">
+               <ion-icon ios="ios-contact" md="md-contact" color="icons"></ion-icon>
+            </button>
+            <p>About FHC</p>
+          </div>
+        </ion-col>
+        <ion-col col-6>
+          <div class="box" tappable (click)="openModal(2)">
+             <button ion-button icon-only clear large color="dark">
+               <ion-icon ios="ios-bookmarks" md="md-bookmarks" color="icons"></ion-icon>
+            </button>
+            <p>Farooq Haque</p>
+          </div>
+        </ion-col>
+        <ion-col col-6>
+          <div class="box" >
+             <button ion-button icon-only clear large color="dark">
+               <ion-icon ios="ios-chatbubbles" md="md-chatbubbles" color="icons"></ion-icon>
+            </button>
+            <p>Contact</p>
+          </div>
+        </ion-col>
+        <ion-col col-6>
+          <div class="box" tappable (click)="openModal(3)">
+             <button ion-button icon-only clear large color="dark">
+               <ion-icon ios="ios-create" md="md-create" color="icons"></ion-icon>
+            </button>
+            <p>Terms & Condition</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
