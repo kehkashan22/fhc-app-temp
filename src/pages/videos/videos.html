@@ -1,7 +1,9 @@
 <ion-header>
 
+
   <ion-navbar>
     <ion-title>{{videoGroup?.setId | titlecase}}</ion-title>
+
   </ion-navbar>
 
 </ion-header>
@@ -9,6 +11,7 @@
 
 <ion-content class="card-background-page background" scroll="false">
   <ion-card *ngFor="let video of videoGroup?.videos; let i = index">
+
     <ion-card-header text-wrap>
       {{ video.text | titlecase}}
     </ion-card-header>

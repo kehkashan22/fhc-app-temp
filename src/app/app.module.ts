@@ -36,9 +36,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalsProvider } from '../providers/globals/globals';
 
+
 /* For Downloading files*/
 import { Transfer  } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+
 
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
@@ -92,6 +94,7 @@ const firebaseConfig = {
     Transfer,
     File,
     YoutubeVideoPlayer
+
   ]
 })
 export class AppModule {}

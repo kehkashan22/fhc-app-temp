@@ -1,5 +1,6 @@
 export default [
   {
+
     quizzes: [{
       video: 'http://static.videogular.com/assets/videos/videogular.mp4',
       questions: [
