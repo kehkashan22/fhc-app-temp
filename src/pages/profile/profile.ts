@@ -1,6 +1,8 @@
+import { User } from './../../data/user.interface';
+import { Md5 } from 'ts-md5/dist/md5';
 import { LoadingController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
-import { Md5 } from 'ts-md5/dist/md5';
+import * as sha1  from 'sha1';
 import { UserProvider } from './../../providers/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Events, ModalController } from 'ionic-angular';
@@ -19,10 +21,12 @@ export class ProfilePage {
   phone = '';
   profilePicture: any = '';
   constructor(private navCtrl: NavController,
-    private userProvider: UserProvider,
-    private events: Events,
-    private authProvider: AuthProvider,
-    private _loader: LoadingController) { }
+              private userProvider: UserProvider,
+              private events: Events,
+              private authProvider: AuthProvider,
+              private modalCtrl: ModalController,
+              private _loader: LoadingController
+  ) { }
 
   ionViewWillEnter(): void {
     const loader = this._loader.create({
@@ -30,16 +34,15 @@ export class ProfilePage {
       content: "Loading Profile..."
     });
     loader.present();
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.userProvider.getUser(token).subscribe((data) => {
+      this.userProvider.getUser().then((data: User) => {
         this.fullname = data.fullName;
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
           Md5.hashStr(this.email.toLowerCase());
+          loader.dismiss();
       });
-      loader.dismiss();
-    });
+
 
   }
 
@@ -48,8 +51,11 @@ export class ProfilePage {
       .catch((error) => console.log('Access denied, Argument was ' + error));
   }
 
-  showSubjectsModal(){
-
+  editProfile(){
+    //let updateModal = this.modalCtrl.create('EditProfilePage');
+    //updateModal.present();
+    this.navCtrl.push('EditProfilePage');
   }
+
 
 }

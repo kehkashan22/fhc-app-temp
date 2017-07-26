@@ -1,5 +1,14 @@
 page-videos {
-  .scroll-content{
-    background: map-get($colors, backgroundColor);
+  .vid{
+    position: relative;
+    .play {
+      position: absolute;
+      top: 36%;
+      left: 38%;
+      align-content: center;
+      text-align: center;
+      width: 100%;
+    }
   }
+
 }

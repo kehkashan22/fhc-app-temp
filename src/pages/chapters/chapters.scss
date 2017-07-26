@@ -1,5 +1,13 @@
 page-chapters {
-<<<<<<< HEAD
+
+   @import "../../assets/scss/_nothing.scss";
+   $color: map-get($colors, bg);
+   .scroll-content{
+      background-color: $color;
+    }
+    ion-col{
+       color: $color;
+    }
     .a{
         background-color: map-get($colors, chapterA);
     }
@@ -11,14 +19,13 @@ page-chapters {
     .c{
       background-color: map-get($colors, chapterC);
     }
-
-    .background{
-      background-color: map-get($colors, backgroundColor);
-    }
     ion-footer{
-      color: map-get($colors, backgroundColor);
+      background-color: $color;
     }
+<<<<<<< HEAD
 =======
 
 >>>>>>> ca17379111e181f3c4907638d9941b169200b0ae
+=======
+>>>>>>> upstream/Kehkashan
 }

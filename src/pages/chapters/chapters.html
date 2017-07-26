@@ -7,12 +7,10 @@
 </ion-header>
 
 
-<ion-content class="background">
+<ion-content scroll="false">
   <ion-searchbar (ionInput)="getChapterByTitle($event)"></ion-searchbar>
-  <ion-list>
-    <button ion-item *ngFor="let chapter of chapters"
-
-    (click) = "toQuizzes(chapter)">
+  <ion-list *ngIf="!nothing; else cat;">
+    <button ion-item *ngFor="let chapter of chapters" (click)="toQuizzes(chapter)">
     <ion-avatar item-start [ngClass]="chapter.chapterType">
 
     </ion-avatar>
@@ -21,24 +19,35 @@
       <p>{{ chapter.quiz.length }} Quizzes</p>
     </button>
   </ion-list>
+ <ng-template #cat>
+  <div class="nothing" ion-fixed no-bounce *ngIf="nothing">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/catbg.png" alt="Sorry Cat">
+  </div>
+ </ng-template>
 </ion-content>
 
-<ion-footer>
-  <button ion-button
-    block outline
-    color="btn-login"
-    (click)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
-  <ion-grid>
-    <ion-row text-center>
-      <ion-col class="a">
-        Most Important
-      </ion-col>
-      <ion-col class="b">
-        Important
-      </ion-col>
-      <ion-col class="c">
-        General
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-footer no-border>
+  <div class="container" *ngIf="nothing; else noChaps;">
+    <h5>
+      No Chapters uploaded yet :(
+    </h5>
+    <p>Why don't you try again after the cat finishes it's song?</p>
+  </div>
+  <ng-template #noChaps>
+    <button ion-button block outline clear color="btn-login" (click)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
+    <ion-grid>
+      <ion-row text-center>
+        <ion-col class="a">
+          Most Important
+        </ion-col>
+        <ion-col class="b">
+          Important
+        </ion-col>
+        <ion-col class="c">
+          General
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
 </ion-footer>

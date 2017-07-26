@@ -1,6 +1,6 @@
-<ion-header no-border color="headerColor">
+<ion-header color="headerColor">
 
-  <ion-navbar no-border color="headerColor">
+  <ion-navbar color="headerColor">
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -9,9 +9,9 @@
     <ion-title>
       Farooq Haque Classes
     </ion-title>
-    <ion-buttons end>
-      <button ion-button (tap) = "navigateToAnnouncements()">
-        <ion-icon name="notifications"></ion-icon>
+    <ion-buttons right>
+      <button id="notification-button" ion-button clear (tap) = "navigateToAnnouncements()">
+        <ion-icon name="notifications"> <ion-badge id="notifications-badge" color="danger">5</ion-badge></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -69,13 +69,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!-- <ion-card (click)="toAnalysisPage()">
-    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/card-saopaolo.jpeg" />
-    <div class="card-title">Analyse Yourself</div>
-    <div class="card-subtitle">
-      Take this simple test to find out where you stand
-    </div>
-  </ion-card> -->
 
 </ion-content>

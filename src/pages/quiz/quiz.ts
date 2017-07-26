@@ -183,11 +183,11 @@ export class QuizPage implements OnInit{
     if (this.percentage < 40) {
       this.review = "Oops!";
       this.subreview = "Maybe you should give it another go?";
-    } else if (this.percentage > 60) {
-      this.review = "Congratulations!";
+    } else if (this.percentage >= 60) {
+      this.review = "Well Done!";
       this.subreview = "You have passed this quiz with flying colors!";
     } else {
-      this.review = "Hmmm...";
+      this.review = "Good Try!";
       this.subreview = "This is the average score for this quiz. Maybe you want to try for a better score?";
     }
     this.answeredQuestion = this.quizCollection[0];
@@ -215,7 +215,7 @@ export class QuizPage implements OnInit{
   private getClassString(per: string) {
     let perInt = +per | 0;
 
-    if(perInt > 60){
+    if(perInt >= 60){
         this.percentClass = 'c100 p' + perInt+ ' green ';
     }else if(perInt < 40){
         this.percentClass = 'c100 p' + perInt;

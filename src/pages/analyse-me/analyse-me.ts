@@ -144,7 +144,6 @@ export class AnalyseMePage implements OnInit {
   }
 
   playVideo() {
-    this.loader.dismiss();
     this.api.play();
   }
 
@@ -152,7 +151,8 @@ export class AnalyseMePage implements OnInit {
     this.api = api;
     this.loader = this._loader.create({
       spinner: 'dots',
-      content: "Loading..."
+      content: "Loading...",
+      duration: 3000
     });
     this.loader.present();
     this.api.getDefaultMedia().subscriptions.loadedMetadata.subscribe(
