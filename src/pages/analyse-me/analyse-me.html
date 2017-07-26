@@ -1,6 +1,6 @@
-<ion-header color="headerColor">
+<ion-header>
 
-  <ion-navbar color="headerColor">
+  <ion-navbar>
     <ion-title>Analyse Yourself!</ion-title>
   </ion-navbar>
 
@@ -10,7 +10,7 @@
 <ion-content scroll="false">
 
   <!--VIDEO HERE-->
-  <div *ngIf="question; else quizEnd" [@myvisibility]="visibleState">
+  <div *ngIf="question; else quizEnd">
     <ng-template #videoTag>
       <vg-player (onPlayerReady)="onPlayerReady($event)">
         <vg-overlay-play></vg-overlay-play>
@@ -34,7 +34,7 @@
           <vg-fullscreen></vg-fullscreen>
         </vg-controls>
 
-        <video [vgMedia]="media" #media [src]= "analysisVideo" id="singleVideo"  preload="auto">
+        <video [vgMedia]="media" #media [src]="analysisVideo" id="singleVideo" preload="auto">
 
         </video>
       </vg-player>
@@ -42,16 +42,33 @@
       <!--QUIZ PORTION-->
     </ng-template>
     <div *ngIf="!video; else videoTag" class="quiz">
-      <ion-card>
-        <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
-      </ion-card>
 
-      <ion-list radio-group mode="ios">
-        <ion-item *ngFor="let answer of currentQuestion?.answers" mode="ios">
-          <ion-label>{{answer.answerKey}}) {{answer.answerText}}</ion-label>
-          <ion-radio [value]="answer" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
-        </ion-item>
-      </ion-list>
+      <ion-slides #slide1>
+        <ion-slide *ngFor="let currentQuestion of quizCollection; let i=index;">
+          <ion-card>
+            <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
+          </ion-card>
+
+          <ion-list radio-group mode="ios">
+            <ion-item *ngFor="let answer of currentQuestion?.answers; let j=index;" mode="ios">
+              <ion-label text-wrap class="quiz">
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-2>
+                    {{answer.answerKey}}.
+                  </ion-col>
+                  <ion-col text-wrap id="answerText">
+                    {{answer.answerText}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </ion-label>
+              <ion-radio [value]="answer" (click)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
     </div>
   </div>
 
@@ -69,6 +86,5 @@
       </ion-card>
       <button ion-button (click)="getExplanation()">Get Explanation</button>
     </div>
-
   </ng-template>
 </ion-content>

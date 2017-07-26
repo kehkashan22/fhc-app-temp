@@ -44,10 +44,8 @@ export class ChaptersPage implements OnInit{
       this._quiz.getQuizLibrary(this.url).then((snapshot) => {
        //let sets: Videos[]  = snapshot;
         if (snapshot){
-          console.log(snapshot);
           this.chapters = snapshot;
           this.tempChapters = this.chapters;
-          console.log(this.chapters.length);
         }
         this.nothing = this.chapters.length > 0 ? false : true;
         loader.dismiss();
@@ -85,6 +83,19 @@ export class ChaptersPage implements OnInit{
     this.navCtrl.push(this.reportCard, {
       subjectId: this.data.subjectId
     });
+  }
+
+  doRefresh(refresher) {
+    this._quiz.getQuizLibrary(this.url).then(snapshot => {
+      //let sets: Videos[]  = snapshot;
+      if (snapshot) {
+        this.chapters = snapshot;
+        this.tempChapters = this.chapters;
+      }
+    });
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
   }
 
 }

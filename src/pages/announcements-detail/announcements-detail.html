@@ -1,6 +1,6 @@
 <ion-header *ngIf = "announcementDetail">
 
-  <ion-navbar color = "headerColor">
+  <ion-navbar>
     <ion-title>Announcement</ion-title>
   </ion-navbar>
 
@@ -8,7 +8,7 @@
 
 
 <ion-content>
-  
+
   <ion-card>
     <ion-card-content>
         <ion-card-title>
@@ -18,7 +18,7 @@
           {{announcementDetail.message}}
         </p>
       </ion-card-content>
-
+      <img src="announcementDetail.img" *ngIf="announcementDetail.img">
       <ion-row no-padding *ngIf="announcementDetail.downloadLink">
         <ion-col text-center>
           <button ion-button clear (tap)="download();">Download</button>

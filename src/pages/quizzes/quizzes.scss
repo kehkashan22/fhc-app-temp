@@ -6,7 +6,7 @@ page-quizzes {
   $ribbon-tail: 10px;
 
   .scroll-content {
-      background-color: map-get($colors, btn-login);
+      background-color: map-get($colors, btn);
   }
   .col{
     padding: 0px !important;
@@ -89,6 +89,6 @@ page-quizzes {
   }
 
   ion-footer{
-    background: map-get($colors, backgroundColor);
+    background: map-get($colors, bg);
   }
 }

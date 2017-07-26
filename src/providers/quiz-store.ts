@@ -1,3 +1,4 @@
+import { AuthProvider } from './auth';
 import { QuizStore } from './../data/quiz/quiz-store.interface';
 import { Injectable } from '@angular/core';
 import { Storage } from "@ionic/storage";
@@ -10,45 +11,15 @@ export class QuizStoreProvider {
 
   private quizCollection: QuizStore[] = [];
 
-  // private quizBySubject:QuizStore[] = [];
-
-  // private quizByChapter: QuizStore[] = [];
-
   constructor(private storage: Storage,
+    private _auth: AuthProvider,
     private toastCtrl: ToastController) { }
-
-  // addQuizAsSolved(quiz: Quizzes) {
-  //   // if (!this.isQuizSolved(quiz)) { //check if quiz does not already exist, then push
-  //     this.quiz.push(_.cloneDeep(quiz));
-  //     this.storage.set('quizzes', this.quiz)
-  //       .then()
-  //       .catch(
-  //       err => {
-  //         this.quiz.splice(this.quiz.indexOf(quiz), 1);
-  //       }
-  //       );
-  //   // }
-
-  // }
-
-  //   removeQuizFromSolved(quizElement: Quizzes) {
-  //   const position = this.quiz.findIndex((quizEl: Quizzes) => {
-  //     return quizEl.quizId === quizElement.quizId;
-  //   });
-  //   this.quiz.splice(position, 1);
-  //   this.storage.set('quizzes', this.quiz)
-  //     .then()
-  //     .catch(
-  //     err => {
-  //       this.quiz.push(quizElement);
-  //     }
-  //     );
-  // }
 
 
   addToQuizCollection(quizStore: QuizStore) {
       this.quizCollection.push(quizStore);
-      this.storage.set('quizCollection', this.quizCollection)
+      const userId = this._auth.getActiveUser().uid;
+    this.storage.set(userId+'/quizCollection', this.quizCollection)
         .then()
         .catch(
         err => {
@@ -62,7 +33,8 @@ export class QuizStoreProvider {
       return (quizStoreEl.quiz.quizId).toLowerCase() === (quizStore.quiz.quizId).toLowerCase();
     });
     this.quizCollection.splice(position, 1);
-    this.storage.set('quizCollection', this.quizCollection)
+    const userId = this._auth.getActiveUser().uid;
+    this.storage.set(userId+'/quizCollection', this.quizCollection)
       .then()
       .catch(
       err => {
@@ -71,10 +43,6 @@ export class QuizStoreProvider {
       );
   }
 
-
-  // getSolvedQuizzes() {
-  //   return _.cloneDeep(this.quiz);
-  // }
 
   getSolvedQuizCollection() { //full array
     return _.cloneDeep(this.quizCollection);
@@ -107,11 +75,7 @@ export class QuizStoreProvider {
     return quizElement.quiz;
   }
 
-  // isQuizSolved(quiz: Quizzes) {
-  //   return this.quiz.find((quizEl: Quizzes) => {
-  //     return quizEl.quizId == quiz.quizId;
-  //   });
-  // }
+
 
   isQuizStoreSolved(quizStore: QuizStore) { //one
     return this.quizCollection.find((quizEl: QuizStore) => {
@@ -119,33 +83,10 @@ export class QuizStoreProvider {
     });
   }
 
-  // loadSolvedQuizzes() {
-  //   this.storage.get('quizzes')
-  //     .then(
-  //     (quizzes: Quizzes[]) => {
-  //       this.quiz = quizzes != null ? quizzes : [];
-  //       console.log(this.quiz);
-  //     }
-  //     )
-  //     .catch(
-  //     err => {
-  //       let toast = this.toastCtrl.create({
-  //         message: 'Could not load list of solved quizzes. Please try again!',
-  //         duration: 3000,
-  //         position: 'middle'
-  //       });
-
-  //       toast.onDidDismiss(() => {
-  //         console.log('Dismissed toast');
-  //       });
-
-  //       toast.present();
-  //     }
-  //     );
-  // }
 
   loadSolvedQuizCollection() {
-    this.storage.get('quizCollection')
+    const userId = this._auth.getActiveUser().uid;
+    this.storage.get(userId+'/quizCollection')
       .then(
       (quizStore: QuizStore[]) => {
         this.quizCollection = quizStore != null ? quizStore : [];
@@ -161,7 +102,7 @@ export class QuizStoreProvider {
         });
 
         toast.onDidDismiss(() => {
-          console.log('Dismissed toast');
+          console.log('Dismissed Toast');
         });
 
         toast.present();

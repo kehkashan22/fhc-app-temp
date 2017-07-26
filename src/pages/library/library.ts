@@ -52,7 +52,6 @@ export class LibraryPage {
     this._video.loadVideos(this.url).then(snapshot => {
       //let sets: Videos[]  = snapshot;
       if (snapshot) {
-        console.log(snapshot);
         this.videoCollection = snapshot;
         this.tempVideos = this.videoCollection;
       }
