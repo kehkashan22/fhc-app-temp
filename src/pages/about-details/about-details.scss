@@ -1,6 +1,8 @@
 page-about-details {
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
     .contact-popover{
-        background: transparent;
+        background: #000;
+        opacity: 0.4;
         
     }
 
@@ -10,18 +12,38 @@ page-about-details {
             padding:10px;
            
         }
+        
     
     .div-text{
-            padding: 20px;
             height: 100%;
             width:auto;
-            border: 3px solid orange;
+            //border: 3px solid orange;
             text-align: justify;
-            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/5908/food.png);
-
+            //background-image: url('../assets/images/aboutpage.png');
+            position: relative;
             color:map-get($colors, light);
             line-height: 30px;
-            font-size: 15px;              
+            font-size: 15px;   
+            img{
+                height: 100%;
+                width: 100%;
+            }  
+            .content{
+            position: absolute;
+            top: 0;
+            height: inherit;
+            width: 100%;
+            padding-left:23px;
+            padding-right: 23px;
+            overflow: scroll;   
+            h1{
+                margin-top:5rem;
+            }
+            .text-area{
+                font-family: 'Open Sans', sans-serif;
+                color:#000;
+            }
+        }         
     }
         button{
             align-items: top right;
@@ -35,112 +57,17 @@ page-about-details {
             background-color: #fff;
             border: 0;
             border-bottom: 1px dashed #ccc;
+            margin:20px;
         }
-        .img-radius{
-            border-radius: 100%;
-            height:161px;
-            width:161px;
-            margin: auto;
-            display: block;
-        }
+        // .img-radius{
+        //     border-radius: 100%;
+        //     height:161px;
+        //     width:161px;
+        //     margin: auto;
+        //     display: block;
+        // }
 
         // @import url(https://fonts.googleapis.com/css?family=EB+Garamond|Cardo:400italic);
-
-.sandbox-correct-pronounciation {
-  padding: 2em 0 2em 0;
-}
-
-.heading-correct-pronounciation {
-
-  margin: auto;
-  text-align: center;
-  position: relative;
-}
-
-
-h1 {
-  color: #fff;
-  font-family: 'Cardo', serif;
-  font-size: 1em;
-  font-weight: normal;
-  font-style: italic;
-  letter-spacing: 0.1em;
-  line-height: 2.2em;
-}
-
-em {
-  font-family: 'EB Garamond', serif;
-  font-size: 1em;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  display: block;
-  font-style:normal;
-  padding-top: 0.1em;
-  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.1);
-  
-  &::before, &::after {
-  content: "§";
-  display: inline-block;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-    opacity: 0.8;
-  margin: 0 0.6em;
-  font-size: 1em;
-}
-
-}
-
-
-.bottom {
-  font-size: 1.5em;
-  letter-spacing: 0.07em;
-  font-size: 1em;
-  display: block;
-}
-
-#three span {
-    height: 40px;
-    width: 10px;
-span {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-}
-    .right-brace-bl {
-    border-right: 2px solid #fff;
-    -webkit-border-bottom-right-radius: 10px;
-    -moz-border-radius-bottomright: 10px;
-    border-bottom-right-radius: 10px;
-    margin-right:-6px;
-    margin-top: 13px;
-}
-.right-brace-br {
-    margin-bottom: 10px;
-    border-left: 2px solid #fff;
-    -webkit-border-top-left-radius: 10px;
-    -moz-border-radius-topleft: 10px;
-    border-top-left-radius: 10px;
-}
-.right-brace-tl {
-    margin-top: -4px;
-    border-right: 2px solid #fff;
-    -webkit-border-top-right-radius: 10px;
-    -moz-border-radius-topright: 10px;
-    border-top-right-radius: 10px;
-    margin-right:-6px;
-}
-
-.right-brace-tr {
-    margin-bottom: -8px;
-    border-left: 2px solid #fff;
-    -webkit-border-bottom-left-radius: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    border-bottom-left-radius: 10px;
-}
-}
-
+            
 
 }
