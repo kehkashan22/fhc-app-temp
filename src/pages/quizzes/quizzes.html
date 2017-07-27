@@ -1,19 +1,19 @@
 <ion-header>
 
-  <ion-navbar color="headerColor">
+  <ion-navbar >
     <ion-title text-wrap>{{chapter?.chapterId | titlecase}}</ion-title>
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="nature" color="headerColor">
+    <ion-segment [(ngModel)]="nature" >
       <!-->[(ngModel)]="nature"-->
-      <ion-segment-button value="application" color="headerColor" text-wrap>
+      <ion-segment-button value="application"  text-wrap>
         Application
       </ion-segment-button>
-      <ion-segment-button value="memory" color="headerColor">
+      <ion-segment-button value="memory" >
         Memory
       </ion-segment-button>
-      <ion-segment-button value="speed" color="headerColor">
+      <ion-segment-button value="speed" >
         Speed
       </ion-segment-button>
     </ion-segment>
@@ -127,5 +127,5 @@
 </ion-content>
 
 <ion-footer no-border>
-  <button ion-button block clear color="headerColor" (click)="toAnalysis()">Get Analysis of this Chapter</button>
+  <button ion-button block clear  (click)="toAnalysis()">Get Analysis of this Chapter</button>
 </ion-footer>

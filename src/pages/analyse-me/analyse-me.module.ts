@@ -21,6 +21,7 @@ import {VgBufferingModule} from 'videogular2/buffering';
     VgBufferingModule,
     IonicPageModule.forChild(AnalyseMePage),
     PipesModule
+
   ],
   exports: [
     AnalyseMePage

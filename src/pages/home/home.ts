@@ -11,8 +11,7 @@ import { Quiz } from "../../data/quiz.interface";
 import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
-
-declare var FCMPlugin;
+import { FCM } from '@ionic-native/fcm';
 
 @IonicPage()
 @Component({
@@ -56,12 +55,17 @@ export class HomePage {
                private authProvider : AuthProvider,
                private _loader : LoadingController,
                private app : App,
+                private quizProvider: QuizService,
                private afd: AngularFireDatabase,
-               private storage: Storage
+               private fcm: FCM
     ){
-        this.tokenSetup().then((token) => {
-          this.storeToken(token);
-        });
+          this.fcm.getToken().then((token) => {
+              this.storeToken(token);
+          },
+          (err) => {
+            console.log(err);
+          });
+
   }
 
   ngOnInit() {
@@ -86,27 +90,20 @@ export class HomePage {
       });
     }
 
-
-
-    FCMPlugin.onNotification((data) => {
-
+    this.fcm.onNotification().subscribe((data) => {
       if(data.wasTapped){
         const self = this;
         //self.navCtrl.setRoot('Home');
         self.navCtrl.setRoot('AnnouncementsPage');
+        alert('Data TAPPED');
       }else{
-        //alert( JSON.stringify(data) );
+        alert( JSON.stringify(data) );
       }
     });
 
-    FCMPlugin.onTokenRefresh((token) => {
+    this.fcm.onTokenRefresh().subscribe(token=>{
       this.storeToken(token);
     });
-
-  }
-
-  onPageWillEnter(){
-        console.log('****on page will enter messages pane');
 
   }
 
@@ -133,16 +130,5 @@ export class HomePage {
     }).catch((err) => {
       alert(err);
     });
-  }
-  tokenSetup(){
-    var promise = new Promise((resolve, reject) => {
-      FCMPlugin.getToken((token) => {
-        resolve(token);
-      }, (err) => {
-        reject(err);
-      });
-
-    });
-    return promise;
   }
 }

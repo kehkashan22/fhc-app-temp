@@ -1,3 +1,4 @@
+import { AuthProvider } from './auth';
 /*
   Name - Favorite Service
   Functionality - A video service to fetch, store, load and delete favorite videos
@@ -15,11 +16,13 @@ export class VideosService {
   private favoriteVideos: Video[] = [];
 
   constructor(private storage: Storage,
+              private _auth: AuthProvider,
               private toastCtrl: ToastController){}
 
   addVideoToFavorites(video: Video) {
     this.favoriteVideos.push(video);
-    this.storage.set('videos', this.favoriteVideos)
+    const userId = this._auth.getActiveUser().uid;
+    this.storage.set(userId+'/videos', this.favoriteVideos)
         .then()
         .catch(
           err => {
@@ -33,7 +36,8 @@ export class VideosService {
       return videoEl.id == video.id;
     });
     this.favoriteVideos.splice(position, 1);
-    this.storage.set('videos', this.favoriteVideos)
+    const userId = this._auth.getActiveUser().uid;
+    this.storage.set(userId+'/videos', this.favoriteVideos)
         .then()
         .catch(
           err => {
@@ -53,7 +57,8 @@ export class VideosService {
   }
 
   loadFavoriteVideos(){
-    this.storage.get('videos')
+    const userId = this._auth.getActiveUser().uid;
+    this.storage.get(userId+'/videos')
         .then(
           (videos: Video[]) => {
             this.favoriteVideos = videos != null ? videos : [];

@@ -7,11 +7,14 @@ page-quiz {
     $font-family-ios-base: "Barrio";
     $font-family-wp-base: "Barrio";
 
-  .scroll-content {
-     background: #2c3e50;  /* fallback for old browsers */
-      background: -webkit-linear-gradient(to bottom, #005C9C, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to bottom, #005C9C, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
+  ion-content, .scroll-content {
+    //  background: #2c3e50;  /* fallback for old browsers */
+    //   background: -webkit-linear-gradient(to bottom, #005C9C, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
+    //   background: linear-gradient(to bottom, #005C9C, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: url('https://images.pexels.com/photos/107958/pexels-photo-107958.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
+      background-size: cover;
+      background-position-x: 50%;
+    }
 
   .results{
     padding: 12px;
@@ -20,6 +23,10 @@ page-quiz {
   .marks{
     padding-right: 20px;
     padding-left: 20px;
+  }
+
+  .slide-zoom{
+    text-align: left !important;
   }
 
   ion-item.quiz, ion-item.item.item-block.item-radio.item-ios, ion-item.item-md, ion-item.item-wp{
@@ -37,19 +44,6 @@ page-quiz {
       }
   }
 
-
-  // #quiz-bg {
-  //
-  //       left: 0;
-  //       top: 44px;
-  //       width: 100%;
-  //       height: 175px;
-  //       //background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/bg.jpg') no-repeat transparent;
-  //       background-size: 100%;
-  //       background-position: 50% 20%;
-
-  //       text-align: center;
-  //     }
       #actions{
           .newhr {
               border-top: 1px dashed #D1D1D1;

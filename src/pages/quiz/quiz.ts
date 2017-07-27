@@ -6,35 +6,17 @@ import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
 import { Answer } from './../../data/answer.interface';
 import { Quiz } from './../../data/quiz.interface';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { trigger, state, style, transition, animate } from "@angular/animations";
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import _ from "lodash";
 
 @IonicPage()
 @Component({
   selector: 'page-quiz',
-  templateUrl: 'quiz.html',
-  host: {
-    '[@myvisibility]': 'true',
-  },
-  animations: [
-    trigger('myvisibility', [
-      state('visible', style({
-        opacity: 1
-      })),
-      state('invisible', style({
-        opacity: 0
-      })),
-      transition('visible <=> invisible', animate('500ms linear'))
-    ])
-  ]
+  templateUrl: 'quiz.html'
 })
 export class QuizPage implements OnInit{
 
-
-  visibleState: string = 'visible';
-  index: number = 0;
   marks: number = 0;
   quizCollection: Quiz[] = [];
   currentQuestion: Quiz;
@@ -48,7 +30,7 @@ export class QuizPage implements OnInit{
   percentage: any;
   results: boolean = true;
   answeredQuestion: Quiz;
-  secondQuestion: boolean = false;
+
   progressIndex: number = 1;
   quizTime: number = 0;
   iconForChip: string = '';
@@ -63,7 +45,14 @@ export class QuizPage implements OnInit{
   review: string = '';
   subreview: string = '';
 
+  //button disable
   disabled = false;
+
+  secondQuestion: boolean = false;
+
+
+  @ViewChild('slide1') slide1: Slides;
+  @ViewChild('slide2') slide2: Slides;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -77,6 +66,9 @@ export class QuizPage implements OnInit{
 
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
+    if(this.slide1){
+      this.slide1.lockSwipes(true);
+    }
   }
 
   ngOnInit() {
@@ -125,6 +117,9 @@ export class QuizPage implements OnInit{
   }
 
   ionViewDidLoad() {
+    if(this.question){
+      this.slide1.lockSwipes(true);
+    }
 
   }
 
@@ -150,20 +145,16 @@ export class QuizPage implements OnInit{
 
   }
 
-  changeQuestion(answer: Answer) {
-    this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
-    var answerIndex = this.quizCollection[this.index].answers.indexOf(answer);
-    this.quizCollection[this.index].answers[answerIndex].selected = true;
-    setTimeout(
-      () => {
-        this.visibleState = 'visible';
-        if (this.index + 1 < this.quizCollection.length) {
-          this.currentQuestion = this.quizCollection[++this.index];
-        } else {
-          this.question = false;
-          this.analysisFunc(this.storeQuiz);
-        }
-      }, 500);
+  changeQuestion(quesInx: number, ansInx: number) {
+    this.quizCollection[quesInx].answers[ansInx].selected = true;
+    if (quesInx + 1 < this.quizCollection.length) {
+      this.slide1.lockSwipes(false);
+      this.slide1.slideNext(300);
+      this.slide1.lockSwipes(true);
+    } else {
+      this.question = false;
+      this.analysisFunc(this.storeQuiz);
+    }
   }
 
   //MARKS CALCULATED HERE
@@ -190,14 +181,9 @@ export class QuizPage implements OnInit{
       this.review = "Good Try!";
       this.subreview = "This is the average score for this quiz. Maybe you want to try for a better score?";
     }
-    this.answeredQuestion = this.quizCollection[0];
-    this.index = 0;
     if (store) {
       this.addToQuizStore();
     }
-
-
-
   }
 
   private addToQuizStore() {
@@ -226,9 +212,8 @@ export class QuizPage implements OnInit{
   }
 
   toExplanation() {
+    this.progressIndex = 1;
     this.results = false;
-    this.answeredQuestion = this.quizCollection[0];
-    this.index = 0;
     this.secondQuestion = false;
   }
 
@@ -249,11 +234,11 @@ export class QuizPage implements OnInit{
             };
             this._quizStore.removefromQuizCollection(remQuizStore);
             this.quizCollection = _.cloneDeep(this.tempQuiz.questions);
-            this.currentQuestion = this.quizCollection[0];
             this.storeQuiz = true;
-            this.index = 0;
+            this.progressIndex = 1;
             this.question = true;
             this.results = true;
+
           }
         },
         {
@@ -270,24 +255,19 @@ export class QuizPage implements OnInit{
   }
 
   changeExplanation(direction: string) {
-    this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
-    if (direction === "next") {
-      this.index = this.index + 1;
-    } else if (direction === "previous" && this.index > 0) {
-      this.index = this.index - 1;
+    if (this.progressIndex  < this.quizCollection.length) {
+      this.progressIndex++;
+    } else {
+      this.results = true;
+      this.progressIndex = 1;
     }
 
-    setTimeout(
-      () => {
-        this.visibleState = 'visible';
-        if (this.index < this.quizCollection.length) {
-          this.answeredQuestion = this.quizCollection[this.index];
-          this.progressIndex = this.index + 1;
-        } else {
-          this.results = true;
-          this.progressIndex = 1;
-        }
-      }, 500);
+    if (direction === "next") {
+      this.slide2.slideNext();
+    } else if (direction === "previous" && this.progressIndex > 1) {
+      this.slide2.slidePrev();
+    }
+
     this.checkButtonVisibility();
   }
 
@@ -305,10 +285,10 @@ export class QuizPage implements OnInit{
   }
 
   checkButtonVisibility() {
-    if (this.index > 0) {
-      this.secondQuestion = true;
-    } else {
+    if (this.slide2.isBeginning()) {
       this.secondQuestion = false;
+    } else {
+      this.secondQuestion = true;
     }
   }
 
@@ -336,14 +316,22 @@ export class QuizPage implements OnInit{
     this.results = true;
   }
 
-  onDone($event) {
-    this.disabled = false;
-    console.log('the end of the animation');
+  slideChanged(){
+    if(this.slide2.getActiveIndex()+1 <= this.quizCollection.length){
+      this.progressIndex = this.slide2.getActiveIndex()+1;
+    }
+    this.checkButtonVisibility();
+
   }
 
-  onStart($event) {
-    this.disabled = true;
-    console.log('the start of the animation');
+  quesChanged(){
+    if(this.slide1.getActiveIndex()+1 <= this.quizCollection.length){
+      this.progressIndex = this.slide1.getActiveIndex()+1;
+    }
+  }
+
+  startingQuizAnimation(){
+
   }
 
 }

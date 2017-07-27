@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar no-border color="headerColor">
+  <ion-navbar no-border>
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -12,13 +12,38 @@
 </ion-header>
 <ion-content>
 
-<ion-card *ngFor = "let annoucement of announcements" (tap) = "navigateToAnnouncement(annoucement);">
-  <ion-card-header>
-    <h2>{{annoucement.title}}</h2>
-  </ion-card-header>
-  <ion-card-content>
-    <h3>{{annoucement.message}}</h3>
-    <p>{{annoucement.date | amTimeAgo}}</p>
-  </ion-card-content>
-</ion-card>
+  <ion-card *ngFor="let annoucement of announcements">
+     <ion-item>
+    <ion-avatar item-start>
+      <img src="assets/images/notif.jpg">
+      </ion-avatar>
+      <h2 text-wrap>{{annoucement.title}}</h2>
+    </ion-item>
+
+    <ion-card-content>
+        <p>{{annoucement.message}}</p>
+        <img [src]="annoucement.img" *ngIf="annoucement.img">
+
+
+       <ion-row no-padding *ngIf="annoucement.downloadLink">
+        <ion-col text-center>
+           <button ion-button icon-left clear *ngIf="annoucement.downloadLink" (tap)="download(annoucement);">
+        <ion-icon name="cloud-download"></ion-icon>
+        <div>Download now!</div>
+      </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row no-padding>
+      <ion-col center text-right>
+      <div>
+        <ion-note>
+       {{annoucement.date | amTimeAgo}}
+      </ion-note>
+      </div>
+
+    </ion-col>
+  </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

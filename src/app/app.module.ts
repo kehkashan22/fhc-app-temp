@@ -36,9 +36,12 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalsProvider } from '../providers/globals/globals';
 
+
 /* For Downloading files*/
 import { Transfer  } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { FCM } from "@ionic-native/fcm";
+
 
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
@@ -91,7 +94,8 @@ const firebaseConfig = {
     QuizStoreProvider,
     Transfer,
     File,
-    YoutubeVideoPlayer
+    YoutubeVideoPlayer,
+    FCM
   ]
 })
 export class AppModule {}

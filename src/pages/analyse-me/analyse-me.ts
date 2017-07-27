@@ -1,35 +1,18 @@
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, Slides } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
-import { Answer } from './../../data/answer.interface';
 import { Quiz } from './../../data/quiz.interface';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { trigger, state, style, transition, animate } from "@angular/animations";
 import { VgAPI } from 'videogular2/core';
-
+import { Storage } from "@ionic/storage";
 import { Chart } from 'chart.js';
-
-//import "_" from "lodash";
-
 import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
   selector: 'page-analyse-me',
   templateUrl: 'analyse-me.html',
-
-  animations: [
-    trigger('myvisibility', [
-      state('visible', style({
-        opacity: 1
-      })),
-      state('invisible', style({
-        opacity: 0
-      })),
-      transition('visible <=> invisible', animate('500ms linear'))
-    ])
-  ]
 })
 
 export class AnalyseMePage implements OnInit {
@@ -52,7 +35,7 @@ export class AnalyseMePage implements OnInit {
   loader: any;
   explain: boolean = false;
   @ViewChild('barCanvas') barCanvas;
-
+  @ViewChild('slide1') slide: Slides;
   barChart: any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -60,59 +43,68 @@ export class AnalyseMePage implements OnInit {
     private authProvider: AuthProvider,
     private api: VgAPI,
     private dom: DomSanitizer,
-    private _loader: LoadingController) {
+    private _loader: LoadingController,
+    private cdRef: ChangeDetectorRef,
+    private storage: Storage) {
+  }
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
+    if (this.slide) {
+      this.slide.lockSwipes(true);
+    }
   }
 
   ngOnInit() {
     //Check if test not given, only then make a db call...so once test is finished,
     //store a token on client side and give option to restart
-      this.quizService.loadQuiz().then((snap:
-          { quizzes: { id: number, video: string, marks: number, questions: Quiz[] }[], explanation: string }) => {
+    this.quizService.loadQuiz().then((snap:
+      { quizzes: { id: number, video: string, marks: number, questions: Quiz[] }[], explanation: string }) => {
 
-        this.analysisCollection = snap;
-        console.log(this.analysisCollection);
-        this.analysis1 = this.analysisCollection.quizzes[0];
-        this.analysis2 = this.analysisCollection.quizzes[1];
-        this.quizCollection = this.analysis1.questions;
-        this.currentQuestion = this.analysis1.questions[0];
-        this.analysisVideo = this.getVideoUrl(this.analysis1.video);
-        this.currentId = this.analysis1.id;
-        console.log(this.analysisVideo);
-      });
+      this.analysisCollection = snap;
+      console.log(this.analysisCollection);
+      this.analysis1 = this.analysisCollection.quizzes[0];
+      this.analysis2 = this.analysisCollection.quizzes[1];
+      this.quizCollection = this.analysis1.questions;
+      this.currentQuestion = this.analysis1.questions[0];
+      this.analysisVideo = this.getVideoUrl(this.analysis1.video);
+      this.currentId = this.analysis1.id;
+      console.log(this.analysisVideo);
+    });
 
   }
 
-  changeQuestion(answer: Answer) {
-    this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
-    console.log(answer);
-    var answerIndex = this.quizCollection[this.index].answers.indexOf(answer);
-    this.quizCollection[this.index].answers[answerIndex].selected = true;
-    setTimeout(
-      () => {
-        this.visibleState = 'visible';
-        if (this.index + 1 < this.quizCollection.length) {
-          this.currentQuestion = this.quizCollection[++this.index];
-        } else {
-          if (this.currentId === this.analysis1.id) {
-            this.analysis1.questions = this.quizCollection;
-            this.analysis1 = this.analysisFunc(this.analysis1);
-            this.currentId = this.analysis2.id;
-            this.quizCollection = this.analysis2.questions;
-            this.analysisVideo = this.getVideoUrl(this.analysis2.video);
-            console.log(this.analysisVideo);
-            this.video = true;
-            this.index = 0;
-            this.currentQuestion = this.quizCollection[0];
-          } else if (this.currentId === this.analysis2.id) {
-            this.analysis2.questions = this.quizCollection;
-            this.question = false;
-            this.analysis2 = this.analysisFunc(this.analysis2);
-            setTimeout(() => {
-              this.drawChart();
-            }, 700);
+  changeQuestion(quesInx: number, ansInx: number) {
+    this.quizCollection[quesInx].answers[ansInx].selected = true;
+
+    if (quesInx + 1 < this.quizCollection.length) {
+      this.slide.lockSwipes(false);
+      this.slide.slideNext(500);
+      this.slide.lockSwipes(true);
+    } else {
+      if (this.currentId === this.analysis1.id) {
+        this.analysis1.questions = this.quizCollection;
+        this.analysis1 = this.analysisFunc(this.analysis1);
+        this.currentId = this.analysis2.id;
+        this.quizCollection = this.analysis2.questions;
+        this.analysisVideo = this.getVideoUrl(this.analysis2.video);
+        this.video = true;
+      } else if (this.currentId === this.analysis2.id) {
+        this.analysis2.questions = this.quizCollection;
+        this.question = false;
+        this.analysis2 = this.analysisFunc(this.analysis2);
+        this.storage.set('solved', true)
+          .then()
+          .catch(
+          err => {
+            console.log("Couldn't store!");
           }
-        }
-      }, 500);
+          );
+        setTimeout(() => {
+          this.drawChart();
+        }, 700);
+      }
+    }
+
 
   }
 
@@ -124,6 +116,7 @@ export class AnalyseMePage implements OnInit {
       for (var j = 0; j < (analysedQuiz.questions[i].answers).length; j++) {
         if (analysedQuiz.questions[i].answers[j].selected && analysedQuiz.questions[i].answers[j].correct) {
           ++marks;
+          break;
         }
       }
     }
@@ -132,13 +125,13 @@ export class AnalyseMePage implements OnInit {
   }
 
   startQuiz() {
-    if(!this.explain){
+    if (!this.explain) {
       this.video = false;
-    }else{
+    } else {
       this.question = false;
       setTimeout(() => {
-       this.drawChart();
-     }, 700);
+        this.drawChart();
+      }, 700);
     }
 
   }

@@ -1,6 +1,6 @@
-// Compass utilities
 @import "../../../node_modules/compass-mixins/lib/compass";
 @import "../../../node_modules/compass-sass-mixins/lib/compass";
+
 
 // VARS
 $circle-width: 0.02em;
@@ -9,7 +9,9 @@ $circle-width-hover: 0.02em;
 // colors default
 $primary-color: #F44858;
 $secondary-color: #2c2c34;
-$bg-color: #2c3e50;
+
+$bg-color: #737474;
+
 
 $primary-color-green: #4db53c;
 $primary-color-orange: #dd9d22;
@@ -55,6 +57,7 @@ $primary-color-orange-dark: #e08833;
 	}
 
 	position: relative;
+
 	font-size: 175px;
 	width: 1em;
 	height: 1em;
@@ -91,10 +94,12 @@ $primary-color-orange-dark: #e08833;
 		// font-size: 0.2em;
 		// color: $secondary-color;
     width: 3.33em;
+
     line-height: 3.33em;
     font-size: 0.3em;
     font-family: 'sans-serif-thin';
     color: map-get($colors, light);
+
 		display: block;
 		text-align: center;
 		white-space: nowrap;
@@ -157,6 +162,7 @@ $primary-color-orange-dark: #e08833;
 		&.p#{$j} .bar {
 			@include rotate((360/100*$j) + deg);
 		}
+
   }
 
   &.green{
@@ -202,3 +208,4 @@ $primary-color-orange-dark: #e08833;
 		}
 
 }
+
