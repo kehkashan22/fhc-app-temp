@@ -40,6 +40,7 @@ import { GlobalsProvider } from '../providers/globals/globals';
 /* For Downloading files*/
 import { Transfer  } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { FCM } from "@ionic-native/fcm";
 
 
 
@@ -93,8 +94,8 @@ const firebaseConfig = {
     QuizStoreProvider,
     Transfer,
     File,
-    YoutubeVideoPlayer
-
+    YoutubeVideoPlayer,
+    FCM
   ]
 })
 export class AppModule {}
