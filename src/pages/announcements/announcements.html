@@ -13,31 +13,29 @@
 <ion-content>
 
   <ion-card *ngFor="let annoucement of announcements">
-    <!-- <ion-card-header>
-      <h2></h2>
-    </ion-card-header> -->
-    <img [src]="annoucement.img" *ngIf="annoucement.img">
+     <ion-item>
+    <ion-avatar item-start>
+      <img src="assets/images/notif.jpg">
+      </ion-avatar>
+      <h2 text-wrap>{{annoucement.title}}</h2>
+    </ion-item>
+
     <ion-card-content>
-      <ion-card-title>
-          {{annoucement.title}}
-      </ion-card-title>
+        <p>{{annoucement.message}}</p>
+        <img [src]="annoucement.img" *ngIf="annoucement.img">
 
-      <p>{{annoucement.message}}</p>
 
-      <!-- <ion-row no-padding *ngIf="annoucement.downloadLink">
+       <ion-row no-padding *ngIf="annoucement.downloadLink">
         <ion-col text-center>
-          <button ion-button clear (tap)="download(annoucement);">Download now!</button>
-        </ion-col>
-      </ion-row> -->
-
-      <ion-row no-padding>
-    <ion-col>
-      <button ion-button icon-left clear *ngIf="annoucement.downloadLink" (tap)="download(annoucement);">
+           <button ion-button icon-left clear *ngIf="annoucement.downloadLink" (tap)="download(annoucement);">
         <ion-icon name="cloud-download"></ion-icon>
         <div>Download now!</div>
       </button>
-    </ion-col>
-    <ion-col center text-right>
+        </ion-col>
+      </ion-row>
+
+      <ion-row no-padding>
+      <ion-col center text-right>
       <div>
         <ion-note>
        {{annoucement.date | amTimeAgo}}

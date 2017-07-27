@@ -91,7 +91,6 @@
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-email" spec="^1.2.6" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.4" />
-    <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
@@ -106,4 +105,5 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2">
         <variable name="locator" value="https://github.com/Rohfosho/CordovaCallNumberPlugin.git" />
     </plugin>
+    <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
 </widget>
