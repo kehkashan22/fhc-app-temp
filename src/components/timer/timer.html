@@ -1,6 +1,7 @@
 <div *ngIf="timer">
     <!--<ion-item class="no-bottom-border item">-->
-        <button ion-button *ngIf="timeInSeconds && timeInSeconds > 0" large full clear class="timer-button timer-text" color="btn-login">{{timer.displayTime}}</button>
+
+        <button ion-button *ngIf="timeInSeconds && timeInSeconds > 0" small clear class="timer-button timer-text" color="light">{{timer.displayTime}}</button>
     <!--</ion-item>-->
     <!--<ion-item class="no-bottom-border" *ngIf="timeInSeconds && timeInSeconds > 0">
         <button ion-button icon-left clear color="danger" small (click)="initTimer()" item-left *ngIf="!timer.runTimer && (timer.hasStarted || timer.hasFinished) || timer.hasFinished">

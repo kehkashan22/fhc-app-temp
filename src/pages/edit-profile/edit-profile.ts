@@ -5,8 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthProvider } from '../../providers/auth';
 
-import * as sha1  from 'sha1';
-
 import * as firebase from 'firebase';
 
 @IonicPage()
@@ -20,8 +18,8 @@ export class EditProfilePage {
   private db;
   /* FormGroup which will be used in html */
   private form: FormGroup;
- 
-  constructor(public navCtrl: NavController, 
+
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
               private viewCtrl: ViewController,
@@ -43,15 +41,15 @@ export class EditProfilePage {
         gender: [''],
         typeOfCourse: ['', Validators.required]
     });
-    
+
     this.db = firebase.database();
-    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditProfilePage');
 
-    
+
       /* Loader */
     let loader = this.loadingCtrl.create({
       spinner: "bubbles",
@@ -62,7 +60,7 @@ export class EditProfilePage {
 
     this.getUserProfile().then(data => {
       this.user = data;
-      
+
       console.log("data", this.user.user);
       let user = {
         fullName: this.user.user.fullName,
@@ -128,7 +126,7 @@ export class EditProfilePage {
 
     let currentUser = firebase.auth().currentUser;
     return this.db.ref("users/"+currentUser.uid).update( { user: user });
-    
+
   }
 
 

@@ -1,6 +1,6 @@
-<ion-header no-border>
+<ion-header>
 
-  <ion-navbar no-border color="headerColor">
+  <ion-navbar>
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -13,7 +13,7 @@
       <button id="notification-button" ion-button clear (tap) = "navigateToAnnouncements()">
         <ion-icon name="notifications">
           <ion-badge id="notifications-badge" color="danger"> 2 </ion-badge>
-        </ion-icon>              
+        </ion-icon>
     </button>
     </ion-buttons>
   </ion-navbar>
@@ -32,38 +32,44 @@
 
   </div>
 
+  <ion-grid text-center>
+    <ion-row wrap>
+      <ion-col col-6>
+        <div class="cards"  tappable (click)="toAnalysisPage()">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/book3.jpg" />
+          <div class="card-title">Analyse Yourself</div>
+           <div class="card-subtitle">
+            Determine your learning capability
+          </div>
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div class="cards" tappable [navPush]="quizLibraryPage">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/books2.jpg" />
+          <div class="card-title">Quizzes Galore!</div>
+          <div class="card-subtitle">
+            Practice makes perfect!
+          </div>
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div class="cards" tappable [navPush]="rootLibraryPage">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/stack-of-books.jpg" />
+          <div class="card-title">Video Library</div>
+          <div class="card-subtitle">
+            Demo Videos for CA and CS students
+          </div>
+        </div>
+      </ion-col>
+      <ion-col col-6><div class="cards" tappable [navPush]="rootLibraryPage">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/books4.jpg" />
+          <div class="card-title">PDF Gallery</div>
+          <div class="card-subtitle">
+            For your pleasure!
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-card [navPush]="analyseMePage">
-    <img src="assets/img/card-saopaolo.jpeg"/>
-    <div class="card-title">Analyse Yourself</div>
-    <div class="card-subtitle">
-      Take this simple test to find out where you stand
-    </div>
-  </ion-card>
-
-   <ion-card [navPush]="quizLibraryPage">
-    <img src="assets/img/card-sf.jpg"/>
-    <div class="card-title">Quizes Galore!</div>
-    <div class="card-subtitle">
-      Practice makes perfect!
-    </div>
-  </ion-card>
-
-  <ion-card [navPush]="rootLibraryPage">
-    <img src="assets/img/card-amsterdam.jpg"/>
-    <div class="card-title">Demo Videos</div>
-    <div class="card-subtitle">
-      Demo Videos for CA and CS students
-    </div>
-  </ion-card>
-
-  <!--<ion-card>
-    <img src="assets/img/card-sf.jpg"/>
-    <div class="card-title">Case Laws</div>
-    <button
-      ion-button
-      [navPush]="rootLibraryPage"
-      color="light"
-      outline>Click Here</button>
-  </ion-card>-->
 </ion-content>

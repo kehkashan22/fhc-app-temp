@@ -1,3 +1,4 @@
+import { QuizStore } from './../../data/quiz/quiz-store.interface';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Quizzes } from './../../data/quizzes.interface';
 import { LoadingController, AlertController } from 'ionic-angular';
@@ -5,32 +6,17 @@ import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
 import { Answer } from './../../data/answer.interface';
 import { Quiz } from './../../data/quiz.interface';
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { trigger, state, style, transition, animate } from "@angular/animations";
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import _ from "lodash";
 
 @IonicPage()
 @Component({
   selector: 'page-quiz',
-  templateUrl: 'quiz.html',
-  animations: [
-    trigger('myvisibility', [
-      state('visible', style({
-        opacity: 1
-      })),
-      state('invisible', style({
-        opacity: 0
-      })),
-      transition('visible <=> invisible', animate('500ms linear'))
-    ])
-  ]
+  templateUrl: 'quiz.html'
 })
 export class QuizPage implements OnInit{
 
-
-  visibleState: string = 'visible';
-  index: number = 0;
   marks: number = 0;
   quizCollection: Quiz[] = [];
   currentQuestion: Quiz;
@@ -43,15 +29,30 @@ export class QuizPage implements OnInit{
   analysisPage = 'AnalysisPage';
   percentage: any;
   results: boolean = true;
-  answeredQuestion : Quiz;
-  secondQuestion: boolean = false;
+  answeredQuestion: Quiz;
+
   progressIndex: number = 1;
   quizTime: number = 0;
-  iconForChip : string = '';
+  iconForChip: string = '';
   percentClass: string = 'c100 p50';
   quiz: Quizzes;
   tempQuiz: Quizzes;
   analysis: { quizId: string, quizNumber: any, marks: number }[] = [];
+  subjectId: string = '';
+  chapterId: string = '';
+  chapterType: string = '';
+
+  review: string = '';
+  subreview: string = '';
+
+  //button disable
+  disabled = false;
+
+  secondQuestion: boolean = false;
+
+
+  @ViewChild('slide1') slide1: Slides;
+  @ViewChild('slide2') slide2: Slides;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,30 +60,51 @@ export class QuizPage implements OnInit{
     private authProvider: AuthProvider,
     private loader: LoadingController,
     private alertCtrl: AlertController,
-    private quizStore: QuizStoreProvider) {
+    private _quizStore: QuizStoreProvider,
+    private cdRef: ChangeDetectorRef) {
   }
 
-  ngOnInit(){
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
+    if(this.slide1){
+      this.slide1.lockSwipes(true);
+    }
+  }
+
+  ngOnInit() {
 
     let isSolved: boolean = this.navParams.get('isSolved');
-     this.tempQuiz = _.cloneDeep(this.navParams.get('quiz'));
-    if(isSolved){
-      this.quiz= _.cloneDeep(this.quizStore.getSolvedQuiz(this.tempQuiz));
-    }else{
-      this.quiz=this.tempQuiz;
+    this.subjectId = this.navParams.get('subjectId');
+    this.chapterId = this.navParams.get('chapterId');
+    this.tempQuiz = _.cloneDeep(this.navParams.get('quiz'));
+    this.chapterType = this.navParams.get('chapterType');
+    if (isSolved) {
+      let tempQuizStore: QuizStore = {
+        subjectId: this.subjectId,
+        chapterId: this.chapterId,
+        chapterType: this.chapterType,
+        quiz: this.tempQuiz
+      };
+      this.quiz = _.cloneDeep(this._quizStore.getSolvedQuizFromStore(tempQuizStore));
+    } else {
+      this.quiz = _.cloneDeep(this.tempQuiz);
     }
 
-    this.quizHeading = this.quiz.quizHeading;
-    this.quizTime = +this.quiz.timeInMins*60;
+    if (this.quiz) {
+      this.quizHeading = this.quiz.quizHeading;
+      this.quizTime = +this.quiz.timeInMins * 60;
 
-    this.quizCollection = _.cloneDeep(this.quiz.questions);
+      this.quizCollection = _.cloneDeep(this.quiz.questions);
+    }
 
-    if(this.quizCollection){
+
+    if (this.quizCollection) {
       this.currentQuestion = this.quizCollection[0];
     }
 
-    if(isSolved){
+    if (isSolved) {
       this.question = false;
+      this.results = true;
       this.storeQuiz = !this.storeQuiz;
       this.analysisFunc(this.storeQuiz);
     }
@@ -95,46 +117,47 @@ export class QuizPage implements OnInit{
   }
 
   ionViewDidLoad() {
+    if(this.question){
+      this.slide1.lockSwipes(true);
+    }
 
   }
 
-  handleTimeUp(timeUp: boolean){
-     const alert = this.alertCtrl.create({
-      title: 'Oops!',
-      subTitle: 'Your time is up...',
-      message: 'Let\'s see how you did.',
-      buttons: [
-        {
-          text: 'Ok',
-          role: 'cancel',
-          handler: () => {
-            this.question=false;
-            this.analysisFunc(this.storeQuiz);
+  handleTimeUp(timeUp: boolean = false) {
+    if (timeUp) {
+      const alert = this.alertCtrl.create({
+        title: 'Oops!',
+        subTitle: 'Your time is up...',
+        message: 'Let\'s see how you did.',
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+            handler: () => {
+              this.question = false;
+              this.analysisFunc(this.storeQuiz);
+            }
           }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
+    }
+
   }
 
-  changeQuestion(answer: Answer) {
-    console.log(answer);
-    this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
-    var answerIndex = this.quizCollection[this.index].answers.indexOf(answer);
-    this.quizCollection[this.index].answers[answerIndex].selected = true;
-    setTimeout(
-      () => {
-        this.visibleState = 'visible';
-        if (this.index + 1 < this.quizCollection.length) {
-          this.currentQuestion = this.quizCollection[++this.index];
-        } else {
-          this.question = false;
-          this.analysisFunc(this.storeQuiz);
-        }
-      }, 500);
+  changeQuestion(quesInx: number, ansInx: number) {
+    this.quizCollection[quesInx].answers[ansInx].selected = true;
+    if (quesInx + 1 < this.quizCollection.length) {
+      this.slide1.lockSwipes(false);
+      this.slide1.slideNext(300);
+      this.slide1.lockSwipes(true);
+    } else {
+      this.question = false;
+      this.analysisFunc(this.storeQuiz);
+    }
   }
 
- //MARKS CALCULATED HERE
+  //MARKS CALCULATED HERE
   analysisFunc(store: boolean) {
     this.marks = 0;
     this.answers = true;
@@ -146,37 +169,55 @@ export class QuizPage implements OnInit{
         }
       }
     }
-    this.percentage = this.marks*100/this.quizCollection.length | 0;
+    this.percentage = this.marks * 100 / this.quizCollection.length | 0;
     this.getClassString(this.percentage);
-    this.answeredQuestion = this.quizCollection[0];
-    this.index=0;
-    if(store){
+    if (this.percentage < 40) {
+      this.review = "Oops!";
+      this.subreview = "Maybe you should give it another go?";
+    } else if (this.percentage >= 60) {
+      this.review = "Well Done!";
+      this.subreview = "You have passed this quiz with flying colors!";
+    } else {
+      this.review = "Good Try!";
+      this.subreview = "This is the average score for this quiz. Maybe you want to try for a better score?";
+    }
+    if (store) {
       this.addToQuizStore();
     }
-
-
-
   }
 
-  private addToQuizStore(){
-      this.quiz.marks = this.marks;
-      this.quiz.questions=this.quizCollection;
-      this.quizStore.addQuizAsSolved(_.cloneDeep(this.quiz));
+  private addToQuizStore() {
+    this.quiz.marks = this.marks;
+    this.quiz.questions = this.quizCollection;
+    let quizStore: QuizStore = {
+      subjectId: this.subjectId,
+      chapterId: this.chapterId,
+      chapterType: this.chapterType,
+      quiz: _.cloneDeep(this.quiz),
+    };
+    this._quizStore.addToQuizCollection(quizStore);
   }
 
-  private getClassString(per: string){
+  private getClassString(per: string) {
     let perInt = +per | 0;
-    this.percentClass = 'c100 p'+ perInt;
+
+    if(perInt >= 60){
+        this.percentClass = 'c100 p' + perInt+ ' green ';
+    }else if(perInt < 40){
+        this.percentClass = 'c100 p' + perInt;
+    }else{
+        this.percentClass = 'c100 p' + perInt+ ' orange ';
+    }
+
   }
 
-  toExplanation(){
+  toExplanation() {
+    this.progressIndex = 1;
     this.results = false;
-     this.answeredQuestion=this.quizCollection[0];
-    this.index=0;
     this.secondQuestion = false;
   }
 
-  toResetScore(){
+  toResetScore() {
     const alert = this.alertCtrl.create({
       title: 'Re-take Quiz?',
       subTitle: 'Are you sure?',
@@ -185,12 +226,19 @@ export class QuizPage implements OnInit{
         {
           text: 'Yes, go ahead',
           handler: () => {
-            this.quizStore.removeQuizFromSolved(this.quiz);
+            let remQuizStore: QuizStore = {
+              subjectId: this.subjectId,
+              chapterId: this.chapterId,
+              chapterType: this.chapterType,
+              quiz: this.quiz
+            };
+            this._quizStore.removefromQuizCollection(remQuizStore);
             this.quizCollection = _.cloneDeep(this.tempQuiz.questions);
-            this.currentQuestion = this.quizCollection[0];
             this.storeQuiz = true;
-            this.index=0;
-            this.question=true;
+            this.progressIndex = 1;
+            this.question = true;
+            this.results = true;
+
           }
         },
         {
@@ -206,66 +254,84 @@ export class QuizPage implements OnInit{
     alert.present();
   }
 
-  changeExplanation(direction: string){
-    this.visibleState = (this.visibleState == 'visible') ? 'invisible' : 'visible';
-    if(direction==="next"){
-      this.index=this.index+1;
-    }else if(direction==="previous" && this.index > 0){
-      this.index=this.index-1;
+  changeExplanation(direction: string) {
+    if (this.progressIndex  < this.quizCollection.length) {
+      this.progressIndex++;
+    } else {
+      this.results = true;
+      this.progressIndex = 1;
     }
+
+    if (direction === "next") {
+      this.slide2.slideNext();
+    } else if (direction === "previous" && this.progressIndex > 1) {
+      this.slide2.slidePrev();
+    }
+
     this.checkButtonVisibility();
-    setTimeout(
-      () => {
-        this.visibleState = 'visible';
-        if (this.index < this.quizCollection.length) {
-          this.answeredQuestion = this.quizCollection[this.index];
-           this.progressIndex = this.index+1;
-        } else {
-          this.results = true;
-          this.progressIndex=1;
-        }
-      }, 500);
   }
 
-  toQuizList(){
+  toQuizList() {
     this.navCtrl.pop();
   }
 
-  checkAnswer(answer: Answer){
-    if(answer.selected === true){
+  checkAnswer(answer: Answer) {
+    if (answer.selected === true) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
-  checkButtonVisibility(){
-    if(this.index > 0){
-        this.secondQuestion = true;
-    }else{
+  checkButtonVisibility() {
+    if (this.slide2.isBeginning()) {
       this.secondQuestion = false;
+    } else {
+      this.secondQuestion = true;
     }
   }
 
-  getAnswerClass(answer: Answer){
-    if(answer.selected && !answer.correct){
+  getAnswerClass(answer: Answer) {
+    if (answer.selected && !answer.correct) {
       return 'wrong';
     }
-    if(answer.correct){
+    if (answer.correct) {
       return 'right';
     }
   }
 
-  thisAnswer(answeredQuestion : Quiz){
-    answeredQuestion.answers
+  thisAnswer(answeredQuestion: Quiz) {
+    //answeredQuestion.answers
 
     for (var j = 0; j < (answeredQuestion.answers).length; j++) {
-        if (answeredQuestion.answers[j].selected && answeredQuestion.answers[j].correct) {
-          return true;
-        }
+      if (answeredQuestion.answers[j].selected && answeredQuestion.answers[j].correct) {
+        return true;
       }
-      return false;
+    }
+    return false;
+  }
+
+  toResults() {
+    this.results = true;
+  }
+
+  slideChanged(){
+    if(this.slide2.getActiveIndex()+1 <= this.quizCollection.length){
+      this.progressIndex = this.slide2.getActiveIndex()+1;
+    }
+    this.checkButtonVisibility();
+
+  }
+
+  quesChanged(){
+    if(this.slide1.getActiveIndex()+1 <= this.quizCollection.length){
+      this.progressIndex = this.slide1.getActiveIndex()+1;
+    }
+  }
+
+  startingQuizAnimation(){
+
   }
 
 }

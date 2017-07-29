@@ -1,24 +1,17 @@
-/****************************************************************
- *
- * CSS Percentage Circle
- * Author: Andre Firchow
- *
-*****************************************************************/
-
-
-// Compass utilities
 @import "../../../node_modules/compass-mixins/lib/compass";
 @import "../../../node_modules/compass-sass-mixins/lib/compass";
 
 
 // VARS
-$circle-width: 0.04em;
-$circle-width-hover: 0.08em;
+$circle-width: 0.02em;
+$circle-width-hover: 0.02em;
 
 // colors default
-$primary-color: #307bbb;
-$secondary-color: #ccc;
-$bg-color: #f5f5f5;
+$primary-color: #F44858;
+$secondary-color: #2c2c34;
+
+$bg-color: #737474;
+
 
 $primary-color-green: #4db53c;
 $primary-color-orange: #dd9d22;
@@ -64,7 +57,8 @@ $primary-color-orange-dark: #e08833;
 	}
 
 	position: relative;
-	font-size: 120px;
+
+	font-size: 175px;
 	width: 1em;
 	height: 1em;
 	border-radius: 50%;
@@ -100,9 +94,12 @@ $primary-color-orange-dark: #e08833;
 		// font-size: 0.2em;
 		// color: $secondary-color;
     width: 3.33em;
-			line-height: 3.33em;
-			font-size: 0.3em;
-			color: $primary-color;
+
+    line-height: 3.33em;
+    font-size: 0.3em;
+    font-family: 'sans-serif-thin';
+    color: map-get($colors, light);
+
 		display: block;
 		text-align: center;
 		white-space: nowrap;
@@ -165,80 +162,50 @@ $primary-color-orange-dark: #e08833;
 		&.p#{$j} .bar {
 			@include rotate((360/100*$j) + deg);
 		}
+
+  }
+
+  &.green{
+
+		.bar, .fill { border-color: $primary-color-green !important;}
+
+		&:hover{
+			> span { color: $primary-color-green;}
+		}
+
 	}
 
-	// // override colors for the dark skin
-	// &.dark {
+		&.green.dark{
 
-	// 	background-color: $secondary-color-dark;
+			.bar, .fill { border-color: $primary-color-green-dark !important;}
 
-	// 	.bar,
-	// 	.fill{
-	// 		border-color: $primary-color-dark !important;
-	// 	}
+			&:hover{
+				> span { color: $primary-color-green-dark;}
+			}
 
-	// 	> span {
-	// 		color: $secondary-color-dark;
-	// 	}
+		}
 
 
-	// 	&:after{
-	// 		background-color: $bg-color-dark;
-	// 	}
+	// orange skin
+	&.orange{
 
-	// 	&:hover{
+		.bar, .fill { border-color: $primary-color-orange !important;}
 
-	// 		> span {
-	// 			color: $primary-color-dark;
-	// 		}
+		&:hover{
+			> span { color: $primary-color-orange;}
+		}
 
-	// 	}
+	}
 
-	// }
+		&.orange.dark{
 
+			.bar, .fill { border-color: $primary-color-orange-dark !important;}
 
-	// // green skin
-	// &.green{
+			&:hover{
+				> span { color: $primary-color-orange-dark;}
+			}
 
-	// 	.bar, .fill { border-color: $primary-color-green !important;}
-
-	// 	&:hover{
-	// 		> span { color: $primary-color-green;}
-	// 	}
-
-	// }
-
-	// 	&.green.dark{
-
-	// 		.bar, .fill { border-color: $primary-color-green-dark !important;}
-
-	// 		&:hover{
-	// 			> span { color: $primary-color-green-dark;}
-	// 		}
-
-	// 	}
-
-
-	// // orange skin
-	// &.orange{
-
-	// 	.bar, .fill { border-color: $primary-color-orange !important;}
-
-	// 	&:hover{
-	// 		> span { color: $primary-color-orange;}
-	// 	}
-
-	// }
-
-	// 	&.orange.dark{
-
-	// 		.bar, .fill { border-color: $primary-color-orange-dark !important;}
-
-	// 		&:hover{
-	// 			> span { color: $primary-color-orange-dark;}
-	// 		}
-
-	// 	}
-
+		}
 
 }
+

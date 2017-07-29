@@ -10,6 +10,8 @@ import { ModalController} from 'ionic-angular';
   templateUrl: 'starred.html',
 })
 export class StarredPage implements OnInit{
+  videoLib = 'RootLibraryPage';
+
   ngOnInit(): void {
     this.videos = this.videosService.getFavoriteVideos();
   }

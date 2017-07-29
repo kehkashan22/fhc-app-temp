@@ -1,54 +1,62 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar  color="headerColor">
-    <ion-title text-wrap>QUIZ</ion-title>
+  <ion-navbar transparent>
+
+    <ion-title text-wrap>Quiz</ion-title>
+    <ion-buttons right *ngIf="question">
+      <timer #timer [timeInSeconds]="quizTime" (timeUp)="handleTimeUp($event)"></timer>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-<ion-content >
+
+<ion-content>
+
   <!--QUIZ DIV HERE-->
-  <div *ngIf="question; else quizEnd;" [@myvisibility]="visibleState" class="results">
+  <div class="mq" *ngIf="question; else quizEnd;" >
 
-    <timer #timer [timeInSeconds]="quizTime" (timeUp)="handleTimeUp($event)"></timer>
+    <progress-bar [progress]="progressIndex" [total]="quizCollection?.length"></progress-bar>
+
+    <ion-slides (ionSlideDidChange)="quesChanged()" #slide1>
+      <ion-slide *ngFor="let currentQuestion of quizCollection; let i=index;">
+        <ion-card class="questionCard">
+          <ion-card-header><b>Question {{i + 1}}</b></ion-card-header>
+          <ion-card-title>{{quizHeading}}</ion-card-title>
+          <ion-card-content>
+            <div class="question">
+              {{currentQuestion?.question}}
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-list radio-group mode="ios" class="results">
+          <ion-item *ngFor="let answer of currentQuestion?.answers; let j=index;" mode="ios">
+
+            <ion-label text-wrap class="quiz">
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-2>
+                    {{answer.answerKey}}.
+                  </ion-col>
+                  <ion-col text-wrap id="answerText">
+                    {{answer.answerText}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </ion-label>
+            <ion-radio [value]="answer" [disabled]="disabled" (click)="changeQuestion(i, j)" mode="ios"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
 
 
-    <progress-bar [progress]="index+1" [total]="quizCollection?.length"></progress-bar>
-    <ion-card class="questionCard">
-      <ion-card-header><b>Question {{index + 1}}</b></ion-card-header>
-      <ion-card-title>{{quizHeading}}</ion-card-title>
-      <ion-card-content>
-        <div class="question">
-          {{currentQuestion?.question}}
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-list radio-group mode="ios">
-      <ion-item *ngFor="let answer of currentQuestion?.answers" mode="ios">
-
-        <ion-label text-wrap  class="quiz">
-          <ion-grid>
-            <ion-row>
-              <ion-col col-2>
-                {{answer.answerKey}}.
-              </ion-col>
-              <ion-col text-wrap id="answerText">
-                {{answer.answerText}}
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-        </ion-label>
-        <ion-radio [value]="answer" (click)="changeQuestion(answer)" mode="ios" color="headerColor"></ion-radio>
-      </ion-item>
-    </ion-list>
 
   </div>
 
   <!--To Analysis-->
   <ng-template #quizEnd>
-    <div *ngIf="results" class="results">
-      <div id="quiz-bg"></div>
+    <div *ngIf="results" class="marks">
       <div id="content">
         <div id="quiz-info">
           <div id="quiz-image">
@@ -60,29 +68,70 @@
               </div>
             </div>
           </div>
-          <br>
-          <span id="quiz-description"> Total Questions : {{quizCollection?.length}} </span>
-          <br>
-          <span id="quiz-description"> Correct Answers : {{marks}} </span>
-          <br>
-          <span id="quiz-description"> Incorrect Answers :{{quizCollection?.length - marks}}</span>
+          <div class="quiz-content">
+            <br>
+            <span class="quiz-description">Total Questions: {{quizCollection?.length}}</span>
+            <br>
+            <span id="correct">Correct: {{marks}}</span>
+            <span class="quiz-description"> | </span>
+            <span id="incorrect">Incorrect: {{quizCollection?.length - marks}}</span>
+
+          </div>
         </div>
       </div>
 
-      <button ion-button block outline color="btn-login" (click)="toExplanation()">Check your Answers</button>
-      <button ion-button block outline color="btn-login" (click)="toQuizList()">Back to Quiz List</button>
-      <button ion-button block outline color="btn-login" (click)="toResetScore()">Re-take Quiz</button>
+      <hr class="divider">
+
+      <div id="actions" class="quiz-text">
+        <h3 text-center>{{review}}</h3>
+        <p text-center>{{subreview}}</p>
+        <hr class="divider">
+        <div style="padding-top: 20px;"></div>
+        <h4 text-left>
+          Why not review...
+        </h4>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button block color="light" (click)="toExplanation()">Review Quiz</button>
+          </ion-col>
+
+          <ion-col>
+            <button ion-button block color="light" (click)="toResetScore()">Retry Quiz</button>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+      <div id="actions" class="quiz-text">
+        <p text-right>
+          ...or retry!
+        </p>
+      </div>
+
     </div>
 
     <!--EXPLANATION AND ANALYSIS HERE-->
-    <div *ngIf="!results" [@myvisibility]="visibleState">
+    <div *ngIf="!results">
       <ion-grid>
         <ion-row>
           <ion-col align-self-start>
-            <div *ngIf="secondQuestion">
+            <div>
               <ion-buttons left>
-                <button ion-button icon-only clear small (click)="changeExplanation('previous')" color="btn-login">
+                <button [disabled]="!secondQuestion" ion-button icon-only clear small (click)="changeExplanation('previous')" color="light">
                   PREV
+                  <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
+                </button>
+              </ion-buttons>
+
+            </div>
+          </ion-col>
+          <ion-col align-self-center>
+            <div text-center>
+              <ion-buttons left>
+                <button ion-button icon-only clear small (click)="toResults()" color="light">
+                  TO RESULTS
                   <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
                 </button>
               </ion-buttons>
@@ -92,9 +141,9 @@
           <ion-col align-self-end>
             <div>
               <ion-buttons right>
-                <button ion-button icon-only clear small (click)="changeExplanation('next')" item-right color="btn-login">
+                <button ion-button icon-only clear small (click)="changeExplanation('next')" item-right color="light">
                  <!--<ion-icon name="md-arrow-round-forward" class="item-icon-right"></ion-icon>-->
-                 NEXT
+                  NEXT
               </button>
               </ion-buttons>
             </div>
@@ -105,69 +154,76 @@
       <progress-bar [progress]="progressIndex" [total]="quizCollection?.length"></progress-bar>
 
 
-        <ion-chip *ngIf="thisAnswer(answeredQuestion); else wrong;">
-          <ion-icon name="md-checkmark" color="secondary"></ion-icon>
-          <ion-label>Correct</ion-label>
-        </ion-chip>
-        <ng-template #wrong>
-          <ion-chip >
-          <ion-icon name="md-close" color="danger"></ion-icon>
-          <ion-label>Incorrect</ion-label>
-        </ion-chip>
-        </ng-template>
-      <div>
-        <ion-card class="questionCard">
-          <ion-card-header>Question {{index+1}}</ion-card-header>
-          <ion-card-title>{{quizHeading}}</ion-card-title>
-          <ion-card-content>
-            <div class="question">
-              {{answeredQuestion?.question}}
-            </div>
-          </ion-card-content>
-        </ion-card>
 
-        <ion-list radio-group mode="ios" id="solutions" class="results" no-lines>
-          <ion-item *ngFor="let answer of answeredQuestion?.answers" mode="ios">
-            <ion-grid id="resultGrid">
-              <ion-row [ngClass]="getAnswerClass(answer)">
-                <ion-col col-2 class="choices">
-                  <div>
-                    <span>
+      <ion-slides (ionSlideDidChange)="slideChanged()" #slide2>
+        <ion-slide *ngFor="let answeredQuestion of quizCollection; let i=index;">
+          <ion-chip *ngIf="thisAnswer(answeredQuestion); else wrong;" color="light">
+            <ion-icon name="md-checkmark" color="secondary"></ion-icon>
+            <ion-label>Correct</ion-label>
+          </ion-chip>
+          <ng-template #wrong>
+            <ion-chip color="light">
+              <ion-icon name="md-close" color="danger"></ion-icon>
+              <ion-label>Incorrect</ion-label>
+            </ion-chip>
+          </ng-template>
+          <ion-card class="questionCard">
+            <ion-card-header>Question {{i+1}}</ion-card-header>
+            <ion-card-title>{{quizHeading}}</ion-card-title>
+            <ion-card-content>
+              <div class="question">
+                {{answeredQuestion?.question}}
+              </div>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-list radio-group mode="ios" id="solutions" class="results" no-lines>
+            <ion-item *ngFor="let answer of answeredQuestion?.answers" mode="ios">
+              <ion-grid id="resultGrid">
+                <ion-row [ngClass]="getAnswerClass(answer)">
+                  <ion-col col-2 class="choices">
+                    <div>
+                      <span>
                          {{answer.answerKey}}.
                     </span>
-                  </div>
+                    </div>
 
-                </ion-col>
-                <ion-col class="choices">
-                  <div>
-                    <span text-wrap>
+                  </ion-col>
+                  <ion-col class="choices">
+                    <div>
+                      <span text-wrap>
                     {{answer.answerText}}
                     </span>
-                  </div>
-                </ion-col>
-                <ion-col col-2>
-                  <ion-buttons right>
-                    <button ion-button icon-only clear small>
+                    </div>
+                  </ion-col>
+                  <ion-col col-2>
+                    <ion-buttons right>
+                      <button ion-button icon-only clear small>
                       <ion-icon name="md-close" *ngIf="answer.selected && !answer.correct" color="danger"></ion-icon>
                       <ion-icon name="md-checkmark" *ngIf="answer.correct" color="secondary" ></ion-icon>
                     </button>
-                  </ion-buttons>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-list>
-        <!--Indication of right or wrong-->
+                    </ion-buttons>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-list>
 
 
-        <ion-card>
-          <ion-card-header><b>Explanation:</b></ion-card-header>
-          <ion-card-content>
-            {{answeredQuestion?.explanation}}
-          </ion-card-content>
-        </ion-card>
-      </div>
+          <ion-card *ngIf="answeredQuestion?.explanation !== 'noexp'">
+            <ion-card-header><b>Explanation:</b></ion-card-header>
+            <ion-card-content>
+              {{answeredQuestion?.explanation}}
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
     </div>
 
   </ng-template>
 </ion-content>
+
+
+<!-- <ion-footer *ngIf="!question && results">  -->
+
+<!-- </ion-footer>  -->

@@ -27,22 +27,15 @@ page-home {
       height: 200px;
     }
 
-    // .slide-title{
-    //   font-size: 1.0em;
-    //   position: absolute;
-    //   top: 52%;
-    //   width: 100%;
-    //   color: #fff;
-    // }
 
   }
 
   .card-background-page {
 
-  ion-card {
+  ion-card, .cards {
     position: relative;
     text-align: center;
-    background-color: black;
+    background-color: map-get($colors, dark);
 
     img{
       opacity: 0.7;
@@ -52,10 +45,10 @@ page-home {
   .card-title {
     position: absolute;
     top: 36%;
-    font-size: 2.0em;
+    font-size: 1.3em;
     width: 100%;
     font-weight: bold;
-    color: #fff;
+    color: map-get($colors, light);
   }
 
   .card-subtitle {
@@ -63,20 +56,33 @@ page-home {
     position: absolute;
     top: 52%;
     width: 100%;
-    color: #fff;
+    color: map-get($colors, light);
     padding-top: 5px;
   }
 
   }
 
-   .background{
-     background: #D3D3D3 no-repeat;
-     background-size: cover;
-   }
+  .iconic{
+    width: 33%;
+    height: 100px;
+  }
 
-  // .scroll-content {
-  //           background-color: map-get($colors, light);
-  //       }
+  #notification-button {
+            position: relative;
+            width: 42px;
+            top:1px;
+            right: 1px;
+            overflow: visible!important;
+        }
+
+
+   #notifications-badge {
+            background-color: #EF476F;
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            border-radius: 100%;
+        }
 
 }
  #notification-button {            

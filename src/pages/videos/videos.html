@@ -1,7 +1,9 @@
-<ion-header color="headerColor">
+<ion-header>
 
-  <ion-navbar color="headerColor">
-    <ion-title>{{videoGroup?.setId | uppercase}}</ion-title>
+
+  <ion-navbar>
+    <ion-title>{{videoGroup?.setId | titlecase}}</ion-title>
+
   </ion-navbar>
 
 </ion-header>
@@ -9,34 +11,31 @@
 
 <ion-content class="card-background-page background" scroll="false">
   <ion-card *ngFor="let video of videoGroup?.videos; let i = index">
-    <ion-card-header>
-      {{ video.text }}
+
+    <ion-card-header text-wrap>
+      {{ video.text | titlecase}}
     </ion-card-header>
     <ion-card-content>
-      <iframe
-      width="100%"
-      height="250"
-      [src]="video.url | youtube"
-      frameborder="0" allowfullscreen>
-      </iframe>
+      <div class="vid">
+        <img [src]="video.url | concat" alt="video.text">
+        <div class="play">
+          <button ion-fab color="light" (click)="openVideo(video.url)"><ion-icon name="play"></ion-icon></button>
+        </div>
+      </div>
+
+      <ion-row>
+        <ion-col text-right>
+          <ion-chip (click)="onAddToFavorites(video)" *ngIf="!isFavorite(video)">
+            <ion-icon name="heart" color="btn"></ion-icon>
+            <ion-label>Favourite</ion-label>
+          </ion-chip>
+
+          <ion-chip (click)="onRemoveFromFavorites(video)" *ngIf="isFavorite(video)">
+            <ion-icon name="heart" color="danger"></ion-icon>
+            <ion-label color="danger">Unfavourite</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
-    <ion-row>
-      <ion-col text-right>
-        <ion-icon name="thumbs-up" item-left></ion-icon>
-        <button
-          ion-button
-          clear
-          small
-          (click)="onAddToFavorites(video)"
-          *ngIf="!isFavorite(video)">Favorite</button>
-        <button
-          ion-button
-          clear
-          small
-          color="danger"
-          (click)="onRemoveFromFavorites(video)"
-          *ngIf="isFavorite(video)">Unfavorite</button>
-      </ion-col>
-    </ion-row>
   </ion-card>
 </ion-content>

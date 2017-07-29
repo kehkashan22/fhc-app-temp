@@ -1,3 +1,4 @@
+import { HomePage } from './../pages/home/home';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -11,6 +12,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 
@@ -34,9 +36,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalsProvider } from '../providers/globals/globals';
 
+
 /* For Downloading files*/
 import { Transfer  } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { FCM } from "@ionic-native/fcm";
 
 
 
@@ -88,8 +92,10 @@ const firebaseConfig = {
     LoaderProvider,
     GlobalsProvider,
     QuizStoreProvider,
-    Transfer, 
-    File
+    Transfer,
+    File,
+    YoutubeVideoPlayer,
+    FCM
   ]
 })
 export class AppModule {}

@@ -1,3 +1,6 @@
+import { User } from './../../data/user.interface';
+import { Md5 } from 'ts-md5/dist/md5';
+import { LoadingController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
 import * as sha1  from 'sha1';
 import { UserProvider } from './../../providers/user';
@@ -12,6 +15,7 @@ import { IonicPage, NavController, Events, ModalController } from 'ionic-angular
 export class ProfilePage {
 
   starredPage = 'StarredPage';
+  reportCard = 'ReportCardPage';
   fullname = '';
   email = '';
   phone = '';
@@ -20,19 +24,25 @@ export class ProfilePage {
               private userProvider: UserProvider,
               private events: Events,
               private authProvider: AuthProvider,
-              private modalCtrl: ModalController
+              private modalCtrl: ModalController,
+              private _loader: LoadingController
   ) { }
 
   ionViewWillEnter(): void {
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.userProvider.getUser(token).subscribe((data) => {
+    const loader = this._loader.create({
+      spinner: "bubbles",
+      content: "Loading Profile..."
+    });
+    loader.present();
+      this.userProvider.getUser().then((data: User) => {
         this.fullname = data.fullName;
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
-          sha1(this.email.toLowerCase());
+          Md5.hashStr(this.email.toLowerCase());
+          loader.dismiss();
       });
-    });
+
 
   }
 

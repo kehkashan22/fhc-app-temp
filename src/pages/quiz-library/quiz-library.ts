@@ -1,3 +1,4 @@
+import { GlobalsProvider } from './../../providers/globals/globals';
 import { QuizLibrary } from './../../data/quiz-library.interface';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, LoadingController } from 'ionic-angular';
@@ -13,8 +14,8 @@ import { Quiz } from "../../data/quiz.interface";
 export class QuizLibraryPage implements OnInit {
 
   quizLibrary: QuizLibrary[];
-  caLibrary: QuizLibrary;
-  csLibrary: QuizLibrary;
+  caLibrary:any[] = [];
+  csLibrary: any[] = [];
   quizCollection: Quiz[];
   quizPage = 'QuizPage';
   show: string = '';
@@ -25,30 +26,34 @@ export class QuizLibraryPage implements OnInit {
   constructor(public navCtrl: NavController,
     private quizService: QuizService,
     private authProvider: AuthProvider,
-    private loader: LoadingController) {
+    private loader: LoadingController,
+    private _globals: GlobalsProvider) {
   }
 
   ionViewDidLoad() {
   }
 
   ngOnInit() {
-    const loader = this.loader.create({
-      spinner: 'bubbles',
-      content: "Loading Quiz..."
-    });
-    loader.present();
+    // const loader = this.loader.create({
+    //   spinner: 'bubbles',
+    //   content: "Loading Quiz..."
+    // });
+    // loader.present();
 
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.quizService.getQuizLibrary(token).subscribe((data: QuizLibrary[]) => {
-        loader.dismiss();
-        this.quizLibrary = data;
-        this.caLibrary = this.quizLibrary[0];
-        this.csLibrary = this.quizLibrary[1];
-      });
-    },
-      error => {
-        console.log(error);
-      });
+    // this.authProvider.getActiveUser().getIdToken().then((token: string) => {
+    //   this.quizService.getQuizLibrary(token).subscribe((data: QuizLibrary[]) => {
+    //     loader.dismiss();
+    //     this.quizLibrary = data;
+    //     this.caLibrary = this.quizLibrary[0];
+    //     this.csLibrary = this.quizLibrary[1];
+    //   });
+    // },
+    //   error => {
+    //     console.log(error);
+    //   });
+     this.caLibrary = this._globals.caCollection;
+    this.csLibrary = this._globals.csCollection;
+
   }
 
   goTo(courseId: string) {
@@ -63,11 +68,18 @@ export class QuizLibraryPage implements OnInit {
     }
   }
 
-  toChapters(fa: any, subjectId: string) {
-    this.navCtrl.push(this.chaptersPage, {
+  toChapters(course, stage, subject, subjectId, fa) {
+    const url = '/quiz-library/'+course+'/'+stage+'/'+subjectId+'/'+fa;
+    let data = {
+      course: course,
+      stage: stage,
+      subject: subject,
+      subjectId: subjectId,
       fa: fa,
-      subjectId: subjectId
-    });
+      url: url
+    }
+
+    this.navCtrl.push(this.chaptersPage, data);
   }
 
 }

@@ -33,7 +33,7 @@ export class VideosProvider {
 
     return new Promise(resolve => {
       console.log("See this new");
-      this.http.get('https://ionic-fhc-app.firebaseio.com/videodb.json?auth='+token)
+      this.http.get('https://fhc-ionic-app.firebaseio.com/videodb.json?auth='+token)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
@@ -45,7 +45,7 @@ export class VideosProvider {
   loadVideos(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
       firebase.database()
-        .ref(url).on('value', snapshot => {
+        .ref(url).child('/sets').on('value', snapshot => {
           resolve(snapshot.val());
         });
     });
@@ -68,24 +68,4 @@ export class VideosProvider {
     });
 
   }
-
-    //  loadLibrary(){
-      //this.libraryCollection = library;
-    //  if (this.data) {
-    //    return Promise.resolve(this.data);
-    //  }
-  //     return new Promise(resolve => {
-
-  //     //  this.http.put('https://ionic-fhc-app.firebaseio.com/video-library.json', this.libraryCollection)
-  //     this.http.put('https://ionic-fhc-app.firebaseio.com/vid-lib2.json', this.vidLib)
-  //        .map(res => res.json())
-  //        .subscribe(() => {
-  //          console.log("Success!");
-  //        },
-  //        (error)=>{
-  //          console.log(error.json());
-  //        });
-  //    });
-
-  //  }
 }

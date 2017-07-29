@@ -1,6 +1,8 @@
 <ion-content padding class="bg" scroll="false">
 
-  <img src="assets/logo/logo.png" alt="">
+
+  <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/logo.png" alt="FHC Logo">
+
 
   <form [formGroup]="loginForm">
 
@@ -30,11 +32,11 @@
   </form>
 
   <div>
-    <button ion-button color="btn-login" style="color: white;" block (tap)="login()">LOGIN</button>
+    <button ion-button color="btn" style="color: white;" block (tap)="login()">LOGIN</button>
     <ion-grid>
       <ion-row>
         <ion-col col-12 offset-5>
-          <button ion-button small color="btn-login" clear (tap)="forgotPassword()">Forgot your Password?</button>
+          <button ion-button small color="btn" clear (tap)="forgotPassword()">Forgot your Password?</button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -43,7 +45,7 @@
   </div>
 
 
-  <button ion-button color="btn-login" outline (tap)="navigateToSignup()" block >Create an account</button>
+  <button ion-button color="btn" outline (tap)="navigateToSignup()" block >Create an account</button>
 </ion-content>
 
 <ion-footer>

@@ -1,37 +1,66 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Quiz } from "../../data/quiz.interface";
+import { QuizService } from './../../providers/quiz';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
   selector: 'page-chapters',
   templateUrl: 'chapters.html',
 })
-export class ChaptersPage {
+export class ChaptersPage implements OnInit{
 
   fa: any;
-  subjectId: string;
-  chapters: {
-    chapterId: string, quiz: {
-      quizId: string,
-      questions: Quiz[]
-    }
-  }[] = [];
+  subjectName: string;
+  chapters: any[] = [];
+  tempChapters: any[] = [];
+  url = '';
   quizzesPage='QuizzesPage';
+  reportCard = 'ReportCardPage';
+  data: {
+      course: string,
+      stage: string,
+      subject: string,
+      subjectId: string,
+      fa: string,
+      url: string
+    }
+  nothing: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+                private _loader: LoadingController,
+                private _quiz: QuizService) {
+  }
+
+ ngOnInit() {
+    const loader = this._loader.create({
+      spinner: "bubbles",
+      content: "Loading Chapters..."
+    });
+    this.data = this.navParams.data;
+    console.log(this.data);
+    this.url = this.data.url;
+      loader.present();
+      this._quiz.getQuizLibrary(this.url).then((snapshot) => {
+       //let sets: Videos[]  = snapshot;
+        if (snapshot){
+          this.chapters = snapshot;
+          this.tempChapters = this.chapters;
+        }
+        this.nothing = this.chapters.length > 0 ? false : true;
+        loader.dismiss();
+      });
   }
 
   ionViewDidLoad() {
-    this.subjectId = this.navParams.get('subjectId');
-    this.fa = this.navParams.get('fa');
-    if (this.fa) {
-      this.chapters = this.fa.chapters;
-    }
+    this.subjectName = this.data.subject;
+    this.fa = this.data.fa;
+
+
   }
 
   getChapterByTitle(event: any) {
-      this.chapters = this.fa.chapters;
+      this.chapters = this.tempChapters;
     // Reset items back to all of the items
 
     let val = event.target.value;
@@ -41,6 +70,32 @@ export class ChaptersPage {
         return (chapters.chapterId.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
+  }
+
+  toQuizzes(chapter){
+    this.navCtrl.push(this.quizzesPage, {
+      subjectId: this.data.subjectId,
+      chapter: chapter
+    });
+  }
+
+  toReportCard(){
+    this.navCtrl.push(this.reportCard, {
+      subjectId: this.data.subjectId
+    });
+  }
+
+  doRefresh(refresher) {
+    this._quiz.getQuizLibrary(this.url).then(snapshot => {
+      //let sets: Videos[]  = snapshot;
+      if (snapshot) {
+        this.chapters = snapshot;
+        this.tempChapters = this.chapters;
+      }
+    });
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
   }
 
 }

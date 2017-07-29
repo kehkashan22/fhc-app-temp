@@ -8,12 +8,10 @@ import { VideosProvider } from './../../providers/videos';
 import { Component  } from '@angular/core';
 import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
-import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
-
-declare var FCMPlugin;
+import { FCM } from '@ionic-native/fcm';
 
 @IonicPage()
 @Component({
@@ -28,8 +26,9 @@ export class HomePage {
   analyseMePage = 'AnalyseMePage';
   rootLibraryPage = 'RootLibraryPage';
   quizLibraryPage = 'QuizLibraryPage';
+  reportCardPage = 'ReportCardPage';
   quizCollection : Quiz[];
-  imgPath = "assets/img/";
+  imgPath = "https://s3-ap-southeast-1.amazonaws.com/fhc.app/";
   imgType = ".jpeg";
   userData: User;
 
@@ -40,9 +39,9 @@ export class HomePage {
   fireStore = firebase.database().ref("/pushtokens");
 
   slides:any[]=[
-              {url: this.imgPath + "slide1.jpg", text: "Test Slide1"},
-              {url: this.imgPath + "slide2.jpg", text: "Test Slide2"},
-              {url: this.imgPath + "slide3.jpg", text: "Test Slide3"}
+              {url: this.imgPath + "slides4.jpg", text: "Test Slide1"},
+              {url: this.imgPath + "slides2.jpg", text: "Test Slide2"},
+              {url: this.imgPath + "slides5.jpg", text: "Test Slide3"}
               ];
 
   constructor(public navCtrl: NavController,
@@ -54,56 +53,63 @@ export class HomePage {
                private events : Events,
                private menuCtrl: MenuController,
                private authProvider : AuthProvider,
-               private loader : LoadingController,
+               private _loader : LoadingController,
                private app : App,
+                private quizProvider: QuizService,
                private afd: AngularFireDatabase,
-               private storage: Storage           
+               private fcm: FCM
     ){
-        this.tokenSetup().then((token) => {
-          this.storeToken(token);
-        });              
+          this.fcm.getToken().then((token) => {
+              this.storeToken(token);
+          },
+          (err) => {
+            console.log(err);
+          });
+
   }
 
   ngOnInit() {
    this.videosService.loadFavoriteVideos();
-    // this.quizService.loadQuizLibrary().then((data) => {
-    //    console.log(data);
-    //  });
-    // this.videosProvider.loadLibrary().then((data) => {
-    //    console.log(data);
-    //  });
+   this.quizStore.loadSolvedQuizCollection();
 
   }
 
   ionViewDidLoad(){
-    this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-      this.userProvider.getUser(token).subscribe((data) => {
+    const loader = this._loader.create({
+      spinner: "bubbles",
+      content:'Please wait while we finish loading...',
+      duration: 3000
+    });
+    if(!this.userData){
+      loader.present();
+      this.userProvider.getUser().then((data: User) => {
            this.userData = data;
            //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
             this.events.publish('user:created', this.userData);
-       });
-    });
-    FCMPlugin.onNotification((data) => {
-      
+
+      });
+    }
+
+    this.fcm.onNotification().subscribe((data) => {
       if(data.wasTapped){
-        var self = this;
+        const self = this;
         //self.navCtrl.setRoot('Home');
         self.navCtrl.setRoot('AnnouncementsPage');
+        alert('Data TAPPED');
       }else{
         alert( JSON.stringify(data) );
       }
     });
 
-    FCMPlugin.onTokenRefresh((token) => {
+    this.fcm.onTokenRefresh().subscribe(token=>{
       this.storeToken(token);
     });
 
   }
 
-  onPageWillEnter(){
-        console.log('****on page will enter messages pane');
-
-  }
+  toAnalysisPage(){
+      this.navCtrl.push(this.analyseMePage);
+    }
 
   navigateToAnnouncements(){
     this.navCtrl.push('AnnouncementsPage');
@@ -124,16 +130,5 @@ export class HomePage {
     }).catch((err) => {
       alert(err);
     });
-  }
-  tokenSetup(){
-    var promise = new Promise((resolve, reject) => {
-      FCMPlugin.getToken((token) => {
-        resolve(token);
-      }, (err) => {
-        reject(err);
-      });
-      
-    });
-    return promise;
   }
 }

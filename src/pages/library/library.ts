@@ -16,36 +16,47 @@ export class LibraryPage {
   videoCollection: Videos[] = [];
   tempVideos: Videos[] = [];
   videosPage = 'VideosPage';
-
+  nothing: boolean = false;
+  url = '';
+  subject = '';
+  type = '';
   constructor(private _video: VideosProvider,
     private _loader: LoadingController,
     private _auth: AuthProvider,
-    private navParams : NavParams) { }
+    private navParams: NavParams) { }
 
   ngOnInit() {
     const loader = this._loader.create({
       spinner: "bubbles",
       content: "Loading Videos..."
     });
-      let url = this.navParams.data;
-      loader.present();
-      this._video.loadVideos(url).then(snapshot => {
-       //let sets: Videos[]  = snapshot;
-        if (snapshot){
-          console.log(snapshot);
-          this.videoCollection = snapshot;
-          this.tempVideos = this.videoCollection;
+    this.url = this.navParams.get('url');
+    this.subject = this.navParams.get('subject');
+    this.type = this.navParams.get('type');
+    loader.present();
+    this._video.loadVideos(this.url).then(snapshot => {
+      //let sets: Videos[]  = snapshot;
+      if (snapshot) {
+        console.log(snapshot);
+        this.videoCollection = snapshot;
+        this.tempVideos = this.videoCollection;
+      }
+       if (this.videoCollection.length === 0) {
+          this.nothing = true;
         }
-        loader.dismiss();
-      });
-
-
+      loader.dismiss();
+    });
   }
 
   doRefresh(refresher) {
-    //this.getVideosFromDB();
+    this._video.loadVideos(this.url).then(snapshot => {
+      //let sets: Videos[]  = snapshot;
+      if (snapshot) {
+        this.videoCollection = snapshot;
+        this.tempVideos = this.videoCollection;
+      }
+    });
     setTimeout(() => {
-      //console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
   }

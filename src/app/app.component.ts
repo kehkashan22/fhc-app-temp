@@ -1,6 +1,4 @@
-import { LoadingController, App } from 'ionic-angular';
-import * as sha1  from 'sha1';
-import { UserProvider } from './../providers/user';
+
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -9,6 +7,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AuthProvider } from "../providers/auth";
+import { Md5 } from 'ts-md5/dist/md5';
+import { LoadingController, App } from 'ionic-angular';
+import { UserProvider } from './../providers/user';
 
 import * as firebase from 'firebase';
 
@@ -60,7 +61,7 @@ export class MyApp {
       const authObserver = afAuth.authState.subscribe(user => {
         this.zone.run(() => {
           if (user) {
-            this.rootPage = 'HomePage';
+            this.rootPage = this.homePage;
             authObserver.unsubscribe();
           } else {
             this.rootPage = 'LoginWithEmailPage';
@@ -70,16 +71,18 @@ export class MyApp {
       });
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.backgroundColorByHexString('#00A1DF');
+      statusBar.backgroundColorByHexString('#005C9C');
       splashScreen.hide();
-      
-  
+
+
     });
 
     this.pages = [
-      { title: 'Home', component: 'HomePage', icon: 'home'},
+      { title: 'Home', component: this.homePage, icon: 'home'},
       { title: 'Video Library', component: 'RootLibraryPage', icon: 'book'},
       { title: 'Starred Videos', component: 'StarredPage', icon: 'star'},
+      { title: 'Quiz Library', component: 'QuizLibraryPage', icon: 'school'},
+       { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications'},
       { title: 'Store', component: 'store', icon: 'cart'},
       { title: 'Contact Us', component: 'ContactPage', icon: 'help-circle'},
       { title: 'About', component: 'AboutPage', icon: 'pulse'},
@@ -91,7 +94,7 @@ export class MyApp {
       this.fullname = user.fullName;
       this.email = user.emailId;
       this.profilePicture = "https://www.gravatar.com/avatar/" +
-        sha1(this.email.toLowerCase())
+        Md5.hashStr(this.email.toLowerCase())
     });
   }
 
@@ -107,7 +110,7 @@ export class MyApp {
   }
 
   goToStore() {
-    this.iab.create('http://www.fhconline.in/');
+    this.iab.create('http://www.fhconline.in/', "_system", "location=yes");
   }
 
   logout() {
@@ -120,7 +123,7 @@ export class MyApp {
     firebase.database().ref('/pushtokens').child(firebase.auth().currentUser.uid).remove();
 
     this.authProvider.logout().then(() => {
-      
+
       setTimeout(() => {
         loading.dismiss();
       }, 3000);
@@ -132,6 +135,6 @@ export class MyApp {
     });
   }
 
-  
+
 }
 

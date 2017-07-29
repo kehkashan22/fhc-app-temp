@@ -1,6 +1,14 @@
 page-videos {
-  .background{
-    background: silver no-repeat;
-    background-size: cover;
+  .vid{
+    position: relative;
+    .play {
+      position: absolute;
+      top: 36%;
+      left: 38%;
+      align-content: center;
+      text-align: center;
+      width: 100%;
+    }
   }
+
 }

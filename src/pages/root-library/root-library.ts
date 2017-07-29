@@ -29,26 +29,6 @@ export class RootLibraryPage {
     private navCtrl : NavController) { }
 
   ngOnInit() {
-    // this.libraryCollection = videos;
-    // const loader = this._loader.create({
-    //   spinner: "bubbles",
-    //   content: "Loading Videos..."
-    // });
-    // loader.present();
-    // this._videos.getNewVideos().then((data: Library[]) => {
-    //   console.log(data);
-    //   loader.dismiss();
-    //   if (data) {
-    //     this.libraryCollection = data;
-    //     this.tempVideos = this.libraryCollection;
-    //    this.caGroup = this.libraryCollection[0];
-    //     this.csGroup = this.libraryCollection[1];
-    //   } else {
-    //     this.libraryCollection = [];
-    //     this.tempVideos = [];
-    //   }
-    // });
-
     this.caGroup = this._globals.caCollection;
     console.log(this.caGroup);
     this.csGroup = this._globals.csCollection;
@@ -72,9 +52,13 @@ export class RootLibraryPage {
     if(type==="case laws"){
       type = 'case_laws';
     }
-    const url = '/vid-lib2/'+course+'/'+stage+'/'+subject+'/'+type;
+    const url = '/video-library/'+course+'/'+stage+'/'+subject+'/'+type;
     console.log(url);
-    this.navCtrl.push(this.library, url)
+    this.navCtrl.push(this.library, {
+        url: url,
+        subject: subject,
+        type: type
+    });
   }
 }
 

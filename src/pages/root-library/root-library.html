@@ -1,6 +1,6 @@
-<ion-header color="headerColor">
+<ion-header >
 
-  <ion-navbar no-border color="headerColor">
+  <ion-navbar no-border >
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -10,11 +10,11 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="course" color="headerColor">
-      <ion-segment-button value="ca" color="headerColor">
+    <ion-segment [(ngModel)]="course" >
+      <ion-segment-button value="ca" >
         CA
       </ion-segment-button>
-      <ion-segment-button value="cs" color="headerColor">
+      <ion-segment-button value="cs" >
         CS
       </ion-segment-button>
     </ion-segment>
@@ -25,6 +25,7 @@
 <ion-content class="card-background-page background" scroll="false">
 <!--CS VIDEOS-->
   <div [ngSwitch]="course">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/bg.jpg" alt="Video Library">
     <ion-list *ngSwitchCase="'ca'">
       <ion-item-group *ngFor="let stage of caGroup">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
@@ -50,7 +51,7 @@
           {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
-              <button ion-item (click)="goToVideos()">
+              <button ion-item (click)="goToVideos(course, stage.stageId, subject.subjectId, type)">
                 <!--[navPush]="library" [navParams]="type.sets"-->
                 {{type | titlecase}}
               </button>
