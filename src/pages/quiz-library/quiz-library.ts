@@ -34,23 +34,6 @@ export class QuizLibraryPage implements OnInit {
   }
 
   ngOnInit() {
-    // const loader = this.loader.create({
-    //   spinner: 'bubbles',
-    //   content: "Loading Quiz..."
-    // });
-    // loader.present();
-
-    // this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-    //   this.quizService.getQuizLibrary(token).subscribe((data: QuizLibrary[]) => {
-    //     loader.dismiss();
-    //     this.quizLibrary = data;
-    //     this.caLibrary = this.quizLibrary[0];
-    //     this.csLibrary = this.quizLibrary[1];
-    //   });
-    // },
-    //   error => {
-    //     console.log(error);
-    //   });
      this.caLibrary = this._globals.caCollection;
     this.csLibrary = this._globals.csCollection;
 

@@ -15,7 +15,7 @@
         CA
       </ion-segment-button>
       <ion-segment-button value="cs" >
-        CS
+        <CS></CS>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -35,6 +35,7 @@
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
           {{subject.subjectName | titlecase}}
+          
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
               <button ion-item
@@ -62,7 +63,7 @@
         </ion-item>
       </ion-item-group>
     </ion-list>
-  </div>
+  </div>  
 
 
 </ion-content>

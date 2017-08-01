@@ -9,4 +9,13 @@ page-quiz-library {
    .inner-list{
           margin-bottom: 0px;
     }
+
+    .item-divider{
+      background: map-get($colors,btn);
+      color:white;
+    }
+
+    .item-block{
+      
+    }
 }

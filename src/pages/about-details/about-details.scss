@@ -1,5 +1,6 @@
 page-about-details {
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
     .contact-popover{
         background: #000;
         opacity: 0.4;
@@ -38,10 +39,12 @@ page-about-details {
             overflow: scroll;   
             h1{
                 margin-top:5rem;
+                font-family: 'Abril Fatface', cursive;
+                color:#0C90C0;
             }
             .text-area{
                 font-family: 'Open Sans', sans-serif;
-                color:#000;
+                color:#545454;
             }
         }         
     }
