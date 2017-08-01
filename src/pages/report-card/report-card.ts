@@ -185,83 +185,33 @@ export class ReportCardPage implements OnInit {
     });
 
     this.getPerformancePercent();
-     const plugin = {
-      beforeDraw: function (chart) {
-        var width = chart.chart.width,
-          height = chart.chart.height,
-          ctx = chart.chart.ctx;
-
-        ctx.restore();
-        var fontSize = (height / 114).toFixed(2);
-        ctx.font = fontSize + "em montserrat";
-
-        ctx.textBaseline = "middle";
-        if(typeof(chart.config.data.text) !== undefined){
-            var text = chart.config.data.text+"%",
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
-          textY = height / 2;
-          ctx.fillText(text, textX, textY);
-        }
-        ctx.save();
-      }
-    };
-
-    const options =  {
-    legend: {
-      display: false
-    },
-    segmentShowStroke : false,
-    cutoutPercentage: 75,
-    tooltips: {
-      enabled: false
-    },
-    elements: {
-        arc: {
-            borderWidth: 0
-        }
-    },
-     title: {
-            display: true,
-            text: '',
-            fontSize: 14,
-            fontFamily: 'Helvetica',
-            position: 'bottom'
-        }
-  };
-
-    //this.getClassString(this.percentage);
-
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-
-      type: 'doughnut',
-      data: {
-        labels: ["Chances of Passing", "Improvement Required!"],
-        datasets: [{
-          label: 'Overall Performance',
-          data: [this.percentage, 100 - this.percentage],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.8)',
-            'rgba(54, 162, 235, 0.8)',
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-          ]
-        }],
-        text: this.percentage
-      },
-      options: options,
-      plugins: [plugin]
-
-    });
+    this.getClassString(this.percentage);
+    this.generateReport();
   }
 
   getPerformancePercent() {
     let sum = 0;
     for (var i = 0; i < this.memoryData.length; sum += (this.memoryData[i] / 100) * this._globals.memoryMatrix[i], i++);
-    for (var i = 0; i < this.memoryData.length; sum += (this.applicationData[i] / 100) * this._globals.applicationMatrix[i], i++);
-    for (var i = 0; i < this.memoryData.length; sum += (this.speedData[i] / 100) * this._globals.speedMatrix[i], i++);
+    for (var i = 0; i < this.applicationData.length; sum += (this.applicationData[i] / 100) * this._globals.applicationMatrix[i], i++);
+    for (var i = 0; i < this.speedData.length; sum += (this.speedData[i] / 100) * this._globals.speedMatrix[i], i++);
     this.percentage = Math.floor(sum);
+  }
+
+    private getClassString(per) {
+    let perInt = +per | 0;
+
+    if (perInt >= 60) {
+      this.percentClass = 'c100 p' + perInt + ' green ';
+    } else if (perInt < 40) {
+      this.percentClass = 'c100 p' + perInt;
+    } else {
+      this.percentClass = 'c100 p' + perInt + ' orange ';
+    }
+
+  }
+
+  private generateReport(){
+
   }
 
 }

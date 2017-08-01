@@ -43,7 +43,9 @@
     </ng-template>
     <div *ngIf="!video; else videoTag" horizontal-padding>
       <progress-bar [progress]="progressIndex" [total]="quizCollection?.length"></progress-bar>
-       <ion-item text-wrap no-lines><p>Based on what you just heard, answer the following questions:</p></ion-item>
+      <ion-item text-wrap no-lines>
+        <p>Based on what you just heard, answer the following questions:</p>
+      </ion-item>
       <ion-slides (ionSlideDidChange)="quesChanged()" #slide>
         <ion-slide *ngFor="let currentQuestion of quizCollection; let i=index;">
           <ion-card no-padding>
@@ -60,18 +62,18 @@
           <ion-list radio-group mode="ios">
             <ion-item *ngFor="let answer of currentQuestion?.answers; let j=index;" mode="ios">
               <ion-label text-wrap>
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-2>
-                    {{answer.answerKey}}.
-                  </ion-col>
-                  <ion-col text-wrap id="answerText">
-                    {{answer.answerText}}
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-2>
+                      {{answer.answerKey}}.
+                    </ion-col>
+                    <ion-col text-wrap id="answerText">
+                      {{answer.answerText}}
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
 
-            </ion-label>
+              </ion-label>
               <ion-radio [value]="answer" (click)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
             </ion-item>
           </ion-list>
@@ -84,14 +86,23 @@
   <ng-template #quizEnd>
     <div class="quiz" padding>
       Congratulations on successfully completing the analysis...
-      <ion-card>
-        <ion-card-header text-center>
-          Compare your two scores!
-        </ion-card-header>
-        <ion-card-content>
+
+
+      <flash-card>
+
+        <div class="flash-card-front">
+
+          <h3 text-center>
+            Compare your two scores!
+          </h3>
+
           <canvas #barCanvas></canvas>
-        </ion-card-content>
-      </ion-card>
+
+        </div>
+
+        <div class="flash-card-back">ARE COOL!</div>
+
+      </flash-card>
 
       <p>...now go to Explanation to get the proper understanding of each question, or re-try the quiz!</p>
       <button ion-button block outline (click)="getExplanation()">Get Explanation</button>

@@ -8,24 +8,45 @@
 
 
 <ion-content>
-
-  <ion-card>
-    <ion-card-header text-center>
-      Report Card
-    </ion-card-header>
-    <ion-card-content>
+  <flash-card>
+    <div class="flash-card-front">
+      <h3 text-center>
+        Report Card
+      </h3>
       <canvas #barCanvas height="250px"></canvas>
-    </ion-card-content>
-  </ion-card>
+    </div>
+    <div class="flash-card-back">
+    <div>
+      What is A, B, C breakup?
+    </div>
 
+    </div>
+  </flash-card>
 
-  <ion-card>
-    <ion-card-header text-center>
-      Performance
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #doughnutCanvas height="250px"></canvas>
-    </ion-card-content>
-  </ion-card>
+  <flash-card>
+    <div class="flash-card-front">
+      <h3 text-center>
+        Performance
+      </h3>
+      <hr>
+    <p>Click on this card to get complete report.</p>
+      <div [class]="percentClass">
+        <span>{{percentage}}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-card-back">
+      <h3 text-center>
+        Performance
+      </h3>
+      <hr>
+    <p><b>A:</b></p>
+    <p><b>B:</b></p>
+    <p><b>C:</b></p>
+    </div>
+  </flash-card>
 
 </ion-content>

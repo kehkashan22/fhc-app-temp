@@ -8,12 +8,11 @@ import {VgCoreModule} from 'videogular2/core';
 import {VgControlsModule} from 'videogular2/controls';
 import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
-import { ProgressBarComponent } from "../../components/progress-bar/progress-bar";
+import { ComponentsModule } from "../../components/components.module";
 
 @NgModule({
   declarations: [
-    AnalyseMePage,
-    ProgressBarComponent
+    AnalyseMePage
   ],
   imports: [
     VgCoreModule,
@@ -21,7 +20,8 @@ import { ProgressBarComponent } from "../../components/progress-bar/progress-bar
     VgOverlayPlayModule,
     VgBufferingModule,
     IonicPageModule.forChild(AnalyseMePage),
-    PipesModule
+    PipesModule,
+    ComponentsModule
 
   ],
   exports: [

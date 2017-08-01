@@ -1,13 +1,10 @@
-import { FlashCardComponent } from './../../components/flash-card/flash-card';
-
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { AnalysisPage } from './analysis';
 
 @NgModule({
   declarations: [
-    AnalysisPage,
-    FlashCardComponent
+    AnalysisPage
   ],
   imports: [
     IonicPageModule.forChild(AnalysisPage),
