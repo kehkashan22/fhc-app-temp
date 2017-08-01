@@ -1,4 +1,4 @@
-page-quiz-library {
+  page-quiz-library {
 
   .slider{
     left: 0;
@@ -11,7 +11,7 @@ page-quiz-library {
     }
 
     .item-divider{
-      background: map-get($colors,btn);
+      background: map-get($colors,primary);
       color:white;
     }
 

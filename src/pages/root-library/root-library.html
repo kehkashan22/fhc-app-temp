@@ -30,6 +30,8 @@
       <ion-item-group *ngFor="let stage of caGroup">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+         <ion-icon name="add" *ngIf="show!==subject.subjectId"></ion-icon>
+          <ion-icon name="remove" *ngIf="show===subject.subjectId"></ion-icon> 
           {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
@@ -48,6 +50,9 @@
       <ion-item-group *ngFor="let stage of csGroup">
         <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+         <ion-icon name="add" *ngIf="show!==subject.subjectId"></ion-icon>
+          <ion-icon name="remove" *ngIf="show===subject.subjectId"></ion-icon>
+         
           {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>

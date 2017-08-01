@@ -2,4 +2,9 @@ page-root-library {
    .inner-list{
           margin-bottom: 0px;
     }
+    
+    .item-divider{
+        background: map-get($colors,primary);
+        color: white;
+    }
 }

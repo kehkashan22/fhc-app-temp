@@ -15,7 +15,7 @@
         CA
       </ion-segment-button>
       <ion-segment-button value="cs" >
-        <CS></CS>
+        CS
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -32,8 +32,10 @@
   <div [ngSwitch]="course">
     <ion-list *ngSwitchCase="'ca'">
       <ion-item-group *ngFor="let stage of caLibrary">
-        <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
-        <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+        <ion-item-divider>{{ stage.stageId | uppercase }}</ion-item-divider>
+        <ion-item icon-end *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+          <ion-icon name="add" *ngIf="show!==subject.subjectId"></ion-icon>
+          <ion-icon name="remove" *ngIf="show===subject.subjectId"></ion-icon>
           {{subject.subjectName | titlecase}}
           
           <div *ngIf="show === subject.subjectId">
@@ -50,8 +52,10 @@
 
     <ion-list *ngSwitchCase="'cs'">
       <ion-item-group *ngFor="let stage of csLibrary">
-        <ion-item-divider color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
+        <ion-item-divider>{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+          <ion-icon name="add" *ngIf="show!==subject.subjectId"></ion-icon>
+          <ion-icon name="remove" *ngIf="show===subject.subjectId"></ion-icon>
           {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
