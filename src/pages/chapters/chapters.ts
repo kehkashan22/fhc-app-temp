@@ -1,3 +1,4 @@
+import { NetworkProvider } from './../../providers/network/network';
 import { QuizService } from './../../providers/quiz';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
@@ -8,59 +9,70 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
   selector: 'page-chapters',
   templateUrl: 'chapters.html',
 })
-export class ChaptersPage implements OnInit{
+export class ChaptersPage implements OnInit {
 
   fa: any;
   subjectName: string;
   chapters: any[] = [];
   tempChapters: any[] = [];
   url = '';
-  quizzesPage='QuizzesPage';
+  quizzesPage = 'QuizzesPage';
   reportCard = 'ReportCardPage';
   data: {
-      course: string,
-      stage: string,
-      subject: string,
-      subjectId: string,
-      fa: string,
-      url: string
-    }
+    course: string,
+    stage: string,
+    subject: string,
+    subjectId: string,
+    fa: string,
+    url: string
+  }
   nothing: boolean = false;
+  loader: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-                private _loader: LoadingController,
-                private _quiz: QuizService) {
+    private _loader: LoadingController,
+    private _quiz: QuizService,
+    private _network: NetworkProvider) {
   }
 
- ngOnInit() {
-    const loader = this._loader.create({
+  ngOnInit() {
+    this.loader = this._loader.create({
       spinner: "bubbles",
       content: "Loading Chapters..."
     });
     this.data = this.navParams.data;
     console.log(this.data);
     this.url = this.data.url;
-      loader.present();
+    this.loader.present();
+    if (this._network.noConnection()) {
+      this.loader.dismiss();
+      this._network.showNetworkAlert();
+    } else {
       this._quiz.getQuizLibrary(this.url).then((snapshot) => {
-       //let sets: Videos[]  = snapshot;
-        if (snapshot){
+        //let sets: Videos[]  = snapshot;
+        if (snapshot) {
           this.chapters = snapshot;
           this.tempChapters = this.chapters;
         }
         this.nothing = this.chapters.length > 0 ? false : true;
-        loader.dismiss();
+        this.loader.dismiss();
       });
+    }
   }
 
   ionViewDidLoad() {
+
     this.subjectName = this.data.subject;
     this.fa = this.data.fa;
 
+  }
 
+  ionViewWillLeave() {
+    this.loader.dismiss();
   }
 
   getChapterByTitle(event: any) {
-      this.chapters = this.tempChapters;
+    this.chapters = this.tempChapters;
     // Reset items back to all of the items
 
     let val = event.target.value;
@@ -72,14 +84,14 @@ export class ChaptersPage implements OnInit{
     }
   }
 
-  toQuizzes(chapter){
+  toQuizzes(chapter) {
     this.navCtrl.push(this.quizzesPage, {
       subjectId: this.data.subjectId,
       chapter: chapter
     });
   }
 
-  toReportCard(){
+  toReportCard() {
     this.navCtrl.push(this.reportCard, {
       subjectId: this.data.subjectId
     });

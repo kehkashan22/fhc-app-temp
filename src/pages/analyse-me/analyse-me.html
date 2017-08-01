@@ -41,17 +41,25 @@
 
       <!--QUIZ PORTION-->
     </ng-template>
-    <div *ngIf="!video; else videoTag" class="quiz">
-
-      <ion-slides #slide1>
+    <div *ngIf="!video; else videoTag" horizontal-padding>
+      <progress-bar [progress]="progressIndex" [total]="quizCollection?.length"></progress-bar>
+       <ion-item text-wrap no-lines><p>Based on what you just heard, answer the following questions:</p></ion-item>
+      <ion-slides (ionSlideDidChange)="quesChanged()" #slide>
         <ion-slide *ngFor="let currentQuestion of quizCollection; let i=index;">
-          <ion-card>
-            <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
+          <ion-card no-padding>
+            <ion-card-content text-left>
+              <ion-card-title>
+                Question {{i+1}}
+              </ion-card-title>
+              <p>
+                {{currentQuestion?.question}}
+              </p>
+            </ion-card-content>
           </ion-card>
 
           <ion-list radio-group mode="ios">
             <ion-item *ngFor="let answer of currentQuestion?.answers; let j=index;" mode="ios">
-              <ion-label text-wrap class="quiz">
+              <ion-label text-wrap>
               <ion-grid>
                 <ion-row>
                   <ion-col col-2>
@@ -74,8 +82,8 @@
 
   <!--To Analysis-->
   <ng-template #quizEnd>
-    <div class="quiz">
-      <h1>You have successfully completed the quiz</h1>
+    <div class="quiz" padding>
+      Congratulations on successfully completing the analysis...
       <ion-card>
         <ion-card-header text-center>
           Compare your two scores!
@@ -84,7 +92,10 @@
           <canvas #barCanvas></canvas>
         </ion-card-content>
       </ion-card>
-      <button ion-button (click)="getExplanation()">Get Explanation</button>
+
+      <p>...now go to Explanation to get the proper understanding of each question, or re-try the quiz!</p>
+      <button ion-button block outline (click)="getExplanation()">Get Explanation</button>
+      <button ion-button block outline (click)="resetScore()">Re-try Analysis</button>
     </div>
   </ng-template>
 </ion-content>

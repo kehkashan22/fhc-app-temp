@@ -31,9 +31,9 @@ export class MyApp {
   aboutPage = 'AboutPage';
   rootLibraryPage = 'RootLibraryPage';
   contactPage = 'ContactPage';
-  fullname = 'User';
-  email = 'user@gmail.com';
-  profilePicture = '';
+  fullname = 'Loading...';
+  email = '';
+  profilePicture = 'assets/images/notif.jpg';
 
   // used for an example of ngFor and navigation
 

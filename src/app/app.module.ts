@@ -1,7 +1,7 @@
-import { HomePage } from './../pages/home/home';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -13,6 +13,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'
+import { Network } from '@ionic-native/network';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 
@@ -41,6 +42,11 @@ import { GlobalsProvider } from '../providers/globals/globals';
 import { Transfer  } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { FCM } from "@ionic-native/fcm";
+import { Badge } from '@ionic-native/badge'
+import { NetworkProvider } from '../providers/network/network';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
+import { FlashCardComponent } from '../components/flash-card/flash-card';
 
 
 
@@ -56,7 +62,8 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    FlashCardComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +102,13 @@ const firebaseConfig = {
     Transfer,
     File,
     YoutubeVideoPlayer,
-    FCM
+    FCM,
+    Diagnostic,
+    Badge,
+    Network,
+    NetworkProvider,
+    SocialSharing,
+    AnalyseStoreProvider
   ]
 })
 export class AppModule {}

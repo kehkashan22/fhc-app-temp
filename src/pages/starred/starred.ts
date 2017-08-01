@@ -13,7 +13,13 @@ export class StarredPage implements OnInit{
   videoLib = 'RootLibraryPage';
 
   ngOnInit(): void {
-    this.videos = this.videosService.getFavoriteVideos();
+    this.videosService.loadFavoriteVideos();
+      this.videos = this.videosService.getFavoriteVideos();
+  }
+
+  ionViewWillEnter(){
+     this.videosService.loadFavoriteVideos();
+      this.videos = this.videosService.getFavoriteVideos();
   }
 
 

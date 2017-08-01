@@ -1,51 +1,71 @@
-<ion-content padding class="bg" scroll="false">
+<ion-content class="bg" scroll="false">
+  <div padding-horizontal class="form-class">
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+        <filter id="blur">
+          <feGaussianBlur stdDeviation="5" />
+        </filter>
+      </defs>
+    </svg> -->
+    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/logo.png" alt="Farooq Haque Classes">
+    <form [formGroup]="loginForm">
 
+      <ion-list>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="mail"></ion-icon>
+            Email
+          </ion-label>
+          <ion-input type="email" formControlName="emailId" [class.invalid]="!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)">
+          <p>Please enter email id</p>
+        </ion-item>
+      </ion-list>
 
-  <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/logo.png" alt="FHC Logo">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="lock"></ion-icon>
+            Password
+          </ion-label>
+          <ion-input type="password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)">
+          <p>Please enter password</p>
+        </ion-item>
+      </ion-list>
+    </form>
 
+    <div padding>
+      <button ion-button color="btn" style="color: white;" block (tap)="login()">LOGIN</button>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 offset-5>
+            <button ion-button small color="btn" clear (tap)="forgotPassword()">Forgot your Password?</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-  <form [formGroup]="loginForm">
+    <div padding>
+      <button ion-button color="btn" outline (tap)="navigateToSignup()" block>Create an account</button>
+    </div>
+  </div>
+<!--
+   <button ion-button block color="danger" (click)="googleLogin()">
+    <ion-icon name="logo-googleplus"></ion-icon>
+    Login with Google
+  </button>
 
-    <ion-list>
-      <ion-item>
-        <ion-label floating>
-          Email
-        </ion-label>
-        <ion-input type="email" formControlName="emailId" [class.invalid]="!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)"></ion-input>
-      </ion-item>
-      <ion-item *ngIf="!loginForm.controls.emailId.valid && (loginForm.controls.emailId.dirty || submitAttempt)">
-        <p>Please enter email id</p>
-      </ion-item>
-    </ion-list>
-
-    <ion-list>
-      <ion-item>
-        <ion-label floating>
-          Password
-        </ion-label>
-        <ion-input type="password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
-      </ion-item>
-      <ion-item *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)">
-        <p>Please enter password</p>
-      </ion-item>
-    </ion-list>
-  </form>
-
-  <div>
-    <button ion-button color="btn" style="color: white;" block (tap)="login()">LOGIN</button>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-12 offset-5>
-          <button ion-button small color="btn" clear (tap)="forgotPassword()">Forgot your Password?</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div style="height: 20px;"></div>
+  <button ion-button block color="possitive" (click)="facebookLogin()">
+    <ion-icon name="logo-facebook"></ion-icon>
+    Login with Facebook
+  </button> -->
 
   </div>
 
 
-  <button ion-button color="btn" outline (tap)="navigateToSignup()" block >Create an account</button>
+
 </ion-content>
 
 <ion-footer>

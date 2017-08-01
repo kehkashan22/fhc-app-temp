@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar>
+  <ion-navbar transparent>
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -12,7 +12,7 @@
 </ion-header>
 
 
-<ion-content class="background" >
+<ion-content class="background">
 <div id="profile-bg"></div>
       <div id="content">
         <div id="profile-info">
@@ -22,7 +22,7 @@
           <br>
           <span id="profile-description"> Mob: {{phone}} </span>
           <br>
-         <button ion-button outline (tap) = "editProfile()" color="btn">Edit Profile</button>
+         <button ion-button outline [disabled] = "noNetwork" (tap) = "editProfile()" color="btn">Edit Profile</button>
         </div>
       </div>
 
@@ -34,11 +34,11 @@
       <ion-icon name="star" item-left></ion-icon>
       Starred Videos
     </button>
-    <button
+     <button
     ion-item
-    (click)="showSubjectsModal()">
+    [navPush]="analyseMePage">
       <ion-icon name="book" item-left></ion-icon>
-      Report Card
+      Analysis
     </button>
   </ion-list>
 </ion-card>
