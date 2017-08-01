@@ -1,4 +1,3 @@
-import library from '../data/library';
 /*
   Name - Videos Provider
   Functionality - Provider for all videos and ammendments fetched from server database

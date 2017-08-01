@@ -1,9 +1,12 @@
+import { NetworkProvider } from './../../providers/network/network';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, Platform, AlertController } from 'ionic-angular';
 
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { SocialSharing } from "@ionic-native/social-sharing";
 
 declare var cordova: any;
 
@@ -16,6 +19,7 @@ export class AnnouncementsPage {
 
   announcements: Array<any>;
 
+  loader: any;
 
   storageDirectory: string = '';
 
@@ -29,8 +33,10 @@ export class AnnouncementsPage {
     private file: File,
     private toast: ToastController,
     public platform: Platform,
-    public alertCtrl: AlertController
-
+    public alertCtrl: AlertController,
+    private diagnostic: Diagnostic,
+    private _network: NetworkProvider,
+    private socialSharing: SocialSharing
   ) {
 
     // defining storage directory
@@ -40,36 +46,48 @@ export class AnnouncementsPage {
         return false;
       }
       if (this.platform.is('ios')) {
-        this.storageDirectory = cordova.file.documentsDirectory;
+        this.storageDirectory = this.file.documentsDirectory;
       }
       else if (this.platform.is('android')) {
-        this.storageDirectory = cordova.file.externalDataDirectory;
+        this.diagnostic.requestExternalStorageAuthorization().then(() => {
+          this.storageDirectory = this.file.externalRootDirectory + 'FHC/';
+        }).catch(error => {
+          this.storageDirectory = this.file.externalApplicationStorageDirectory;
+        });
+
       }
       else {
         // exit otherwise, but you could add further types here e.g. Windows
         return false;
       }
+
     });
   }
   ionViewDidLoad() {
-    let loader = this.loadingCtrl.create({
+    this.loader = this.loadingCtrl.create({
       content: 'Loading Notifications',
       spinner: 'bubbles'
     });
 
-    loader.present();
+    this.loader.present();
 
-    this.afd.list('/posts', {
-      query: {
-        orderByChild: 'date'
-      }
-    }).subscribe(data => {
-      data = data.reverse();
-      this.announcements = data;
-      loader.dismiss();
-    });
+    if (this._network.noConnection()) {
+      this.loader.dismiss();
+      this._network.showNetworkAlert();
+    } else {
+      this.afd.list('/posts', {
+        query: {
+          orderByChild: 'date'
+        }
+      }).subscribe(data => {
+        data = data.reverse();
+        this.announcements = data;
+        this.loader.dismiss();
+      });
+    }
 
   }
+
   navigateToAnnouncement(announcement) {
     this.navCtrl.push('AnnouncementsDetailPage', {
       announcements: announcement
@@ -81,33 +99,33 @@ export class AnnouncementsPage {
     let url = annoucement.downloadLink;
     let fileTokens: Array<any> = url.split('/');
     const fileName = fileTokens[fileTokens.length - 1];
+
     console.log(fileName);
 
-    fileTransfer.download(url, this.storageDirectory + fileName).then((entry) => {
-      let t = this.toast.create({
-        message: 'Downloading started...',
-        duration: 2000
-      }).present();
+    let loader = this.loadingCtrl.create({
+      content: 'Downloading your file, please wait...',
+      spinner: 'bubbles'
+    });
 
+    loader.present();
+
+
+    fileTransfer.download(url, this.storageDirectory + fileName).then((entry) => {
+      loader.dismiss();
       if (entry) {
         console.log('download complete: ' + entry.toURL());
-        this.toast.create({
-          message: 'Downloading completed',
-          duration: 2000
-        }).present();
-
-        /*let alert = this.alertCtrl.create({
-            title: 'Downloaded Successfully',
-            message: 'successfully downloaded at '+entry.toURL(),
-            buttons: [{
-                text: 'Ok',
-            }]
+        let alert = this.alertCtrl.create({
+          title: 'Download successful!',
+          message: 'File downloaded  at ' + entry.toURL(),
+          buttons: [{
+            text: 'Ok',
+          }]
         });
-        alert.present();*/
+        alert.present();
       }
       else {
         let alert = this.alertCtrl.create({
-          title: 'Error',
+          title: 'Sorry, could not download your file!',
           message: '' + entry.Error,
           buttons: [{
             text: 'Ok',
@@ -115,6 +133,30 @@ export class AnnouncementsPage {
         });
         alert.present();
       }
+    },
+      (err) => {
+        loader.dismiss();
+        let alert = this.alertCtrl.create({
+          title: 'Sorry, could not download your file!',
+          message: err.json(),
+          buttons: [{
+            text: 'Ok',
+          }]
+        });
+        alert.present();
+      });
+  }
+
+  ionViewWillLeave(){
+    this.loader.dismiss();
+  }
+
+  shareSheetShare(announcement) {
+    const playstore = "https://play.google.com/store/apps/topic?id=editors_choice";
+    this.socialSharing.share(announcement.message+"\nVisit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more at:\n ", announcement.title, announcement.img, playstore).then(() => {
+      console.log("shareSheetShare: Success");
+    }).catch(() => {
+      console.error("shareSheetShare: failed");
     });
   }
 }

@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border color="btn">
 
-  <ion-navbar>
+  <ion-navbar color="btn">
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -12,8 +12,8 @@
 </ion-header>
 
 
-<ion-content padding class="background">
-<div class="nothing" *ngIf="noVideo()">
+<ion-content>
+<div class="nothing" *ngIf="noVideo()" padding>
   <h1>No Starred Videos Yet! </h1>
 <div class="scene">
   <span class="cloud cloud--small"></span>
@@ -33,12 +33,15 @@
   <span class="cloud cloud--large"></span>
 </div>
   <p text-center>Fly over to the Video Library to start your collection!</p>
-  <div class="button">
-    <button ion-button outline color="light" [navPush]="videoLib"> Vrooooommm... </button>
+
+  <div>
+    <button ion-button block outline color="light" [navPush]="videoLib"> Vrooooommm... </button>
   </div>
 
+
 </div>
-<ion-list>
+<div padding>
+  <ion-list>
     <ion-item-sliding
       *ngFor="let video of videos">
       <ion-item
@@ -46,15 +49,17 @@
         <h2 text-wrap>{{ video.text }}</h2>
         <p>{{ video.text }}</p>
       </ion-item>
-      <ion-item-options>
+      <ion-item-options side="right">
         <button
           ion-button
           color="danger"
-          (click)="onRemoveFromFavorites(video)">
+          (click)="onRemoveFromFavorites(video)" icon-end>
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+</div>
+
 </ion-content>

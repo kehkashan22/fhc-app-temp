@@ -1,3 +1,6 @@
+import { AnalyseStoreProvider } from './../../providers/analyse-store/analyse-store';
+import { NetworkProvider } from './../../providers/network/network';
+import { Badge } from '@ionic-native/badge';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { User } from './../../data/user.interface';
 import { AuthProvider } from './../../providers/auth';
@@ -5,8 +8,8 @@ import { UserProvider } from './../../providers/user';
 import { QuizService } from './../../providers/quiz';
 import { VideosService } from './../../providers/fav-videos';
 import { VideosProvider } from './../../providers/videos';
-import { Component,  } from '@angular/core';
-import { NavController, IonicPage, Events, MenuController, LoadingController, App, NavParams } from 'ionic-angular';
+import { Component, } from '@angular/core';
+import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
 import * as firebase from 'firebase';
@@ -28,92 +31,112 @@ export class HomePage {
   rootLibraryPage = 'RootLibraryPage';
   quizLibraryPage = 'QuizLibraryPage';
   reportCardPage = 'ReportCardPage';
-  quizCollection : Quiz[];
+  announcements = 'AnnouncementsPage'
+  quizCollection: Quiz[];
   imgPath = "https://s3-ap-southeast-1.amazonaws.com/fhc.app/";
   imgType = ".jpeg";
   userData: User;
+  notificationNum: number = 0;
+
 
   fireStore = firebase.database().ref("/pushtokens");
 
-  slides:any[]=[
-              {url: this.imgPath + "slides4.jpg", text: "Test Slide1"},
-              {url: this.imgPath + "slides2.jpg", text: "Test Slide2"},
-              {url: this.imgPath + "slides5.jpg", text: "Test Slide3"}
-              ];
+  slides: any[] = [
+    { url: this.imgPath + "slides4.jpg", text: "Test Slide1" },
+    { url: this.imgPath + "slides2.jpg", text: "Test Slide2" },
+    { url: this.imgPath + "slides5.jpg", text: "Test Slide3" }
+  ];
 
   constructor(public navCtrl: NavController,
-               private videosProvider: VideosProvider,
-               private videosService: VideosService,
-               private quizService: QuizService,
-               private quizStore: QuizStoreProvider,
-               private userProvider : UserProvider,
-               private events : Events,
-               private menuCtrl: MenuController,
-               private authProvider : AuthProvider,
-               private _loader : LoadingController,
-               private app : App,
-                private quizProvider: QuizService,
-               private afd: AngularFireDatabase,
-               private fcm: FCM
-    ){
-          this.fcm.getToken().then((token) => {
-              this.storeToken(token);
-          },
-          (err) => {
-            console.log(err);
-          });
+    private videosProvider: VideosProvider,
+    private videosService: VideosService,
+    private quizService: QuizService,
+    private quizStore: QuizStoreProvider,
+    private userProvider: UserProvider,
+    private events: Events,
+    private menuCtrl: MenuController,
+    private authProvider: AuthProvider,
+    private _loader: LoadingController,
+    private app: App,
+    private quizProvider: QuizService,
+    private afd: AngularFireDatabase,
+    private fcm: FCM,
+    private badge: Badge,
+    private _network: NetworkProvider,
+    private _analysed: AnalyseStoreProvider
+  ) {
+    this.fcm.getToken().then((token) => {
+      this.storeToken(token);
+    },
+      (err) => {
+        console.log(err);
+      });
 
   }
 
   ngOnInit() {
-   this.videosService.loadFavoriteVideos();
-   this.quizStore.loadSolvedQuizCollection();
-   //this.quizProvider.putAnalysis();
+    this.requestPermission();
+
+    this.getBadges();
 
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     const loader = this._loader.create({
       spinner: "bubbles",
-      content:'Please wait while we finish loading...',
+      content: 'Please wait while we finish loading...',
       duration: 3000
     });
-    if(!this.userData){
+    if (!this.userData) {
       loader.present();
+      this.videosService.loadFavoriteVideos();
+      this.quizStore.loadSolvedQuizCollection();
+      this._analysed.loadSolved();
+      if (this._network.noConnection()) {
+        console.log(this._network.noConnection());
+      loader.dismiss();
+      this._network.showNetworkAlert();
+    } else {
       this.userProvider.getUser().then((data: User) => {
-           this.userData = data;
-           //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
-            this.events.publish('user:created', this.userData);
+        this.userData = data;
+        //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
+        this.events.publish('user:created', this.userData);
 
       });
     }
+    }
 
     this.fcm.onNotification().subscribe((data) => {
-      if(data.wasTapped){
+      this.badge.increase(1).then((badge) => {
+        this.notificationNum = badge;
+      });
+      if (data.wasTapped) {
         const self = this;
         //self.navCtrl.setRoot('Home');
         self.navCtrl.setRoot('AnnouncementsPage');
         alert('Data TAPPED');
-      }else{
-        alert( JSON.stringify(data) );
+      } else {
+        alert(JSON.stringify(data));
       }
     });
 
-    this.fcm.onTokenRefresh().subscribe(token=>{
+    this.fcm.onTokenRefresh().subscribe(token => {
       this.storeToken(token);
     });
 
   }
 
-  toAnalysisPage(){
-      this.navCtrl.push(this.analyseMePage);
-    }
+  toAnalysisPage() {
+    this.navCtrl.push(this.analyseMePage);
+  }
 
-  navigateToAnnouncements(){
+  navigateToAnnouncements() {
+    this.badge.clear().then(() => { });
+    this.getBadges();
     this.navCtrl.push('AnnouncementsPage');
   }
 
-  storeToken(token){
+  storeToken(token) {
     this.fireStore.child(firebase.auth().currentUser.uid).set({
       uid: firebase.auth().currentUser.uid,
       devToken: token
@@ -122,5 +145,24 @@ export class HomePage {
     }).catch((err) => {
       alert(err);
     });
+  }
+
+  async requestPermission() {
+    try {
+      let hasPermission = await this.badge.hasPermission();
+      if (!hasPermission) {
+        await this.badge.registerPermission();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async getBadges() {
+    try {
+      this.notificationNum = await this.badge.get();
+    } catch (e) {
+      console.error(e);
+    }
   }
 }

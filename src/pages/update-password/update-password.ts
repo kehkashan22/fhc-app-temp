@@ -17,7 +17,7 @@ export class UpdatePasswordPage {
   private newPassword: string;
 
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public viewCtrl: ViewController,
               public alertCtrl: AlertController,
@@ -64,7 +64,7 @@ export class UpdatePasswordPage {
       let alert = this.alertCtrl.create({
         title: 'Error',
         message: err.message,
-        buttons: 
+        buttons:
         [
           {
             text: 'Ok',

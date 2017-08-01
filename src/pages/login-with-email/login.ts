@@ -1,3 +1,4 @@
+import { NetworkProvider } from './../../providers/network/network';
 /*
   Name - Login Component
   Functionality - For authentication of users using firebase.
@@ -13,7 +14,7 @@ import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
 
-import * as sha1  from 'sha1';
+import * as sha1 from 'sha1';
 
 import { HomePage } from "../home/home";
 
@@ -31,17 +32,18 @@ export class LoginWithEmailPage {
   private submitAttempt: boolean = false;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public formBuilder: FormBuilder,
-              private _auth: AuthProvider,
-              private _logger: Logger,
-              private alertCtrl: AlertController,
-              private loadingCtrl: LoadingController
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    private _auth: AuthProvider,
+    private _logger: Logger,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private _network: NetworkProvider
   ) {
     /* Building form  */
     this.loginForm = formBuilder.group({
-      emailId: [ '', Validators.compose([Validators.required])],
-      password: [ '', Validators.required],
+      emailId: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.required],
     });
 
   }
@@ -52,21 +54,22 @@ export class LoginWithEmailPage {
   }
 
   /* Navigate to Signup */
-  navigateToSignup(){
+  navigateToSignup() {
     this._logger.log('navigateToSignup()');
     this.navCtrl.setRoot('SignUp');
   }
 
   /* Login Method */
-  login(){
+  login() {
     this._logger.log('login()');
+
     /* Building user */
     let loginUserData = {
       emailId: this.loginForm.value.emailId,
       password: sha1(this.loginForm.value.password)
     };
 
-     /* Loader */
+    /* Loader */
     let loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Signing you in...'
@@ -74,31 +77,33 @@ export class LoginWithEmailPage {
 
     loader.present();
 
-    /* Calling Auth service method to login the user */
-    this._auth.authenticateAndLogin(loginUserData).then(authData => {
+    if (this._network.noConnection()) {
       loader.dismiss();
-      if(authData.emailVerified){
-        this._logger.log("Successfully logged in ");
+      this._network.showNetworkAlert();
+    } else {
 
-        /* Navigate to Home Component */
-        this.navCtrl.setRoot('HomePage');
+      /* Calling Auth service method to login the user */
 
-       
+      this._auth.authenticateAndLogin(loginUserData).then(authData => {
+        loader.dismiss();
+        if (authData.emailVerified) {
+          this._logger.log("Successfully logged in ");
 
-      }else{
+          /* Navigate to Home Component */
+          this.navCtrl.setRoot('HomePage');
+        } else {
 
           const alert = this.alertCtrl.create({
-          title: 'EMAIL NOT VERIFIED',
-          message: "Please verify your email address",
-          buttons: ['Ok']
+            title: 'EMAIL NOT VERIFIED',
+            message: "Please verify your email address",
+            buttons: ['Ok']
 
-        });
+          });
 
-         alert.present();
-
-      }
-    }, (error) => {
-        console.log('Error in logging in '+error);
+          alert.present();
+        }
+      }, (error) => {
+        console.log('Error in logging in ' + error);
 
         loader.dismiss();
         const alert = this.alertCtrl.create({
@@ -108,12 +113,21 @@ export class LoginWithEmailPage {
         });
         alert.present();
       });
+    }
   }
 
   /* Navigate to Forget Password Component */
-  forgotPassword(){
+  forgotPassword() {
     this.navCtrl.push('ForgetPasswordPage');
   }
 
-  
+  //   googleLogin(): void {
+  //   this._auth.googleLogin();
+  // }
+
+  // facebookLogin(): void {
+  //   this._auth.facebookLogin();
+  // }
+
+
 }

@@ -3,9 +3,15 @@ page-starred {
 @import "../../../node_modules/compass-sass-mixins/lib/compass";
 @import url('https://fonts.googleapis.com/css?family=Bangers|Open+Sans');
 
-.scroll-content{
-  background: map-get($colors, btn)
+ion-header.header{
+  box-sizing: initial !important;
 }
+.scroll-content{
+  background: map-get($colors, btn);
+  background-size: cover;
+  background-position-x: 50%;
+}
+
 .wrap {
   padding: 0.5em 0.5em;
   margin: 0 auto;
@@ -30,7 +36,7 @@ h1 {
 
 p{
   color: #fff;
-  text-align: center;
+  //text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -60,13 +66,6 @@ p{
   left:30%;
 }
 
-.button{
-  width: 90%;
-  margin: auto;
-  button{
-    margin: auto;
-  }
-}
 
 @keyframes anim-plane{
   to{

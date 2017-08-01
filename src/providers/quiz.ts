@@ -3,9 +3,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Quiz } from "../data/quiz.interface";
-import quiz from '../data/quiz';
-import quizLib from '../data/quiz-lib-2';
-import quizLibrary from '../data/quiz-library';
 
 import * as firebase from 'firebase/app';
 

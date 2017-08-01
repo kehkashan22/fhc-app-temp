@@ -9,4 +9,5 @@ export interface User {
       attemptNo: number,
       attemptDate: string,
       typeOfCourse: string
+      pictureURL: string
 }

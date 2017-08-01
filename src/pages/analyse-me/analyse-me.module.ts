@@ -1,5 +1,4 @@
 import { PipesModule } from './../../pipes/pipes.module';
-import { YoutubePipe } from './../../pipes/youtube';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { AnalyseMePage } from './analyse-me';
@@ -9,10 +8,12 @@ import {VgCoreModule} from 'videogular2/core';
 import {VgControlsModule} from 'videogular2/controls';
 import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
+import { ProgressBarComponent } from "../../components/progress-bar/progress-bar";
 
 @NgModule({
   declarations: [
     AnalyseMePage,
+    ProgressBarComponent
   ],
   imports: [
     VgCoreModule,

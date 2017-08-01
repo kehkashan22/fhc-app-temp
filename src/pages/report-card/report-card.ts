@@ -185,6 +185,50 @@ export class ReportCardPage implements OnInit {
     });
 
     this.getPerformancePercent();
+     const plugin = {
+      beforeDraw: function (chart) {
+        var width = chart.chart.width,
+          height = chart.chart.height,
+          ctx = chart.chart.ctx;
+
+        ctx.restore();
+        var fontSize = (height / 114).toFixed(2);
+        ctx.font = fontSize + "em montserrat";
+
+        ctx.textBaseline = "middle";
+        if(typeof(chart.config.data.text) !== undefined){
+            var text = chart.config.data.text+"%",
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 2;
+          ctx.fillText(text, textX, textY);
+        }
+        ctx.save();
+      }
+    };
+
+    const options =  {
+    legend: {
+      display: false
+    },
+    segmentShowStroke : false,
+    cutoutPercentage: 75,
+    tooltips: {
+      enabled: false
+    },
+    elements: {
+        arc: {
+            borderWidth: 0
+        }
+    },
+     title: {
+            display: true,
+            text: '',
+            fontSize: 14,
+            fontFamily: 'Helvetica',
+            position: 'bottom'
+        }
+  };
+
     //this.getClassString(this.percentage);
 
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
@@ -203,8 +247,11 @@ export class ReportCardPage implements OnInit {
             "#FF6384",
             "#36A2EB",
           ]
-        }]
-      }
+        }],
+        text: this.percentage
+      },
+      options: options,
+      plugins: [plugin]
 
     });
   }
