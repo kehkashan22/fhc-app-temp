@@ -73,8 +73,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByHexString('#005C9C');
       splashScreen.hide();
-
-
     });
 
     this.pages = [
@@ -88,6 +86,8 @@ export class MyApp {
       { title: 'About', component: 'AboutPage', icon: 'pulse'},
       { title: ' Logout', component: 'logout', icon: 'log-out'},
     ];
+
+
 
     this.events.subscribe('user:created', (user) => {
       // user captured on first entry
@@ -134,7 +134,5 @@ export class MyApp {
 
     });
   }
-
-
 }
 

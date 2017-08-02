@@ -10,14 +10,17 @@ page-chapters {
     }
     .a{
         background-color: map-get($colors, chapterA);
+        content: "A";
     }
 
     .b{
       background-color: map-get($colors, chapterB);
+      content: "B";
     }
 
     .c{
       background-color: map-get($colors, chapterC);
+      content: "C";
     }
     ion-footer{
       background-color: $color;

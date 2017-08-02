@@ -48,15 +48,16 @@
     color: #09141F !important;
   }
   background: #EFF5FB !important;
-
 }
 
 #menu{
   .scroll-content{
     background: #EFF5FB;
   }
+
 }
 
 .scroll-content{
   background: map-get($colors, bg);
 }
+

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, IonicPage } from 'ionic-angular';
+import { YoutubeVideoPlayer } from "@ionic-native/youtube-video-player";
 
 @IonicPage()
 @Component({
@@ -11,7 +12,8 @@ export class VideoPage {
   url: string;
 
   constructor(private viewCtrl: ViewController,
-              private navParams: NavParams) {
+              private navParams: NavParams,
+            private youtube: YoutubeVideoPlayer) {
   }
 
   ionViewDidLoad() {
@@ -21,5 +23,9 @@ export class VideoPage {
 
   onClose(remove = false) {
     this.viewCtrl.dismiss(remove);
+  }
+
+  openVideo(id){
+    this.youtube.openVideo(id);
   }
 }

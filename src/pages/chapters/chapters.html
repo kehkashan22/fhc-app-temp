@@ -2,12 +2,16 @@
 
   <ion-navbar>
     <ion-title>{{subjectName | titlecase}}</ion-title>
+    <ion-buttons right>
+      <button ion-button>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content scroll="false">
+<ion-content fullscreen #mycontent>
    <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
@@ -38,7 +42,7 @@
     <p>Why don't you try again after the cat finishes it's song?</p>
   </div>
   <ng-template #noChaps>
-    <button ion-button block outline color="btn" (click)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
+     <button ion-button block outline color="btn" (click)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
     <ion-grid>
       <ion-row text-center>
         <ion-col class="a">

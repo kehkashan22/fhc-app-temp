@@ -10,17 +10,16 @@
 <ion-content padding text-center>
   <ion-card>
     <ion-card-content>
-      <!-- <iframe width="100%" height="315" [src]="url | youtube" frameborder="0" allowfullscreen></iframe> -->
-      <img [src]="url | concat" alt="Videos by Farooq Haque">
+      <div class="vid">
+        <img [src]="url | concat" alt="Videos by Farooq Haque">
+        <div class="play">
+          <button ion-fab color="light" (click)="openVideo(url)"><ion-icon name="play"></ion-icon></button>
+        </div>
+      </div>
     </ion-card-content>
     <ion-row>
       <ion-col>
-        <button
-          ion-button
-          small
-          outline
-          color="danger"
-          (click)="onClose(true)">
+        <button ion-button small outline color="danger" (click)="onClose(true)">
             Unfavorite
           </button>
       </ion-col>

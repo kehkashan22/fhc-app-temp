@@ -1,7 +1,68 @@
 page-report-card {
   @import "../../assets/scss/_circle.scss";
 
+  .scroll-content{
+    background: #fff;
+  }
   .c100{
     margin: 0 0.1em 0.1em 0.2em !important;
+    span{
+      color: map-get($colors, dark);
+    }
+    &:after{
+      background-color: map-get($colors, light) !important;
+    }
   }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+hr{
+  height: 1px !important;
+}
+  td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+
+  .back-text{
+    height: 45vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+      .front{
+  //       background-color: transparent !important;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+        border: 0px;
+        background: #fff;
+    }
+
+  #report{
+  //     ion-card{
+  //       //box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  //     }
+.flip-container{
+  margin: 10px auto 20px;
+}
+  .main-report{
+    height: 100%;
+  }
+
+      .flash-card-front{
+        width: 100%;
+        height: 100%;
+
+      }
+      canvas {
+        //background:#c0c0c0;
+        width:95% !important;
+        height:90% !important;
+        padding-right: 0px !important;
+      }
+    }
+
+
 }

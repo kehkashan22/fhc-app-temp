@@ -1,21 +1,4 @@
 page-home {
-
-
-  ion-header, ion-navbar {
-    border: 0px !important;
-    border-bottom-color: transparent !important;
-    background-image: none !important;
-    border-bottom: none !important;
-    opacity: 0.85;
-
-    ion-title{
-        img{
-          height: 30 px;
-          width: 100px;
-        }
-    }
-}
-
   .slider{
     ion-slide{
       position: relative;
