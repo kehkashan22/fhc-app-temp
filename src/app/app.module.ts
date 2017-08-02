@@ -64,9 +64,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    ProgressBarComponent,
-    FlashCardComponent
+    MyApp
   ],
   imports: [
     BrowserModule,
