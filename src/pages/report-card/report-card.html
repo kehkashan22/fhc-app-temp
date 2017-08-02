@@ -2,35 +2,91 @@
 
   <ion-navbar>
     <ion-title>{{subjectId | uppercase}} Report Card</ion-title>
+    <ion-buttons right>
+      <button ion-button>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
+
 
 </ion-header>
 
 
 <ion-content>
-  <flash-card>
+  <flash-card id="report">
     <div class="flash-card-front">
-      <h3 text-center>
+      <div class="main-report">
+        <hr />
+          <h6 text-center>
         Report Card
-      </h3>
+      </h6>
+      <hr />
       <canvas #barCanvas height="250px"></canvas>
+      </div>
     </div>
-    <div class="flash-card-back">
-    <div>
-      What is A, B, C breakup?
-    </div>
+    <div class="flash-card-back" padding>
+      <div class="back-text">
+      <h3>
+        What is A, B, C breakup?
+      </h3>
+      <hr />
+      <p>
+        On the basis of exam papers of past 10 years, Farooq Sir has devised a scientifically accurate analysis system. In this
+        system all chapters of each subject are divided into three categories: <b>A, B</b> and <b>C</b>.
+      </p>
+      <p>On an average (as seen in the past 10 years), the breakup of scores for each topic is as follows:</p>
+      <table>
+        <tr>
+          <th>Chapter Type</th>
+          <th>Marks (out of 100)</th>
+        </tr>
+        <tr>
+          <td text-center>A</td>
+          <td text-center>60</td>
+        </tr>
+        <tr>
+          <td text-center>B</td>
+          <td text-center>30</td>
+        </tr>
+           <tr>
+          <td text-center>C</td>
+          <td text-center>10</td>
+        </tr>
+      </table>
+      <p>Similarly, each chapter has further been divided into three sub-categories:</p>
+      <p text-center><b>Application, Speed</b> and <b>Memory,</b> </p>
+      <p>with different weightage alloted to each category in each chapter type.</p>
+      <ol>
+        <li><p>In category <b>A</b> topics most questions are based on <b>Application</b> and only a few on Memory and Speed</p></li>
+        <li><p>In category <b>B</b> topics most questions are based on <b>Memory</b> and only a few on Application and Speed</p></li>
+        <li><p>In category <b>C</b> almost all topics are <b>Memory</b> based</p></li>
+      </ol>
+
+      <p>This test series has been devised to accurately project the aggregate marks a student should expect in their CA/CS exam, based on the number
+        of quizzes of each type and sub-type solved. Plus, for each quiz, chapter and type, individual average scores have also been calculated.
+      </p>
+
+      <p>So one must try to give as many quizzes as possible for an accurate assessment.</p>
+      </div>
+
+
 
     </div>
   </flash-card>
+  <div padding-top>
 
+  </div>
   <flash-card>
     <div class="flash-card-front">
-      <h3 text-center>
+      <hr />
+      <h6 text-center>
         Performance
-      </h3>
-      <hr>
-    <p>Click on this card to get complete report.</p>
-      <div [class]="percentClass">
+      </h6>
+      <hr />
+    <p text-center>Click on this card to get complete report.</p>
+      <div [class]="percentClass" text-center>
         <span>{{percentage}}%</span>
         <div class="slice">
           <div class="bar"></div>
@@ -38,15 +94,26 @@
         </div>
       </div>
     </div>
-    <div class="flash-card-back">
-      <h3 text-center>
+    <div class="flash-card-back" padding>
+      <div class="back-text">
+         <h3 text-center>
         Performance
       </h3>
-      <hr>
-    <p><b>A:</b></p>
-    <p><b>B:</b></p>
-    <p><b>C:</b></p>
+      <hr />
+      <h6>Overall:</h6>
+      <p>{{overall}}</p>
+    <p><b>A:</b> {{analysisA}}</p>
+    <p><b>B:</b> {{analysisB}}</p>
+    <p><b>C:</b> {{analysisA}}</p>
+      </div>
+
     </div>
   </flash-card>
 
 </ion-content>
+
+<ion-footer>
+  <div>
+   <p text-center>Click on the reports for more information...</p>
+  </div>
+</ion-footer>

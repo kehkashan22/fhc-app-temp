@@ -46,9 +46,6 @@ import { Badge } from '@ionic-native/badge'
 import { NetworkProvider } from '../providers/network/network';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
-import { ProgressBarComponent } from "../components/progress-bar/progress-bar";
-import { FlashCardComponent } from "../components/flash-card/flash-card";
-// import { FlashCardComponent } from '../components/flash-card/flash-card';
 
 
 
@@ -64,9 +61,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    ProgressBarComponent,
-    FlashCardComponent
+    MyApp
   ],
   imports: [
     BrowserModule,

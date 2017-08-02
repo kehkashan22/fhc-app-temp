@@ -80,7 +80,8 @@ export class EditProfilePage {
     /* Loader */
     let loader = this.loadingCtrl.create({
       spinner: "bubbles",
-      content: 'Updating'
+      content: 'Updating',
+      duration: 3000
     });
     loader.present();
 
@@ -101,7 +102,7 @@ export class EditProfilePage {
     console.log(user);
 
     this._user.updateUserProfile(user).then(() => {
-      loader.dismiss();
+      //loader.dismiss();
       this.viewCtrl.dismiss();
     }, (err) => {
       console.log(err);

@@ -37,6 +37,11 @@ export class ReportCardPage implements OnInit {
   percentage: number = 0;
   percentClass: string = 'c100 p50';
 
+  overall = "Why don't you give a quiz to get your own personalised results!";
+  analysisA = "";
+  analysisB ="";
+  analysisC = "";
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -153,7 +158,7 @@ export class ReportCardPage implements OnInit {
           xAxes: [{
             scaleLabel: {
               display: true,
-              labelString: 'Breakup of scores by Chapter Type and Quiz Type'
+              labelString: 'Breakup of scores by Chapter and Quiz Type'
             }
           }],
         },
@@ -211,6 +216,11 @@ export class ReportCardPage implements OnInit {
   }
 
   private generateReport(){
+      if(this.percentage > 40){
+        this.overall = "You have a good chance of passing, but make sure that you concentrate on important chapters to ensure that you come out on top!";
+      }else{
+        this.overall = "You have a long way to go in terms of clearing your exam. Lots of practice is required in a structured manner."
+      }
 
   }
 

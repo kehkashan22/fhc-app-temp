@@ -1,10 +1,17 @@
-import { AnalyseStoreProvider } from './../../providers/analyse-store/analyse-store';
-import { LoadingController, Slides, AlertController } from 'ionic-angular';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  LoadingController,
+  Slides,
+  AlertController,
+  ModalController
+} from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
 import { Quiz } from './../../data/quiz.interface';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AnalyseStoreProvider } from './../../providers/analyse-store/analyse-store';
 import { VgAPI } from 'videogular2/core';
 import { Chart } from 'chart.js';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -51,7 +58,8 @@ export class AnalyseMePage implements OnInit {
     private _loader: LoadingController,
     private cdRef: ChangeDetectorRef,
     private _analysed: AnalyseStoreProvider,
-  private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private _modal: ModalController) {
   }
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
@@ -191,7 +199,7 @@ export class AnalyseMePage implements OnInit {
           display: false
         },
         scales: {
-          yAxes:[{
+          yAxes: [{
             barThickness: 30,
           }],
           xAxes: [{
@@ -258,7 +266,7 @@ export class AnalyseMePage implements OnInit {
   }
 
   getAnalysisQuizzes() {
-     this.loader = this._loader.create({
+    this.loader = this._loader.create({
       spinner: 'dots',
       content: "Loading...",
       duration: 3000
@@ -278,10 +286,25 @@ export class AnalyseMePage implements OnInit {
     });
   }
 
-  ionViewWillLeave(){
-    if(this.loader){
+  ionViewWillLeave() {
+    if (this.loader) {
       this.loader.dismiss();
     }
+  }
+
+  presentInstructions() {
+    if(this.api){
+      this.api.pause();
+    }
+
+
+    let instructions = this._modal.create('InstructionsPage', { userId: 8675309 });
+    instructions.onDidDismiss(data => {
+        if(this.api){
+          this.api.play();
+        }
+      });
+     instructions.present();
   }
 }
 
