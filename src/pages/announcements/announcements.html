@@ -8,10 +8,8 @@
     </ion-buttons>
     <ion-title>Notifications</ion-title>
   </ion-navbar>
-
 </ion-header>
 <ion-content>
-
   <ion-card *ngFor="let annoucement of announcements">
     <ion-item>
       <ion-avatar item-start>
@@ -46,9 +44,29 @@
         <ion-icon name='share-alt'></ion-icon>
         Share
       </button>
-
         </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <div padding-horizontal>
+       <ion-grid no-padding>
+    <ion-row no-padding>
+      <ion-col>
+          <button ion-button full color="danger" (click)="getItems('pdf')" icon-left>  <ion-icon ios="ios-download" md="md-download"></ion-icon> PDF</button>
+      </ion-col>
+        <ion-col>
+          <button ion-button full color="danger" (click)="getItems('news')" icon-left>  <ion-icon name="chatboxes"></ion-icon>News</button>
+      </ion-col>
+      <ion-col>
+           <button ion-button full color="danger" (click)="getItems('misc')" icon-left> <ion-icon name="create"></ion-icon>MISC</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

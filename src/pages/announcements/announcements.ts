@@ -20,6 +20,7 @@ export class AnnouncementsPage {
   announcements: Array<any>;
 
   loader: any;
+  temp: any;
 
   storageDirectory: string = '';
 
@@ -82,6 +83,7 @@ export class AnnouncementsPage {
       }).subscribe(data => {
         data = data.reverse();
         this.announcements = data;
+        this.temp=this.announcements;
         this.loader.dismiss();
       });
     }
@@ -158,6 +160,17 @@ export class AnnouncementsPage {
     }).catch(() => {
       console.error("shareSheetShare: failed");
     });
+  }
+
+  getItems(val: string){
+    if(val==='all'){
+      this.announcements = this.temp;
+    }else{
+        this.announcements = this.announcements.filter((announcement) => {
+          return announcement.id === val;
+        });
+    }
+    
   }
 }
 

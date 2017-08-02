@@ -18,9 +18,7 @@ page-about-details {
     .div-text{
             height: 100%;
             width:auto;
-            //border: 3px solid orange;
             text-align: justify;
-            //background-image: url('../assets/images/aboutpage.png');
             position: relative;
             color:map-get($colors, light);
             line-height: 30px;
@@ -62,15 +60,4 @@ page-about-details {
             border-bottom: 1px dashed #ccc;
             margin:20px;
         }
-        // .img-radius{
-        //     border-radius: 100%;
-        //     height:161px;
-        //     width:161px;
-        //     margin: auto;
-        //     display: block;
-        // }
-
-        // @import url(https://fonts.googleapis.com/css?family=EB+Garamond|Cardo:400italic);
-            
-
 }
