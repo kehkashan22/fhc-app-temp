@@ -1,3 +1,4 @@
+import { NotificationsProvider } from './../../providers/notifications/notifications';
 import { FirstProvider } from './../../providers/first/first';
 import { AnalyseStoreProvider } from './../../providers/analyse-store/analyse-store';
 import { NetworkProvider } from './../../providers/network/network';
@@ -38,8 +39,7 @@ export class HomePage {
   imgType = ".jpeg";
   userData: User;
   notificationNum: number = 0;
-
-  pop="all";
+  show;
   fireStore = firebase.database().ref("/pushtokens");
 
   slides: any[] = [
@@ -60,7 +60,8 @@ export class HomePage {
     private badge: Badge,
     private _network: NetworkProvider,
     private _analysed: AnalyseStoreProvider,
-    private _launch: FirstProvider
+    private _launch: FirstProvider,
+    private _note: NotificationsProvider
   ) {
     this.fcm.getToken().then((token) => {
       this.storeToken(token);
@@ -74,6 +75,7 @@ export class HomePage {
   ngOnInit() {
     this.requestPermission();
     this._launch.loadLaunchCount();
+    this.show = this._note.getNote();
     this.getBadges();
 
   }
@@ -104,13 +106,10 @@ export class HomePage {
     }
 
     this.fcm.onNotification().subscribe((data) => {
-      this.badge.increase(1).then((badge) => {
-        this.notificationNum = badge;
-      });
+      this._note.setNote(true);
+      this.show = true;
+      alert(this.show);
       if (data.wasTapped) {
-        const self = this;
-        //self.navCtrl.setRoot('Home');
-        self.navCtrl.setRoot('AnnouncementsPage');
         alert('Data TAPPED');
       } else {
         alert(JSON.stringify(data));
@@ -121,6 +120,7 @@ export class HomePage {
       this.storeToken(token);
     });
 
+    this.show = this._note.getNote();
   }
 
   toAnalysisPage() {
@@ -129,6 +129,7 @@ export class HomePage {
 
   navigateToAnnouncements() {
     this.badge.clear().then(() => { });
+    this._note.setNote(false);
     this.getBadges();
     this.navCtrl.push('AnnouncementsPage');
   }
@@ -138,7 +139,7 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-      //alert('Token Stored');
+      alert('Token Stored');
     }).catch((err) => {
       alert(err);
     });

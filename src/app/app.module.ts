@@ -47,6 +47,7 @@ import { NetworkProvider } from '../providers/network/network';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
 import { FirstProvider } from '../providers/first/first';
+import { NotificationsProvider } from '../providers/notifications/notifications';
 
 
 
@@ -108,7 +109,8 @@ const firebaseConfig = {
     NetworkProvider,
     SocialSharing,
     AnalyseStoreProvider,
-    FirstProvider
+    FirstProvider,
+    NotificationsProvider
   ]
 })
 export class AppModule {}
