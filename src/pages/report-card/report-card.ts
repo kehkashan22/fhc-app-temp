@@ -1,8 +1,9 @@
+import { FirstProvider } from './../../providers/first/first';
 import { GlobalsProvider } from './../../providers/globals/globals';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Chart } from 'chart.js';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { QuizStore } from "../../data/quiz/quiz-store.interface";
 
 @IonicPage()
@@ -39,17 +40,26 @@ export class ReportCardPage implements OnInit {
 
   overall = "Why don't you give a quiz to get your own personalised results!";
   analysisA = "";
-  analysisB ="";
+  analysisB = "";
   analysisC = "";
 
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private _quizStore: QuizStoreProvider,
-    private _globals: GlobalsProvider) {
+    private _globals: GlobalsProvider,
+    private _alert: AlertController,
+    private _launch: FirstProvider) {
   }
 
   ngOnInit(): void {
+    this._launch.loadLaunchCount();
+     let count = this._launch.getLaunchCount();
+    if(this._launch.getLaunchCount() === 0){
+      this.presentAlert();
+    }
+    this._launch.addLaunchCount(++count);
+
     this.subjectId = this.navParams.get('subjectId');
 
 
@@ -178,7 +188,7 @@ export class ReportCardPage implements OnInit {
               for (var i = 0; i < dataset.data.length; i++) {
                 for (var key in dataset._meta) {
                   var model = dataset._meta[key].data[i]._model;
-                    ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
+                  ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
 
                 }
               }
@@ -202,7 +212,7 @@ export class ReportCardPage implements OnInit {
     this.percentage = Math.floor(sum);
   }
 
-    private getClassString(per) {
+  private getClassString(per) {
     let perInt = +per | 0;
 
     if (perInt >= 60) {
@@ -215,13 +225,22 @@ export class ReportCardPage implements OnInit {
 
   }
 
-  private generateReport(){
-      if(this.percentage > 40){
-        this.overall = "You have a good chance of passing, but make sure that you concentrate on important chapters to ensure that you come out on top!";
-      }else{
-        this.overall = "You have a long way to go in terms of clearing your exam. Lots of practice is required in a structured manner."
-      }
+  private generateReport() {
+    if (this.percentage > 40) {
+      this.overall = "You have a good chance of passing, but make sure that you concentrate on important chapters to ensure that you come out on top!";
+    } else {
+      this.overall = "You have a long way to go in terms of clearing your exam. Lots of practice is required in a structured manner."
+    }
 
+  }
+
+  presentAlert() {
+    let alert = this._alert.create({
+      title: 'Click!',
+      subTitle: 'Click on both the reports for the complete picture!',
+      buttons: ['ok']
+    });
+    alert.present();
   }
 
 }

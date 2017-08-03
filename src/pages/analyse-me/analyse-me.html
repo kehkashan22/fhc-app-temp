@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>Analyse Yourself!</ion-title>
     <ion-buttons right>
-      <button ion-button (click)="presentInstructions()">
+      <button ion-button (tap)="presentInstructions()">
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>
@@ -39,7 +39,7 @@
           <vg-fullscreen></vg-fullscreen>
         </vg-controls>
 
-        <video [vgMedia]="media" #media [src]="analysisVideo" id="singleVideo" preload="auto">
+        <video [vgMedia]="media" #media [src]="analysisVideo" id="singleVideo" preload="auto" poster="assets/images/transparent.png">
 
         </video>
       </vg-player>
@@ -79,7 +79,7 @@
                 </ion-grid>
 
               </ion-label>
-              <ion-radio [value]="answer" (click)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
+              <ion-radio [value]="answer" (tap)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
             </ion-item>
           </ion-list>
         </ion-slide>
@@ -96,13 +96,13 @@
       <flash-card>
 
         <div class="flash-card-front">
-
-          <h3 text-center>
-            Compare your two scores!
-          </h3>
-
-          <canvas #barCanvas></canvas>
-
+          <ion-card>
+            <ion-card-header>Your Analysis is complete</ion-card-header>
+            <ion-card-content>
+              <p>Compare your scores:</p>
+                 <canvas #barCanvas height="250px"></canvas>
+            </ion-card-content>
+          </ion-card>
         </div>
 
         <div class="flash-card-back">ARE COOL!</div>
@@ -110,8 +110,8 @@
       </flash-card>
 
       <p>...now go to Explanation to get the proper understanding of each question, or re-try the quiz!</p>
-      <button ion-button block outline (click)="getExplanation()">Get Explanation</button>
-      <button ion-button block outline (click)="resetScore()">Re-try Analysis</button>
+      <button ion-button block outline (tap)="getExplanation()">Get Explanation</button>
+      <button ion-button block outline (tap)="resetScore()">Re-try Analysis</button>
     </div>
   </ng-template>
 </ion-content>

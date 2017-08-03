@@ -12,7 +12,8 @@ export class AnalyseStoreProvider {
     solved: boolean,
     marks1: number,
     marks2: number,
-    max: number
+    max: number,
+    exp: string
   };
 
   constructor(private storage: Storage,
@@ -21,7 +22,7 @@ export class AnalyseStoreProvider {
   }
 
   addAsSolved(analysis: {solved: boolean, marks1: number, marks2: number,
-    max: number}) {
+    max: number, exp: string}) {
     const userId = this._auth.getActiveUser().uid;
     this.storage.set(userId + '/solved', analysis)
       .then()
@@ -29,10 +30,10 @@ export class AnalyseStoreProvider {
       err => {
         console.log("Could not store");
       }
-      );
+    );
   }
 
-  removeFromSolved(analysis: {solved: boolean, marks1: number, marks2: number, max: number}) {
+  removeFromSolved(analysis: {solved: boolean, marks1: number, marks2: number, max: number, exp: string}) {
       const userId = this._auth.getActiveUser().uid;
     this.storage.set(userId + '/solved', analysis)
       .then()
@@ -46,8 +47,8 @@ export class AnalyseStoreProvider {
     const userId = this._auth.getActiveUser().uid;
     this.storage.get(userId+'/solved')
       .then(
-      (analysis: {solved: boolean, marks1: number, marks2: number, max: number}) => {
-        this.analysis = analysis != null ? analysis : {solved: false, marks1: 0, marks2: 0, max: 0};
+      (analysis: {solved: boolean, marks1: number, marks2: number, max: number, exp: string}) => {
+        this.analysis = analysis != null ? analysis : {solved: false, marks1: 0, marks2: 0, max: 0, exp: ''};
         console.log(this.analysis);
       }
       )

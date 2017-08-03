@@ -1,3 +1,4 @@
+import { ToastController, AlertController } from 'ionic-angular';
 import { NetworkProvider } from './../../providers/network/network';
 import { QuizService } from './../../providers/quiz';
 import { Component, OnInit } from '@angular/core';
@@ -29,10 +30,12 @@ export class ChaptersPage implements OnInit {
   nothing: boolean = false;
   loader: any;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private _loader: LoadingController,
     private _quiz: QuizService,
-    private _network: NetworkProvider) {
+    private _network: NetworkProvider,
+    private _alert: AlertController) {
   }
 
   ngOnInit() {
@@ -53,6 +56,7 @@ export class ChaptersPage implements OnInit {
         if (snapshot) {
           this.chapters = snapshot;
           this.tempChapters = this.chapters;
+          console.log(this.chapters);
         }
         this.nothing = this.chapters.length > 0 ? false : true;
         this.loader.dismiss();
@@ -68,7 +72,9 @@ export class ChaptersPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.loader.dismiss();
+    if(this.loader){
+      this.loader.dismiss();
+    }
   }
 
   getChapterByTitle(event: any) {
@@ -108,6 +114,22 @@ export class ChaptersPage implements OnInit {
     setTimeout(() => {
       refresher.complete();
     }, 2000);
+  }
+
+  presentAlert(){
+    let alert = this._alert.create({
+      title: 'A, B, C Breakup:',
+      message: 'Chapters marked A are the most important, followed by B which are important and chapters marked C are general chapters.',
+      buttons: ['ok']
+    });
+    alert.present();
+  }
+
+  filterChaps(val){
+    this.chapters = this.tempChapters;
+    this.chapters = this.chapters.filter((chapter) => {
+      return (chapter.chapterType.toLowerCase() === val.toLowerCase())
+    });
   }
 
 }

@@ -41,6 +41,7 @@ export class AnalyseMePage implements OnInit {
   currentId = 0;
   loader: any;
   explain: boolean = false;
+  expVid = '';
 
   marks1 = 0;
   marks2 = 0;
@@ -71,7 +72,7 @@ export class AnalyseMePage implements OnInit {
   ngOnInit() {
     //Check if test not given, only then make a db call...so once test is finished,
     //store a token on client side and give option to restart
-    let analysis: { solved: boolean, marks1: number, marks2: number, max: number };
+    let analysis: { solved: boolean, marks1: number, marks2: number, max: number, exp: string };
     this._analysed.loadSolved();
     analysis = this._analysed.getSolved();
     if (!analysis.solved) {
@@ -82,6 +83,7 @@ export class AnalyseMePage implements OnInit {
       this.marks1 = analysis.marks1;
       this.marks2 = analysis.marks2;
       this.max = analysis.max;
+      this.expVid = analysis.exp;
       setTimeout(() => {
         this.drawChart(this.max);
       }, 700);
@@ -111,7 +113,7 @@ export class AnalyseMePage implements OnInit {
         this.marks1 = this.analysis1.marks;
         this.marks2 = this.analysis2.marks;
         this.max = this.quizCollection.length;
-        let analysis = { solved: true, marks1: this.marks1, marks2: this.marks2, max: this.max };
+        let analysis = { solved: true, marks1: this.marks1, marks2: this.marks2, max: this.max, exp: this.expVid };
         this._analysed.addAsSolved(analysis);
         this.max = this.quizCollection.length;
         setTimeout(() => {
@@ -219,7 +221,7 @@ export class AnalyseMePage implements OnInit {
 
   getExplanation() {
     this.explain = true;
-    this.analysisVideo = this.getVideoUrl(this.analysisCollection.explanation);
+    this.analysisVideo = this.getVideoUrl(this.expVid);
     this.video = true;
     this.question = true;
 
@@ -243,7 +245,7 @@ export class AnalyseMePage implements OnInit {
           text: 'Yes, go ahead',
           handler: () => {
             this._analysed.removeFromSolved({
-              solved: false, marks1: 0, marks2: 0, max: 0
+              solved: false, marks1: 0, marks2: 0, max: 0, exp: ''
             });
             this.getAnalysisQuizzes();
             this.progressIndex = 1;
@@ -280,6 +282,7 @@ export class AnalyseMePage implements OnInit {
       this.analysis2 = this.analysisCollection.quizzes[1];
       this.quizCollection = this.analysis1.questions;
       this.currentQuestion = this.analysis1.questions[0];
+      this.expVid = this.analysisCollection.explanation;
       this.analysisVideo = this.getVideoUrl(this.analysis1.video);
       this.currentId = this.analysis1.id;
 

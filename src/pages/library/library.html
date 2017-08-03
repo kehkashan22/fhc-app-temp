@@ -15,15 +15,15 @@
 <ion-content scroll="false">
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..." color="primary">
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar>
   <ion-list *ngIf="!nothing; else noVids;">
-    <button ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
-      <ion-icon [name]="videoGroup.icon" item-left></ion-icon>
-      <h2 text-wrap>{{ videoGroup.setId }}</h2>
-      <p>{{ videoGroup.videos.length }} Videos</p>
+    <button class="list-grow-animation" ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
+      <ion-icon class="animate-in-primary" [name]="videoGroup.icon" item-left></ion-icon>
+      <h2 class="animate-in-primary" text-wrap>{{ videoGroup.setId }}</h2>
+      <p class="animate-in-secondary">{{ videoGroup.videos.length }} Videos</p>
     </button>
   </ion-list>
 
