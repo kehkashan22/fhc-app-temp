@@ -22,9 +22,9 @@ export class AboutPage {
 
    openModal(choice: number) {
     if(choice === 1){
-        this.title ="About Farooq Haque";
+        this.title ="About CA Farooq Haque";
         this.src = 'https://s3-ap-southeast-1.amazonaws.com/fhc.app/aboutpage.png';
-        this.body ="Education is going through paradigm shift from the echelons of age old classrooms to reaching out to students at their doorsteps through different modes of communication. FHC is one of the pioneer in India to have realized the changing times and moulded itself to bring the best Quality lectures delivered by the best faculties in India to the doorsteps of students pursuing CA / CS and CMA course. All aspects required for clearing the exam with flying colours and developing skills for future career are taken care of at FHC, like";
+        this.body ="Farooq Haque Classes ( A unit of YO Edutech Solutions Pvt. Ltd.)Founded in 1998, by a  professional on a mission to revolutionize the process of teaching prevalent in the country,  Farooq Haque Classes ever since has endeavoured to blend  innovative learning techniques and advanced information and communication technologies to offer modern, scalable and affordable solutions to the education community. Main objective being on delivering the best quality education to students pursuing CA / CS and CMA at their doorsteps from the best faculties across India.";
     }else if(choice === 2){
       this.title ="Farooq Haque";
       this.src = 'https://s3-ap-southeast-1.amazonaws.com/fhc.app/farooqhaque.png';

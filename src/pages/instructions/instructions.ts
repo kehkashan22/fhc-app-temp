@@ -1,24 +1,28 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage,  NavParams, ViewController } from 'ionic-angular';
 
-/**
- * Generated class for the InstructionsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-instructions',
   templateUrl: 'instructions.html',
 })
 export class InstructionsPage {
+body: string = '';
+  title: string = '';
+  src = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navParams: NavParams, private view: ViewController) {
   }
+
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InstructionsPage');
+    this.title = this.navParams.get('title');
+    this.body = this.navParams.get('body');
+    this.src= this.navParams.get('src')
+    console.log(this.title);
   }
 
+  onClose(){
+    this.view.dismiss();
+  }
 }

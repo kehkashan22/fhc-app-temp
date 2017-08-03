@@ -23,6 +23,7 @@ export class AnnouncementsPage {
   temp: any;
 
   storageDirectory: string = '';
+  currentSelected = 'all';
 
   fileTransfer: TransferObject = this.transfer.create();
 
@@ -163,14 +164,28 @@ export class AnnouncementsPage {
   }
 
   getItems(val: string){
-    if(val==='all'){
-      this.announcements = this.temp;
-    }else{
+    this.currentSelected = val;
+    this.announcements = this.temp;
+    if(val!=='all'){
         this.announcements = this.announcements.filter((announcement) => {
           return announcement.id === val;
         });
     }
     
+  }
+}
+
+@Component({
+  template: `
+  <ion-tabs>
+    <ion-tab tabIcon="water" tabTitle="Water" [root]="tab1"></ion-tab>
+    <ion-tab tabIcon="leaf" tabTitle="Life" [root]="tab2"></ion-tab>
+    <ion-tab tabIcon="flame" tabTitle="Fire" [root]="tab3"></ion-tab>
+    <ion-tab tabIcon="magnet" tabTitle="Force" [root]="tab4"></ion-tab>
+  </ion-tabs>`
+})
+export class TabsTextPage {
+  constructor() {
   }
 }
 

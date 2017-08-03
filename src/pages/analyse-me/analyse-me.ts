@@ -75,7 +75,7 @@ export class AnalyseMePage implements OnInit {
     this._analysed.loadSolved();
     analysis = this._analysed.getSolved();
     if (!analysis.solved) {
-      this.getAnalysisQuizzes();
+      this.presentInstructions(true);
     } else {
       this.question = false;
       this.explain = true;
@@ -156,12 +156,12 @@ export class AnalyseMePage implements OnInit {
   }
 
   onPlayerReady(api: VgAPI) {
+
     this.api = api;
 
     this.api.getDefaultMedia().subscriptions.loadedMetadata.subscribe(
       this.playVideo.bind(this)
     );
-
 
     this.api.getDefaultMedia().subscriptions.ended.subscribe(
       () => {
@@ -292,19 +292,28 @@ export class AnalyseMePage implements OnInit {
     }
   }
 
-  presentInstructions() {
+  presentInstructions(first = false) {
     if(this.api){
       this.api.pause();
     }
 
 
-    let instructions = this._modal.create('InstructionsPage', { userId: 8675309 });
+    let instructions = this._modal.create('InstructionsPage', {
+      title: 'Your personal Analysis',
+      body: 'Welcome to the test that',
+      src: 'this.src'
+    }, { cssClass: 'contact-popover' });
+
     instructions.onDidDismiss(data => {
         if(this.api){
           this.api.play();
         }
+        if(first){
+          this.getAnalysisQuizzes();
+        }
       });
-     instructions.present();
+
+      instructions.present();
   }
 }
 

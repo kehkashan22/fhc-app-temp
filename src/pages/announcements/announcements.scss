@@ -1,6 +1,16 @@
 page-announcements {
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
 
-    button{
-        
+    ion-footer{
+        ion-item.item-md, ion-item.item-ios, ion-item.item-wp{
+             color:  map-get($colors, primary); 
+             font-family: 'Bree Serif', serif;
+             font-size: 1em;
+             font-weight:bold;
+        }
     }
+    .selected{
+         color:  map-get($colors, danger) !important; 
+    }
+        
 }
