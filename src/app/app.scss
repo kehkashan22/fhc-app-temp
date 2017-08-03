@@ -15,6 +15,62 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+ @-webkit-keyframes animateInPrimary {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+@-webkit-keyframes animateInSecondary{
+
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes listGrow {
+  0% {
+    -webkit-transform: scale3d(1, 0, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 0);
+  }
+}
+
+.list-grow-animation {
+  -webkit-animation: listGrow ease-in 1;
+  animation: listGrow ease-in 1;
+  -webkit-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
+
+.animate-in-primary {
+    -webkit-animation: animateInPrimary;
+    animation: animateInPrimary;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+
+.animate-in-secondary {
+    -webkit-animation: animateInSecondary ease-in 1;
+    animation: animateInSecondary ease-in 1;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+
 .bg{
     background-color: white;
     font-weight: normal;

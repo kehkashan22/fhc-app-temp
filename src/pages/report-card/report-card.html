@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>{{subjectId | uppercase}} Report Card</ion-title>
     <ion-buttons right>
-      <button ion-button>
+      <button ion-button (tap)="presentAlert()">
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>

@@ -44,8 +44,8 @@
   <ion-list>
     <ion-item-sliding
       *ngFor="let video of videos">
-      <ion-item
-        (click)="onViewVideo(video)">
+      <ion-item tappable
+        (tap)="onViewVideo(video)">
         <h2 text-wrap>{{ video.text }}</h2>
         <p>{{ video.text }}</p>
       </ion-item>
@@ -53,7 +53,7 @@
         <button
           ion-button
           color="danger"
-          (click)="onRemoveFromFavorites(video)" icon-end>
+          (tap)="onRemoveFromFavorites(video)" icon-end>
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>

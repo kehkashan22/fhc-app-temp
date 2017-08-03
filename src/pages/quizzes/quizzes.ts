@@ -52,6 +52,9 @@ export class QuizzesPage implements OnInit {
           this.memoryQuiz.push(quizEl);
         }
       }
+      this.applicationQuiz.reverse();
+      this.speedQuiz.reverse();
+      this.memoryQuiz.reverse();
     }
 
   }

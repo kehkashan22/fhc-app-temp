@@ -30,7 +30,6 @@ export class AnnouncementsPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private afd: AngularFireDatabase,
-    private loadingCtrl: LoadingController,
     private transfer: Transfer,
     private file: File,
     private toast: ToastController,
@@ -38,7 +37,8 @@ export class AnnouncementsPage {
     public alertCtrl: AlertController,
     private diagnostic: Diagnostic,
     private _network: NetworkProvider,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private _loader: LoadingController
   ) {
 
     // defining storage directory
@@ -66,7 +66,7 @@ export class AnnouncementsPage {
     });
   }
   ionViewDidLoad() {
-    this.loader = this.loadingCtrl.create({
+    this.loader = this._loader.create({
       content: 'Loading Notifications',
       spinner: 'bubbles'
     });
@@ -105,7 +105,7 @@ export class AnnouncementsPage {
 
     console.log(fileName);
 
-    let loader = this.loadingCtrl.create({
+    let loader = this._loader.create({
       content: 'Downloading your file, please wait...',
       spinner: 'bubbles'
     });
@@ -156,9 +156,15 @@ export class AnnouncementsPage {
 
   shareSheetShare(announcement) {
     const playstore = "https://play.google.com/store/apps/topic?id=editors_choice";
+    let loader = this._loader.create({
+      spinner: 'bubbles',
+    });
+    loader.present();
     this.socialSharing.share(announcement.message+"\nVisit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more at:\n ", announcement.title, announcement.img, playstore).then(() => {
+      loader.dismiss();
       console.log("shareSheetShare: Success");
     }).catch(() => {
+      loader.dismiss();
       console.error("shareSheetShare: failed");
     });
   }

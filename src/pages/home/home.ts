@@ -1,3 +1,4 @@
+import { FirstProvider } from './../../providers/first/first';
 import { AnalyseStoreProvider } from './../../providers/analyse-store/analyse-store';
 import { NetworkProvider } from './../../providers/network/network';
 import { Badge } from '@ionic-native/badge';
@@ -38,7 +39,7 @@ export class HomePage {
   userData: User;
   notificationNum: number = 0;
 
-
+  pop="all";
   fireStore = firebase.database().ref("/pushtokens");
 
   slides: any[] = [
@@ -48,22 +49,18 @@ export class HomePage {
   ];
 
   constructor(public navCtrl: NavController,
-    private videosProvider: VideosProvider,
-    private videosService: VideosService,
-    private quizService: QuizService,
-    private quizStore: QuizStoreProvider,
-    private userProvider: UserProvider,
+    private _videosStore: VideosService,
+    private _quizStore: QuizStoreProvider,
+    private _user: UserProvider,
     private events: Events,
-    private menuCtrl: MenuController,
-    private authProvider: AuthProvider,
     private _loader: LoadingController,
     private app: App,
-    private quizProvider: QuizService,
     private afd: AngularFireDatabase,
     private fcm: FCM,
     private badge: Badge,
     private _network: NetworkProvider,
-    private _analysed: AnalyseStoreProvider
+    private _analysed: AnalyseStoreProvider,
+    private _launch: FirstProvider
   ) {
     this.fcm.getToken().then((token) => {
       this.storeToken(token);
@@ -76,7 +73,7 @@ export class HomePage {
 
   ngOnInit() {
     this.requestPermission();
-
+    this._launch.loadLaunchCount();
     this.getBadges();
 
   }
@@ -89,15 +86,15 @@ export class HomePage {
     });
     if (!this.userData) {
       loader.present();
-      this.videosService.loadFavoriteVideos();
-      this.quizStore.loadSolvedQuizCollection();
+      this._videosStore.loadFavoriteVideos();
+      this._quizStore.loadSolvedQuizCollection();
       this._analysed.loadSolved();
       if (this._network.noConnection()) {
         console.log(this._network.noConnection());
       loader.dismiss();
       this._network.showNetworkAlert();
     } else {
-      this.userProvider.getUser().then((data: User) => {
+      this._user.getUser().then((data: User) => {
         this.userData = data;
         //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
         this.events.publish('user:created', this.userData);

@@ -330,29 +330,4 @@ export class QuizPage implements OnInit {
     }
   }
 
-  ionViewWillLeave() {
-    if (this.question) {
-      const alert = this.alertCtrl.create({
-        title: 'Leave page?',
-        subTitle: 'Are you sure?',
-        message: 'Your quiz will be reset...',
-        buttons: [
-          {
-            text: 'Yes, go ahead',
-          },
-          {
-            text: 'No, I changed my mind!',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancelled!');
-            }
-          }
-        ]
-      });
-
-      alert.present();
-    }
-  }
-
-
 }
