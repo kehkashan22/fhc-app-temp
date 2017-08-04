@@ -46,7 +46,7 @@ import { Badge } from '@ionic-native/badge'
 import { NetworkProvider } from '../providers/network/network';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
-import { FirstProvider } from '../providers/first/first';
+import { FirstProvider } from "../providers/first/first";
 
 
 
