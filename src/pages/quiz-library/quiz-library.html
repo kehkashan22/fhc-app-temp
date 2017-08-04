@@ -33,9 +33,10 @@
     <ion-list *ngSwitchCase="'ca'">
       <ion-item-group *ngFor="let stage of caLibrary">
         <ion-item-divider class="list-grow-animation" color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
-        <ion-item class="list-grow-animation" *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+        <ion-item class="list-grow-animation" *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)" item-left>
+         <ion-icon ios="ios-add" md="md-add" *ngIf="show !== subject.subjectId"></ion-icon>
+          <ion-icon ios="ios-remove" md="md-remove" *ngIf="show === subject.subjectId"></ion-icon>
           {{subject.subjectName | titlecase}}
-          
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
               <button ion-item
@@ -52,6 +53,8 @@
       <ion-item-group *ngFor="let stage of csLibrary">
         <ion-item-divider class="list-grow-animation" color="light">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item class="list-grow-animation" *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)">
+          <ion-icon ios="ios-add" md="md-add" *ngIf="show !== subject.subjectId"></ion-icon>
+          <ion-icon ios="ios-remove" md="md-remove" *ngIf="show === subject.subjectId"></ion-icon>
           {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let fa of subject.fa" class="inner-list" no-lines>
