@@ -43,9 +43,9 @@ export class HomePage {
   fireStore = firebase.database().ref("/pushtokens");
 
   slides: any[] = [
-    { url: this.imgPath + "slides4.jpg", text: "Test Slide1" },
-    { url: this.imgPath + "slides2.jpg", text: "Test Slide2" },
-    { url: this.imgPath + "slides5.jpg", text: "Test Slide3" }
+    { url: "assets/images/slidequiz.png", text: "Test Slide1" },
+    { url: "assets/images/slidequiz.png", text: "Test Slide2" },
+    { url: "assets/images/slidequiz.png", text: "Test Slide3" }
   ];
 
   constructor(public navCtrl: NavController,
