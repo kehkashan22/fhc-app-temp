@@ -11,6 +11,7 @@ page-home {
     img{
       width: 100%;
       height: auto;
+      
     }
 
 
@@ -21,11 +22,12 @@ page-home {
   ion-card, .cards {
     position: relative;
     text-align: center;
-    
+    border-radius: 10px;
+    box-shadow: 7px 7px 32px -5px rgba(138,138,138,1);
 
 
     img{
-      opacity: 0.85;
+      border-radius: 10px;
     }
   }
 .card1{

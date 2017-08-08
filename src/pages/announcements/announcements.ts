@@ -174,7 +174,7 @@ export class AnnouncementsPage {
     this.announcements = this.temp;
     if(val!=='all'){
         this.announcements = this.announcements.filter((announcement) => {
-          return announcement.id === val;
+          return announcement.type === val;
         });
     }
     

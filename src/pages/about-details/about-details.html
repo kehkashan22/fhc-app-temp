@@ -1,16 +1,56 @@
-<div class="main">
-  
-  <div class="div-text" [ngStyle]="{}">
-    <ion-fab top right>
-      <button ion-fab mini icon-only (click)="onClose()"><ion-icon name="close"></ion-icon></button>
-    </ion-fab>
-    <img [src]="src" />
-    <div class="content">
-      <h1 text-center>
-        {{title}}
-      </h1>
-      <hr class="hr">
-      <p class="text-area"> {{body}}</p>
-    </div>
-  </div>
-</div>
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button (click)="onClose()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>About</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <p>About Us</p>
+  <p>Farooq Haque Classes ( A unit of YO Edutech Solutions Pvt. Ltd.)</p>
+  <p>Founded in 1998, by a  professional on a mission to revolutionize the process of teaching 
+    prevalent in the country,  Farooq Haque Classes ever since has endeavoured to blend  innovative 
+    learning techniques and advanced information and communication technologies to offer modern, 
+    scalable and affordable solutions to the education community. Main objective being on delivering 
+    the best quality education to students pursuing CA / CS and CMA at their doorsteps from the best
+     faculties across India. </p>
+  <p>Our primary focus is on overall development of the student through :</p>   
+  <ul>
+    <li>Convenience- Lectures available on DVD /USB and Android.</li>
+    <li>Clearing concepts and learning the practical application knowledge </li>
+    <li>Best quality notes for study and reference</li>
+    <li>Continuous updates of all Amendments, Case laws, Notifications, etc…</li>
+    <li>Improving Mind Power Skills</li>
+    <li>Study Plan</li>
+    <li>Time Management</li>
+    <li>Ease of communication – Presence across all Social Media Platforms</li>
+  </ul> 
+
+  <p>Our Objective: </p>
+  <p><i>To ensure that no matter who you are or where you are, you should not be deprived of best 
+    of education.</i> </p>
+
+
+  <p>About CA Farooq Haque</p>  
+  <p><i>“I can't change the direction of the wind, but I can adjust your sails to make you reach
+     your destination”</i></p>
+  <p>Teaching is an art and it came very naturally to him. What started as a student tutoring his own 
+    classmates while pursuing chartered accountancy, ended up in revolutionizing the Indian education
+    industry by establishing Farooq Haque Classes.  He did not want to get lost in the crowd and that’s
+    what he did. He followed his passion for teaching and wrote history. </p>
+  <p>With his deep understanding of the subjects, passion, humane and simple approach towards students 
+    and teacher fraternity and his resolve to give back to the society, made him extremely popular all
+     over the country. He now has taught more than 35000 students.</p> 
+  <p>Students have not only excelled in their academics ( highest being 1st All India Rank in CA Final)
+     but also in their professional lives. Large numbers of his students are placed in top managerial 
+     positions in Indian and Multinational companies all across the globe.</p> 
+     
+  <p>To live up to his reputation as a perfectionist, he is constantly upgrading teaching techniques
+     as well as education delivery modules so as to achieve his vision 
+     <i>“To provide access to best quality Online & Offline Education beyond Geographical & Economic boundaries.”</i></p>
+</ion-content>

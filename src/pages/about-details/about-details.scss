@@ -1,63 +1,66 @@
 page-about-details {
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-    @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
-    .contact-popover{
-        background: #000;
-        opacity: 0.4;
-        
+    // @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    // @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+    content{
+        background-color: #000;
     }
+    // .contact-popover{
+    //     background: #000;
+    //     opacity: 0.4;
+        
+    // }
 
-    .main{
-            height: 100%;
-           // border: 3px solid green;
-            padding:10px;
+    // .main{
+    //         height: 100%;
+    //        // border: 3px solid green;
+    //         padding:10px;
 
-        }
+    //     }
         
     
-    .div-text{
-            height: 100%;
-            width:auto;
-            text-align: justify;
-            position: relative;
-            color:map-get($colors, light);
-            line-height: 30px;
-            font-size: 15px;   
-            img{
-                height: 100%;
-                width: 100%;
-            }  
-            .content{
-            position: absolute;
-            top: 0;
-            height: inherit;
-            width: 100%;
-            padding-left:23px;
-            padding-right: 23px;
-            overflow: scroll;   
-            h1{
-                margin-top:5rem;
-                font-family: 'Abril Fatface', cursive;
-                color:#0C90C0;
-            }
-            .text-area{
-                font-family: 'Open Sans', sans-serif;
-                color:#545454;
-            }
-        }         
-    }
-        button{
-            align-items: top right;
-        }
+    // .div-text{
+    //         height: 100%;
+    //         width:auto;
+    //         text-align: justify;
+    //         position: relative;
+    //         color:map-get($colors, light);
+    //         line-height: 30px;
+    //         font-size: 15px;   
+    //         img{
+    //             height: 100%;
+    //             width: 100%;
+    //         }  
+    //         .content{
+    //         position: absolute;
+    //         top: 0;
+    //         height: inherit;
+    //         width: 100%;
+    //         padding-left:23px;
+    //         padding-right: 23px;
+    //         overflow: scroll;   
+    //         h1{
+    //             margin-top:5rem;
+    //             font-family: 'Abril Fatface', cursive;
+    //             color:#0C90C0;
+    //         }
+    //         .text-area{
+    //             font-family: 'Open Sans', sans-serif;
+    //             color:#545454;
+    //         }
+    //     }         
+    // }
+    //     button{
+    //         align-items: top right;
+    //     }
 
-        .head{
-            font-size: 25px;
-        }
+    //     .head{
+    //         font-size: 25px;
+    //     }
 
-        .hr{
-            background-color: #fff;
-            border: 0;
-            border-bottom: 1px dashed #ccc;
-            margin:20px;
-        }
+    //     .hr{
+    //         background-color: #fff;
+    //         border: 0;
+    //         border-bottom: 1px dashed #ccc;
+    //         margin:20px;
+    //     }
 }
