@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController, T
 
 import { AuthProvider } from '../../providers/auth';
 
-import * as sha1  from 'sha1';
-
 import * as firebase from 'firebase';
 
 @IonicPage()
@@ -43,7 +41,7 @@ export class UpdatePasswordPage {
 
     loading.present();
 
-    let newPass = ""+sha1(this.newPassword);
+    let newPass = this.newPassword;
 
     let user = firebase.auth().currentUser;
 

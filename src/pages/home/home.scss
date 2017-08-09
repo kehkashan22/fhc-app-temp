@@ -13,26 +13,40 @@ page-home {
 
   }
 
+    .card1{
+    background-color: #ed7272;
+    }
+
+    .card2{
+    background-color: #9fea73;
+    }
+    .card3{
+    background-color: #73b7ea;
+    }
+    .card4{
+    background-color: #fcf877;
+    }
+
   .card-background-page {
 
   ion-card, .cards {
     position: relative;
     text-align: center;
-    background-color: map-get($colors, dark);
+
 
     img{
-      opacity: 0.7;
+      opacity: 0.85;
     }
   }
 
   .card-title {
-    position: absolute;
-    top: 36%;
-    font-size: 1.3em;
-    width: 100%;
-    font-weight: bold;
-    color: map-get($colors, light);
-  }
+position: absolute;
+top: 74%;
+font-size: 1.3em;
+width: 100%;
+font-weight: bold;
+color: #3f3f3f;
+}
 
   .card-subtitle {
     font-size: 1.0em;

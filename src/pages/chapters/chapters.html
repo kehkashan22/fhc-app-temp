@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>{{subjectName | titlecase}}</ion-title>
     <ion-buttons right>
-      <button ion-button (tap)="presentAlert()" icon-only><ion-icon name="help" ></ion-icon></button>
+      <button ion-button class="bounce-animation" (tap)="presentAlert()" icon-only><ion-icon name="help" ></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -16,7 +16,7 @@
   </ion-refresher>
   <ion-searchbar (ionInput)="getChapterByTitle($event)"></ion-searchbar>
   <ion-list *ngIf="!nothing; else cat;">
-    <button ion-item *ngFor="let chapter of chapters" (tap)="toQuizzes(chapter)" class="list-grow-animation">
+    <button ion-item *ngFor="let chapter of chapters" (tap)="toQuizzes(chapter)">
     <ion-avatar item-start [ngClass]="chapter.chapterType" class="animate-in-primary">
 
     </ion-avatar>

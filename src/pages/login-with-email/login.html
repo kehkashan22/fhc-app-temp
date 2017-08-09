@@ -1,14 +1,6 @@
-<ion-content class="bg" scroll="false">
-  <div padding-horizontal class="form-class">
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-      <defs>
-        <filter id="blur">
-          <feGaussianBlur stdDeviation="5" />
-        </filter>
-      </defs>
-    </svg> -->
+<ion-content class="bg" scroll="false" padding>
     <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/logo.png" alt="Farooq Haque Classes">
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" padding>
 
       <ion-list>
         <ion-item>
@@ -52,7 +44,7 @@
     </div>
   </div>
 <!--
-   <button ion-button block color="danger" (click)="googleLogin()">
+  <button ion-button block color="danger" (click)="googleLogin()">
     <ion-icon name="logo-googleplus"></ion-icon>
     Login with Google
   </button>
@@ -61,11 +53,6 @@
     <ion-icon name="logo-facebook"></ion-icon>
     Login with Facebook
   </button> -->
-
-  </div>
-
-
-
 </ion-content>
 
 <ion-footer>

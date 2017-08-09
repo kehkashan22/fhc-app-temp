@@ -6,7 +6,7 @@ import { NetworkProvider } from './../../providers/network/network';
   Date - 06/06/2017
 */
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, MenuController } from 'ionic-angular';
 /* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /* Logger Service */
@@ -14,7 +14,7 @@ import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
 
-import * as sha1 from 'sha1';
+
 
 import { HomePage } from "../home/home";
 
@@ -38,13 +38,18 @@ export class LoginWithEmailPage {
     private _logger: Logger,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
-    private _network: NetworkProvider
+    private _network: NetworkProvider,
+    private _menu: MenuController
   ) {
+
+    this._menu.enable(false);
+    //this._menu.swipeEnable(false, 'menu-toolbar');
     /* Building form  */
     this.loginForm = formBuilder.group({
       emailId: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required],
     });
+
 
   }
   /* Check for Network - Remaining*/
@@ -66,7 +71,7 @@ export class LoginWithEmailPage {
     /* Building user */
     let loginUserData = {
       emailId: this.loginForm.value.emailId,
-      password: sha1(this.loginForm.value.password)
+      password: this.loginForm.value.password
     };
 
     /* Loader */

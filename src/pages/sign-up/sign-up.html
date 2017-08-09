@@ -1,6 +1,7 @@
 <ion-content padding class="bg">
-  <h6><b>Sign Up</b></h6><hr>
-
+  <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/logo.png" alt="Farooq Haque Classes">
+  <hr>
+  <h6><b>Sign Up</b></h6>
   <form [formGroup] = "form">
   <ion-list>
   <ion-item>
@@ -125,14 +126,14 @@
     block
     color = "btn"
     (tap) = "signupUser()"
-    [disabled]="!form.valid">SIGN UP</button><hr>
+    [disabled]="!form.valid">Sign Up</button><hr>
     <button
     ion-button
     block
     color = "btn"
     outline
     (tap) = "navigateToLogin()"
-    >LOGIN</button>
+    >Cancel</button>
   </div>
 </form>
 </ion-content>

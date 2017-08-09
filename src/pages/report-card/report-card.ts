@@ -54,8 +54,8 @@ export class ReportCardPage implements OnInit {
 
   ngOnInit(): void {
     this._launch.loadLaunchCount();
-     let count = this._launch.getLaunchCount();
-    if(this._launch.getLaunchCount() === 0){
+    let count = this._launch.getLaunchCount();
+    if (this._launch.getLaunchCount() === 0) {
       this.presentAlert();
     }
     this._launch.addLaunchCount(++count);
@@ -118,6 +118,8 @@ export class ReportCardPage implements OnInit {
     } else if (type === 'application') {
       this.applicationData = data;
     }
+
+
 
   }
 
@@ -206,8 +208,13 @@ export class ReportCardPage implements OnInit {
 
   getPerformancePercent() {
     let sum = 0;
+    let sumA = 0;
+    let sumB = 0;
+    let sumC = 0;
     for (var i = 0; i < this.memoryData.length; sum += (this.memoryData[i] / 100) * this._globals.memoryMatrix[i], i++);
+
     for (var i = 0; i < this.applicationData.length; sum += (this.applicationData[i] / 100) * this._globals.applicationMatrix[i], i++);
+
     for (var i = 0; i < this.speedData.length; sum += (this.speedData[i] / 100) * this._globals.speedMatrix[i], i++);
     this.percentage = Math.floor(sum);
   }
@@ -226,21 +233,126 @@ export class ReportCardPage implements OnInit {
   }
 
   private generateReport() {
-    if (this.percentage > 40) {
+    if (this.percentage > 50) {
       this.overall = "You have a good chance of passing, but make sure that you concentrate on important chapters to ensure that you come out on top!";
     } else {
       this.overall = "You have a long way to go in terms of clearing your exam. Lots of practice is required in a structured manner."
     }
+    this.getAnalysis();
 
   }
 
-  presentAlert() {
-    let alert = this._alert.create({
-      title: 'Click!',
-      subTitle: 'Click on both the reports for the complete picture!',
-      buttons: ['ok']
-    });
-    alert.present();
+  private getAnalysis() {
+    let memA = this.memoryData[0] > 50 ? true : false;
+    let speA = this.speedData[0] > 50 ? true : false;
+    let appA = this.applicationData[0] > 50 ? true : false;
+    let memB = this.memoryData[1] > 50 ? true : false;
+    let speB = this.speedData[1] > 50 ? true : false;
+    let appB = this.applicationData[1] > 50 ? true : false;
+    let memC = this.memoryData[2] > 50 ? true : false;
+    let speC = this.speedData[2] > 50 ? true : false;
+    let appC = this.applicationData[2] > 50 ? true : false;
+
+
+    if (memA) {
+      if (speA && memB) {
+        this.analysisA = this._globals.report.A.MgAgSg;
+      } else if (speA && !memB) {
+        this.analysisA = this._globals.report.A.MgAgSb;
+      } else if (!speA && memB) {
+        this.analysisA = this._globals.report.A.MgAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MgAbSb;
+      }
+    } else {
+      if (speA && memB) {
+        this.analysisA = this._globals.report.A.MbAgSg;
+      } else if (speA && !memB) {
+        this.analysisA = this._globals.report.A.MbAgSb;
+      } else if (!speA && memB) {
+        this.analysisA = this._globals.report.A.MbAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MbAbSb;
+      }
+    }
+
+    if (memA) {
+      if (speA && appA) {
+        this.analysisA = this._globals.report.A.MgAgSg;
+      } else if (speA && !appA) {
+        this.analysisA = this._globals.report.A.MgAgSb;
+      } else if (!speA && appA) {
+        this.analysisA = this._globals.report.A.MgAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MgAbSb;
+      }
+    } else {
+      if (speA && appA) {
+        this.analysisA = this._globals.report.A.MbAgSg;
+      } else if (speA && !appA) {
+        this.analysisA = this._globals.report.A.MbAgSb;
+      } else if (!speA && appA) {
+        this.analysisA = this._globals.report.A.MbAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MbAbSb;
+      }
+    }
+
+    if (memB) {
+      if (speB && appB) {
+        this.analysisB = this._globals.report.B.MgAgSg;
+      } else if (speB && !appB) {
+        this.analysisB = this._globals.report.B.MgAgSb;
+      } else if (!speB && appB) {
+        this.analysisB = this._globals.report.B.MgAbSg;
+      } else {
+        this.analysisB = this._globals.report.B.MgAbSb;
+      }
+    } else {
+      if (speB && appB) {
+        this.analysisB = this._globals.report.B.MbAgSg;
+      } else if (speB && !appB) {
+        this.analysisB = this._globals.report.B.MbAgSb;
+      } else if (!speB && appB) {
+        this.analysisB = this._globals.report.B.MbAbSg;
+      } else {
+        this.analysisB = this._globals.report.B.MbAbSb;
+      }
+    }
+
+    if (memC) {
+      if (speC && appC) {
+        this.analysisC = this._globals.report.C.MgAgSg;
+      } else if (speC && !appC) {
+        this.analysisC = this._globals.report.C.MgAgSb;
+      } else if (!speC && appC) {
+        this.analysisC = this._globals.report.C.MgAbSg;
+      } else {
+        this.analysisC = this._globals.report.C.MgAbSb;
+      }
+    } else {
+      if (speC && appC) {
+        this.analysisC = this._globals.report.C.MbAgSg;
+      } else if (speC && !appC) {
+        this.analysisC = this._globals.report.C.MbAgSb;
+      } else if (!speC && appC) {
+        this.analysisC = this._globals.report.C.MbAbSg;
+      } else {
+        this.analysisC = this._globals.report.C.MbAbSb;
+      }
+    }
+
+
   }
+
+
+presentAlert() {
+  let alert = this._alert.create({
+    title: 'Click!',
+    subTitle: 'Click on both the reports for the complete picture!',
+    buttons: ['ok']
+  });
+  alert.present();
+}
 
 }

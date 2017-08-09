@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth';
 import { NetworkProvider } from './../../providers/network/network';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, Platform, AlertController } from 'ionic-angular';
@@ -7,6 +8,7 @@ import { File } from '@ionic-native/file';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 declare var cordova: any;
 
@@ -30,13 +32,15 @@ export class AnnouncementsPage {
     private afd: AngularFireDatabase,
     private transfer: Transfer,
     private file: File,
+    private iab: InAppBrowser,
     private toast: ToastController,
     public platform: Platform,
     public alertCtrl: AlertController,
     private diagnostic: Diagnostic,
     private _network: NetworkProvider,
     private socialSharing: SocialSharing,
-    private _loader: LoadingController
+    private _loader: LoadingController,
+    private _auth: AuthProvider
   ) {
 
     // defining storage directory
@@ -63,6 +67,12 @@ export class AnnouncementsPage {
 
     });
   }
+
+   ionViewCanEnter(): boolean{
+     console.log(this._auth.getLoginStatus());
+    return this._auth.getLoginStatus() ? true : false;
+  }
+
   ionViewDidLoad() {
     this.loader = this._loader.create({
       content: 'Loading Notifications',
@@ -155,15 +165,20 @@ export class AnnouncementsPage {
     const playstore = "https://play.google.com/store/apps/topic?id=editors_choice";
     let loader = this._loader.create({
       spinner: 'bubbles',
+      content: 'breathe in...breathe out...'
     });
     loader.present();
-    this.socialSharing.share(announcement.message+"\nVisit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more at:\n ", announcement.title, announcement.img, playstore).then(() => {
+    this.socialSharing.share(announcement.message+"\n\nVisit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more at:\n ", announcement.title, announcement.img, playstore).then(() => {
       loader.dismiss();
       console.log("shareSheetShare: Success");
     }).catch(() => {
       loader.dismiss();
-      console.error("shareSheetShare: failed");
+      console.error("shareSheetShare: Failed");
     });
+  }
+
+  goToNews(newsUrl){
+    this.iab.create(newsUrl, "_system", "location=yes");
   }
 }
 

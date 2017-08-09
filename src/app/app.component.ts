@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Platform, NavController } from 'ionic-angular';
+import { Platform, NavController, ModalController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -50,9 +50,11 @@ export class MyApp {
     private events: Events,
     private loader: LoadingController,
     public authProvider: AuthProvider,
-    private app: App) {
+    private app: App,
+    private modalCtrl: ModalController) {
 
-
+      console.log(menuCtrl.get());
+    menuCtrl.swipeEnable(false);
     this.zone = new NgZone({});
     //Angular Authentication
 
@@ -61,10 +63,15 @@ export class MyApp {
       const authObserver = afAuth.authState.subscribe(user => {
         this.zone.run(() => {
           if (user) {
+            this.authProvider.setLoginStatus(true);
             this.rootPage = this.homePage;
             authObserver.unsubscribe();
           } else {
+            this.authProvider.setLoginStatus(false);
+            console.log(this.authProvider.getLoginStatus());
             this.rootPage = 'LoginWithEmailPage';
+          //   let contactModal = this.modalCtrl.create('LoginWithEmailPage');
+          //  contactModal.present();
             authObserver.unsubscribe();
           }
         });
@@ -80,7 +87,7 @@ export class MyApp {
       { title: 'Video Library', component: 'RootLibraryPage', icon: 'book'},
       { title: 'Starred Videos', component: 'StarredPage', icon: 'star'},
       { title: 'Quiz Library', component: 'QuizLibraryPage', icon: 'school'},
-       { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications'},
+      { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications'},
       { title: 'Store', component: 'store', icon: 'cart'},
       { title: 'Contact Us', component: 'ContactPage', icon: 'help-circle'},
       { title: 'About', component: 'AboutPage', icon: 'pulse'},
@@ -94,17 +101,23 @@ export class MyApp {
       this.fullname = user.fullName;
       this.email = user.emailId;
       this.profilePicture = "https://www.gravatar.com/avatar/" +
-        Md5.hashStr(this.email.toLowerCase())
+        Md5.hashStr(this.email.toLowerCase()) +"?d=wavatar";
     });
+
+    console.log(this.profilePicture);
   }
 
   onLoad(page: any) {
     if(page === 'store'){
       this.goToStore();
+      this.menuCtrl.close();
     }else if(page === 'logout'){
       this.logout();
-    }else{
+    }else if(page === this.homePage){
       this.nav.setRoot(page);
+      this.menuCtrl.close();
+    }else{
+      this.nav.push(page);
       this.menuCtrl.close();
     }
   }
@@ -130,9 +143,12 @@ export class MyApp {
       this.menuCtrl.close();
       setTimeout(() => {
         this.nav.setRoot('LoginWithEmailPage');
+        // let contactModal = this.modalCtrl.create('LoginWithEmailPage');
+        //    contactModal.present();
       }, 3000);
 
     });
   }
+
 }
 

@@ -88,4 +88,8 @@ export class LibraryPage {
     }
   }
 
+  ionViewCanEnter(): boolean{
+    return this._auth.getLoginStatus() ? true : false;
+  }
+
 }

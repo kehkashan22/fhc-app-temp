@@ -24,6 +24,16 @@
       </div>
 
       <ion-row>
+        <ion-col>
+          <!-- <button ion-button color="primary" clear small icon-start (tap)="shareSheetShare(video)">
+        <ion-icon name='share-alt'></ion-icon>
+        Share
+      </button> -->
+          <ion-chip tappable (tap)="shareSheetShare(video)">
+            <ion-icon name='share-alt' color="secondary"></ion-icon>
+            <ion-label>Share</ion-label>
+          </ion-chip>
+        </ion-col>
         <ion-col text-right>
           <ion-chip tappable (tap)="onAddToFavorites(video)" *ngIf="!isFavorite(video)">
             <ion-icon name="heart" color="btn"></ion-icon>
@@ -36,6 +46,8 @@
           </ion-chip>
         </ion-col>
       </ion-row>
+
+
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -13,16 +13,20 @@
 <ion-content>
 
   <ion-card *ngFor="let annoucement of announcements">
-    <ion-item>
+    <!-- <ion-item>
       <ion-avatar item-start>
         <img src="assets/images/notif.jpg">
       </ion-avatar>
       <h2 text-wrap>{{annoucement.title}}</h2>
-    </ion-item>
+    </ion-item> -->
 
+    <img [src]="annoucement.img" *ngIf="annoucement.img">
     <ion-card-content>
+      <ion-card-title>
+        {{annoucement.title}}
+      </ion-card-title>
       <p>{{annoucement.message}}</p>
-      <img [src]="annoucement.img" *ngIf="annoucement.img">
+
 
 
       <ion-row no-padding *ngIf="annoucement.downloadLink">
@@ -49,6 +53,13 @@
 
         </ion-col>
       </ion-row>
+
     </ion-card-content>
+    <div class="news" *ngIf="annoucement.newsLink">
+       <button ion-button full clear (click)="goToNews(annoucement.newsLink)" color="light">
+      Tap to read more
+    </button>
+
+    </div>
   </ion-card>
 </ion-content>

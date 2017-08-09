@@ -123,12 +123,7 @@ export class AnalysisPage implements OnInit {
 
 
     if(this.speedSolved > 0){
-      let totalSpeed = 0;
-      for(let i = 0; i< this.speedSolved; i++){
-        const quizLength = this.speedQuizzes[i].questions.length;
-        totalSpeed = this.speedQuizzes[i].marks/quizLength + totalSpeed;
-      }
-      this.speedPercent = Math.floor((totalSpeed/this.speedSolved)*100);
+      this.speedPercent = this.totalPercent(this.speedSolved, this.speedQuizzes)
       console.log("speed "+this.speedPercent);
       this.options.title.text = this.setTitle(this.speedPercent);
     }else{
@@ -160,7 +155,7 @@ export class AnalysisPage implements OnInit {
     //memory
     let memoryPercent = 0;
     if(this.memorySolved > 0){
-      memoryPercent = this.totalPercent(this.memorySolved, this.memoryQuizzes)
+      memoryPercent = this.totalPercent(this.memorySolved, this.memoryQuizzes);
       this.options.title.text = this.setTitle(memoryPercent);
     }else{
        this.options.title.text = 'Hurry up and solve something, buddy!';
@@ -170,7 +165,6 @@ export class AnalysisPage implements OnInit {
       data: {
         labels: ["Memory", "Improvement"],
         datasets: [{
-          label: '# of Votes',
           data: [memoryPercent, (100 - memoryPercent)],
           backgroundColor: [
             'rgba(247, 70, 74, 1.0)',
@@ -221,11 +215,11 @@ export class AnalysisPage implements OnInit {
 
   private setTitle(percent: number){
       if(percent > 70){
-        return "Bau Rami, Raja Ji, Bau Rami!";
+        return "Well done! But keep practicing to get even better!";
       }else if(percent < 40){
-        return "Bhid ke padhai karo Bhaiyya!";
+        return "Step up your game! Practice, practice, practice...";
       }else{
-        return "Kaiku beech mein rehre? Kaam karo kaam";
+        return "Meh. Give more quizzes to raise your average.";
       }
   }
 

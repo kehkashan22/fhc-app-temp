@@ -72,7 +72,8 @@ const firebaseConfig = {
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp, {
       //for limiting scrolling of the page when keyboard is up
-      scrollAssist: false
+      scrollAssist: false,
+      swipeBackEnabled: false
     }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule

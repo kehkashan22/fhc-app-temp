@@ -1,3 +1,5 @@
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { LoadingController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
 import { VideosService } from '../../providers/fav-videos';
 import { Video } from './../../data/video.interface';
@@ -14,7 +16,7 @@ export class StarredPage implements OnInit{
 
   ngOnInit(): void {
     this.videosService.loadFavoriteVideos();
-      this.videos = this.videosService.getFavoriteVideos();
+    this.videos = this.videosService.getFavoriteVideos();
   }
 
   ionViewWillEnter(){
@@ -26,7 +28,9 @@ export class StarredPage implements OnInit{
   videos: Video[];
   starredPage: 'StarredPage';
   constructor(private videosService: VideosService,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController,
+            private _loader: LoadingController,
+          private socialSharing: SocialSharing) {
 
   }
 
@@ -55,5 +59,21 @@ export class StarredPage implements OnInit{
 
   noVideo() {
     return this.videos.length == 0 ? true : false;
+  }
+
+    shareSheetShare(video){
+    const yourl = "https://youtu.be/"+video.url;
+    let loader = this._loader.create({
+      spinner: 'bubbles',
+      content: 'breathe in...breathe out...'
+    });
+    loader.present();
+    this.socialSharing.share("Visit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more.\n", null, null, yourl).then(() => {
+      loader.dismiss();
+      console.log("shareSheetShare: Success");
+    }).catch(() => {
+      loader.dismiss();
+      console.error("shareSheetShare: failed");
+    });
   }
 }

@@ -2,8 +2,7 @@ import { NetworkProvider } from './../../providers/network/network';
 import { User } from './../../data/user.interface';
 import { Md5 } from 'ts-md5/dist/md5';
 import { LoadingController } from 'ionic-angular';
-import { AuthProvider } from './../../providers/auth';
-import * as sha1  from 'sha1';
+import { AuthProvider } from './../../providers/auth'
 import { UserProvider } from './../../providers/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Events, ModalController } from 'ionic-angular';
@@ -49,7 +48,7 @@ export class ProfilePage {
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
-          Md5.hashStr(this.email.toLowerCase());
+          Md5.hashStr(this.email.toLowerCase())+"?d=wavatar";
           this.loader.dismiss();
       });
     }

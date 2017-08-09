@@ -115,6 +115,9 @@ export class EditProfilePage {
     modal.present();
   }
 
+   ionViewCanEnter(): boolean{
+    return this._auth.getLoginStatus() ? true : false;
+  }
 
 }
 
