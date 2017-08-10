@@ -44,8 +44,9 @@ export class HomePage {
 
   slides: any[] = [
     { url: "assets/images/slidequiz.png", text: "Test Slide1" },
-    { url: "assets/images/slidequiz.png", text: "Test Slide2" },
-    { url: "assets/images/slidequiz.png", text: "Test Slide3" }
+    { url: "assets/images/slideranalyse.png", text: "Test Slide2" },
+    { url: "assets/images/slidernotification.png", text: "Test Slide3" },
+    { url: "assets/images/slidervideo.png", text: "Test Slide3" }
   ];
 
   constructor(public navCtrl: NavController,

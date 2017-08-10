@@ -2,27 +2,28 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
- * Generated class for the TermsPage page.
+ * Generated class for the PrivacyPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-terms',
-  templateUrl: 'terms.html',
+  selector: 'page-privacy',
+  templateUrl: 'privacy.html',
 })
-export class TermsPage {
+export class PrivacyPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TermsPage');
+    console.log('ionViewDidLoad PrivacyPage');
   }
 
    onClose(){
     this.view.dismiss();
   }
+
 
 }

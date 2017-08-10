@@ -2,11 +2,10 @@
 // http://ionicframework.com/docs/v2/theming/
 $font-path: "../assets/fonts";
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 @font-face {
 font-family: MyFont;
-src: url("../assets/fonts/OpenSans-Regular.ttf");
+src: url("../assets/fonts/Roboto-Regular.ttf");
 }
 
 span, button, h1, h2, h3, h4, h5, h6, p, ion-title {
@@ -45,9 +44,9 @@ $colors: (
   dark:       #222,
   btn:        #13293D,
   bg:       #E6E6EA,
-  chapterA: #ED7272,
-  chapterB: #73B7EA,
-  chapterC: #9FEA73 ,
+  chapterA: #CC5858,
+  chapterB: #4E97C4,
+  chapterC: #7DC44E ,
   icons: #757780,
   header: #4E97C4
 );

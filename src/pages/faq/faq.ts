@@ -2,23 +2,23 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
- * Generated class for the TermsPage page.
+ * Generated class for the FaqPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-terms',
-  templateUrl: 'terms.html',
+  selector: 'page-faq',
+  templateUrl: 'faq.html',
 })
-export class TermsPage {
+export class FaqPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController) {
+   constructor(private navParams: NavParams, private view: ViewController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TermsPage');
+    console.log('ionViewDidLoad FaqPage');
   }
 
    onClose(){

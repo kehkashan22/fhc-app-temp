@@ -1,8 +1,23 @@
 page-about-details {
-    // @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-    // @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+   @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
     content{
         background-color: #000;
+    }
+    h4{
+        font-family: roboto;
+        color:#73B7EA;
+    }
+    h3{
+        font-family: roboto;
+        color:#ED7272;
+    }
+    .scroll-content{
+        background-color: #fff;
+        padding:23px;
+    }
+
+    ion-content{
+        padding:23px;
     }
     // .contact-popover{
     //     background: #000;
