@@ -22,9 +22,12 @@ page-report-card {
 hr{
   height: 1px !important;
 }
+
+hr.divider{
+  border-top: 3px double #8c8b8b;
+}
   td, th {
       border: 1px solid #dddddd;
-      text-align: left;
       padding: 8px;
   }
 
@@ -40,6 +43,9 @@ hr{
         background: #fff;
     }
 
+    .back{
+      background: #E7F6FC;
+    }
   #report{
   //     ion-card{
   //       //box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);

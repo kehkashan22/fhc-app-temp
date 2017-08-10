@@ -1,3 +1,5 @@
+import { LoadingController } from 'ionic-angular';
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { Videos } from './../../data/videos.interface';
 import { VideosService } from '../../providers/fav-videos';
 import { Video } from './../../data/video.interface';
@@ -17,7 +19,9 @@ export class VideosPage{
     private navParams: NavParams,
     private alertCtrl: AlertController,
     private videosService: VideosService,
-  private youtube: YoutubeVideoPlayer) {}
+  private youtube: YoutubeVideoPlayer,
+private socialSharing: SocialSharing,
+private _loader: LoadingController) {}
 
   ionViewDidLoad() {
     this.videoGroup = this.navParams.data;
@@ -81,6 +85,22 @@ export class VideosPage{
 
   openVideo(id){
     this.youtube.openVideo(id);
+  }
+
+  shareSheetShare(video){
+    const yourl = "https://youtu.be/"+video.url;
+    let loader = this._loader.create({
+      spinner: 'bubbles',
+      content: 'breathe in...breathe out...'
+    });
+    loader.present();
+    this.socialSharing.share("Head over to CA Farooq Haque's YouTube channel for more such content:\n", null, null, yourl).then(() => {
+      loader.dismiss();
+      console.log("shareSheetShare: Success");
+    }).catch(() => {
+      loader.dismiss();
+      console.error("shareSheetShare: failed");
+    });
   }
 
 }

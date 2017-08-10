@@ -41,7 +41,8 @@ export class ChaptersPage implements OnInit {
   ngOnInit() {
     this.loader = this._loader.create({
       spinner: "bubbles",
-      content: "Loading Chapters..."
+      content: "Loading Chapters...",
+      duration: 5000
     });
     this.data = this.navParams.data;
     console.log(this.data);

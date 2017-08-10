@@ -52,6 +52,13 @@
       <ion-item-options side="right">
         <button
           ion-button
+          color="secondary"
+          (tap)="shareSheetShare(video)" icon-end>
+          <ion-icon name="share"></ion-icon>
+          Share
+        </button>
+        <button
+          ion-button
           color="danger"
           (tap)="onRemoveFromFavorites(video)" icon-end>
           <ion-icon name="trash"></ion-icon>

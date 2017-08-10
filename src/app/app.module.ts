@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppRate } from '@ionic-native/app-rate';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
@@ -46,7 +47,9 @@ import { Badge } from '@ionic-native/badge'
 import { NetworkProvider } from '../providers/network/network';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
-import { FirstProvider } from "../providers/first/first";
+import { FirstProvider } from '../providers/first/first';
+import { NotificationsProvider } from '../providers/notifications/notifications';
+import { RateServiceProvider } from '../providers/rate-service/rate-service';
 
 
 
@@ -71,7 +74,8 @@ const firebaseConfig = {
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp, {
       //for limiting scrolling of the page when keyboard is up
-      scrollAssist: false
+      scrollAssist: false,
+      swipeBackEnabled: false
     }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
@@ -108,7 +112,10 @@ const firebaseConfig = {
     NetworkProvider,
     SocialSharing,
     AnalyseStoreProvider,
-    FirstProvider
+    FirstProvider,
+    NotificationsProvider,
+    AppRate,
+    RateServiceProvider
   ]
 })
 export class AppModule {}

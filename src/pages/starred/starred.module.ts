@@ -4,7 +4,7 @@ import { StarredPage } from './starred';
 
 @NgModule({
   declarations: [
-    StarredPage,
+    StarredPage
   ],
   imports: [
     IonicPageModule.forChild(StarredPage),

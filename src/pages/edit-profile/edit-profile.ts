@@ -114,8 +114,6 @@ export class EditProfilePage {
     let modal = this.modalCtrl.create('UpdatePasswordPage');
     modal.present();
   }
-
-
 }
 
 

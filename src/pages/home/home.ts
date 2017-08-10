@@ -1,16 +1,15 @@
+import { RateServiceProvider } from './../../providers/rate-service/rate-service';
+import { AuthProvider } from './../../providers/auth';
+import { NotificationsProvider } from './../../providers/notifications/notifications';
 import { FirstProvider } from './../../providers/first/first';
 import { AnalyseStoreProvider } from './../../providers/analyse-store/analyse-store';
 import { NetworkProvider } from './../../providers/network/network';
-import { Badge } from '@ionic-native/badge';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { User } from './../../data/user.interface';
-import { AuthProvider } from './../../providers/auth';
 import { UserProvider } from './../../providers/user';
-import { QuizService } from './../../providers/quiz';
 import { VideosService } from './../../providers/fav-videos';
-import { VideosProvider } from './../../providers/videos';
 import { Component, } from '@angular/core';
-import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
+import { NavController, IonicPage, Events, LoadingController, App, MenuController } from 'ionic-angular';
 import { Quiz } from "../../data/quiz.interface";
 
 import * as firebase from 'firebase';
@@ -38,9 +37,9 @@ export class HomePage {
   imgType = ".jpeg";
   userData: User;
   notificationNum: number = 0;
-
-  pop="all";
+  show = true;
   fireStore = firebase.database().ref("/pushtokens");
+  notifNum: number = 0;
 
   slides: any[] = [
     { url: "assets/images/slidequiz.png", text: "Test Slide1" },
@@ -50,19 +49,22 @@ export class HomePage {
   ];
 
   constructor(public navCtrl: NavController,
+    private _auth: AuthProvider,
     private _videosStore: VideosService,
     private _quizStore: QuizStoreProvider,
     private _user: UserProvider,
     private events: Events,
     private _loader: LoadingController,
     private app: App,
-    private afd: AngularFireDatabase,
     private fcm: FCM,
-    private badge: Badge,
     private _network: NetworkProvider,
     private _analysed: AnalyseStoreProvider,
-    private _launch: FirstProvider
+    private _launch: FirstProvider,
+    private _note: NotificationsProvider,
+    private _menu: MenuController,
+    private _rate: RateServiceProvider
   ) {
+    this._menu.enable(true);
     this.fcm.getToken().then((token) => {
       this.storeToken(token);
     },
@@ -73,55 +75,47 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.requestPermission();
     this._launch.loadLaunchCount();
-    this.getBadges();
-
+    this._note.loadNote();
+    console.log("OnInit Home");
   }
 
   ionViewDidLoad() {
-    const loader = this._loader.create({
-      spinner: "bubbles",
-      content: 'Please wait while we finish loading...',
-      duration: 3000
-    });
     if (!this.userData) {
-      loader.present();
       this._videosStore.loadFavoriteVideos();
       this._quizStore.loadSolvedQuizCollection();
       this._analysed.loadSolved();
       if (this._network.noConnection()) {
         console.log(this._network.noConnection());
-      loader.dismiss();
       this._network.showNetworkAlert();
     } else {
       this._user.getUser().then((data: User) => {
         this.userData = data;
         //publish user data to an Event which is published in app.components.ts to fetch user data for side menu
         this.events.publish('user:created', this.userData);
-
       });
     }
     }
 
     this.fcm.onNotification().subscribe((data) => {
-      this.badge.increase(1).then((badge) => {
-        this.notificationNum = badge;
-      });
-      if (data.wasTapped) {
-        const self = this;
-        //self.navCtrl.setRoot('Home');
-        self.navCtrl.setRoot('AnnouncementsPage');
-        alert('Data TAPPED');
-      } else {
-        alert(JSON.stringify(data));
-      }
+    this._note.setNote(true);
+    this.show = true;
+    if (data.wasTapped) {
+      console.log('Data TAPPED');
+      this.navigateToAnnouncements();
+    } else {
+      console.log(JSON.stringify(data));
+    }
     });
 
-    this.fcm.onTokenRefresh().subscribe(token => {
+     this.fcm.onTokenRefresh().subscribe(token => {
       this.storeToken(token);
     });
 
+  }
+
+  ionViewDidEnter(){
+    this._rate.appRate.promptForRating(false);
   }
 
   toAnalysisPage() {
@@ -129,8 +123,8 @@ export class HomePage {
   }
 
   navigateToAnnouncements() {
-    this.badge.clear().then(() => { });
-    this.getBadges();
+    this.show = false;
+    this._note.setNote(false);
     this.navCtrl.push('AnnouncementsPage');
   }
 
@@ -139,28 +133,13 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-      //alert('Token Stored');
+      console.log('Token Stored');
     }).catch((err) => {
-      alert(err);
+      console.log(err);
     });
   }
 
-  async requestPermission() {
-    try {
-      let hasPermission = await this.badge.hasPermission();
-      if (!hasPermission) {
-        await this.badge.registerPermission();
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }
 
-  async getBadges() {
-    try {
-      this.notificationNum = await this.badge.get();
-    } catch (e) {
-      console.error(e);
-    }
-  }
+
+
 }
