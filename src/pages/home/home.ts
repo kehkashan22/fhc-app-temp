@@ -122,7 +122,6 @@ export class HomePage {
   }
 
   navigateToAnnouncements() {
-    this.show = false;
     this._note.setNote(false);
     this.navCtrl.push('AnnouncementsPage');
   }
