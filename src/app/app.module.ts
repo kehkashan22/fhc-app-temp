@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppRate } from '@ionic-native/app-rate';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
@@ -48,6 +49,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
 import { FirstProvider } from '../providers/first/first';
 import { NotificationsProvider } from '../providers/notifications/notifications';
+import { RateServiceProvider } from '../providers/rate-service/rate-service';
 
 
 
@@ -111,7 +113,9 @@ const firebaseConfig = {
     SocialSharing,
     AnalyseStoreProvider,
     FirstProvider,
-    NotificationsProvider
+    NotificationsProvider,
+    AppRate,
+    RateServiceProvider
   ]
 })
 export class AppModule {}

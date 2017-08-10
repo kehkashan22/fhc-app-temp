@@ -22,20 +22,24 @@ export class NotificationsProvider {
     );
   }
 
-  getNote() {
+  loadNote() {
     this.storage.get('/note')
       .then(
       (show) => {
         this.show = show != null ? show : false;
-        return this.show;
+
       }
       )
       .catch(
       err => {
         console.log(err);
-        return false;
+
       }
       );
+  }
+
+  getNote(){
+    return this.show;
   }
 
 }

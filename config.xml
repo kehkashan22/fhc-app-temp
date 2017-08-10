@@ -127,4 +127,5 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2">
         <variable name="locator" value="https://github.com/Rohfosho/CordovaCallNumberPlugin.git" />
     </plugin>
+    <plugin name="cordova-plugin-apprate" spec="^1.3.0" />
 </widget>

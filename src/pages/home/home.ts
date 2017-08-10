@@ -1,3 +1,4 @@
+import { RateServiceProvider } from './../../providers/rate-service/rate-service';
 import { AuthProvider } from './../../providers/auth';
 import { NotificationsProvider } from './../../providers/notifications/notifications';
 import { FirstProvider } from './../../providers/first/first';
@@ -15,7 +16,6 @@ import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM } from '@ionic-native/fcm';
-import { Badge } from "@ionic-native/badge";
 
 @IonicPage()
 @Component({
@@ -37,7 +37,7 @@ export class HomePage {
   imgType = ".jpeg";
   userData: User;
   notificationNum: number = 0;
-  show;
+  show = true;
   fireStore = firebase.database().ref("/pushtokens");
   notifNum: number = 0;
 
@@ -61,7 +61,7 @@ export class HomePage {
     private _launch: FirstProvider,
     private _note: NotificationsProvider,
     private _menu: MenuController,
-    private badge: Badge
+    private _rate: RateServiceProvider
   ) {
     this._menu.enable(true);
     this.fcm.getToken().then((token) => {
@@ -75,14 +75,8 @@ export class HomePage {
 
   ngOnInit() {
     this._launch.loadLaunchCount();
-    this.badge.get().then(badge => {
-      this.notifNum = badge;
-    });
-  }
-
-
-  ionViewCanEnter(): boolean{
-    return this._auth.getLoginStatus() ? true : false;
+    this._note.loadNote();
+    console.log("OnInit Home");
   }
 
   ionViewDidLoad() {
@@ -103,13 +97,8 @@ export class HomePage {
     }
 
     this.fcm.onNotification().subscribe((data) => {
-    this.badge.increase(1).then((badge) => {
-      console.log("Badge number"+badge);
-      this.notifNum = badge+1;
-    });
     this._note.setNote(true);
     this.show = true;
-    console.log(this.show);
     if (data.wasTapped) {
       console.log('Data TAPPED');
       this.navigateToAnnouncements();
@@ -124,6 +113,10 @@ export class HomePage {
 
   }
 
+  ionViewDidEnter(){
+    this._rate.appRate.promptForRating(false);
+  }
+
   toAnalysisPage() {
     this.navCtrl.push(this.analyseMePage);
   }
@@ -131,11 +124,6 @@ export class HomePage {
   navigateToAnnouncements() {
     this.show = false;
     this._note.setNote(false);
-    this.badge.clear().then(data => {
-      if(data){
-        this.notifNum = 0;
-      }
-    });
     this.navCtrl.push('AnnouncementsPage');
   }
 

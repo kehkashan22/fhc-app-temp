@@ -114,11 +114,6 @@ export class EditProfilePage {
     let modal = this.modalCtrl.create('UpdatePasswordPage');
     modal.present();
   }
-
-   ionViewCanEnter(): boolean{
-    return this._auth.getLoginStatus() ? true : false;
-  }
-
 }
 
 

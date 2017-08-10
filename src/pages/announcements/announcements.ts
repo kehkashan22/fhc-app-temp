@@ -68,10 +68,6 @@ export class AnnouncementsPage {
     });
   }
 
-   ionViewCanEnter(): boolean{
-     console.log(this._auth.getLoginStatus());
-    return this._auth.getLoginStatus() ? true : false;
-  }
 
   ionViewDidLoad() {
     this.loader = this._loader.create({
