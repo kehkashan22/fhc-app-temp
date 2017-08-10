@@ -2,6 +2,16 @@
 // http://ionicframework.com/docs/v2/theming/
 $font-path: "../assets/fonts";
 
+
+@font-face {
+font-family: MyFont;
+src: url("../assets/fonts/Roboto-Regular.ttf");
+}
+
+span, button, h1, h2, h3, h4, h5, h6, p, ion-title {
+font-family: 'MyFont' !important;
+}
+
 @import "ionic.globals";
 
 
@@ -12,7 +22,10 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-
+$font-family-base: 'MyFont';
+$font-family-ios-base: 'MyFont';
+$font-family-md-base: 'MyFont';
+$font-family-wp-base: 'MyFont';
 
 
 // Named Color Variables
@@ -24,18 +37,21 @@ $font-path: "../assets/fonts";
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #005C9C,
+  primary:    #3c7393,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  btn:        #222E50,
+  btn:        #13293D,
   bg:       #E6E6EA,
-  chapterA: #FB3640,
-  chapterB: #0A2463,
-  chapterC: #605F5E,
-  icons: #757780
+  chapterA: #CC5858,
+  chapterB: #4E97C4,
+  chapterC: #7DC44E ,
+  icons: #757780,
+  header: #4E97C4
 );
+
+
 
 $popover-md-width: 100%;
 $popover-md-height: 100%;
@@ -69,7 +85,7 @@ $popover-wp-width: 320px;
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-$toolbar-background: map-get($colors, primary);
+$toolbar-background: map-get($colors, header);
 $toolbar-active-color:                 #fff;
 $toolbar-inactive-color:               #fff;
 $segment-button-text-color-activated:  #fff;

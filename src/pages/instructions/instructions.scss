@@ -1,4 +1,6 @@
 page-instructions {
+    @import url('https://fonts.googleapis.com/css?family=Bree+Serif|Gudea|Julius+Sans+One|Open+Sans|Open+Sans+Condensed:300');
+ 
      .contact-popover{
         //background: rgba(0, 0, 0, 0.9);
 
@@ -13,14 +15,12 @@ page-instructions {
         }
 
     .div-text{
-            padding: 20px;
+            padding: 15px;
             height: 100%;
             width:auto;
-            text-align: justify;
             background: map-get($colors, btn);
 
             color:map-get($colors, light);
-            line-height: 30px;
             font-size: 15px;
             overflow: scroll;
     }
@@ -43,6 +43,29 @@ page-instructions {
             width:161px;
             margin: auto;
             display: block;
+        }
+
+        i{
+            color:red;
+        }
+
+        h4{
+            font-family: 'Bree Serif', serif;
+            font-family: 'Gudea', sans-serif;
+            font-family: 'Julius Sans One', sans-serif; 
+            font-weight: bold;
+        }
+
+        h3{
+            font-family: 'Bree Serif', serif;
+            font-family: 'Gudea', sans-serif;
+            font-family: 'Julius Sans One', sans-serif; 
+            font-size:1.2em;
+        }
+
+        p{
+            font-family: 'Open Sans', sans-serif;
+            font-size:1em;
         }
 
 }

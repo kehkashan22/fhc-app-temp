@@ -22,8 +22,10 @@ export class AnnouncementsPage {
   announcements: Array<any> = [];
 
   loader: any;
+  temp: any;
 
   storageDirectory: string = '';
+  currentSelected = 'all';
 
   fileTransfer: TransferObject = this.transfer.create();
 
@@ -88,6 +90,7 @@ export class AnnouncementsPage {
       }).subscribe(data => {
         data = data.reverse();
         this.announcements = data;
+        this.temp=this.announcements;
         this.loader.dismiss();
       });
     }
@@ -173,10 +176,19 @@ export class AnnouncementsPage {
     });
   }
 
+
+  getItems(val: string){
+    this.currentSelected = val;
+    this.announcements = this.temp;
+    if(val!=='all'){
+        this.announcements = this.announcements.filter((announcement) => {
+          return announcement.type === val;
+        });
+    }
+    
+  }
   goToNews(newsUrl){
     this.iab.create(newsUrl, "_system", "location=yes");
   }
 }
-
-
 
