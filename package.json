@@ -51,6 +51,7 @@
         "compass-sass-mixins": "^0.12.7",
         "cordova-android": "^6.2.3",
         "cordova-browser": "^4.1.0",
+        "cordova-plugin-app-event": "file:node_modules\\cordova-plugin-app-event",
         "cordova-plugin-badge": "^0.8.1",
         "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-console": "^1.0.5",
@@ -113,7 +114,6 @@
             "cordova-plugin-email-composer": {},
             "cordova-plugin-email": {},
             "cordova-plugin-inappbrowser": {},
-            "cordova-plugin-fcm": {},
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-youtube-video-player": {},
@@ -122,7 +122,8 @@
             },
             "cordova.plugins.diagnostic": {},
             "cordova-plugin-badge": {},
-            "cordova-plugin-x-socialsharing": {}
+            "cordova-plugin-x-socialsharing": {},
+            "cordova-plugin-fcm": {}
         },
         "platforms": [
             "android",

@@ -104,8 +104,8 @@ export class HomePage {
 
     this.fcm.onNotification().subscribe((data) => {
     this.badge.increase(1).then((badge) => {
-      console.log("BAdge number"+badge);
-      this.notifNum = badge;
+      console.log("Badge number"+badge);
+      this.notifNum = badge+1;
     });
     this._note.setNote(true);
     this.show = true;

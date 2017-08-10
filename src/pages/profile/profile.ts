@@ -48,7 +48,7 @@ export class ProfilePage {
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
-          Md5.hashStr(this.email.toLowerCase())+"?d=wavatar";
+          Md5.hashStr(this.email.toLowerCase())+"?d=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F8c%2Faa%2Fcb%2F8caacb9d2eaebdedc67af9d375895be5.jpg&f=y";
           this.loader.dismiss();
       });
     }

@@ -68,7 +68,7 @@ export class StarredPage implements OnInit{
       content: 'breathe in...breathe out...'
     });
     loader.present();
-    this.socialSharing.share("Visit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more.\n", null, null, yourl).then(() => {
+    this.socialSharing.share("Follow Farooq Sir's YouTube channel for more such content:\n", null, null, yourl).then(() => {
       loader.dismiss();
       console.log("shareSheetShare: Success");
     }).catch(() => {

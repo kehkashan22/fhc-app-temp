@@ -50,11 +50,9 @@ export class MyApp {
     private events: Events,
     private loader: LoadingController,
     public authProvider: AuthProvider,
-    private app: App,
-    private modalCtrl: ModalController) {
+    private app: App) {
 
-      console.log(menuCtrl.get());
-    menuCtrl.swipeEnable(false);
+
     this.zone = new NgZone({});
     //Angular Authentication
 
@@ -64,14 +62,12 @@ export class MyApp {
         this.zone.run(() => {
           if (user) {
             this.authProvider.setLoginStatus(true);
-            this.rootPage = this.homePage;
+            this.rootPage = 'HomePage';
             authObserver.unsubscribe();
           } else {
             this.authProvider.setLoginStatus(false);
             console.log(this.authProvider.getLoginStatus());
             this.rootPage = 'LoginWithEmailPage';
-          //   let contactModal = this.modalCtrl.create('LoginWithEmailPage');
-          //  contactModal.present();
             authObserver.unsubscribe();
           }
         });
@@ -143,8 +139,6 @@ export class MyApp {
       this.menuCtrl.close();
       setTimeout(() => {
         this.nav.setRoot('LoginWithEmailPage');
-        // let contactModal = this.modalCtrl.create('LoginWithEmailPage');
-        //    contactModal.present();
       }, 3000);
 
     });

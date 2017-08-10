@@ -19,7 +19,7 @@ declare var cordova: any;
 })
 export class AnnouncementsPage {
 
-  announcements: Array<any>;
+  announcements: Array<any> = [];
 
   loader: any;
 
