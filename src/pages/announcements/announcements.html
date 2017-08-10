@@ -8,14 +8,13 @@
     </ion-buttons>
     <ion-title>Notifications</ion-title>
   </ion-navbar>
-
 </ion-header>
 <ion-content>
 
     <ion-card *ngFor="let announcement of announcements">
       <!-- <ion-item>
       <ion-avatar item-start>
-        <img src="assets/images/notif.jpg">
+        <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/notif.jpg">
       </ion-avatar>
       <h2 text-wrap>{{announcement.title}}</h2>
     </ion-item> -->
@@ -63,3 +62,27 @@
         </div>
     </ion-card>
 </ion-content>
+
+<ion-footer transparent no-border>
+  <ion-grid no-padding>
+    <ion-row no-padding>
+      <ion-col>
+        <ion-item (click)="getItems('pdf')" [class.selected]="'pdf' === currentSelected" icon-left>
+          <ion-icon ios="ios-download" md="md-download"></ion-icon> PDF
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="getItems('news')" [class.selected]="'news' === currentSelected" icon-left>
+          <ion-icon name="chatboxes"></ion-icon>News</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="getItems('misc')" [class.selected]="'misc' === currentSelected" icon-left>
+          <ion-icon name="create"></ion-icon>Misc</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="getItems('all')" [class.selected]="'all' === currentSelected" icon-left>
+          <ion-icon name="leaf" ></ion-icon>All</ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

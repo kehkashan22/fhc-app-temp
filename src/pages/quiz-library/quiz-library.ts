@@ -22,6 +22,7 @@ export class QuizLibraryPage implements OnInit {
   courseId: string = '';
   course: string = "ca";
   chaptersPage = 'ChaptersPage';
+  icon = 'arrow-dropdown';
 
   constructor(public navCtrl: NavController,
     private quizService: QuizService,
@@ -34,23 +35,6 @@ export class QuizLibraryPage implements OnInit {
   }
 
   ngOnInit() {
-    // const loader = this.loader.create({
-    //   spinner: 'bubbles',
-    //   content: "Loading Quiz..."
-    // });
-    // loader.present();
-
-    // this.authProvider.getActiveUser().getIdToken().then((token: string) => {
-    //   this.quizService.getQuizLibrary(token).subscribe((data: QuizLibrary[]) => {
-    //     loader.dismiss();
-    //     this.quizLibrary = data;
-    //     this.caLibrary = this.quizLibrary[0];
-    //     this.csLibrary = this.quizLibrary[1];
-    //   });
-    // },
-    //   error => {
-    //     console.log(error);
-    //   });
      this.caLibrary = this._globals.caCollection;
     this.csLibrary = this._globals.csCollection;
 
@@ -63,8 +47,10 @@ export class QuizLibraryPage implements OnInit {
   toggleDetails(data: string) {
     if (this.show === data) {
       this.show = '';
+      this.icon = 'arrow-dropdown'
     } else {
       this.show = data;
+      this.icon = "arrow-dropup";
     }
   }
 
