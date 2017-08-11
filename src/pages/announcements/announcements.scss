@@ -1,11 +1,10 @@
 page-announcements {
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
 
     ion-footer{
         ion-item.item-md, ion-item.item-ios, ion-item.item-wp{
              color:  map-get($colors, primary); 
-             font-family: 'Bree Serif', serif;
+             font-family:'Roboto';
              font-size: 1em;
              font-weight:bold;
         }
@@ -14,7 +13,6 @@ page-announcements {
          color:  map-get($colors, danger) !important; 
     }
         
-=======
   .news{
     background-image: url('http://www.pptbackgrounds.org/uploads/soft-wolke-pure-backgrounds-wallpapers.jpg');
     padding: 5px;
@@ -28,5 +26,4 @@ page-announcements {
   ion-img{
     height: 250px;
   }
->>>>>>> upstream/Kehkashan
 }
