@@ -176,7 +176,9 @@
 }
 
 .scroll-content{
-  background: map-get($colors, bg);
+ // background: map-get($colors, bg);
+ background-image: url("../assets/images/mainbg.png") no-repeat center;
+ 
 }
 
 
