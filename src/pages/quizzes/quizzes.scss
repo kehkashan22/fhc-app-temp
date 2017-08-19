@@ -1,12 +1,12 @@
 page-quizzes {
 
-  $ribbon-bg: #bb3a34;
-  $ribbon-hl: #e74841;
-  $ribbon-w: 20px;
-  $ribbon-tail: 10px;
+  // $ribbon-bg: #bb3a34;
+  // $ribbon-hl: #e74841;
+  // $ribbon-w: 20px;
+  // $ribbon-tail: 10px;
 
   .scroll-content {
-      background-color: map-get($colors, btn);
+      background-color: #f3f3f5;
   }
   .col{
     padding: 0px !important;
@@ -31,34 +31,7 @@ page-quizzes {
       padding-top: 2rem !important;
 
     }
-    .ribbon {
-      padding:0 0 $ribbon-tail 0;
-      position:absolute;
-      left:0.25em;
-      top:-0.25em;
-      width:$ribbon-w;
-
-      div {
-        background:$ribbon-bg;
-        background: linear-gradient($ribbon-hl 0%, $ribbon-bg 100%);
-        color:#fff;
-        padding:0.5em 0;
-        text-align:center;
-        text-shadow:-1px -1px 0 rgba(0, 0, 0, 0.5);
-      }
-
-      div:after {
-        border-left: $ribbon-w/2 solid $ribbon-bg;
-        border-right: $ribbon-w/2 solid $ribbon-bg;
-        border-bottom: $ribbon-tail solid transparent;
-        bottom:0;
-        content:'';
-        height: 0;
-        left:0;
-        position:absolute;
-        width: 0;
-      }
-    }
+    
   }
   .center {
     display: flex;

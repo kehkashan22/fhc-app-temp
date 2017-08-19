@@ -31,9 +31,9 @@
         <ion-col *ngFor="let quiz of applicationQuiz; let i = index" col-6 class="list-grow-animation">
           <a (tap)="toQuiz(quiz)">
              <ion-card tappable >
-            <div class="ribbon">
+            <!-- <div class="ribbon">
                 <div><ion-icon *ngIf="!isSolved(quiz)" name="star"></ion-icon></div>
-            </div>
+            </div> -->
             <div class="solved" *ngIf="isSolved(quiz)">
               <ion-fab center middle>
                 <button ion-fab mini color="btn-login">
@@ -68,9 +68,9 @@
           <a (tap)="toQuiz(quiz)">
              <ion-card tappable >
 
-            <div class="ribbon">
+            <!-- <div class="ribbon">
                 <div><ion-icon *ngIf="!isSolved(quiz)" name="star"></ion-icon></div>
-            </div>
+            </div> -->
                <div class="solved" *ngIf="isSolved(quiz)">
               <ion-fab center middle>
                 <button ion-fab mini color="btn-login">
@@ -104,9 +104,9 @@
         <ion-col *ngFor="let quiz of speedQuiz; let i = index"  col-6 class="list-grow-animation">
           <a  (tap)="toQuiz(quiz)">
              <ion-card tappable>
-            <div class="ribbon">
+            <!-- <div class="ribbon">
                 <div><ion-icon *ngIf="!isSolved(quiz)" name="star"></ion-icon></div>
-            </div>
+            </div> -->
             <div class="solved" *ngIf="isSolved(quiz)">
               <ion-fab center middle>
                 <button ion-fab mini color="btn-login">
@@ -136,5 +136,5 @@
 </ion-content>
 
 <ion-footer no-border>
-  <button ion-button block clear  (tap)="toAnalysis()">Get Analysis of this Chapter</button>
+  <button ion-button block color="btn" (tap)="toAnalysis()">Get Analysis of this Chapter</button>
 </ion-footer>

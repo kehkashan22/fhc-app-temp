@@ -1,6 +1,6 @@
 page-home {
   .scroll-content{
-    //background: map-get(, : );
+    background-color: #f3f3f5;
   }
   .slider{
     ion-slide{
@@ -92,5 +92,10 @@ background-color: #fcf877;
             top: -3px;
             right: -3px;
             border-radius: 100%;
-        }
+    
+          }
+
+          .grid{
+           
+          }
 }
