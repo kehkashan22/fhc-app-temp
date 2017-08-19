@@ -10,7 +10,7 @@
     </ion-title>
     <ion-buttons right>
       <button id="notification-button" ion-button clear (tap) = "navigateToAnnouncements()">
-        <ion-icon name="notifications"> <ion-badge id="notifications-badge" color="danger">{{notifNum}}</ion-badge></ion-icon>
+        <ion-icon name="notifications"> <ion-badge id="notifications-badge" color="danger" *ngIf="show">!</ion-badge></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
