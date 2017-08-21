@@ -6,43 +6,47 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title class="titleicon" style="display:inline-block" >Contact Us</ion-title>
+    <ion-title class="titleicon">Contact Us</ion-title>
   </ion-navbar>
 
 
 </ion-header>
 
 
-<ion-content  padding>
-
-  <div id="profile-bg"></div>
+<ion-content>
+  <div class="background">
+    <div id="profile-bg"></div>
    <ion-list>
-     <ion-list-header>
+     <!-- <ion-list-header class="content">
     Contact Info:
-  </ion-list-header>
-  <button ion-item (tap)="callNow('00919422107444')">
+  </ion-list-header> -->
+  <button class="content text" ion-item (tap)="callNow('00919422107444')">
     Mobile:
-    <p >+91-9422107444</p>
+    <p class="text">+91-9422107444</p>
     <ion-icon name="phone-portrait" item-end></ion-icon>
   </button>
 
-  <button ion-item (tap)="callNow('07122521444')">
+  <button class="content text" ion-item (tap)="callNow('07122521444')">
     Landline:
-    <p >+712-2521444</p>
+    <p class="text">+712-2521444</p>
     <ion-icon name="call" item-end></ion-icon>
   </button>
 
- <button ion-item (tap)="mailTo('info@fhconline.in')">
+ <button class="content text" ion-item (tap)="mailTo('info@fhconline.in')">
       For Enquiries:
-      <p >info@fhconline.in</p>
+      <p class="text">info@fhconline.in</p>
       <ion-icon name="mail" item-end></ion-icon>
   </button>
 </ion-list>
 
-<div class="contactUs">
-  <ion-item no-lines>
-    <h3>Please contact us in case of any queries.</h3>
+<div>
+  <ion-item class="content text" no-lines>
+    <h3 >Please contact us in case of any queries.</h3>
   </ion-item>
-</div>
+</div> 
+
+  </div>
+
+  
 
 </ion-content>

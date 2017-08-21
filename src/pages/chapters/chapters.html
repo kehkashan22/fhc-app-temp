@@ -35,7 +35,7 @@
 </ion-content>
 
 <ion-footer no-border *ngIf="!nothing"> 
-     <button ion-button block outline color="btn" (tap)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
+     <button ion-button block color="btn" (tap)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
     <ion-grid>
       <ion-row text-center>
         <ion-col class="a"  (tap)="filterChaps('a')">
