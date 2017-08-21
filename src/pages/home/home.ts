@@ -8,10 +8,15 @@ import { QuizStoreProvider } from './../../providers/quiz-store';
 import { User } from './../../data/user.interface';
 import { UserProvider } from './../../providers/user';
 import { VideosService } from './../../providers/fav-videos';
+<<<<<<< HEAD
+import { VideosProvider } from './../../providers/videos';
+import { Component  } from '@angular/core';
+import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
+=======
 import { Component, } from '@angular/core';
 import { NavController, IonicPage, Events, LoadingController, App, MenuController } from 'ionic-angular';
+>>>>>>> Kehkashan
 import { Quiz } from "../../data/quiz.interface";
-
 import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -36,8 +41,16 @@ export class HomePage {
   imgPath = "https://s3-ap-southeast-1.amazonaws.com/fhc.app/";
   imgType = ".jpeg";
   userData: User;
+<<<<<<< HEAD
+
+  diff: number = 0;
+
+  announcements: Array<any> = [];
+
+=======
   notificationNum: number = 0;
   show = true;
+>>>>>>> Kehkashan
   fireStore = firebase.database().ref("/pushtokens");
   notifNum: number = 0;
 
@@ -123,9 +136,14 @@ export class HomePage {
   }
 
   navigateToAnnouncements() {
-    this.show = false;
     this._note.setNote(false);
     this.navCtrl.push('AnnouncementsPage');
+    this.diff = 0;
+  }
+
+  emittedDifference(difference: number){
+    console.log('Difference in home page',difference);
+    this.diff = difference;
   }
 
   storeToken(token) {
@@ -133,7 +151,11 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
+<<<<<<< HEAD
+      console.log('Token stored');
+=======
       console.log('Token Stored');
+>>>>>>> Kehkashan
     }).catch((err) => {
       console.log(err);
     });

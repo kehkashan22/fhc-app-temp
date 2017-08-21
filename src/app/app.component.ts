@@ -97,7 +97,7 @@ export class MyApp {
       this.fullname = user.fullName;
       this.email = user.emailId;
       this.profilePicture = "https://www.gravatar.com/avatar/" +
-        Md5.hashStr(this.email.toLowerCase()) +"?d=wavatar";
+        Md5.hashStr(this.email.toLowerCase()) +"?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fprofile.png";
     });
 
     console.log(this.profilePicture);
