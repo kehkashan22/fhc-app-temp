@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar>
+  <ion-navbar transparent>
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -12,33 +12,78 @@
 </ion-header>
 
 
-<ion-content class="background" >
-<div id="profile-bg"></div>
+<ion-content class="background">
+<!-- <div id="profile-bg"></div>
       <div id="content">
         <div id="profile-info">
             <img id="profile-image" [src]="profilePicture" >
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                    Solved
+                </ion-col>
+                <ion-col>
+                    20
+                </ion-col>
+              </ion-row>
+            </ion-grid>
             <h3 id="profile-name">{{fullname}}</h3>
           <span id="profile-description"> Email: {{email}} </span>
           <br>
           <span id="profile-description"> Mob: {{phone}} </span>
           <br>
-         <button ion-button outline (tap) = "editProfile()" color="btn">Edit Profile</button>
+         <button ion-button outline [disabled] = "noNetwork" (tap) = "editProfile()" color="btn">Edit Profile</button>
         </div>
+      </div> -->
+
+       <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo">
+      <ion-fab bottom right>
+    <button ion-fab color="light"><ion-icon name="camera"></ion-icon></button>
+
+</ion-fab>
+      <div>
+        <img id="profile-image" [src]="profilePicture" >
       </div>
+
+
+    </div>
+     <div>
+       <ion-grid>
+              <ion-row>
+                <ion-col>
+                    Solved
+                </ion-col>
+                <ion-col>
+                    20
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+    </div>
+    <div class="splash-intro">
+      <h3 id="profile-name">{{fullname}}</h3>
+          <span id="profile-description"> Email: {{email}} </span>
+          <br>
+          <span id="profile-description"> Mob: {{phone}} </span>
+          <br>
+         <button ion-button outline [disabled] = "noNetwork" (tap) = "editProfile()" color="btn">Edit Profile</button>
+    </div>
+  </div>
 
 <ion-card>
   <ion-list>
     <button
     ion-item
-    (click)="onGoToStarred()">
+    (tap)="onGoToStarred()">
       <ion-icon name="star" item-left></ion-icon>
       Starred Videos
     </button>
-    <button
+     <button
     ion-item
-    (click)="showSubjectsModal()">
+    [navPush]="analyseMePage">
       <ion-icon name="book" item-left></ion-icon>
-      Report Card
+      Analysis
     </button>
   </ion-list>
 </ion-card>

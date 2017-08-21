@@ -1,3 +1,5 @@
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { LoadingController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
 import { VideosService } from '../../providers/fav-videos';
 import { Video } from './../../data/video.interface';
@@ -13,14 +15,22 @@ export class StarredPage implements OnInit{
   videoLib = 'RootLibraryPage';
 
   ngOnInit(): void {
+    this.videosService.loadFavoriteVideos();
     this.videos = this.videosService.getFavoriteVideos();
+  }
+
+  ionViewWillEnter(){
+     this.videosService.loadFavoriteVideos();
+      this.videos = this.videosService.getFavoriteVideos();
   }
 
 
   videos: Video[];
   starredPage: 'StarredPage';
   constructor(private videosService: VideosService,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController,
+            private _loader: LoadingController,
+          private socialSharing: SocialSharing) {
 
   }
 
@@ -49,5 +59,21 @@ export class StarredPage implements OnInit{
 
   noVideo() {
     return this.videos.length == 0 ? true : false;
+  }
+
+    shareSheetShare(video){
+    const yourl = "https://youtu.be/"+video.url;
+    let loader = this._loader.create({
+      spinner: 'bubbles',
+      content: 'breathe in...breathe out...'
+    });
+    loader.present();
+    this.socialSharing.share("Follow Farooq Sir's YouTube channel for more such content:\n", null, null, yourl).then(() => {
+      loader.dismiss();
+      console.log("shareSheetShare: Success");
+    }).catch(() => {
+      loader.dismiss();
+      console.error("shareSheetShare: failed");
+    });
   }
 }

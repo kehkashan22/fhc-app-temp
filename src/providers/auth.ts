@@ -16,6 +16,8 @@ import { Logger } from './logger';
 @Injectable()
 export class AuthProvider {
 
+  login: boolean;
+
   constructor(private af: AngularFireAuth,
               private logger: Logger
   ) {}
@@ -65,10 +67,22 @@ export class AuthProvider {
   }
 
   logout(): firebase.Promise<any>{
+    firebase.database().ref('/users'+firebase.auth().currentUser.uid)
+    .child('/user').off();
+
     return this.af.auth.signOut();
+
   }
 
   getActiveUser(){
     return firebase.auth().currentUser;
+  }
+
+  getLoginStatus(){
+      return this.login;
+  }
+
+  setLoginStatus(status){
+      this.login = status;
   }
 }

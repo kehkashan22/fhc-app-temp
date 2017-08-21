@@ -1,8 +1,9 @@
+import { FirstProvider } from './../../providers/first/first';
 import { GlobalsProvider } from './../../providers/globals/globals';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Chart } from 'chart.js';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { QuizStore } from "../../data/quiz/quiz-store.interface";
 
 @IonicPage()
@@ -37,14 +38,28 @@ export class ReportCardPage implements OnInit {
   percentage: number = 0;
   percentClass: string = 'c100 p50';
 
+  overall = "Why don't you give a quiz to get your own personalised results!";
+  analysisA = "";
+  analysisB = "";
+  analysisC = "";
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private _quizStore: QuizStoreProvider,
-    private _globals: GlobalsProvider) {
+    private _globals: GlobalsProvider,
+    private _alert: AlertController,
+    private _launch: FirstProvider) {
   }
 
   ngOnInit(): void {
+    this._launch.loadLaunchCount();
+    let count = this._launch.getLaunchCount();
+    if (this._launch.getLaunchCount() === 0) {
+      this.presentAlert();
+    }
+    this._launch.addLaunchCount(++count);
+
     this.subjectId = this.navParams.get('subjectId');
 
 
@@ -104,6 +119,8 @@ export class ReportCardPage implements OnInit {
       this.applicationData = data;
     }
 
+
+
   }
 
   ionViewDidLoad() {
@@ -116,22 +133,22 @@ export class ReportCardPage implements OnInit {
         datasets: [{
           label: 'Memory',
           data: this.memoryData,
-          backgroundColor: 'rgba(0, 92, 156, 0.5)',
-          borderColor: 'rgba(0, 92, 156, 1)',
+          backgroundColor: '#9FEA73',
+          borderColor: '#9FEA73',
           borderWidth: 1
         },
         {
           label: 'Application',
           data: this.applicationData,
-          backgroundColor: 'rgba(255, 209, 102, 0.2)',
-          borderColor: 'rgba(255, 209, 102, 1)',
+          backgroundColor: '#ED7272',
+          borderColor: '#ED7272',
           borderWidth: 1
         },
         {
           label: 'Speed',
           data: this.speedData,
-          backgroundColor: 'rgba(6, 214, 160, 0.2)',
-          borderColor: 'rgba(6, 214, 160, 1)',
+          backgroundColor: '#73B7EA',
+          borderColor: '#73B7EA',
           borderWidth: 1
         }]
       },
@@ -153,7 +170,7 @@ export class ReportCardPage implements OnInit {
           xAxes: [{
             scaleLabel: {
               display: true,
-              labelString: 'Breakup of scores by Chapter Type and Quiz Type'
+              labelString: 'Breakup of scores by Chapter and Quiz Type'
             }
           }],
         },
@@ -173,7 +190,7 @@ export class ReportCardPage implements OnInit {
               for (var i = 0; i < dataset.data.length; i++) {
                 for (var key in dataset._meta) {
                   var model = dataset._meta[key].data[i]._model;
-                    ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
+                  ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
 
                 }
               }
@@ -185,36 +202,157 @@ export class ReportCardPage implements OnInit {
     });
 
     this.getPerformancePercent();
-    //this.getClassString(this.percentage);
-
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-
-      type: 'doughnut',
-      data: {
-        labels: ["Chances of Passing", "Improvement Required!"],
-        datasets: [{
-          label: 'Overall Performance',
-          data: [this.percentage, 100 - this.percentage],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.8)',
-            'rgba(54, 162, 235, 0.8)',
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-          ]
-        }]
-      }
-
-    });
+    this.getClassString(this.percentage);
+    this.generateReport();
   }
 
   getPerformancePercent() {
     let sum = 0;
+    let sumA = 0;
+    let sumB = 0;
+    let sumC = 0;
     for (var i = 0; i < this.memoryData.length; sum += (this.memoryData[i] / 100) * this._globals.memoryMatrix[i], i++);
-    for (var i = 0; i < this.memoryData.length; sum += (this.applicationData[i] / 100) * this._globals.applicationMatrix[i], i++);
-    for (var i = 0; i < this.memoryData.length; sum += (this.speedData[i] / 100) * this._globals.speedMatrix[i], i++);
+
+    for (var i = 0; i < this.applicationData.length; sum += (this.applicationData[i] / 100) * this._globals.applicationMatrix[i], i++);
+
+    for (var i = 0; i < this.speedData.length; sum += (this.speedData[i] / 100) * this._globals.speedMatrix[i], i++);
     this.percentage = Math.floor(sum);
   }
+
+  private getClassString(per) {
+    let perInt = +per | 0;
+
+    if (perInt >= 60) {
+      this.percentClass = 'c100 p' + perInt + ' green ';
+    } else if (perInt < 40) {
+      this.percentClass = 'c100 p' + perInt;
+    } else {
+      this.percentClass = 'c100 p' + perInt + ' orange ';
+    }
+
+  }
+
+  private generateReport() {
+    if (this.percentage > 50) {
+      this.overall = "You have a good chance of passing, but make sure that you concentrate on important chapters to ensure that you come out on top!";
+    } else {
+      this.overall = "You have a long way to go in terms of clearing your exam. Lots of practice is required in a structured manner."
+    }
+    this.getAnalysis();
+
+  }
+
+  private getAnalysis() {
+    let memA = this.memoryData[0] > 50 ? true : false;
+    let speA = this.speedData[0] > 50 ? true : false;
+    let appA = this.applicationData[0] > 50 ? true : false;
+    let memB = this.memoryData[1] > 50 ? true : false;
+    let speB = this.speedData[1] > 50 ? true : false;
+    let appB = this.applicationData[1] > 50 ? true : false;
+    let memC = this.memoryData[2] > 50 ? true : false;
+    let speC = this.speedData[2] > 50 ? true : false;
+    let appC = this.applicationData[2] > 50 ? true : false;
+
+
+    if (memA) {
+      if (speA && memB) {
+        this.analysisA = this._globals.report.A.MgAgSg;
+      } else if (speA && !memB) {
+        this.analysisA = this._globals.report.A.MgAgSb;
+      } else if (!speA && memB) {
+        this.analysisA = this._globals.report.A.MgAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MgAbSb;
+      }
+    } else {
+      if (speA && memB) {
+        this.analysisA = this._globals.report.A.MbAgSg;
+      } else if (speA && !memB) {
+        this.analysisA = this._globals.report.A.MbAgSb;
+      } else if (!speA && memB) {
+        this.analysisA = this._globals.report.A.MbAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MbAbSb;
+      }
+    }
+
+    if (memA) {
+      if (speA && appA) {
+        this.analysisA = this._globals.report.A.MgAgSg;
+      } else if (speA && !appA) {
+        this.analysisA = this._globals.report.A.MgAgSb;
+      } else if (!speA && appA) {
+        this.analysisA = this._globals.report.A.MgAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MgAbSb;
+      }
+    } else {
+      if (speA && appA) {
+        this.analysisA = this._globals.report.A.MbAgSg;
+      } else if (speA && !appA) {
+        this.analysisA = this._globals.report.A.MbAgSb;
+      } else if (!speA && appA) {
+        this.analysisA = this._globals.report.A.MbAbSg;
+      } else {
+        this.analysisA = this._globals.report.A.MbAbSb;
+      }
+    }
+
+    if (memB) {
+      if (speB && appB) {
+        this.analysisB = this._globals.report.B.MgAgSg;
+      } else if (speB && !appB) {
+        this.analysisB = this._globals.report.B.MgAgSb;
+      } else if (!speB && appB) {
+        this.analysisB = this._globals.report.B.MgAbSg;
+      } else {
+        this.analysisB = this._globals.report.B.MgAbSb;
+      }
+    } else {
+      if (speB && appB) {
+        this.analysisB = this._globals.report.B.MbAgSg;
+      } else if (speB && !appB) {
+        this.analysisB = this._globals.report.B.MbAgSb;
+      } else if (!speB && appB) {
+        this.analysisB = this._globals.report.B.MbAbSg;
+      } else {
+        this.analysisB = this._globals.report.B.MbAbSb;
+      }
+    }
+
+    if (memC) {
+      if (speC && appC) {
+        this.analysisC = this._globals.report.C.MgAgSg;
+      } else if (speC && !appC) {
+        this.analysisC = this._globals.report.C.MgAgSb;
+      } else if (!speC && appC) {
+        this.analysisC = this._globals.report.C.MgAbSg;
+      } else {
+        this.analysisC = this._globals.report.C.MgAbSb;
+      }
+    } else {
+      if (speC && appC) {
+        this.analysisC = this._globals.report.C.MbAgSg;
+      } else if (speC && !appC) {
+        this.analysisC = this._globals.report.C.MbAgSb;
+      } else if (!speC && appC) {
+        this.analysisC = this._globals.report.C.MbAbSg;
+      } else {
+        this.analysisC = this._globals.report.C.MbAbSb;
+      }
+    }
+
+
+  }
+
+
+presentAlert() {
+  let alert = this._alert.create({
+    title: 'Click!',
+    subTitle: 'Click on both the reports for the complete picture!',
+    buttons: ['ok']
+  });
+  alert.present();
+}
 
 }

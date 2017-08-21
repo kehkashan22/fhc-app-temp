@@ -1,2 +1,13 @@
 page-video {
+  .vid{
+    position: relative;
+    .play {
+      position: absolute;
+      top: 36%;
+      left: 38%;
+      align-content: center;
+      text-align: center;
+      width: 100%;
+    }
+  }
 }

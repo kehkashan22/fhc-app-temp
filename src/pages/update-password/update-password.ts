@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController, T
 
 import { AuthProvider } from '../../providers/auth';
 
-import * as sha1  from 'sha1';
-
 import * as firebase from 'firebase';
 
 @IonicPage()
@@ -17,7 +15,7 @@ export class UpdatePasswordPage {
   private newPassword: string;
 
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public viewCtrl: ViewController,
               public alertCtrl: AlertController,
@@ -43,7 +41,7 @@ export class UpdatePasswordPage {
 
     loading.present();
 
-    let newPass = ""+sha1(this.newPassword);
+    let newPass = this.newPassword;
 
     let user = firebase.auth().currentUser;
 
@@ -64,7 +62,7 @@ export class UpdatePasswordPage {
       let alert = this.alertCtrl.create({
         title: 'Error',
         message: err.message,
-        buttons: 
+        buttons:
         [
           {
             text: 'Ok',

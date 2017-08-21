@@ -8,10 +8,12 @@ page-quiz {
     $font-family-wp-base: "Barrio";
 
   ion-content, .scroll-content {
+    //background: map-get($colors, btn );
     //  background: #2c3e50;  /* fallback for old browsers */
     //   background: -webkit-linear-gradient(to bottom, #005C9C, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
     //   background: linear-gradient(to bottom, #005C9C, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-image: url('https://images.pexels.com/photos/107958/pexels-photo-107958.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
+      //background-image: url('https://s-media-cache-ak0.pinimg.com/736x/15/dd/54/15dd541e705f168a8027be8849424388--wall-tiles-evans.jpg');
+      background-image: url('../assets/images/aboutpage.png');
       background-size: cover;
       background-position-x: 50%;
     }

@@ -15,6 +15,117 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+ @-webkit-keyframes animateInPrimary {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+@-webkit-keyframes animateInSecondary{
+
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes listGrow {
+  0% {
+    -webkit-transform: scale3d(1, 0, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 0);
+  }
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+
+  25% {
+    -webkit-transform: translate3d(0,-30%,0);
+  }
+
+  50% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(0,-30%,0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+//here
+@-webkit-keyframes slidingAnimation {
+  0% {
+    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+  }
+
+  50% {
+    transform: translate3d(-70px,0,0);
+    -webkit-transform: translate3d(-70px,0,0);
+  }
+
+  100% {
+    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+.itemSlidingAnimation {
+    -webkit-animation: slidingAnimation;
+    animation: slidingAnimation;
+    -webkit-animation-duration: 1000ms;
+    animation-duraton: 1000ms;
+}
+//to here
+
+.bounce-animation {
+  -webkit-animation: bounce ease-in 1;
+  animation: bounce ease-in 1;
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
+}
+
+.list-grow-animation {
+  -webkit-animation: listGrow ease-in 1;
+  animation: listGrow ease-in 1;
+  -webkit-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
+
+.animate-in-primary {
+    -webkit-animation: animateInPrimary;
+    animation: animateInPrimary;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+
+.animate-in-secondary {
+    -webkit-animation: animateInSecondary ease-in 1;
+    animation: animateInSecondary ease-in 1;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+
 .bg{
     background-color: white;
     font-weight: normal;
@@ -28,8 +139,13 @@
 }
 
 #menu-head, #menu-toolbar{
-  .item, .toolbar-content, .toolbar-background{
-       background: #173753 !important;
+  .toolbar-background{
+    //height: 250px;
+       background-image: url("../assets/images/main.png");
+       background-size:cover;
+       background-repeat: no-repeat; }
+  .item, .toolbar-content{      
+      background: transparent;
        h1{
          font-size: 2rem;
        }
@@ -37,7 +153,9 @@
           font-size: 1.3rem;
         }
        h1, p, button{
-         color: #DBE4EE;
+         color: #fff;
+         font-weight:bold;
+         
        }
   }
   color: map-get($colors, light);
@@ -48,15 +166,17 @@
     color: #09141F !important;
   }
   background: #EFF5FB !important;
-
 }
 
 #menu{
   .scroll-content{
     background: #EFF5FB;
   }
+
 }
 
 .scroll-content{
   background: map-get($colors, bg);
 }
+
+

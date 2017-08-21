@@ -2,6 +2,11 @@
 
   <ion-navbar>
     <ion-title>Analyse Yourself!</ion-title>
+    <ion-buttons right>
+      <button ion-button (tap)="presentInstructions()">
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -34,37 +39,47 @@
           <vg-fullscreen></vg-fullscreen>
         </vg-controls>
 
-        <video [vgMedia]="media" #media [src]="analysisVideo" id="singleVideo" preload="auto">
+        <video [vgMedia]="media" #media [src]="analysisVideo" id="singleVideo" preload="auto" poster="assets/images/transparent.png">
 
         </video>
       </vg-player>
 
       <!--QUIZ PORTION-->
     </ng-template>
-    <div *ngIf="!video; else videoTag" class="quiz">
-
-      <ion-slides #slide1>
+    <div *ngIf="!video; else videoTag" horizontal-padding>
+      <progress-bar [progress]="progressIndex" [total]="quizCollection?.length"></progress-bar>
+      <ion-item text-wrap no-lines>
+        <p>Based on what you just heard, answer the following questions:</p>
+      </ion-item>
+      <ion-slides (ionSlideDidChange)="quesChanged()" #slide>
         <ion-slide *ngFor="let currentQuestion of quizCollection; let i=index;">
-          <ion-card>
-            <ion-card-content>{{currentQuestion?.question}}</ion-card-content>
+          <ion-card no-padding>
+            <ion-card-content text-left>
+              <ion-card-title>
+                Question {{i+1}}
+              </ion-card-title>
+              <p>
+                {{currentQuestion?.question}}
+              </p>
+            </ion-card-content>
           </ion-card>
 
           <ion-list radio-group mode="ios">
             <ion-item *ngFor="let answer of currentQuestion?.answers; let j=index;" mode="ios">
-              <ion-label text-wrap class="quiz">
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-2>
-                    {{answer.answerKey}}.
-                  </ion-col>
-                  <ion-col text-wrap id="answerText">
-                    {{answer.answerText}}
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+              <ion-label text-wrap>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-2>
+                      {{answer.answerKey}}.
+                    </ion-col>
+                    <ion-col text-wrap id="answerText">
+                      {{answer.answerText}}
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
 
-            </ion-label>
-              <ion-radio [value]="answer" (click)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
+              </ion-label>
+              <ion-radio [value]="answer" (tap)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
             </ion-item>
           </ion-list>
         </ion-slide>
@@ -74,17 +89,29 @@
 
   <!--To Analysis-->
   <ng-template #quizEnd>
-    <div class="quiz">
-      <h1>You have successfully completed the quiz</h1>
-      <ion-card>
-        <ion-card-header text-center>
-          Compare your two scores!
-        </ion-card-header>
-        <ion-card-content>
-          <canvas #barCanvas></canvas>
-        </ion-card-content>
-      </ion-card>
-      <button ion-button (click)="getExplanation()">Get Explanation</button>
+    <div class="quiz" padding>
+      Congratulations on successfully completing the analysis...
+
+
+      <flash-card>
+
+        <div class="flash-card-front">
+          <ion-card>
+            <ion-card-header text-center>Your Analysis is complete</ion-card-header>
+            <ion-card-content>
+              <p text-center>Compare your scores:</p>
+                 <canvas #barCanvas height="250px"></canvas>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="flash-card-back">ARE COOL!</div>
+
+      </flash-card>
+
+      <p>...now go to Explanation to get the proper understanding of each question, or re-try the quiz!</p>
+      <button ion-button block outline (tap)="getExplanation()">Get Explanation</button>
+      <button ion-button block outline (tap)="resetScore()">Re-try Analysis</button>
     </div>
   </ng-template>
 </ion-content>

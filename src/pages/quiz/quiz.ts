@@ -15,7 +15,7 @@ import _ from "lodash";
   selector: 'page-quiz',
   templateUrl: 'quiz.html'
 })
-export class QuizPage implements OnInit{
+export class QuizPage implements OnInit {
 
   marks: number = 0;
   quizCollection: Quiz[] = [];
@@ -66,7 +66,7 @@ export class QuizPage implements OnInit{
 
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
-    if(this.slide1){
+    if (this.slide1) {
       this.slide1.lockSwipes(true);
     }
   }
@@ -117,7 +117,7 @@ export class QuizPage implements OnInit{
   }
 
   ionViewDidLoad() {
-    if(this.question){
+    if (this.question) {
       this.slide1.lockSwipes(true);
     }
 
@@ -201,12 +201,12 @@ export class QuizPage implements OnInit{
   private getClassString(per: string) {
     let perInt = +per | 0;
 
-    if(perInt >= 60){
-        this.percentClass = 'c100 p' + perInt+ ' green ';
-    }else if(perInt < 40){
-        this.percentClass = 'c100 p' + perInt;
-    }else{
-        this.percentClass = 'c100 p' + perInt+ ' orange ';
+    if (perInt >= 60) {
+      this.percentClass = 'c100 p' + perInt + ' green ';
+    } else if (perInt < 40) {
+      this.percentClass = 'c100 p' + perInt;
+    } else {
+      this.percentClass = 'c100 p' + perInt + ' orange ';
     }
 
   }
@@ -255,7 +255,7 @@ export class QuizPage implements OnInit{
   }
 
   changeExplanation(direction: string) {
-    if (this.progressIndex  < this.quizCollection.length) {
+    if (this.progressIndex < this.quizCollection.length) {
       this.progressIndex++;
     } else {
       this.results = true;
@@ -316,22 +316,18 @@ export class QuizPage implements OnInit{
     this.results = true;
   }
 
-  slideChanged(){
-    if(this.slide2.getActiveIndex()+1 <= this.quizCollection.length){
-      this.progressIndex = this.slide2.getActiveIndex()+1;
+  slideChanged() {
+    if (this.slide2.getActiveIndex() + 1 <= this.quizCollection.length) {
+      this.progressIndex = this.slide2.getActiveIndex() + 1;
     }
     this.checkButtonVisibility();
 
   }
 
-  quesChanged(){
-    if(this.slide1.getActiveIndex()+1 <= this.quizCollection.length){
-      this.progressIndex = this.slide1.getActiveIndex()+1;
+  quesChanged() {
+    if (this.slide1.getActiveIndex() + 1 <= this.quizCollection.length) {
+      this.progressIndex = this.slide1.getActiveIndex() + 1;
     }
-  }
-
-  startingQuizAnimation(){
-
   }
 
 }

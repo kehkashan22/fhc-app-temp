@@ -1,3 +1,4 @@
+import { MenuController } from 'ionic-angular';
 /*
   Name - Login Component
   Functionality - For authentication of users using firebase.
@@ -12,8 +13,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
-
-import * as sha1  from 'sha1';
 
 import { HomePage } from "../home/home";
 
@@ -36,18 +35,19 @@ export class LoginWithEmailPage {
               private _auth: AuthProvider,
               private _logger: Logger,
               private alertCtrl: AlertController,
-              private loadingCtrl: LoadingController
+              private loadingCtrl: LoadingController,
+              private _menu: MenuController
   ) {
     /* Building form  */
     this.loginForm = formBuilder.group({
       emailId: [ '', Validators.compose([Validators.required])],
       password: [ '', Validators.required],
     });
-
   }
   /* Check for Network - Remaining*/
   ionViewDidLoad() {
     console.log('ionViewDidLoad Login');
+    this._menu.enable(false);
 
   }
 
@@ -63,7 +63,7 @@ export class LoginWithEmailPage {
     /* Building user */
     let loginUserData = {
       emailId: this.loginForm.value.emailId,
-      password: sha1(this.loginForm.value.password)
+      password: this.loginForm.value.password
     };
 
      /* Loader */
@@ -81,10 +81,8 @@ export class LoginWithEmailPage {
         this._logger.log("Successfully logged in ");
 
         /* Navigate to Home Component */
+        this._menu.enable(true);
         this.navCtrl.setRoot('HomePage');
-
-       
-
       }else{
 
           const alert = this.alertCtrl.create({
@@ -115,5 +113,5 @@ export class LoginWithEmailPage {
     this.navCtrl.push('ForgetPasswordPage');
   }
 
-  
+
 }

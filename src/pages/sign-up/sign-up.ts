@@ -1,3 +1,4 @@
+import { MenuController } from 'ionic-angular';
 /*
   Name - Signup Component
   Functionality - For registering of users using firebase.
@@ -7,15 +8,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 /* Forms module */
-import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 /* Logger Service */
 import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
 
-import * as sha1  from 'sha1';
-
-import { AngularFireDatabase } from 'angularfire2/database';
 
 import * as firebase from 'firebase';
 
@@ -29,8 +27,6 @@ export class SignUp {
 
   /* FormGroup which will be used in html */
   private form: FormGroup;
-  /* For Validation purposes */
-  private submitAttempt: boolean = false;
 
   fireStore = firebase.database().ref('/pushTokens');
 
@@ -40,7 +36,8 @@ export class SignUp {
               private logger: Logger,
               private authProvider: AuthProvider,
               private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController
+              private alertCtrl: AlertController,
+              private _menu: MenuController
   ) {
     /* Creating form using formBuilder module and applying validations.*/
     this.form = formBuilder.group({
@@ -57,7 +54,7 @@ export class SignUp {
         gender: [''],
         typeOfCourse: ['', Validators.required]
     });
-    
+    _menu.swipeEnable(false);
   }
 
   ionViewDidLoad() {
@@ -83,7 +80,7 @@ export class SignUp {
       typeOfCourse: this.form.value.typeOfCourse
     }
 
-    let userPassword = sha1(this.form.value.password);
+    let userPassword = this.form.value.password;
 
     /* Loader */
     let loader = this.loadingCtrl.create({
@@ -94,22 +91,22 @@ export class SignUp {
 
     /* Auth service registerUser method */
     this.authProvider.registerUser(userData, userPassword).then(() => {
-      
+
       const alert = this.alertCtrl.create({
           title: 'Success',
           message: 'Please validate your email address',
           buttons: ['Ok']
         });
         alert.present();
-      
+
       /* Resetting the form once everything is done */
       this.form.reset();
       /* Setting the stack root to login */
-      this.navCtrl.setRoot('LoginWithEmailPage');
+      this.navCtrl.setRoot('SignUpSuccessPage');
       /* Dismissing the loader */
       loader.dismiss();
 
-      
+
 
     }, (error) => {
       /* handle the errors in any */

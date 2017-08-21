@@ -1,11 +1,12 @@
+import { UserProvider } from './../../providers/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ViewController, LoadingController, AlertController } from 'ionic-angular';
 /* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthProvider } from '../../providers/auth';
+import { User } from "../../data/user.interface";
 
-import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -14,8 +15,7 @@ import * as firebase from 'firebase';
 })
 export class EditProfilePage {
 
-  private user;
-  private db;
+  private user: User;
   /* FormGroup which will be used in html */
   private form: FormGroup;
 
@@ -26,7 +26,8 @@ export class EditProfilePage {
               private _auth: AuthProvider,
               private formBuilder: FormBuilder,
               private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController
+              private alertCtrl: AlertController,
+              private _user: UserProvider
   ) {
     this.form = formBuilder.group({
         fullName: [ '', Validators.required],
@@ -42,8 +43,6 @@ export class EditProfilePage {
         typeOfCourse: ['', Validators.required]
     });
 
-    this.db = firebase.database();
-
   }
 
   ionViewDidLoad() {
@@ -58,32 +57,20 @@ export class EditProfilePage {
     loader.present();
 
 
-    this.getUserProfile().then(data => {
+    this._user.getUser().then((data: User) => {
       this.user = data;
 
-      console.log("data", this.user.user);
-      let user = {
-        fullName: this.user.user.fullName,
-        emailId: this.user.user.emailId,
-        phoneNumber: this.user.user.phoneNumber,
-        address: this.user.user.address,
-        attemptNo: this.user.user.attemptNo,
-        pincode: this.user.user.pincode,
-        attemptDate: this.user.user.attemptDate,
-        dob: this.user.user.dob,
-        gender: this.user.user.gender,
-        typeOfCourse: this.user.user.typeOfCourse
-      }
-      this.form.get('fullName').setValue(user.fullName);
-      this.form.get('emailId').setValue(user.emailId);
-      this.form.get('phoneNumber').setValue(user.phoneNumber);
-      this.form.get('address').setValue(user.address);
-      this.form.get('attemptNo').setValue(user.attemptNo);
-      this.form.get('attemptDate').setValue(user.attemptDate);
-      this.form.get('pincode').setValue(user.pincode);
-      this.form.get('dob').setValue(user.dob);
-      this.form.get('gender').setValue(user.gender);
-      this.form.get('typeOfCourse').setValue(user.typeOfCourse);
+
+      this.form.get('fullName').setValue(this.user.fullName);
+      this.form.get('emailId').setValue(this.user.emailId);
+      this.form.get('phoneNumber').setValue(this.user.phoneNumber);
+      this.form.get('address').setValue(this.user.address);
+      this.form.get('attemptNo').setValue(this.user.attemptNo);
+      this.form.get('attemptDate').setValue(this.user.attemptDate);
+      this.form.get('pincode').setValue(this.user.pincode);
+      this.form.get('dob').setValue(this.user.dob);
+      this.form.get('gender').setValue(this.user.gender);
+      this.form.get('typeOfCourse').setValue(this.user.typeOfCourse);
 
       loader.dismiss();
     });
@@ -93,7 +80,8 @@ export class EditProfilePage {
     /* Loader */
     let loader = this.loadingCtrl.create({
       spinner: "bubbles",
-      content: 'Updating'
+      content: 'Updating',
+      duration: 3000
     });
     loader.present();
 
@@ -113,8 +101,8 @@ export class EditProfilePage {
     console.log("Updated Info");
     console.log(user);
 
-    this.updateUserProfile(user).then(() => {
-      loader.dismiss();
+    this._user.updateUserProfile(user).then(() => {
+      //loader.dismiss();
       this.viewCtrl.dismiss();
     }, (err) => {
       console.log(err);
@@ -122,31 +110,10 @@ export class EditProfilePage {
 
   }
 
-  updateUserProfile(user): Promise<any>{
-
-    let currentUser = firebase.auth().currentUser;
-    return this.db.ref("users/"+currentUser.uid).update( { user: user });
-
-  }
-
-
-  getUserProfile(): Promise<any>{
-    return new Promise((resolve, reject) => {
-      firebase.database().ref('/users')
-      .child(firebase.auth().currentUser.uid)
-      .on('value', data => {
-        console.log(data);
-        resolve(data.val());
-      })
-    });
-  }
-
   updatePassword(){
     let modal = this.modalCtrl.create('UpdatePasswordPage');
     modal.present();
   }
-
-
 }
 
 

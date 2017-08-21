@@ -1,12 +1,23 @@
 page-chapters {
-
    @import "../../assets/scss/_nothing.scss";
    $color: map-get($colors, bg);
    .scroll-content{
       background-color: $color;
     }
+
+
+  ion-avatar{
+    border-radius: 20px;
+  }
+
+    ion-grid {
+      height: 100%;
+      justify-content: center;
+    }
+
     ion-col{
        color: $color;
+       height: 2em;
     }
     .a{
         background-color: map-get($colors, chapterA);
@@ -22,4 +33,13 @@ page-chapters {
     ion-footer{
       background-color: $color;
     }
+
+    .blank{
+       //background-image: url('../../assets/images/blank.png');
+       height: 100%;
+       width: 100%;
+       background-size: contain;
+       background-repeat: no-repeat;
+     }
+
 }

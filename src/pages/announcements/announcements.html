@@ -8,42 +8,81 @@
     </ion-buttons>
     <ion-title>Notifications</ion-title>
   </ion-navbar>
-
 </ion-header>
 <ion-content>
 
-  <ion-card *ngFor="let annoucement of announcements">
-     <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/images/notif.jpg">
+    <ion-card *ngFor="let announcement of announcements">
+      <!-- <ion-item>
+      <ion-avatar item-start>
+        <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/notif.jpg">
       </ion-avatar>
-      <h2 text-wrap>{{annoucement.title}}</h2>
-    </ion-item>
+      <h2 text-wrap>{{announcement.title}}</h2>
+    </ion-item> -->
 
-    <ion-card-content>
-        <p>{{annoucement.message}}</p>
-        <img [src]="annoucement.img" *ngIf="annoucement.img">
+      <img [src]="announcement.img" *ngIf="announcement.img" />
+        <ion-card-content>
+          <ion-card-title>
+            {{announcement.title}}
+          </ion-card-title>
+          <p>{{announcement.message}}</p>
 
 
-       <ion-row no-padding *ngIf="annoucement.downloadLink">
-        <ion-col text-center>
-           <button ion-button icon-left clear *ngIf="annoucement.downloadLink" (tap)="download(annoucement);">
-        <ion-icon name="cloud-download"></ion-icon>
-        <div>Download now!</div>
-      </button>
-        </ion-col>
-      </ion-row>
 
-      <ion-row no-padding>
-      <ion-col center text-right>
-      <div>
-        <ion-note>
-       {{annoucement.date | amTimeAgo}}
-      </ion-note>
-      </div>
+          <ion-row no-padding *ngIf="announcement.downloadLink">
+            <ion-col text-center>
+              <button ion-button icon-left clear *ngIf="announcement.downloadLink" (tap)="download(announcement);">
+              <ion-icon name="cloud-download"></ion-icon>
+              <div>Download now!</div>
+            </button>
+            </ion-col>
+          </ion-row>
 
-    </ion-col>
-  </ion-row>
-    </ion-card-content>
-  </ion-card>
+          <ion-row>
+            <ion-col text-left align-self-center>
+              <ion-note>
+                {{announcement.date | amTimeAgo}}
+              </ion-note>
+            </ion-col>
+
+            <ion-col text-right>
+              <button ion-button color="primary" clear small icon-start (tap)="shareSheetShare(announcement)">
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+
+            </ion-col>
+          </ion-row>
+
+        </ion-card-content>
+        <div class="news" *ngIf="announcement.newsLink">
+          <button ion-button full clear (click)="goToNews(announcement.newsLink)" color="light">
+            Tap to read more
+        </button>
+
+        </div>
+    </ion-card>
 </ion-content>
+
+<ion-footer transparent no-border>
+  <ion-grid no-padding>
+    <ion-row no-padding>
+      <ion-col>
+        <ion-item (click)="getItems('pdf')" [class.selected]="'pdf' === currentSelected" icon-left>
+          <ion-icon ios="ios-download" md="md-download"></ion-icon> PDF
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="getItems('news')" [class.selected]="'news' === currentSelected" icon-left>
+          <ion-icon name="chatboxes"></ion-icon>News</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="getItems('misc')" [class.selected]="'misc' === currentSelected" icon-left>
+          <ion-icon name="create"></ion-icon>Misc</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="getItems('all')" [class.selected]="'all' === currentSelected" icon-left>
+          <ion-icon name="leaf" ></ion-icon>All</ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

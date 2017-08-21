@@ -1,3 +1,29 @@
 page-announcements {
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
 
+    ion-footer{
+        ion-item.item-md, ion-item.item-ios, ion-item.item-wp{
+             color:  map-get($colors, primary);
+             font-family: 'Bree Serif', serif;
+             font-size: 1em;
+             font-weight:bold;
+        }
+    }
+    .selected{
+         color:  map-get($colors, danger) !important;
+    }
+
+  .news{
+    background-image: url('http://www.pptbackgrounds.org/uploads/soft-wolke-pure-backgrounds-wallpapers.jpg');
+    padding: 5px;
+    background-repeat: no-repeat;
+    //background-position: contain;
+    button{
+      text-transform: none !important;
+      text-align: left;
+    }
+  }
+  ion-img{
+    height: 250px;
+  }
 }

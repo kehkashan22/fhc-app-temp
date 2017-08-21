@@ -44,7 +44,7 @@
               </ion-grid>
 
             </ion-label>
-            <ion-radio [value]="answer" [disabled]="disabled" (click)="changeQuestion(i, j)" mode="ios"></ion-radio>
+            <ion-radio [value]="answer" [disabled]="disabled" (tap)="changeQuestion(i, j)" mode="ios"></ion-radio>
           </ion-item>
         </ion-list>
       </ion-slide>
@@ -94,11 +94,11 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <button ion-button block color="light" (click)="toExplanation()">Review Quiz</button>
+            <button ion-button block color="light" (tap)="toExplanation()">Review Quiz</button>
           </ion-col>
 
           <ion-col>
-            <button ion-button block color="light" (click)="toResetScore()">Retry Quiz</button>
+            <button ion-button block color="light" (tap)="toResetScore()">Retry Quiz</button>
           </ion-col>
 
         </ion-row>
@@ -119,7 +119,7 @@
           <ion-col align-self-start>
             <div>
               <ion-buttons left>
-                <button [disabled]="!secondQuestion" ion-button icon-only clear small (click)="changeExplanation('previous')" color="light">
+                <button [disabled]="!secondQuestion" ion-button icon-only clear small (tap)="changeExplanation('previous')" color="light">
                   PREV
                   <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
                 </button>
@@ -130,7 +130,7 @@
           <ion-col align-self-center>
             <div text-center>
               <ion-buttons left>
-                <button ion-button icon-only clear small (click)="toResults()" color="light">
+                <button ion-button icon-only clear small (tap)="toResults()" color="light">
                   TO RESULTS
                   <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
                 </button>
@@ -141,7 +141,7 @@
           <ion-col align-self-end>
             <div>
               <ion-buttons right>
-                <button ion-button icon-only clear small (click)="changeExplanation('next')" item-right color="light">
+                <button ion-button icon-only clear small (tap)="changeExplanation('next')" item-right color="light">
                  <!--<ion-icon name="md-arrow-round-forward" class="item-icon-right"></ion-icon>-->
                   NEXT
               </button>

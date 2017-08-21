@@ -19,23 +19,35 @@
       <div class="vid">
         <img [src]="video.url | concat" alt="video.text">
         <div class="play">
-          <button ion-fab color="light" (click)="openVideo(video.url)"><ion-icon name="play"></ion-icon></button>
+          <button ion-fab color="light" (tap)="openVideo(video.url)"><ion-icon name="play"></ion-icon></button>
         </div>
       </div>
 
       <ion-row>
+        <ion-col>
+          <!-- <button ion-button color="primary" clear small icon-start (tap)="shareSheetShare(video)">
+        <ion-icon name='share-alt'></ion-icon>
+        Share
+      </button> -->
+          <ion-chip tappable (tap)="shareSheetShare(video)">
+            <ion-icon name='share-alt' color="secondary"></ion-icon>
+            <ion-label>Share</ion-label>
+          </ion-chip>
+        </ion-col>
         <ion-col text-right>
-          <ion-chip (click)="onAddToFavorites(video)" *ngIf="!isFavorite(video)">
+          <ion-chip tappable (tap)="onAddToFavorites(video)" *ngIf="!isFavorite(video)">
             <ion-icon name="heart" color="btn"></ion-icon>
             <ion-label>Favourite</ion-label>
           </ion-chip>
 
-          <ion-chip (click)="onRemoveFromFavorites(video)" *ngIf="isFavorite(video)">
+          <ion-chip tappable (tap)="onRemoveFromFavorites(video)" *ngIf="isFavorite(video)">
             <ion-icon name="heart" color="danger"></ion-icon>
             <ion-label color="danger">Unfavourite</ion-label>
           </ion-chip>
         </ion-col>
       </ion-row>
+
+
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -2,9 +2,10 @@ page-login {
 
   .scroll-content{
     background: #fff;
+    padding-top: 50px !important;
   }
 
-    .item.item-input {
+    .item.item-input, .item {
         background-color: transparent;
 
     }
@@ -22,4 +23,5 @@ page-login {
           padding: 0px;
       }
     }
+
 }

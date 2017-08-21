@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Platform, NavController } from 'ionic-angular';
+import { Platform, NavController, ModalController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -31,9 +31,9 @@ export class MyApp {
   aboutPage = 'AboutPage';
   rootLibraryPage = 'RootLibraryPage';
   contactPage = 'ContactPage';
-  fullname = 'User';
-  email = 'user@gmail.com';
-  profilePicture = '';
+  fullname = 'Loading...';
+  email = '';
+  profilePicture = 'assets/images/notif.jpg';
 
   // used for an example of ngFor and navigation
 
@@ -61,9 +61,12 @@ export class MyApp {
       const authObserver = afAuth.authState.subscribe(user => {
         this.zone.run(() => {
           if (user) {
-            this.rootPage = this.homePage;
+            this.authProvider.setLoginStatus(true);
+            this.rootPage = 'HomePage';
             authObserver.unsubscribe();
           } else {
+            this.authProvider.setLoginStatus(false);
+            console.log(this.authProvider.getLoginStatus());
             this.rootPage = 'LoginWithEmailPage';
             authObserver.unsubscribe();
           }
@@ -73,8 +76,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByHexString('#005C9C');
       splashScreen.hide();
-
-
     });
 
     this.pages = [
@@ -82,29 +83,37 @@ export class MyApp {
       { title: 'Video Library', component: 'RootLibraryPage', icon: 'book'},
       { title: 'Starred Videos', component: 'StarredPage', icon: 'star'},
       { title: 'Quiz Library', component: 'QuizLibraryPage', icon: 'school'},
-       { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications'},
+      { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications'},
       { title: 'Store', component: 'store', icon: 'cart'},
       { title: 'Contact Us', component: 'ContactPage', icon: 'help-circle'},
       { title: 'About', component: 'AboutPage', icon: 'pulse'},
       { title: ' Logout', component: 'logout', icon: 'log-out'},
     ];
 
+
+
     this.events.subscribe('user:created', (user) => {
       // user captured on first entry
       this.fullname = user.fullName;
       this.email = user.emailId;
       this.profilePicture = "https://www.gravatar.com/avatar/" +
-        Md5.hashStr(this.email.toLowerCase())
+        Md5.hashStr(this.email.toLowerCase()) +"?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fprofile.png";
     });
+
+    console.log(this.profilePicture);
   }
 
   onLoad(page: any) {
     if(page === 'store'){
       this.goToStore();
+      this.menuCtrl.close();
     }else if(page === 'logout'){
       this.logout();
-    }else{
+    }else if(page === this.homePage){
       this.nav.setRoot(page);
+      this.menuCtrl.close();
+    }else{
+      this.nav.push(page);
       this.menuCtrl.close();
     }
   }
@@ -134,7 +143,6 @@ export class MyApp {
 
     });
   }
-
 
 }
 

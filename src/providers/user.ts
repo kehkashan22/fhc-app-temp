@@ -1,3 +1,4 @@
+import { NetworkProvider } from './network/network';
 import { GlobalsProvider } from './globals/globals';
 import { AuthProvider } from './auth';
 import { Injectable } from '@angular/core';
@@ -16,12 +17,8 @@ export class UserProvider {
   }
 
   getUser() {
+
     const userId = this.authProvider.getActiveUser().uid;
-    // return this.http.get(this.g.firebase_url+'users/' + userId + '/user.json?auth=' + token)
-    //   .map((res) => res.json())
-    //   .do((data) => {
-    //     this.data = data;
-    //   });
     return new Promise((resolve, reject) => {
       firebase.database()
         .ref('/users/'+userId).child('/user').once('value', snapshot => {
@@ -29,6 +26,17 @@ export class UserProvider {
           resolve(snapshot.val());
         });
     });
+  }
+
+  updateUserProfile(user): Promise<any>{
+
+    let userId = this.authProvider.getActiveUser().uid;
+    return new Promise((resolve, reject) => {
+      firebase.database()
+        .ref("users/"+userId).update(
+          { user: user });
+        });
+
   }
 
 }

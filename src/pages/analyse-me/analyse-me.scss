@@ -8,12 +8,13 @@ page-analyse-me {
       background-color: black;
   }
 
-  .quiz{
-    padding: 16px;
-  }
 
   ion-item.quiz, ion-item.item.item-block.item-radio.item-ios, ion-item.item-md, ion-item.item-wp{
     font-size: 1.7rem !important;
+  }
+
+  ion-list{
+    padding: 10px;
   }
 
   #solutions{
@@ -45,24 +46,12 @@ page-analyse-me {
           }
       }
 
-      .right{
-          background-color: rgba(144, 238, 144, 0.3);
-          color: #32db64;
-      }
-
-      .wrong{
-          background-color: rgba(240, 128, 128, 0.3);
-          color: red;
-      }
-
          ion-card-title.card-title.card-title-md, ion-card-title.card-title.card-title-ios,
           ion-card-title.card-title.card-title-wp{
             font-size: 1.7rem !important;
             font-weight: bold;
             margin-top: 0px;
             margin-bottom: 0px;
-            padding-left: 16px !important;
-            padding-right: 16px!important;
             padding-top: 0px;
             padding-bottom: 0px;
           }
@@ -71,4 +60,14 @@ page-analyse-me {
      background: #D3D3D3 no-repeat;
      background-size: cover;
    }
+
+    video {
+      background:transparent url('../../assets/images/notif.jpg') no-repeat 0 0;
+      -webkit-background-size:cover;
+      -moz-background-size:cover;
+      -o-background-size:cover;
+      background-size:cover;
+    }
 }
+
+

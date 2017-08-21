@@ -99,7 +99,7 @@
     </ion-label>
         </ion-col>
         <ion-col col-8>
-          <ion-datetime displayFormat="DD-MM-YYYY" formControlName="attemptDate"></ion-datetime>
+          <ion-datetime displayFormat="MMMM-YYYY" max="2025" formControlName="attemptDate"></ion-datetime>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -129,7 +129,6 @@
           <ion-select formControlName = "typeOfCourse" interface="popover">
             <ion-option value="ca">CA</ion-option>
             <ion-option value="cs">CS</ion-option>
-            <ion-option value="bcom">B.COM HONS</ion-option>
           </ion-select>
         </ion-col>
       </ion-row>

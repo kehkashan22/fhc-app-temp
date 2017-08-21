@@ -20,27 +20,24 @@ export class AboutPage {
     console.log('ionViewDidLoad AboutPage');
   }
 
-   openModal(choice: number) {
-    if(choice === 1){
-        this.title ="About Farooq Haque";
-        this.src = 'assets/images/2.jpg';
-        this.body ="About Body";
-    }else if(choice === 2){
-      this.title ="Farooq Haque";
-      this.src = '';
-      this.body ="Farooq Body";
-    }else if(choice === 3){
-      this.title ="Terms and Condition";
-      this.src = '';
-      this.body ="Terms Body";
-    }
-    const myModal = this.modal.create('AboutDetailsPage', {
-      title: this.title,
-      body: this.body,
-      src: this.src
-    }, { cssClass: 'contact-popover' });
+   openAbout() {
+    const myModal = this.modal.create('AboutDetailsPage');
     myModal.present();
   }
 
+  openPrivacy(){
+    const myModal = this.modal.create('PrivacyPage');
+    myModal.present();
+  }
+
+  openTerms(){
+    const myModal = this.modal.create('TermsPage');
+    myModal.present();
+  }
+  
+  openFaq(){
+    const myModal = this.modal.create('FaqPage');
+    myModal.present();
+  }
 
 }

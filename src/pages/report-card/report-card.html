@@ -2,30 +2,138 @@
 
   <ion-navbar>
     <ion-title>{{subjectId | uppercase}} Report Card</ion-title>
+    <ion-buttons right>
+      <button ion-button (tap)="presentAlert()" icon-only>
+        <ion-icon name="help" class="bounce-animation"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
+
 
 </ion-header>
 
 
 <ion-content>
-
-  <ion-card>
-    <ion-card-header text-center>
-      Report Card
-    </ion-card-header>
-    <ion-card-content>
+  <flash-card id="report">
+    <div class="flash-card-front">
+      <div class="main-report">
+        <hr />
+          <h6 text-center>
+        Report Card
+      </h6>
+      <hr />
       <canvas #barCanvas height="250px"></canvas>
-    </ion-card-content>
-  </ion-card>
+      </div>
+    </div>
+    <div class="flash-card-back" padding>
+      <div class="back-text">
+      <h3>
+        What is A, B, C breakup?
+      </h3>
+      <hr />
+      <p>
+        On the basis of exam papers of past 10 years, Farooq Sir has designed an analysis system keeping in mind the statistics that came out from
+         past experience and keen understanding of the working of the exam. In this
+        system all chapters of each subject are divided into three categories: <b>A, B</b> and <b>C</b>.
+      </p>
+      <p>On an average (as seen in the past 10 years), the breakup of scores for each topic is as follows:</p>
+      <table>
+        <tr>
+          <th text-center>Chapter Type</th>
+          <th text-center>Marks (out of 100)</th>
+        </tr>
+        <tr>
+          <td text-center>A</td>
+          <td text-center>60</td>
+        </tr>
+        <tr>
+          <td text-center>B</td>
+          <td text-center>30</td>
+        </tr>
+           <tr>
+          <td text-center>C</td>
+          <td text-center>10</td>
+        </tr>
+      </table>
+      <p>Similarly, each type has further been divided into three sub-types:</p>
+      <p text-center><b>Application, Speed</b> and <b>Memory,</b> </p>
+      <p>with different weightage alloted to each category in each chapter type.</p>
+      <ol>
+        <li><p>In topics of type <b>A</b> most questions are based on <b>Application</b> and only a few on Memory and Speed.</p></li>
+        <li><p>In topics of type <b>B</b> most questions are based on <b>Memory</b> and only a few on Application and Speed.</p></li>
+        <li><p>In topics of type <b>C</b> almost all topics are <b>Memory</b> based.</p></li>
+      </ol>
+
+      <p>This test series has been devised to accurately project the aggregate marks a student should expect in their CA/CS exam, based on the number
+        of quizzes of each type and sub-type solved. Plus, for each quiz, chapter and type, individual average scores have also been calculated.
+      </p>
+
+      <p>Solve as many quizzes as possible for the best assessment. Best of Luck and happy Learning!</p>
+      </div>
 
 
-  <ion-card>
-    <ion-card-header text-center>
-      Performance
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #doughnutCanvas height="250px"></canvas>
-    </ion-card-content>
-  </ion-card>
+
+    </div>
+  </flash-card>
+  <div padding-top>
+
+  </div>
+  <flash-card>
+    <div class="flash-card-front">
+      <hr />
+      <h6 text-center>
+        Performance
+      </h6>
+      <hr />
+    <p text-center>Click on this card to get complete report.</p>
+      <div [class]="percentClass" text-center>
+        <span>{{percentage}}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-card-back" padding>
+      <div class="back-text">
+         <h3 text-center>
+        Performance
+      </h3>
+      <hr />
+      <h6>Overall:</h6>
+      <p>{{overall}}</p>
+      <p>Take quizzes and watch the practice videos provided in order to improve more.</p>
+
+    <hr class="divider">
+      <h6>
+        Datailed Analysis:
+      </h6>
+
+    <table>
+        <tr>
+          <td>A</td>
+          <td>{{analysisA}}</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>{{analysisB}}</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td>{{analysisC}}</td>
+        </tr>
+    </table>
+
+      </div>
+
+    </div>
+  </flash-card>
 
 </ion-content>
+
+<ion-footer>
+  <div>
+   <p text-center>Click on the reports for more information...</p>
+  </div>
+</ion-footer>

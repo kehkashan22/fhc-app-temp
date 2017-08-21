@@ -2,56 +2,51 @@
 
   <ion-navbar>
     <ion-title>{{subjectName | titlecase}}</ion-title>
+    <ion-buttons right>
+      <button ion-button class="bounce-animation" (tap)="presentAlert()" icon-only><ion-icon name="help" ></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content scroll="false">
+<ion-content fullscreen #mycontent>
    <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..." color="primary">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-searchbar (ionInput)="getChapterByTitle($event)"></ion-searchbar>
+  
   <ion-list *ngIf="!nothing; else cat;">
-    <button ion-item *ngFor="let chapter of chapters" (click)="toQuizzes(chapter)">
-    <ion-avatar item-start [ngClass]="chapter.chapterType">
+    <ion-searchbar (ionInput)="getChapterByTitle($event)"></ion-searchbar>
+    <button ion-item *ngFor="let chapter of chapters" (tap)="toQuizzes(chapter)" class="list-grow-animation">
+    <ion-avatar item-start [ngClass]="chapter.chapterType" class="animate-in-primary">
 
     </ion-avatar>
       <!--[navParams]="chapter" >-->
-      <h2 text-wrap>{{ chapter.chapterId }}</h2>
-      <p>{{ chapter.quiz.length }} Quizzes</p>
+      <h2 text-wrap class="animate-in-primary">{{ chapter.chapterId }}</h2>
+      <p class="animate-in-secondary">{{ chapter.quiz.length }} Quizzes</p>
     </button>
   </ion-list>
  <ng-template #cat>
-  <div class="nothing" ion-fixed no-bounce *ngIf="nothing">
-    <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/catbg.png" alt="Sorry Cat">
+   
+  <div class="blank" ion-fixed no-bounce *ngIf="nothing">
+    <img src="assets/images/blank.png" alt="Sorry Book">
   </div>
  </ng-template>
 </ion-content>
 
-<ion-footer no-border>
-  <div class="container" *ngIf="nothing; else noChaps;">
-    <h5>
-      No Chapters uploaded yet :(
-    </h5>
-    <p>Why don't you try again after the cat finishes it's song?</p>
-  </div>
-  <ng-template #noChaps>
-    <button ion-button block outline color="btn" (click)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
+<ion-footer no-border *ngIf="!nothing"> 
+     <button ion-button block outline color="btn" (tap)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
     <ion-grid>
       <ion-row text-center>
-        <ion-col class="a">
-          Most Important
+        <ion-col class="a"  (tap)="filterChaps('a')">
+          A
         </ion-col>
-        <ion-col class="b">
-          Important
+        <ion-col class="b"  (tap)="filterChaps('b')">
+          B
         </ion-col>
-        <ion-col class="c">
-          General
+        <ion-col class="c"  (tap)="filterChaps('c')">
+          C
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ng-template>
-
 </ion-footer>

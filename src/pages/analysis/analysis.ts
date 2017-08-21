@@ -97,13 +97,33 @@ export class AnalysisPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    if(this.speedSolved > 0){
-      let totalSpeed = 0;
-      for(let i = 0; i< this.speedSolved; i++){
-        const quizLength = this.speedQuizzes[i].questions.length;
-        totalSpeed = this.speedQuizzes[i].marks/quizLength + totalSpeed;
+
+    //Chart Plugin
+    this.plugin = {
+      beforeDraw: function (chart) {
+        var width = chart.chart.width,
+          height = chart.chart.height,
+          ctx = chart.chart.ctx;
+
+        ctx.restore();
+        var fontSize = (height / 114).toFixed(2);
+        ctx.font = fontSize + "em montserrat";
+
+        ctx.textBaseline = "middle";
+        if(typeof(chart.config.data.text) !== undefined){
+            var text = chart.config.data.text+"%",
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 1.6;
+          ctx.fillText(text, textX, textY);
+        }
+        ctx.save();
       }
-      this.speedPercent = Math.floor((totalSpeed/this.speedSolved)*100);
+    };
+
+
+
+    if(this.speedSolved > 0){
+      this.speedPercent = this.totalPercent(this.speedSolved, this.speedQuizzes)
       console.log("speed "+this.speedPercent);
       this.options.title.text = this.setTitle(this.speedPercent);
     }else{
@@ -127,19 +147,15 @@ export class AnalysisPage implements OnInit {
         }],
         text: this.speedPercent
       },
-      options: this.options
+      options: this.options,
+      plugins: [this.plugin]
 
     });
 
     //memory
     let memoryPercent = 0;
     if(this.memorySolved > 0){
-      let totalMemory = 0;
-      for(let i = 0; i< this.memorySolved; i++){
-        const quizLength = this.memoryQuizzes[i].questions.length;
-        totalMemory = this.memoryQuizzes[i].marks/quizLength + totalMemory;
-      }
-      memoryPercent = Math.floor((totalMemory/this.memorySolved)*100);
+      memoryPercent = this.totalPercent(this.memorySolved, this.memoryQuizzes);
       this.options.title.text = this.setTitle(memoryPercent);
     }else{
        this.options.title.text = 'Hurry up and solve something, buddy!';
@@ -149,7 +165,6 @@ export class AnalysisPage implements OnInit {
       data: {
         labels: ["Memory", "Improvement"],
         datasets: [{
-          label: '# of Votes',
           data: [memoryPercent, (100 - memoryPercent)],
           backgroundColor: [
             'rgba(247, 70, 74, 1.0)',
@@ -161,7 +176,8 @@ export class AnalysisPage implements OnInit {
         }],
         text: memoryPercent
       },
-      options: this.options
+      options: this.options,
+      plugins: [this.plugin]
 
     });
 
@@ -170,12 +186,7 @@ export class AnalysisPage implements OnInit {
     this.options.title.text = 'Application!';
     let applicationPercent = 0;
     if(this.applicationSolved > 0){
-      let totalApplication = 0;
-      for(let i = 0; i< this.applicationSolved; i++){
-        const quizLength = this.applicationQuizzes[i].questions.length;
-        totalApplication = this.applicationQuizzes[i].marks/quizLength + totalApplication;
-      }
-      applicationPercent = Math.floor((totalApplication/this.applicationSolved)*100);
+      applicationPercent = this.totalPercent(this.applicationSolved, this.applicationQuizzes);
       this.options.title.text = this.setTitle(applicationPercent);
     }else{
        this.options.title.text = 'Hurry up and solve something, buddy!';
@@ -196,51 +207,32 @@ export class AnalysisPage implements OnInit {
         }],
         text: applicationPercent
       },
-      options: this.options
+      options: this.options,
+      plugins: [this.plugin]
 
     });
-
-    this.plugin = {
-      beforeDraw: function (chart) {
-        var width = chart.chart.width,
-          height = chart.chart.height,
-          ctx = chart.chart.ctx;
-
-        ctx.restore();
-        var fontSize = (height / 114).toFixed(2);
-        ctx.font = fontSize + "em montserrat";
-
-        ctx.textBaseline = "middle";
-        var text = chart.config.data.text+"%",
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
-          textY = height / 1.6;
-
-        ctx.fillText(text, textX, textY);
-        ctx.save();
-      }
-    };
-
-    Chart.pluginService.register(this.plugin);
-
-
-
   }
 
   private setTitle(percent: number){
       if(percent > 70){
-        return "Bau Rami, Raja Ji, Bau Rami!";
+        return "Well done! But keep practicing to get even better!";
       }else if(percent < 40){
-        return "Bhid ke padhai karo Bhaiyya!";
+        return "Step up your game! Practice, practice, practice...";
       }else{
-        return "Kaiku beech mein rehre? Kaam karo kaam";
+        return "Meh. Give more quizzes to raise your average.";
       }
   }
 
   onClose(){
-    Chart.pluginService.unregister(this.plugin);
     this.viewCtrl.dismiss();
   }
 
-
-
+  totalPercent(length, solved){
+      let total = 0;
+      for(let i = 0; i< length; i++){
+        const quizLength = solved[i].questions.length;
+        total = solved[i].marks/quizLength + total;
+      }
+      return Math.floor((total/length)*100);
+  }
 }

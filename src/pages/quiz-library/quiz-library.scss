@@ -1,4 +1,4 @@
-page-quiz-library {
+  page-quiz-library {
 
   .slider{
     left: 0;
@@ -8,5 +8,14 @@ page-quiz-library {
 
    .inner-list{
           margin-bottom: 0px;
+    }
+
+    .item-divider{
+      background: map-get($colors,primary);
+      color:white;
+    }
+
+    .item-block{
+      
     }
 }

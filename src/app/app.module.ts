@@ -1,7 +1,7 @@
-import { HomePage } from './../pages/home/home';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -9,10 +9,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppRate } from '@ionic-native/app-rate';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'
+import { Network } from '@ionic-native/network';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 
@@ -41,6 +43,13 @@ import { GlobalsProvider } from '../providers/globals/globals';
 import { Transfer  } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { FCM } from "@ionic-native/fcm";
+import { Badge } from '@ionic-native/badge'
+import { NetworkProvider } from '../providers/network/network';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
+import { FirstProvider } from '../providers/first/first';
+import { NotificationsProvider } from '../providers/notifications/notifications';
+import { RateServiceProvider } from '../providers/rate-service/rate-service';
 
 
 
@@ -65,7 +74,8 @@ const firebaseConfig = {
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp, {
       //for limiting scrolling of the page when keyboard is up
-      scrollAssist: false
+      scrollAssist: false,
+      swipeBackEnabled: false
     }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
@@ -95,7 +105,17 @@ const firebaseConfig = {
     Transfer,
     File,
     YoutubeVideoPlayer,
-    FCM
+    FCM,
+    Diagnostic,
+    Badge,
+    Network,
+    NetworkProvider,
+    SocialSharing,
+    AnalyseStoreProvider,
+    FirstProvider,
+    NotificationsProvider,
+    AppRate,
+    RateServiceProvider
   ]
 })
 export class AppModule {}

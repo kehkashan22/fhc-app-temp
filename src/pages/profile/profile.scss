@@ -1,24 +1,78 @@
 page-profile {
 
-  .scroll-content{
-    background: map-get($colors, backgroundColor);
+    .splash-bg {
+    position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 50vh;
+    background: url('https://i.ytimg.com/vi/xYkz0Ueg0L4/maxresdefault.jpg') no-repeat transparent;
+    background-size: cover;
+    height: 45%;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: animatedBackground 40s linear infinite;
+  }
+
+  @keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+  }
+
+  ion-fab[bottom] {
+    bottom: 156px !important;
+}
+
+ion-fab[right] {
+    right: 100px !important;
+}
+
+  .splash-info {
+    position: relative;
+    z-index: 2;
+    margin-top: 25vh;
+    text-align: center;
+  }
+  .splash-logo {
+    margin: auto;
+    //background: url('../assets/img/appicon.png') repeat transparent;
+    background-size: 100%;
+    width: 128px;
+    height: 128px;
+  }
+  .splash-intro {
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  ion-col{
+    border-color: red;
   }
   #profile-bg {
         position: fixed;
         left: 0;
-        top: 44px;
+        top: 0;
         width: 100%;
-        height: 175px;
-        background: url('https://s3-ap-southeast-1.amazonaws.com/fhc.app/bg.jpg') no-repeat transparent;
+        height: 50vh;
+        background: url('https://i.ytimg.com/vi/xYkz0Ueg0L4/maxresdefault.jpg') no-repeat transparent;
         background-size: 100%;
         background-position: 50% 20%;
 
         text-align: center;
-      }
+      background-repeat: repeat-x;
+    animation: animatedBackground 40s linear infinite;
+  }
+
+  @keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+  }
 
       #content {
         position: relative;
-        margin-top: 150px;
+        margin-top: 175px;
         background-color: transparent;
         //box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
         padding-top: 200px;
@@ -26,7 +80,7 @@ page-profile {
 
       #profile-info {
         position: absolute;
-        top: -95px;
+        top: -187px;
         width: 100%;
         z-index: 2;
         text-align: center;
@@ -49,7 +103,6 @@ page-profile {
         border: 1px solid #fff;
         width: 128px;
         height: 128px;
-        margin: 30px auto 0;
         box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
       }
 }
