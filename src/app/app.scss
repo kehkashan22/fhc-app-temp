@@ -144,7 +144,7 @@
        background-image: url("../assets/images/main.png");
        background-size:cover;
        background-repeat: no-repeat; }
-  .item, .toolbar-content{      
+  .item, .toolbar-content{
       background: transparent;
        h1{
          font-size: 2rem;
@@ -155,30 +155,34 @@
        h1, p, button{
          color: #fff;
          font-weight:bold;
-         
+
        }
   }
   color: map-get($colors, light);
 }
 #menu-content{
   .list, .item, .content{
-    background: #EFF5FB !important;
+    background: #fff !important;
     color: #09141F !important;
   }
-  background: #EFF5FB !important;
+  background: #fff !important;
 }
 
 #menu{
   .scroll-content{
-    background: #EFF5FB;
+    background: #fff;
   }
 
 }
 
 .scroll-content{
- background: map-get($colors, bg);
- 
- 
+ background: map-get($colors, light);
+
+
+}
+
+.activeHightlight{
+  background-color: map-get($colors, header)
 }
 
 

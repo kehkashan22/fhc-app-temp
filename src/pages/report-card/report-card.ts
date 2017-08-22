@@ -208,9 +208,6 @@ export class ReportCardPage implements OnInit {
 
   getPerformancePercent() {
     let sum = 0;
-    let sumA = 0;
-    let sumB = 0;
-    let sumC = 0;
     for (var i = 0; i < this.memoryData.length; sum += (this.memoryData[i] / 100) * this._globals.memoryMatrix[i], i++);
 
     for (var i = 0; i < this.applicationData.length; sum += (this.applicationData[i] / 100) * this._globals.applicationMatrix[i], i++);

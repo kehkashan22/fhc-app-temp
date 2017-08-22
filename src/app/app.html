@@ -18,14 +18,14 @@
   </ion-header>
   <ion-content id="menu-content">
     <ion-list>
-      <button *ngFor="let page of pages" ion-item (click)="onLoad(page.component)">
-        <ion-icon [name]="page.icon" item-left></ion-icon>
+      <button *ngFor="let page of pages" [class.activeHightlight]="checkActive(page)" ion-item (click)="onLoad(page.component)">
+        <ion-icon [name]="page.icon" item-left color="btn"></ion-icon>
         {{page.title}}
       </button>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage" #nav swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" #nav></ion-nav>
 
 

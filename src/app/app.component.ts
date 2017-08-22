@@ -1,11 +1,11 @@
+import { IabProvider } from './../providers/iab/iab';
 
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Platform, NavController, ModalController } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AuthProvider } from "../providers/auth";
 import { Md5 } from 'ts-md5/dist/md5';
 import { LoadingController, App } from 'ionic-angular';
@@ -17,6 +17,7 @@ import * as firebase from 'firebase';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  activePage: any;
 
   rootPage: any ;
   //= 'IntroSlider'
@@ -45,12 +46,12 @@ export class MyApp {
     splashScreen: SplashScreen,
     private afAuth: AngularFireAuth,
     private menuCtrl: MenuController,
-    private iab: InAppBrowser,
     private userProvider: UserProvider,
     private events: Events,
     private loader: LoadingController,
     public authProvider: AuthProvider,
-    private app: App) {
+    private app: App,
+    private _iab: IabProvider) {
 
 
     this.zone = new NgZone({});
@@ -74,7 +75,7 @@ export class MyApp {
       });
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.backgroundColorByHexString('#005C9C');
+      statusBar.backgroundColorByHexString('#4E97C4');
       splashScreen.hide();
     });
 
@@ -111,15 +112,17 @@ export class MyApp {
       this.logout();
     }else if(page === this.homePage){
       this.nav.setRoot(page);
+      this.activePage = page;
       this.menuCtrl.close();
     }else{
       this.nav.push(page);
+      this.activePage = page;
       this.menuCtrl.close();
     }
   }
 
   goToStore() {
-    this.iab.create('http://www.fhconline.in/', "_system", "location=yes");
+    this._iab.redirectToStore();
   }
 
   logout() {
@@ -142,6 +145,10 @@ export class MyApp {
       }, 3000);
 
     });
+  }
+
+  checkActive(page){
+    return page == this.activePage;
   }
 
 }

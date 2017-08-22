@@ -50,6 +50,7 @@ import { AnalyseStoreProvider } from '../providers/analyse-store/analyse-store';
 import { FirstProvider } from '../providers/first/first';
 import { NotificationsProvider } from '../providers/notifications/notifications';
 import { RateServiceProvider } from '../providers/rate-service/rate-service';
+import { IabProvider } from '../providers/iab/iab';
 
 
 
@@ -115,7 +116,8 @@ const firebaseConfig = {
     FirstProvider,
     NotificationsProvider,
     AppRate,
-    RateServiceProvider
+    RateServiceProvider,
+    IabProvider
   ]
 })
 export class AppModule {}
