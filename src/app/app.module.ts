@@ -10,6 +10,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppRate } from '@ionic-native/app-rate';
+//import { Firebase } from '@ionic-native/firebase';
+import { Firebase } from '@ionic-native/firebase';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
@@ -51,6 +53,7 @@ import { FirstProvider } from '../providers/first/first';
 import { NotificationsProvider } from '../providers/notifications/notifications';
 import { RateServiceProvider } from '../providers/rate-service/rate-service';
 import { IabProvider } from '../providers/iab/iab';
+import { AnalyticsProvider } from '../providers/analytics/analytics';
 
 
 
@@ -89,6 +92,7 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Firebase,
     VideosService,
     QuizService,
     VideosProvider,
@@ -117,7 +121,8 @@ const firebaseConfig = {
     NotificationsProvider,
     AppRate,
     RateServiceProvider,
-    IabProvider
+    IabProvider,
+    AnalyticsProvider
   ]
 })
 export class AppModule {}

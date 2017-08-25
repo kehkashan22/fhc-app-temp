@@ -139,6 +139,9 @@
 }
 
 #menu-head, #menu-toolbar{
+  #menu-profile{
+    margin-top: 12px;
+  }
   .toolbar-background{
     //height: 250px;
        background-image: url("../assets/images/main.png");
@@ -154,7 +157,7 @@
         }
        h1, p, button{
          color: #fff;
-         font-weight:bold;
+         font-weight:normal;
 
        }
   }

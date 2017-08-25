@@ -1,3 +1,4 @@
+import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { FirstProvider } from './../../providers/first/first';
 import { GlobalsProvider } from './../../providers/globals/globals';
 import { QuizStoreProvider } from './../../providers/quiz-store';
@@ -49,7 +50,8 @@ export class ReportCardPage implements OnInit {
     private _quizStore: QuizStoreProvider,
     private _globals: GlobalsProvider,
     private _alert: AlertController,
-    private _launch: FirstProvider) {
+    private _launch: FirstProvider,
+  private _analytics: AnalyticsProvider) {
   }
 
   ngOnInit(): void {
@@ -84,6 +86,7 @@ export class ReportCardPage implements OnInit {
     this.dataLoad('speed', this.speedQuizzes);
     this.dataLoad('application', this.applicationQuizzes);
 
+    this._analytics.analyse('report_card');
 
   }
 

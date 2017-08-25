@@ -1,3 +1,4 @@
+import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { RateServiceProvider } from './../../providers/rate-service/rate-service';
 import { AuthProvider } from './../../providers/auth';
 import { NotificationsProvider } from './../../providers/notifications/notifications';
@@ -15,6 +16,7 @@ import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM } from '@ionic-native/fcm';
+import { Firebase } from '@ionic-native/firebase';
 
 @IonicPage()
 @Component({
@@ -66,7 +68,8 @@ export class HomePage {
     private _launch: FirstProvider,
     private _note: NotificationsProvider,
     private _menu: MenuController,
-    private _rate: RateServiceProvider
+    private _rate: RateServiceProvider,
+    private _analytics: AnalyticsProvider
   ) {
     this._menu.enable(true);
     this.fcm.getToken().then((token) => {
@@ -83,6 +86,7 @@ export class HomePage {
     this._note.loadNote();
     this.show = this._note.getNote();
     console.log("OnInit Home");
+    this._analytics.analyse('home');
   }
 
   ionViewDidLoad() {

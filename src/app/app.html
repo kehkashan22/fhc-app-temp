@@ -2,7 +2,8 @@
   <ion-header>
     <ion-toolbar id="menu-toolbar">
       <!--<ion-title>Welcome!</ion-title>-->
-      <ion-list no-lines no-padding id="menu-head">
+      <div id="menu-profile">
+         <ion-list no-lines no-padding id="menu-head">
         <ion-item >
           <ion-avatar item-left >
             <img [src]="profilePicture">
@@ -13,7 +14,8 @@
         <button ion-item (click)="onLoad(profilePage)">
           View Profile
         </button>
-      </ion-list>
+         </ion-list>
+      </div>
     </ion-toolbar>
   </ion-header>
   <ion-content id="menu-content">

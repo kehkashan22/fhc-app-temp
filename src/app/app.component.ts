@@ -19,11 +19,11 @@ import * as firebase from 'firebase';
 export class MyApp {
   activePage: any;
 
-  rootPage: any ;
+  rootPage: any;
   //= 'IntroSlider'
   zone: NgZone;
 
-  pages: Array<{title: string, component: any, icon: string}>;
+  pages: Array<{ title: string, component: any, icon: string }>;
 
   homePage = 'HomePage';
   profilePage = 'ProfilePage';
@@ -64,6 +64,13 @@ export class MyApp {
           if (user) {
             this.authProvider.setLoginStatus(true);
             this.rootPage = 'HomePage';
+            // this.ga.startTrackerWithId('UA-105141803-1')
+            //   .then(() => {
+            //     console.log('Google analytics is ready now');
+            //     this.ga.trackView('home');
+            //     this.ga.setUserId(firebase.auth().currentUser.uid);
+            //   })
+            //   .catch(e => console.log('Error starting GoogleAnalytics', e));
             authObserver.unsubscribe();
           } else {
             this.authProvider.setLoginStatus(false);
@@ -80,15 +87,15 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Home', component: this.homePage, icon: 'home'},
-      { title: 'Video Library', component: 'RootLibraryPage', icon: 'book'},
-      { title: 'Starred Videos', component: 'StarredPage', icon: 'star'},
-      { title: 'Quiz Library', component: 'QuizLibraryPage', icon: 'school'},
-      { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications'},
-      { title: 'Store', component: 'store', icon: 'cart'},
-      { title: 'Contact Us', component: 'ContactPage', icon: 'help-circle'},
-      { title: 'About', component: 'AboutPage', icon: 'pulse'},
-      { title: ' Logout', component: 'logout', icon: 'log-out'},
+      { title: 'Home', component: this.homePage, icon: 'home' },
+      { title: 'Video Library', component: 'RootLibraryPage', icon: 'book' },
+      { title: 'Starred Videos', component: 'StarredPage', icon: 'star' },
+      { title: 'Quiz Library', component: 'QuizLibraryPage', icon: 'school' },
+      { title: 'Notifications', component: 'AnnouncementsPage', icon: 'notifications' },
+      { title: 'Store', component: 'store', icon: 'cart' },
+      { title: 'Contact Us', component: 'ContactPage', icon: 'help-circle' },
+      { title: 'About', component: 'AboutPage', icon: 'pulse' },
+      { title: ' Logout', component: 'logout', icon: 'log-out' },
     ];
 
 
@@ -98,23 +105,23 @@ export class MyApp {
       this.fullname = user.fullName;
       this.email = user.emailId;
       this.profilePicture = "https://www.gravatar.com/avatar/" +
-        Md5.hashStr(this.email.toLowerCase()) +"?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fprofile.png";
+        Md5.hashStr(this.email.toLowerCase()) + "?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fprofile.png";
     });
 
     console.log(this.profilePicture);
   }
 
   onLoad(page: any) {
-    if(page === 'store'){
+    if (page === 'store') {
       this.goToStore();
       this.menuCtrl.close();
-    }else if(page === 'logout'){
+    } else if (page === 'logout') {
       this.logout();
-    }else if(page === this.homePage){
+    } else if (page === this.homePage) {
       this.nav.setRoot(page);
       this.activePage = page;
       this.menuCtrl.close();
-    }else{
+    } else {
       this.nav.push(page);
       this.activePage = page;
       this.menuCtrl.close();
@@ -147,7 +154,7 @@ export class MyApp {
     });
   }
 
-  checkActive(page){
+  checkActive(page) {
     return page == this.activePage;
   }
 
