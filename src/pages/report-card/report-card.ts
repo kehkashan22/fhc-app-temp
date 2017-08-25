@@ -133,22 +133,22 @@ export class ReportCardPage implements OnInit {
         datasets: [{
           label: 'Memory',
           data: this.memoryData,
-          backgroundColor: '#9FEA73',
-          borderColor: '#9FEA73',
+          backgroundColor: '#17A599',
+          borderColor: '#17A599',
           borderWidth: 1
         },
         {
           label: 'Application',
           data: this.applicationData,
-          backgroundColor: '#ED7272',
-          borderColor: '#ED7272',
+          backgroundColor: '#CA0936',
+          borderColor: '#CA0936',
           borderWidth: 1
         },
         {
           label: 'Speed',
           data: this.speedData,
-          backgroundColor: '#73B7EA',
-          borderColor: '#73B7EA',
+          backgroundColor: '#F57D06',
+          borderColor: '#F57D06',
           borderWidth: 1
         }]
       },

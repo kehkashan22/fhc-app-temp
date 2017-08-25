@@ -1,19 +1,19 @@
 <ion-header>
 
-  <ion-navbar >
+  <ion-navbar>
     <ion-title text-wrap>{{chapter?.chapterId}}</ion-title>
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="nature" >
+    <ion-segment [(ngModel)]="nature">
       <!-->[(ngModel)]="nature"-->
-      <ion-segment-button value="application"  text-wrap>
+      <ion-segment-button value="application" text-wrap>
         Application
       </ion-segment-button>
-      <ion-segment-button value="memory" >
+      <ion-segment-button value="memory">
         Memory
       </ion-segment-button>
-      <ion-segment-button value="speed" >
+      <ion-segment-button value="speed">
         Speed
       </ion-segment-button>
     </ion-segment>
@@ -30,31 +30,34 @@
       <ion-row>
         <ion-col *ngFor="let quiz of applicationQuiz; let i = index" col-6 class="list-grow-animation">
           <a (tap)="toQuiz(quiz)">
-             <ion-card tappable >
-            <!-- <div class="ribbon">
+            <ion-card tappable>
+              <!-- <div class="ribbon">
                 <div><ion-icon *ngIf="!isSolved(quiz)" name="star"></ion-icon></div>
             </div> -->
-            <div class="solved" *ngIf="isSolved(quiz)">
-              <ion-fab center middle>
-                <button ion-fab mini color="btn-login">
-                <ion-icon name="checkmark"></ion-icon>
-              </button>
-              </ion-fab>
-            </div>
-            <ion-card-header text-center text-wrap>
-
-              <b>{{ quiz.quizTitle }}</b>
-            </ion-card-header>
-            <ion-card-content>
-              <p text-center>{{quiz.questions.length}} Questions</p>
-              <div class="center">
-                <ion-chip text-center>
-                  <ion-icon name="md-time" color="btn-login"></ion-icon>
-                  <ion-label>{{quiz.timeInMins}}:00 mins</ion-label>
-                </ion-chip>
+              <div class="solved" *ngIf="isSolved(quiz)">
+                
               </div>
-            </ion-card-content>
-          </ion-card>
+              <div class="solved-icon" *ngIf="isSolved(quiz)">
+                <button ion-button icon-only clear>
+                  <ion-icon color="light" name="md-checkmark"></ion-icon>
+                </button>
+              </div>
+
+              <ion-card-header text-center text-wrap>
+
+                <b>{{ quiz.quizTitle }}</b>
+                
+              </ion-card-header>
+              <ion-card-content>
+                <p text-center>{{quiz.questions.length}} Questions</p>
+                <div class="center">
+                  <ion-chip text-center>
+                    <ion-icon name="md-time" color="quizbox"></ion-icon>
+                    <ion-label>{{quiz.timeInMins}}:00 mins</ion-label>
+                  </ion-chip>
+                </div>
+              </ion-card-content>
+            </ion-card>
           </a>
 
         </ion-col>
@@ -64,34 +67,30 @@
 
     <ion-grid *ngSwitchCase="'memory'">
       <ion-row>
-        <ion-col *ngFor="let quiz of memoryQuiz; let i = index"  col-6 class="list-grow-animation">
+        <ion-col *ngFor="let quiz of memoryQuiz; let i = index" col-6 class="list-grow-animation">
           <a (tap)="toQuiz(quiz)">
-             <ion-card tappable >
+            <ion-card tappable>
 
-            <!-- <div class="ribbon">
-                <div><ion-icon *ngIf="!isSolved(quiz)" name="star"></ion-icon></div>
-            </div> -->
-               <div class="solved" *ngIf="isSolved(quiz)">
-              <ion-fab center middle>
-                <button ion-fab mini color="btn-login">
-                <ion-icon name="checkmark"></ion-icon>
-              </button>
-              </ion-fab>
-
-            </div>
-            <ion-card-header text-center text-wrap>
-              <b>{{ quiz.quizTitle }}</b>
-            </ion-card-header>
-            <ion-card-content>
-              <p text-center>{{quiz.questions.length}} Questions</p>
-              <div class="center">
-                <ion-chip text-center>
-                  <ion-icon name="md-time" color="btn-login"></ion-icon>
-                  <ion-label>{{quiz.timeInMins}}:00 mins</ion-label>
-                </ion-chip>
+              <div class="solved" *ngIf="isSolved(quiz)">
               </div>
-            </ion-card-content>
-          </ion-card>
+              <div class="solved-icon" *ngIf="isSolved(quiz)">
+                <button ion-button icon-only clear>
+                  <ion-icon color="light" name="md-checkmark"></ion-icon>
+                </button>
+              </div>
+              <ion-card-header text-center text-wrap>
+                <b>{{ quiz.quizTitle }}</b>
+              </ion-card-header>
+              <ion-card-content>
+                <p text-center>{{quiz.questions.length}} Questions</p>
+                <div class="center">
+                  <ion-chip text-center>
+                    <ion-icon name="md-time" color="quizbox"></ion-icon>
+                    <ion-label>{{quiz.timeInMins}}:00 mins</ion-label>
+                  </ion-chip>
+                </div>
+              </ion-card-content>
+            </ion-card>
           </a>
 
         </ion-col>
@@ -101,32 +100,29 @@
 
     <ion-grid *ngSwitchCase="'speed'">
       <ion-row>
-        <ion-col *ngFor="let quiz of speedQuiz; let i = index"  col-6 class="list-grow-animation">
-          <a  (tap)="toQuiz(quiz)">
-             <ion-card tappable>
-            <!-- <div class="ribbon">
-                <div><ion-icon *ngIf="!isSolved(quiz)" name="star"></ion-icon></div>
-            </div> -->
-            <div class="solved" *ngIf="isSolved(quiz)">
-              <ion-fab center middle>
-                <button ion-fab mini color="btn-login">
-                <ion-icon name="checkmark"></ion-icon>
-              </button>
-              </ion-fab>
-            </div>
-            <ion-card-header text-center>
-              <b>{{ quiz.quizTitle }}</b>
-            </ion-card-header>
-            <ion-card-content>
-              <p text-center>{{quiz.questions.length}} Questions</p>
-              <div class="center">
-                <ion-chip text-center text-wrap>
-                  <ion-icon name="md-time" color="btn-login"></ion-icon>
-                  <ion-label>{{quiz.timeInMins}}:00 mins</ion-label>
-                </ion-chip>
+        <ion-col *ngFor="let quiz of speedQuiz; let i = index" col-6 class="list-grow-animation">
+          <a (tap)="toQuiz(quiz)">
+            <ion-card tappable>
+              <div class="solved" *ngIf="isSolved(quiz)">
               </div>
-            </ion-card-content>
-          </ion-card>
+              <div class="solved-icon" *ngIf="isSolved(quiz)">
+                <button ion-button icon-only clear>
+                  <ion-icon color="light" name="md-checkmark"></ion-icon>
+                </button>
+              </div>
+              <ion-card-header text-center>
+                <b>{{ quiz.quizTitle }}</b>
+              </ion-card-header>
+              <ion-card-content>
+                <p text-center>{{quiz.questions.length}} Questions</p>
+                <div class="center">
+                  <ion-chip text-center text-wrap>
+                    <ion-icon name="md-time" color="quizbox"></ion-icon>
+                    <ion-label text-left>{{quiz.timeInMins}}:00 mins</ion-label>
+                  </ion-chip>
+                </div>
+              </ion-card-content>
+            </ion-card>
           </a>
 
         </ion-col>
