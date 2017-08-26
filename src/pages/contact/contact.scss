@@ -6,12 +6,16 @@ page-contact {
             background-position-x: 50%;
         }
 
-        // .background{
 
-        //   height:100%;
-        //   width:100%;
-        //   background-size:contain;
-        // }
+        .background{
+          background-image: url("../../assets/images/contactus.png");
+          height:100%;
+          width:100%;
+          background-size:contain; 
+          background-color: #629ebc;
+        }
+
+
 
         .content{
           background-color:transparent;
