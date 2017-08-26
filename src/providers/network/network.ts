@@ -33,7 +33,10 @@ export class NetworkProvider {
       buttons: [
         {
           text: 'Cancel',
-          handler: () => {}
+          role: 'cancel',
+          handler: () => {
+
+          }
         },
         {
           text: 'Open Settings',

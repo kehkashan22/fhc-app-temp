@@ -41,7 +41,7 @@ export class SignUp {
   ) {
     /* Creating form using formBuilder module and applying validations.*/
     this.form = formBuilder.group({
-        fullName: [ '', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+        fullName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         emailId: ['', Validators.compose([Validators.required, Validators.email])],
         phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
         password: [ '', Validators.compose([Validators.required, Validators.minLength(6)])],
@@ -49,7 +49,7 @@ export class SignUp {
         address: [''],
         attemptNo: ['', Validators.required],
         pincode: [ '', Validators.compose([Validators.minLength(6), Validators.maxLength(6)])],
-        attemptDate: ['', Validators.required],
+        attemptDate: [ new Date().toISOString(), Validators.compose([ Validators.required ]) ],
         dob: [''],
         gender: [''],
         typeOfCourse: ['', Validators.required]

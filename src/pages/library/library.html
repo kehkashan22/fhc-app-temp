@@ -18,7 +18,7 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..." color="primary">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar>
+  <!-- <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar> -->
   <ion-list *ngIf="!nothing; else noVids;">
     <button class="list-grow-animation" ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
       <ion-icon class="animate-in-primary" [name]="videoGroup.icon" item-left></ion-icon>
@@ -30,14 +30,14 @@
   <ng-template #noVids>
 
     <div class="nothing" ion-fixed no-bounce>
-      <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/catbg.png" alt="Sorry Cat">
+      <img src="../assets/images/blank.png" alt="Sorry Cat">
     </div>
 
 
   </ng-template>
 </ion-content>
 
-<ion-footer *ngIf="nothing" no-border>
+<!-- <ion-footer *ngIf="nothing" no-border>
   <div class="container">
       <h5>
         No Videos uploaded yet :(
@@ -45,4 +45,4 @@
       <p>Why don't you try again after the cat finishes it's song?</p>
     </div>
 
-</ion-footer>
+</ion-footer> -->

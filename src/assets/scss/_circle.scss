@@ -10,7 +10,7 @@ $circle-width-hover: 0.03em;
 $primary-color: #CA0936;
 $secondary-color: #2c2c34;
 
-$bg-color: #737474;
+$bg-color: #fff;
 
 
 $primary-color-green: #17A599;
@@ -98,7 +98,7 @@ $primary-color-orange-dark: #e08833;
     line-height: 3.33em;
     font-size: 0.3em;
     font-family: 'sans-serif-thin';
-    color: map-get($colors, light);
+    color: map-get($colors, dark);
 
 		display: block;
 		text-align: center;
@@ -168,44 +168,16 @@ $primary-color-orange-dark: #e08833;
   &.green{
 
 		.bar, .fill { border-color: $primary-color-green !important;}
-
-		&:hover{
-			> span { color: $primary-color-green;}
-		}
-
 	}
-
-		&.green.dark{
-
-			.bar, .fill { border-color: $primary-color-green-dark !important;}
-
-			&:hover{
-				> span { color: $primary-color-green-dark;}
-			}
-
-		}
-
 
 	// orange skin
 	&.orange{
 
 		.bar, .fill { border-color: $primary-color-orange !important;}
 
-		&:hover{
-			> span { color: $primary-color-orange;}
-		}
-
 	}
 
-		&.orange.dark{
 
-			.bar, .fill { border-color: $primary-color-orange-dark !important;}
-
-			&:hover{
-				> span { color: $primary-color-orange-dark;}
-			}
-
-		}
 
 }
 
