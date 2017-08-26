@@ -1,3 +1,5 @@
+import { AnalyticsProvider } from './../providers/analytics/analytics';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { IabProvider } from './../providers/iab/iab';
 
 import { Component, ViewChild, NgZone } from '@angular/core';
@@ -51,7 +53,9 @@ export class MyApp {
     private loader: LoadingController,
     public authProvider: AuthProvider,
     private app: App,
-    private _iab: IabProvider) {
+    private _iab: IabProvider,
+  private ga:  GoogleAnalytics,
+private _analytics: AnalyticsProvider) {
 
 
     this.zone = new NgZone({});
@@ -64,13 +68,7 @@ export class MyApp {
           if (user) {
             this.authProvider.setLoginStatus(true);
             this.rootPage = 'HomePage';
-            // this.ga.startTrackerWithId('UA-105141803-1')
-            //   .then(() => {
-            //     console.log('Google analytics is ready now');
-            //     this.ga.trackView('home');
-            //     this.ga.setUserId(firebase.auth().currentUser.uid);
-            //   })
-            //   .catch(e => console.log('Error starting GoogleAnalytics', e));
+
             authObserver.unsubscribe();
           } else {
             this.authProvider.setLoginStatus(false);

@@ -86,7 +86,7 @@ export class HomePage {
     this._note.loadNote();
     this.show = this._note.getNote();
     console.log("OnInit Home");
-    this._analytics.analyse('home');
+     this._analytics.trackView('home');
   }
 
   ionViewDidLoad() {

@@ -32,6 +32,7 @@
         "@ionic-native/file": "^3.12.1",
         "@ionic-native/firebase": "^4.1.0",
         "@ionic-native/firebase-analytics": "^4.1.0",
+        "@ionic-native/google-analytics": "^4.1.0",
         "@ionic-native/in-app-browser": "^3.12.1",
         "@ionic-native/keyboard": "^3.12.1",
         "@ionic-native/network": "^4.1.0",

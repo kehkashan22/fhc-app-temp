@@ -12,6 +12,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppRate } from '@ionic-native/app-rate';
 //import { Firebase } from '@ionic-native/firebase';
 import { Firebase } from '@ionic-native/firebase';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CallNumber } from '@ionic-native/call-number';
@@ -93,6 +94,7 @@ const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Firebase,
+    GoogleAnalytics,
     VideosService,
     QuizService,
     VideosProvider,

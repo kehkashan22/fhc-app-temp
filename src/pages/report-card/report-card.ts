@@ -193,8 +193,9 @@ export class ReportCardPage implements OnInit {
               for (var i = 0; i < dataset.data.length; i++) {
                 for (var key in dataset._meta) {
                   var model = dataset._meta[key].data[i]._model;
-                  ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
-
+                  if(dataset.data[i] !== 100){
+                    ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
+                  }
                 }
               }
             });
