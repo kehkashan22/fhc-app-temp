@@ -1,3 +1,4 @@
+import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { LoadingController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Videos } from './../../data/videos.interface';
@@ -21,10 +22,12 @@ export class VideosPage{
     private videosService: VideosService,
   private youtube: YoutubeVideoPlayer,
 private socialSharing: SocialSharing,
-private _loader: LoadingController) {}
+private _loader: LoadingController,
+private _analytics: AnalyticsProvider) {}
 
   ionViewDidLoad() {
     this.videoGroup = this.navParams.data;
+    this._analytics.analyse('videos');
   }
 
   onAddToFavorites(selectedvideo: Video) {

@@ -1,23 +1,22 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar>
+  <ion-navbar transparent>
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title class="titleicon">Contact Us</ion-title>
   </ion-navbar>
 
 
 </ion-header>
-<ion-content>
-  <div class="background">
-    <div id="profile-bg"></div>
+
+
+
+<ion-content fullscreen>
+  <!-- <div class="background"> -->
+    <!-- <div id="profile-bg"></div> -->
    <ion-list>
-     <!-- <ion-list-header class="content">
-    Contact Info:
-  </ion-list-header> -->
   <button class="content text" ion-item (tap)="callNow('00919422107444')">
     Mobile:
     <p class="text">+91-9422107444</p>
@@ -34,16 +33,23 @@
       For Enquiries:
       <p class="text">info@fhconline.in</p>
       <ion-icon name="mail" item-end></ion-icon>
-  </button>
+</button>
 </ion-list>
 
-<div>
+<div class="address">
   <ion-item class="content text" no-lines>
+    <h3 >Address:</h3>
+    <p text-wrap>F.N. 308, Mangalam Arcade Shivaji Nagar Nagpur Nagpur MH 440010 IN</p>
+  </ion-item>
+</div>
+
+ <ion-item class="content text" no-lines>
     <h3 >Please contact us in case of any queries.</h3>
   </ion-item>
-</div> 
-  </div>
 
-  
+<!--
+  </div> -->
+
+
 
 </ion-content>

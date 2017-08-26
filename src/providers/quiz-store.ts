@@ -1,31 +1,60 @@
+import { NetworkProvider } from './network/network';
 import { AuthProvider } from './auth';
 import { QuizStore } from './../data/quiz/quiz-store.interface';
 import { Injectable } from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { ToastController } from "ionic-angular";
 import { Quizzes } from "../data/quizzes.interface";
+import * as firebase from 'firebase/app';
+
 import _ from "lodash";
 
 @Injectable()
 export class QuizStoreProvider {
 
   private quizCollection: QuizStore[] = [];
+  private solvedRef:firebase.database.Reference;
 
   constructor(private storage: Storage,
     private _auth: AuthProvider,
-    private toastCtrl: ToastController) { }
+    private toastCtrl: ToastController,
+  private _network: NetworkProvider) { }
 
 
   addToQuizCollection(quizStore: QuizStore) {
       this.quizCollection.push(quizStore);
       const userId = this._auth.getActiveUser().uid;
     this.storage.set(userId+'/quizCollection', this.quizCollection)
-        .then()
+        .then(data => {
+         if(!this._network.noConnection){
+            this.addToFirebase(quizStore);
+          }
+        }
+        )
         .catch(
         err => {
           this.quizCollection.splice(this.quizCollection.indexOf(quizStore), 1);
         }
         );
+  }
+
+ private addToFirebase(quizStore: QuizStore){
+    const userId = this._auth.getActiveUser().uid;
+    const url = '/solved/'+userId;
+    const marks = quizStore.quiz.marks*100/quizStore.quiz.questions.length;
+    return firebase.database()
+      .ref(url).push({
+      subject: quizStore.subjectId,
+      chapter: quizStore.chapterId,
+      chapterType: quizStore.chapterId,
+      quizId: quizStore.quiz.quizId,
+      marks: marks,
+      date: Date.now()
+    });
+  }
+
+  private removeFromFirebase(quizStore: QuizStore){
+
   }
 
   removefromQuizCollection(quizStore: QuizStore) {

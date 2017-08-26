@@ -12,7 +12,7 @@ export class NetworkProvider {
     console.log('Hello NetworkProvider Provider');
   }
 
-   noConnection() {
+   noConnection(): boolean {
      console.log(this.network.type);
     return (this.network.type === 'none');
   }
