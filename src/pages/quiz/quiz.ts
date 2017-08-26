@@ -1,3 +1,4 @@
+import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { QuizStore } from './../../data/quiz/quiz-store.interface';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Quizzes } from './../../data/quizzes.interface';
@@ -61,7 +62,8 @@ export class QuizPage implements OnInit {
     private loader: LoadingController,
     private alertCtrl: AlertController,
     private _quizStore: QuizStoreProvider,
-    private cdRef: ChangeDetectorRef) {
+    private cdRef: ChangeDetectorRef,
+  private _analytics: AnalyticsProvider) {
   }
 
   ngAfterViewChecked() {
@@ -112,7 +114,7 @@ export class QuizPage implements OnInit {
     //nested inside another object array, tried slice() but it gave only a shallow copy and the Answers array
     //was still getting modified at the source
     //_.lodash() is being used to improve performance over JSON parse
-
+    this._analytics.analyse('quiz');
 
   }
 

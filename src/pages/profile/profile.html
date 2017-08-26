@@ -6,87 +6,67 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>My Account</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content class="background">
-<!-- <div id="profile-bg"></div>
-      <div id="content">
-        <div id="profile-info">
-            <img id="profile-image" [src]="profilePicture" >
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                    Solved
-                </ion-col>
-                <ion-col>
-                    20
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            <h3 id="profile-name">{{fullname}}</h3>
-          <span id="profile-description"> Email: {{email}} </span>
-          <br>
-          <span id="profile-description"> Mob: {{phone}} </span>
-          <br>
-         <button ion-button outline [disabled] = "noNetwork" (tap) = "editProfile()" color="btn">Edit Profile</button>
-        </div>
-      </div> -->
+<ion-content fullscreen>
 
-       <div class="splash-bg"></div>
+  <div class="splash-bg"></div>
   <div class="splash-info">
     <div class="splash-logo">
-      <ion-fab bottom right>
-    <button ion-fab color="light"><ion-icon name="camera"></ion-icon></button>
-
-</ion-fab>
-      <div>
-        <img id="profile-image" [src]="profilePicture" >
+      <div class="profile-pic">
+        <img id="profile-image" [src]="profilePicture">
+        <ion-fab right bottom edge >
+          <button ion-fab mini color="btn"
+          (click)="changePicture()"><ion-icon name="camera"></ion-icon></button>
+        </ion-fab>
       </div>
 
 
     </div>
-     <div>
-       <ion-grid>
-              <ion-row>
-                <ion-col>
-                    Solved
-                </ion-col>
-                <ion-col>
-                    20
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-    </div>
     <div class="splash-intro">
       <h3 id="profile-name">{{fullname}}</h3>
-          <span id="profile-description"> Email: {{email}} </span>
-          <br>
-          <span id="profile-description"> Mob: {{phone}} </span>
-          <br>
-         <button ion-button outline [disabled] = "noNetwork" (tap) = "editProfile()" color="btn">Edit Profile</button>
+      <span id="profile-description"> Email: {{email}} </span>
+      <br>
+      <span id="profile-description"> Mob: {{phone}} </span>
+      <br>
+      <button ion-button round [disabled]="noNetwork" (tap)="editProfile()" color="btn">Edit Profile</button>
     </div>
   </div>
+  <div class="profile-content">
 
-<ion-card>
-  <ion-list>
-    <button
-    ion-item
-    (tap)="onGoToStarred()">
-      <ion-icon name="star" item-left></ion-icon>
-      Starred Videos
-    </button>
-     <button
-    ion-item
-    [navPush]="analyseMePage">
-      <ion-icon name="book" item-left></ion-icon>
-      Analysis
-    </button>
-  </ion-list>
-</ion-card>
+      <ion-grid>
+      <ion-row>
+        <ion-col col-6 class="first" tappable [navPush]="quizLibraryPage">
+          <h1>{{solvedQuizLen}}</h1>
+          <p>solved quizzes</p>
+        </ion-col>
+        <ion-col col-6 class="second" tappable (tap)="onGoToStarred()">
+          <h1>{{starredVidsLen}}</h1>
+          <p>starred videos</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  <ion-card>
+      <ion-list>
+        <button ion-item [navPush]="analyseMePage">
+        <ion-icon name="school" color="btn" item-left></ion-icon>
+        Learning Skills Test
+      </button>
+      <button ion-item (click)="visitStore()">
+        <ion-icon name="cart" color="btn" item-left></ion-icon>
+        Visit our Store
+      </button>
+      </ion-list>
+    </ion-card>
+    <div padding>
+         <canvas #lineCanvas></canvas>
+    </div>
+
+
+  </div>
+
 
 
 </ion-content>

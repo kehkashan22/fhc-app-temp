@@ -2,7 +2,8 @@
   <ion-header>
     <ion-toolbar id="menu-toolbar">
       <!--<ion-title>Welcome!</ion-title>-->
-      <ion-list no-lines no-padding id="menu-head">
+      <div id="menu-profile">
+         <ion-list no-lines no-padding id="menu-head">
         <ion-item >
           <ion-avatar item-left >
             <img [src]="profilePicture">
@@ -13,19 +14,20 @@
         <button ion-item (click)="onLoad(profilePage)">
           View Profile
         </button>
-      </ion-list>
+         </ion-list>
+      </div>
     </ion-toolbar>
   </ion-header>
   <ion-content id="menu-content">
     <ion-list>
-      <button *ngFor="let page of pages" ion-item (click)="onLoad(page.component)">
-        <ion-icon [name]="page.icon" item-left></ion-icon>
+      <button *ngFor="let page of pages" [class.activeHightlight]="checkActive(page)" ion-item (click)="onLoad(page.component)">
+        <ion-icon [name]="page.icon" item-left color="btn"></ion-icon>
         {{page.title}}
       </button>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage" #nav swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" #nav></ion-nav>
 
 

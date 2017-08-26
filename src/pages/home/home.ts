@@ -1,3 +1,4 @@
+import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { RateServiceProvider } from './../../providers/rate-service/rate-service';
 import { AuthProvider } from './../../providers/auth';
 import { NotificationsProvider } from './../../providers/notifications/notifications';
@@ -8,19 +9,14 @@ import { QuizStoreProvider } from './../../providers/quiz-store';
 import { User } from './../../data/user.interface';
 import { UserProvider } from './../../providers/user';
 import { VideosService } from './../../providers/fav-videos';
-<<<<<<< HEAD
-import { VideosProvider } from './../../providers/videos';
-import { Component  } from '@angular/core';
-import { NavController, IonicPage, Events, MenuController, LoadingController, App } from 'ionic-angular';
-=======
 import { Component, } from '@angular/core';
 import { NavController, IonicPage, Events, LoadingController, App, MenuController } from 'ionic-angular';
->>>>>>> Kehkashan
 import { Quiz } from "../../data/quiz.interface";
 import * as firebase from 'firebase';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM } from '@ionic-native/fcm';
+import { Firebase } from '@ionic-native/firebase';
 
 @IonicPage()
 @Component({
@@ -41,16 +37,13 @@ export class HomePage {
   imgPath = "https://s3-ap-southeast-1.amazonaws.com/fhc.app/";
   imgType = ".jpeg";
   userData: User;
-<<<<<<< HEAD
 
   diff: number = 0;
 
-  announcements: Array<any> = [];
 
-=======
+
   notificationNum: number = 0;
-  show = true;
->>>>>>> Kehkashan
+  show: boolean;
   fireStore = firebase.database().ref("/pushtokens");
   notifNum: number = 0;
 
@@ -75,7 +68,8 @@ export class HomePage {
     private _launch: FirstProvider,
     private _note: NotificationsProvider,
     private _menu: MenuController,
-    private _rate: RateServiceProvider
+    private _rate: RateServiceProvider,
+    private _analytics: AnalyticsProvider
   ) {
     this._menu.enable(true);
     this.fcm.getToken().then((token) => {
@@ -90,7 +84,9 @@ export class HomePage {
   ngOnInit() {
     this._launch.loadLaunchCount();
     this._note.loadNote();
+    this.show = this._note.getNote();
     console.log("OnInit Home");
+     this._analytics.trackView('home');
   }
 
   ionViewDidLoad() {
@@ -111,13 +107,14 @@ export class HomePage {
     }
 
     this.fcm.onNotification().subscribe((data) => {
-    this._note.setNote(true);
-    this.show = true;
     if (data.wasTapped) {
-      console.log('Data TAPPED');
+      console.log('Data Tapped');
       this.navigateToAnnouncements();
+      this.show=false;
     } else {
       console.log(JSON.stringify(data));
+      this._note.setNote(true);
+      this.show = true;
     }
     });
 
@@ -138,12 +135,6 @@ export class HomePage {
   navigateToAnnouncements() {
     this._note.setNote(false);
     this.navCtrl.push('AnnouncementsPage');
-    this.diff = 0;
-  }
-
-  emittedDifference(difference: number){
-    console.log('Difference in home page',difference);
-    this.diff = difference;
   }
 
   storeToken(token) {
@@ -151,17 +142,9 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-<<<<<<< HEAD
-      console.log('Token stored');
-=======
       console.log('Token Stored');
->>>>>>> Kehkashan
     }).catch((err) => {
       console.log(err);
     });
   }
-
-
-
-
 }

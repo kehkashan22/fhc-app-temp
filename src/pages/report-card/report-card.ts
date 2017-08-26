@@ -1,3 +1,4 @@
+import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { FirstProvider } from './../../providers/first/first';
 import { GlobalsProvider } from './../../providers/globals/globals';
 import { QuizStoreProvider } from './../../providers/quiz-store';
@@ -49,7 +50,8 @@ export class ReportCardPage implements OnInit {
     private _quizStore: QuizStoreProvider,
     private _globals: GlobalsProvider,
     private _alert: AlertController,
-    private _launch: FirstProvider) {
+    private _launch: FirstProvider,
+  private _analytics: AnalyticsProvider) {
   }
 
   ngOnInit(): void {
@@ -84,6 +86,7 @@ export class ReportCardPage implements OnInit {
     this.dataLoad('speed', this.speedQuizzes);
     this.dataLoad('application', this.applicationQuizzes);
 
+    this._analytics.analyse('report_card');
 
   }
 
@@ -190,8 +193,9 @@ export class ReportCardPage implements OnInit {
               for (var i = 0; i < dataset.data.length; i++) {
                 for (var key in dataset._meta) {
                   var model = dataset._meta[key].data[i]._model;
-                  ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
-
+                  if(dataset.data[i] !== 100){
+                    ctx.fillText(dataset.data[i] + "%", model.x, model.y - 5);
+                  }
                 }
               }
             });
@@ -208,9 +212,6 @@ export class ReportCardPage implements OnInit {
 
   getPerformancePercent() {
     let sum = 0;
-    let sumA = 0;
-    let sumB = 0;
-    let sumC = 0;
     for (var i = 0; i < this.memoryData.length; sum += (this.memoryData[i] / 100) * this._globals.memoryMatrix[i], i++);
 
     for (var i = 0; i < this.applicationData.length; sum += (this.applicationData[i] / 100) * this._globals.applicationMatrix[i], i++);
