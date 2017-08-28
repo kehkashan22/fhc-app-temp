@@ -90,21 +90,21 @@
   <!--To Analysis-->
   <ng-template #quizEnd>
     <div class="quiz" padding>
-      Congratulations on successfully completing the analysis...
 
 
           <ion-card>
             <ion-card-header text-center>Your Analysis is complete</ion-card-header>
             <ion-card-content>
               <p text-center>Compare your scores:</p>
-                 <canvas #barCanvas height="250px"></canvas>
+                 <canvas #barCanvas></canvas>
             </ion-card-content>
           </ion-card>
 
 
-      <p>...now go to Explanation to get the proper understanding of each question, or re-try the quiz!</p>
-      <button ion-button block outline (tap)="getExplanation()">Get Explanation</button>
-      <button ion-button block outline (tap)="resetScore()">Re-try Analysis</button>
+     <button ion-button block outline (tap)="getExplanation()" color="btn">Get Overview</button>
+      <button ion-button block outline (tap)="getAnswers()" >Check correct answers</button>
+      <button ion-button block outline (tap)="resetScore()" color="btn">Re-try Analysis</button>
+      <button ion-button block outline (tap)="visitStore()" >Visit Store</button>
     </div>
   </ng-template>
 </ion-content>

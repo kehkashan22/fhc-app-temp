@@ -13,7 +13,6 @@ import _ from "lodash";
 export class QuizStoreProvider {
 
   private quizCollection: QuizStore[] = [];
-  private solvedRef:firebase.database.Reference;
 
   constructor(private storage: Storage,
     private _auth: AuthProvider,
@@ -51,10 +50,6 @@ export class QuizStoreProvider {
       marks: marks,
       date: Date.now()
     });
-  }
-
-  private removeFromFirebase(quizStore: QuizStore){
-
   }
 
   removefromQuizCollection(quizStore: QuizStore) {

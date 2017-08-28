@@ -1,3 +1,4 @@
+import { IabProvider } from './../../providers/iab/iab';
 import {
   IonicPage,
   NavController,
@@ -60,7 +61,8 @@ export class AnalyseMePage implements OnInit {
     private cdRef: ChangeDetectorRef,
     private _analysed: AnalyseStoreProvider,
     private alertCtrl: AlertController,
-    private _modal: ModalController) {
+    private _modal: ModalController,
+  private _iab: IabProvider) {
   }
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
@@ -184,13 +186,13 @@ export class AnalyseMePage implements OnInit {
         datasets: [{
           data: [this.marks1, this.marks2],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(54, 162, 235, 0.7)',
+            'rgba(23,165,153, 0.8)',
+            'rgba(202,9,54, 0.8)',
 
           ],
           borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
+            '#17A599',
+            '#CA0936',
 
           ],
           borderWidth: 1
@@ -317,6 +319,15 @@ export class AnalyseMePage implements OnInit {
       });
 
       instructions.present();
+  }
+
+  getAnswers(){
+    let answers = this._modal.create('AnalysisAnswersPage');
+    answers.present();
+  }
+
+  visitStore(){
+    this._iab.redirectToStore();
   }
 }
 

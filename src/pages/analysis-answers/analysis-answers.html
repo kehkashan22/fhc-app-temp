@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+        <button ion-button icon-only clear color="light" (click)="onClose()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+      <ion-title>Learning Skills Answers</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+ <ion-slides direction="vertical" effect="flip" loop
+ paginationType="fraction" pager>
+   <ion-slide *ngFor="let set of sets; let i = index">
+     <ion-card>
+       <ion-card-header>Question {{i+1}}</ion-card-header>
+       <ion-card-content>
+         <ion-card-title>
+          {{set.question}}
+         </ion-card-title>
+          Answer {{i+1}}
+          <p>{{set.answer}}</p>
+       </ion-card-content>
+     </ion-card>
+   </ion-slide>
+ </ion-slides>
+</ion-content>
+
