@@ -184,13 +184,13 @@ export class AnalyseMePage implements OnInit {
         datasets: [{
           data: [this.marks1, this.marks2],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(54, 162, 235, 0.7)',
+            '#17A599',
+            '#CA0936',
 
           ],
           borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
+            '#17A599',
+            '#CA0936',
 
           ],
           borderWidth: 1
@@ -317,6 +317,11 @@ export class AnalyseMePage implements OnInit {
       });
 
       instructions.present();
+  }
+
+  getAnswers(){
+    let answers = this._modal.create('AnalysisAnswersPage');
+    answers.present();
   }
 }
 

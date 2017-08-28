@@ -2,13 +2,13 @@ import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { QuizStore } from './../../data/quiz/quiz-store.interface';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Quizzes } from './../../data/quizzes.interface';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, ViewController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
 import { Answer } from './../../data/answer.interface';
 import { Quiz } from './../../data/quiz.interface';
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, Navbar } from 'ionic-angular';
 import _ from "lodash";
 
 @IonicPage()
@@ -51,7 +51,7 @@ export class QuizPage implements OnInit {
 
   secondQuestion: boolean = false;
 
-
+  @ViewChild(Navbar) navbar: Navbar;
   @ViewChild('slide1') slide1: Slides;
   @ViewChild('slide2') slide2: Slides;
 
@@ -117,6 +117,7 @@ export class QuizPage implements OnInit {
     this._analytics.analyse('quiz');
 
   }
+
 
   ionViewDidLoad() {
     if (this.question) {

@@ -2,7 +2,7 @@
 
 
   <ion-navbar>
-    <ion-title>{{videoGroup?.setId | titlecase}}</ion-title>
+    <ion-title>{{videoGroup?.setId }}</ion-title>
 
   </ion-navbar>
 
@@ -13,7 +13,7 @@
   <ion-card *ngFor="let video of videoGroup?.videos; let i = index">
 
     <ion-card-header text-wrap>
-      {{ video.text | titlecase}}
+      {{ video.text }}
     </ion-card-header>
     <ion-card-content>
       <div class="vid">

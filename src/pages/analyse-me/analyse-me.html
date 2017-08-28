@@ -97,14 +97,15 @@
             <ion-card-header text-center>Your Analysis is complete</ion-card-header>
             <ion-card-content>
               <p text-center>Compare your scores:</p>
-                 <canvas #barCanvas height="250px"></canvas>
+                 <canvas #barCanvas></canvas>
             </ion-card-content>
           </ion-card>
 
 
-      <p>...now go to Explanation to get the proper understanding of each question, or re-try the quiz!</p>
-      <button ion-button block outline (tap)="getExplanation()">Get Explanation</button>
-      <button ion-button block outline (tap)="resetScore()">Re-try Analysis</button>
+      <p>...now you can get an overview, check correct answers to get the proper understanding of each question, or re-try the quiz!</p>
+      <button ion-button block outline (tap)="getExplanation()" color="btn">Get Overview</button>
+      <button ion-button block outline (tap)="getAnswers()" >Check correct answers</button>
+      <button ion-button block outline (tap)="resetScore()" color="btn">Re-try Analysis</button>
     </div>
   </ng-template>
 </ion-content>
