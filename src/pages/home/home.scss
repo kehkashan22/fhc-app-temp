@@ -16,22 +16,7 @@ page-home {
 
 
   }
-
-    .card1{
-    background-color: #ed7272;
-    }
-
-    .card2{
-    background-color: #9fea73;
-    }
-    .card3{
-    background-color: #73b7ea;
-    }
-    .card4{
-    background-color: #fcf877;
-    }
-
-  .card-background-page {
+ .card-background-page {
 
   ion-card, .cards {
     position: relative;
@@ -47,7 +32,6 @@ page-home {
 .card1{
 background-color: #ed7272;
 }
-
 .card2{
 background-color: #9fea73;
 }
@@ -65,16 +49,6 @@ background-color: #fcf877;
     font-weight: bold;
     color: #3f3f3f;
   }
-
-  .card-subtitle {
-    font-size: 1.0em;
-    position: absolute;
-    top: 52%;
-    width: 100%;
-    color: map-get($colors, light);
-    padding-top: 7px;
-  }
-
   }
 
   #notification-button {
@@ -99,14 +73,6 @@ background-color: #fcf877;
            
           }
 }
- #notification-button {            
-            position: relative;
-            width: 42px;
-            top:1px;
-            right: 1px;
-            overflow: visible!important;
-        }
-
 
    #notifications-badge {
             background-color: red;

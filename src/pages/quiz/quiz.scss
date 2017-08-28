@@ -9,14 +9,7 @@ page-quiz {
     $font-family-wp-base: "Barrio";
 
   ion-content, .scroll-content {
-    //background: map-get($colors, btn );
-    //  background: #2c3e50;  /* fallback for old browsers */
-    //   background: -webkit-linear-gradient(to bottom, #005C9C, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
-    //   background: linear-gradient(to bottom, #005C9C, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-      //background-image: url('https://s-media-cache-ak0.pinimg.com/736x/15/dd/54/15dd541e705f168a8027be8849424388--wall-tiles-evans.jpg');
       background-image: url('../assets/images/quizbg.png');
-
       background-size: cover;
       background-position-x: 50%;
     }
@@ -28,10 +21,6 @@ page-quiz {
   .marks{
     padding-right: 20px;
     padding-left: 20px;
-  }
-
-  .slide-zoom{
-    text-align: left !important;
   }
 
   ion-item.quiz, ion-item.item.item-block.item-radio.item-ios, ion-item.item-md, ion-item.item-wp{
@@ -62,8 +51,6 @@ page-quiz {
       #content {
         position: relative;
         margin-top: 100px;
-        // background-color: map-get($colors, light);
-        // box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
         padding-top: 200px;
       }
 
@@ -90,11 +77,9 @@ page-quiz {
       #quiz-image {
         display: block;
         border-radius: 100px;
-        //border: 1px solid #fff;
         width: 175px;
         height: 120px;
         margin: 30px auto 0;
-        //box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
       }
 
       .quiz-text{
@@ -122,8 +107,6 @@ page-quiz {
             max-height: 200px;
             height: 40px;
             line-height: 40px;
-            //text-align: center;
-            //border: 2px dashed #f69c55;
             overflow-y: scroll;
             font-size: 1.6rem;
           }
@@ -143,11 +126,6 @@ page-quiz {
           background-color: rgba(240, 128, 128, 0.3);
           color: map-get($colors, danger);
       }
-
-      // .question{
-      //   height: 20rem;
-      //   overflow: scroll;
-      // }
 
          ion-card-title.card-title.card-title-md, ion-card-title.card-title.card-title-ios,
           ion-card-title.card-title.card-title-wp{

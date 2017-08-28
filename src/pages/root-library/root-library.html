@@ -30,18 +30,14 @@
       <ion-item-group *ngFor="let stage of caGroup" >
         <ion-item-divider color="light" class="list-grow-animation">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)" class="list-grow-animation">
-         <!-- <ion-buttons end>
-            <button ion-button clear color="dark"> -->
               <ion-icon ios="ios-add" md="md-add" *ngIf="show !== subject.subjectId"></ion-icon>
               <ion-icon ios="ios-remove" md="md-remove" *ngIf="show === subject.subjectId"></ion-icon>
-            <!-- </button>
-         </ion-buttons> -->
+        
           
           {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
               <button ion-item (tap)="goToVideos(course, stage.stageId, subject.subjectId, type)">
-                <!--[navPush]="library" [navParams]="type.sets"-->
                 {{type | titlecase}}
               </button>
             </ion-list>
@@ -61,7 +57,6 @@
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>
               <button ion-item (tap)="goToVideos(course, stage.stageId, subject.subjectId, type)">
-                <!--[navPush]="library" [navParams]="type.sets"-->
                 {{type | titlecase}}
               </button>
             </ion-list>

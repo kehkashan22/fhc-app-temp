@@ -6,7 +6,6 @@
 
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="nature">
-      <!-->[(ngModel)]="nature"-->
       <ion-segment-button value="application" text-wrap>
         Application
       </ion-segment-button>
@@ -31,10 +30,7 @@
         <ion-col *ngFor="let quiz of applicationQuiz; let i = index" col-6 class="list-grow-animation">
           <a (tap)="toQuiz(quiz)">
             <ion-card tappable>
-              <!-- <div class="ribbon">
-                <div><ion-icon *ngIf="!isSolved(quiz)" name="star"></ion-icon></div>
-            </div> -->
-              <div class="solved" *ngIf="isSolved(quiz)">
+             <div class="solved" *ngIf="isSolved(quiz)">
                 
               </div>
               <div class="solved-icon" *ngIf="isSolved(quiz)">

@@ -18,8 +18,7 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..." color="primary">
     </ion-refresher-content>
   </ion-refresher>
-  <!-- <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar> -->
-  <ion-list *ngIf="!nothing; else noVids;">
+    <ion-list *ngIf="!nothing; else noVids;">
     <button class="list-grow-animation" ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
       <ion-icon class="animate-in-primary" [name]="videoGroup.icon" item-left></ion-icon>
       <h2 class="animate-in-primary" text-wrap>{{ videoGroup.setId }}</h2>
@@ -37,12 +36,3 @@
   </ng-template>
 </ion-content>
 
-<!-- <ion-footer *ngIf="nothing" no-border>
-  <div class="container">
-      <h5>
-        No Videos uploaded yet :(
-      </h5>
-      <p>Why don't you try again after the cat finishes it's song?</p>
-    </div>
-
-</ion-footer> -->
