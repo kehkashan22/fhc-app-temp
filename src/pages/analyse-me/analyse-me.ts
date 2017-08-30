@@ -37,7 +37,7 @@ export class AnalyseMePage implements OnInit {
   trigger: boolean = false;
   url: string = '';
   analysisPage = 'AnalysisPage';
-  video: boolean = true;
+  video: boolean = false;
   analysisVideo;
   currentId = 0;
   loader: any;
