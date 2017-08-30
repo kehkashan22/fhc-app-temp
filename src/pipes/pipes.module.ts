@@ -1,7 +1,6 @@
 import { ConcatPipe } from './concat';
 import { TitlecasePipe } from './titlecase';
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
 import { YoutubePipe } from './youtube';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { YoutubePipe } from './youtube';
   exports: [
       YoutubePipe,
       TitlecasePipe,
-
       ConcatPipe
   ]
 })

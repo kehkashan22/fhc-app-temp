@@ -90,21 +90,36 @@
   <!--To Analysis-->
   <ng-template #quizEnd>
     <div class="quiz" padding>
-      Congratulations on successfully completing the analysis...
 
-
+      <div class="div-img">
+  <img src="assets/images/grad.png" alt="Great!">
+</div>
           <ion-card>
             <ion-card-header text-center>Your Analysis is complete</ion-card-header>
             <ion-card-content>
               <p text-center>Compare your scores:</p>
-                 <canvas #barCanvas height="250px"></canvas>
+                 <canvas #barCanvas></canvas>
             </ion-card-content>
           </ion-card>
 
+<ion-grid>
+      <ion-row>
+        <ion-col col-6 class="first">
+          <h1>{{marks1*100/max}}%</h1>
+          <p>in Quiz 1</p>
+        </ion-col>
+        <ion-col col-6 class="second">
+          <h1>{{marks2*100/max}}%</h1>
+          <p>in Quiz 2</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+     <button ion-button block outline (tap)="getExplanation()" color="btn">Get Overview</button>
+      <button ion-button block outline (tap)="getAnswers()" >Check correct answers</button>
+      <button ion-button block outline (tap)="resetScore()" color="btn">Re-try Analysis</button>
+      <button ion-button block outline (tap)="visitStore()" >Visit Store</button>
 
-      <p>...now go to Explanation to get the proper understanding of each question, or re-try the quiz!</p>
-      <button ion-button block outline (tap)="getExplanation()">Get Explanation</button>
-      <button ion-button block outline (tap)="resetScore()">Re-try Analysis</button>
+
     </div>
   </ng-template>
 </ion-content>

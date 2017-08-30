@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only clear color="light" (click)="onClose()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>Learning Skills Answers</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-slides direction="vertical" effect="flip" paginationType="fraction" pager loop>
+    <ion-slide *ngFor="let set of sets; let i = index">
+      <div class="answers">
+         <ion-chip *ngIf="i === 0" color="light">
+            <ion-icon name="arrow-round-up" color="secondary"></ion-icon>
+            <ion-label >Swipe up more!</ion-label>
+          </ion-chip>
+        <ion-card>
+
+          <ion-card-header>Question {{i+1}}</ion-card-header>
+          <ion-card-content>
+            <h2>
+              {{set.question}}
+            </h2>
+            <hr>
+            <b>Answer:</b>
+            <p>{{set.answer}}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <div class="answer-img">
+        <img src="assets/images/isit.png" alt="">
+      </div>
+
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

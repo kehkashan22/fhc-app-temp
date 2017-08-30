@@ -1,5 +1,4 @@
 page-chapters {
-   @import "../../assets/scss/_nothing.scss";
    $color: map-get($colors, bg);
    .scroll-content{
       background-color: $color;
@@ -35,7 +34,6 @@ page-chapters {
     }
 
     .blank{
-       //background-image: url('../../assets/images/blank.png');
        height: 100%;
        width: 100%;
        background-size: contain;

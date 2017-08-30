@@ -58,7 +58,6 @@ export class SignUp {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUp');
   }
 
   /* Signup user method which is called in click */

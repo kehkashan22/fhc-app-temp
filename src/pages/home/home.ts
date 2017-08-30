@@ -14,9 +14,7 @@ import { NavController, IonicPage, Events, LoadingController, App, MenuControlle
 import { Quiz } from "../../data/quiz.interface";
 import * as firebase from 'firebase';
 
-import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM } from '@ionic-native/fcm';
-import { Firebase } from '@ionic-native/firebase';
 
 @IonicPage()
 @Component({
@@ -46,12 +44,13 @@ export class HomePage {
   show: boolean;
   fireStore = firebase.database().ref("/pushtokens");
   notifNum: number = 0;
+  url = 'https://s3-ap-southeast-1.amazonaws.com/fhc.app/';
 
   slides: any[] = [
-    { url: "assets/images/slidequiz.png", text: "Test Slide1" },
-    { url: "assets/images/slideranalyse.png", text: "Test Slide2" },
-    { url: "assets/images/slidernotification.png", text: "Test Slide3" },
-    { url: "assets/images/slidervideo.png", text: "Test Slide3" }
+    { url: this.url+"slide1.png", text: "Test Slide1" },
+    { url: this.url+"slide2.png", text: "Test Slide2" },
+    { url: this.url+"slide3.png", text: "Test Slide3" },
+    { url: this.url+"slide4.png", text: "Test Slide3" }
   ];
 
   constructor(public navCtrl: NavController,
@@ -85,7 +84,6 @@ export class HomePage {
     this._launch.loadLaunchCount();
     this._note.loadNote();
     this.show = this._note.getNote();
-    console.log("OnInit Home");
      this._analytics.trackView('home');
   }
 
@@ -95,7 +93,6 @@ export class HomePage {
       this._quizStore.loadSolvedQuizCollection();
       this._analysed.loadSolved();
       if (this._network.noConnection()) {
-        console.log(this._network.noConnection());
       this._network.showNetworkAlert();
     } else {
       this._user.getUser().then((data: User) => {
@@ -108,11 +105,9 @@ export class HomePage {
 
     this.fcm.onNotification().subscribe((data) => {
     if (data.wasTapped) {
-      console.log('Data Tapped');
       this.navigateToAnnouncements();
       this.show=false;
     } else {
-      console.log(JSON.stringify(data));
       this._note.setNote(true);
       this.show = true;
     }
@@ -142,7 +137,6 @@ export class HomePage {
       uid: firebase.auth().currentUser.uid,
       devToken: token
     }).then(() => {
-      console.log('Token Stored');
     }).catch((err) => {
       console.log(err);
     });

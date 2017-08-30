@@ -1,71 +1,32 @@
 page-instructions {
-    @import url('https://fonts.googleapis.com/css?family=Bree+Serif|Gudea|Julius+Sans+One|Open+Sans|Open+Sans+Condensed:300');
- 
-     .contact-popover{
-        //background: rgba(0, 0, 0, 0.9);
+  @import url('https://fonts.googleapis.com/css?family=Bree+Serif|Gudea|Julius+Sans+One|Open+Sans|Open+Sans+Condensed:300');
 
+  hr {
+    border: 0;
+    height: 3px;
+    background-image: linear-gradient(to right, rgba(239, 83, 80, 0), rgba(239, 83, 80, 0.75), rgba(239, 83, 80, 0));
+  }
+  .img-radius {
+    height: 161px;
+    width: 161px;
+    margin: auto;
+    display: block;
+  }
+  p,
+  li {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8em;
+  }
+  .img-right{
+    height: 161px;
+    text-align: right;
+    img{
+      text-align: right !important;
     }
-
-    .main{
-            height: 100%;
-           // border: 3px solid green;
-            padding:30px;
-            background: rgba(0, 0, 0, 0.85);
-
-        }
-
-    .div-text{
-            padding: 15px;
-            height: 100%;
-            width:auto;
-            background: map-get($colors, btn);
-
-            color:map-get($colors, light);
-            font-size: 15px;
-            overflow: scroll;
-    }
-        button{
-            align-items: top right;
-        }
-
-        .head{
-            font-size: 25px;
-        }
-
-        .hr{
-            background-color: #fff;
-            border: 0;
-            border-bottom: 1px dashed #ccc;
-        }
-        .img-radius{
-            border-radius: 100%;
-            height:161px;
-            width:161px;
-            margin: auto;
-            display: block;
-        }
-
-        i{
-            color:red;
-        }
-
-        h4{
-            font-family: 'Bree Serif', serif;
-            font-family: 'Gudea', sans-serif;
-            font-family: 'Julius Sans One', sans-serif; 
-            font-weight: bold;
-        }
-
-        h3{
-            font-family: 'Bree Serif', serif;
-            font-family: 'Gudea', sans-serif;
-            font-family: 'Julius Sans One', sans-serif; 
-            font-size:1.2em;
-        }
-
-        p{
-            font-family: 'Open Sans', sans-serif;
-            font-size:1em;
-        }
-
+  }
+  .img-win{
+    height: 225px;
+    margin: auto;
+    display: block;
+  }
 }

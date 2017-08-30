@@ -74,7 +74,6 @@ export class AnalysisPage implements OnInit {
 
 
     this.quizzes = quizStore;
-    console.log(this.quizzes);
     for (let i = 0; i < this.quizzes.length; i++) {
       if (this.quizzes[i].quiz.nature === 'memory') {
         this.memoryQuizzes.push(this.quizzes[i].quiz);
@@ -123,8 +122,7 @@ export class AnalysisPage implements OnInit {
 
 
     if(this.speedSolved > 0){
-      this.speedPercent = this.totalPercent(this.speedSolved, this.speedQuizzes)
-      console.log("speed "+this.speedPercent);
+      this.speedPercent = this.totalPercent(this.speedSolved, this.speedQuizzes);
       this.options.title.text = this.setTitle(this.speedPercent);
     }else{
        this.options.title.text = 'Hurry up and solve something, buddy!';
@@ -138,7 +136,7 @@ export class AnalysisPage implements OnInit {
         datasets: [{
           data: [this.speedPercent, (100 - this.speedPercent)],
           backgroundColor: [
-            'rgba(247, 70, 74, 1.0)',
+            'rgba(245, 125, 6, 1.0)',
             'rgba(0, 0, 0, 0.1)'
           ],
           borderColor:
@@ -167,7 +165,7 @@ export class AnalysisPage implements OnInit {
         datasets: [{
           data: [memoryPercent, (100 - memoryPercent)],
           backgroundColor: [
-            'rgba(247, 70, 74, 1.0)',
+            'rgba(23, 165, 153, 1.0)',
             'rgba(0, 0, 0, 0.1)'
           ],
           borderColor:
@@ -198,7 +196,7 @@ export class AnalysisPage implements OnInit {
         datasets: [{
           data: [applicationPercent, (100 - applicationPercent)],
           backgroundColor: [
-            'rgba(75, 192, 192, 1.0)',
+            'rgba(202, 9, 54, 1.0)',
             'rgba(0, 0, 0, 0.1)'
           ],
           borderColor:

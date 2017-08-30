@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 export class IabProvider {
 
   constructor(public iab: InAppBrowser) {
-    console.log('Hello IabProvider Provider');
   }
 
   redirectToStore(){

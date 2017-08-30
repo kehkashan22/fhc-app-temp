@@ -4,7 +4,6 @@ import { QuizStore } from './../data/quiz/quiz-store.interface';
 import { Injectable } from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { ToastController } from "ionic-angular";
-import { Quizzes } from "../data/quizzes.interface";
 import * as firebase from 'firebase/app';
 
 import _ from "lodash";
@@ -13,7 +12,6 @@ import _ from "lodash";
 export class QuizStoreProvider {
 
   private quizCollection: QuizStore[] = [];
-  private solvedRef:firebase.database.Reference;
 
   constructor(private storage: Storage,
     private _auth: AuthProvider,
@@ -26,7 +24,7 @@ export class QuizStoreProvider {
       const userId = this._auth.getActiveUser().uid;
     this.storage.set(userId+'/quizCollection', this.quizCollection)
         .then(data => {
-         if(!this._network.noConnection){
+         if(!this._network.noConnection()){
             this.addToFirebase(quizStore);
           }
         }
@@ -42,6 +40,7 @@ export class QuizStoreProvider {
     const userId = this._auth.getActiveUser().uid;
     const url = '/solved/'+userId;
     const marks = quizStore.quiz.marks*100/quizStore.quiz.questions.length;
+    console.log("Pushing solved to db");
     return firebase.database()
       .ref(url).push({
       subject: quizStore.subjectId,
@@ -51,10 +50,6 @@ export class QuizStoreProvider {
       marks: marks,
       date: Date.now()
     });
-  }
-
-  private removeFromFirebase(quizStore: QuizStore){
-
   }
 
   removefromQuizCollection(quizStore: QuizStore) {
@@ -119,7 +114,6 @@ export class QuizStoreProvider {
       .then(
       (quizStore: QuizStore[]) => {
         this.quizCollection = quizStore != null ? quizStore : [];
-        console.log(this.quizCollection);
       }
       )
       .catch(
@@ -128,10 +122,6 @@ export class QuizStoreProvider {
           message: 'Could not load list of solved quizzes. Please try again!',
           duration: 3000,
           position: 'middle'
-        });
-
-        toast.onDidDismiss(() => {
-          console.log('Dismissed Toast');
         });
 
         toast.present();

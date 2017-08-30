@@ -34,8 +34,6 @@ page-analyse-me {
             max-height: 200px;
             height: 40px;
             line-height: 40px;
-            //text-align: center;
-            //border: 2px dashed #f69c55;
             overflow-y: scroll;
             font-size: 1.6rem;
           }
@@ -57,17 +55,53 @@ page-analyse-me {
           }
 
       .background{
-     background: #D3D3D3 no-repeat;
-     background-size: cover;
+        background: #D3D3D3 no-repeat;
+        background-size: cover;
    }
 
     video {
-      background:transparent url('../../assets/images/notif.jpg') no-repeat 0 0;
+      background:transparent url('../assets/images/quizbg.png') no-repeat 0 0;
       -webkit-background-size:cover;
       -moz-background-size:cover;
       -o-background-size:cover;
       background-size:cover;
     }
+    .quiz{
+      .div-img{
+        img{
+          height: auto;
+        width: 100%;
+        }
+        display: absolute;
+        top: 10px;
+        left: 15px;
+        text-align: left;
+      }
+
+    }
+
+    ion-grid{
+          padding: 10px;
+          text-align: center;
+          height: 100%;
+          justify-content: center;
+          h1{
+            margin-bottom: 0rem;
+            margin-top: 2rem !important;
+            color: map-get($colors, light);
+          }
+          p{
+             margin-top: 0rem;
+              margin-bottom: 2rem;
+              color: map-get($colors, light);
+          }
+        }
+        .first{
+          background:  #17A599;
+        }
+        .second{
+          background: #CA0936;
+        }
 }
 
 

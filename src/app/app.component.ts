@@ -19,7 +19,6 @@ import * as firebase from 'firebase';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  activePage: any;
 
   rootPage: any;
   //= 'IntroSlider'
@@ -72,7 +71,6 @@ private _analytics: AnalyticsProvider) {
             authObserver.unsubscribe();
           } else {
             this.authProvider.setLoginStatus(false);
-            console.log(this.authProvider.getLoginStatus());
             this.rootPage = 'LoginWithEmailPage';
             authObserver.unsubscribe();
           }
@@ -103,10 +101,8 @@ private _analytics: AnalyticsProvider) {
       this.fullname = user.fullName;
       this.email = user.emailId;
       this.profilePicture = "https://www.gravatar.com/avatar/" +
-        Md5.hashStr(this.email.toLowerCase()) + "?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fprofile.png";
+        Md5.hashStr(this.email.toLowerCase()) + "?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fnotif.jpg";
     });
-
-    console.log(this.profilePicture);
   }
 
   onLoad(page: any) {
@@ -117,11 +113,9 @@ private _analytics: AnalyticsProvider) {
       this.logout();
     } else if (page === this.homePage) {
       this.nav.setRoot(page);
-      this.activePage = page;
       this.menuCtrl.close();
     } else {
       this.nav.push(page);
-      this.activePage = page;
       this.menuCtrl.close();
     }
   }
@@ -151,10 +145,5 @@ private _analytics: AnalyticsProvider) {
 
     });
   }
-
-  checkActive(page) {
-    return page == this.activePage;
-  }
-
 }
 

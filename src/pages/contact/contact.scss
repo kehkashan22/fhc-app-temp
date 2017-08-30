@@ -1,17 +1,9 @@
 page-contact {
   .scroll-content {
-            //background-color: map-get($colors, header);
             background-image: url("../assets/img/contactus.png");
             background-size: cover;
             background-position-x: 50%;
         }
-
-        // .background{
-
-        //   height:100%;
-        //   width:100%;
-        //   background-size:contain;
-        // }
 
         .content{
           background-color:transparent;
@@ -27,21 +19,6 @@ page-contact {
    background-color:transparent;
    padding-top: 92px;
  }
-    // #profile-info {
-    //    position: absolute;
-    //    top: -95px;
-    //   width: 100%;
-    //   z-index: 2;
-    // }
-
-  //    .contactUs{
-  //     h3{
-  //       color: #8e9093;
-  //     }
-  //     padding: 20px;
-     //}
-
-
   .address{
     p{
       color: map-get($colors, light);

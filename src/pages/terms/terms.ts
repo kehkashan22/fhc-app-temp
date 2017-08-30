@@ -18,7 +18,6 @@ export class TermsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TermsPage');
   }
 
    onClose(){

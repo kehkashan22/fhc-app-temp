@@ -11,4 +11,8 @@ page-videos {
     }
   }
 
+  .icon-md-btn, .icon-ios-btn, .icon-wp-btn{
+    background-color: map-get($colors, header) !important;
+  }
+
 }

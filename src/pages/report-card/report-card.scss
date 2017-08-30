@@ -1,6 +1,4 @@
 page-report-card {
-  @import "../../assets/scss/_circle.scss";
-
   .scroll-content{
     background: #fff;
   }
@@ -37,7 +35,6 @@ hr.divider{
     overflow-x: hidden;
   }
       .front{
-  //       background-color: transparent !important;
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
         border: 0px;
         background: #fff;
@@ -60,12 +57,23 @@ hr.divider{
 
       }
       canvas {
-        //background:#c0c0c0;
         width:95% !important;
         height:90% !important;
         padding-right: 0px !important;
       }
     }
+
+     .current {
+    position: absolute;
+    color: #3f3f3f;
+    font-weight: lighter;
+    line-height: 1;
+    top: auto;
+    top: 55%;
+    left: 51%;
+    transform: translateX(-50%);
+    font-size: 60px;
+  }
 
 
 }

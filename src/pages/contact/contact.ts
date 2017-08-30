@@ -1,3 +1,4 @@
+import { CustomToast } from './../../providers/custom-toast';
 import { Component } from '@angular/core';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { CallNumber } from '@ionic-native/call-number';
@@ -11,17 +12,12 @@ import { IonicPage } from 'ionic-angular';
 export class ContactPage {
 
   constructor(private emailComposer: EmailComposer,
-              private callNumber: CallNumber) {
+              private callNumber: CallNumber,
+            private _toast: CustomToast) {
   }
 
 
       mailTo(mail: string){
-      //   this.emailComposer.isAvailable().then((available: boolean) =>{
-      //          if(available) {
-
-      //          }
-      // });
-
       let email = {
                       to: mail,
                       subject: 'Support Required!',
@@ -34,8 +30,8 @@ export class ContactPage {
 
    callNow(number: string){
       this.callNumber.callNumber(number, true)
-      .then(() => console.log('Launched dialer!'))
-      .catch(() => console.log('Error launching dialer'));
+      .then()
+      .catch(() => this._toast.show('Could not launch dialler'));
    }
 
 }

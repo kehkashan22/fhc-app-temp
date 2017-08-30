@@ -26,12 +26,10 @@ export class VideosProvider {
 
   getVideos(token: string) {
      if (this.data) {
-       console.log("See this old");
       return Promise.resolve(this.data);
     }
 
     return new Promise(resolve => {
-      console.log("See this new");
       this.http.get('https://fhc-ionic-app.firebaseio.com/videodb.json?auth='+token)
         .map(res => res.json())
         .subscribe(data => {

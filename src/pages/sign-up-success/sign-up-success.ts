@@ -18,7 +18,6 @@ export class SignUpSuccessPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpSuccessPage');
   }
 
   toLoginPage(){

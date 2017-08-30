@@ -34,7 +34,7 @@
       <hr />
       <p>
         On the basis of exam papers of past 10 years, Farooq Sir has designed an analysis system keeping in mind the statistics that came out from
-         past experience and keen understanding of the working of the exam. In this
+        past experience and keen understanding of the working of the exam. In this
         system all chapters of each subject are divided into three categories: <b>A, B</b> and <b>C</b>.
       </p>
       <p>On an average (as seen in the past 10 years), the breakup of scores for each topic is as follows:</p>
@@ -87,13 +87,23 @@
       </h6>
       <hr />
     <p text-center>Click on this card to get complete report.</p>
-      <div [class]="percentClass" text-center>
+      <!-- <div [class]="percentClass" text-center>
         <span>{{percentage}}%</span>
         <div class="slice">
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-      </div>
+      </div> -->
+       <div class="current">
+                {{percentage}}%
+            </div>
+        <round-progress [current]="percentage"
+            [max]="100"
+            [responsive]="true"
+            [rounded]="true"
+            [color]="percentClass"
+            [stroke]="5"
+            [background]="'#6e6e6e'"></round-progress>
     </div>
     <div class="flash-card-back" padding>
       <div class="back-text">

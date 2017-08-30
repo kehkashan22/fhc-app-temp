@@ -1,4 +1,3 @@
-import { Quiz } from './quiz.interface';
 import { Quizzes } from "./quizzes.interface";
 
 export interface QuizLibrary {

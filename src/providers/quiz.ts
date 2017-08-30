@@ -33,47 +33,27 @@ export class QuizService {
     });
   }
 
-// putAnalysis() {
-//   const quizEl = quiz;
-//   if (this.data) {
-//     return Promise.resolve(this.data);
-//   }
-//   return new Promise(resolve => {
-//     this.http.put(this.g.firebase_url+'quizdb.json', quizEl)
-//       .map(res => res.json())
-//       .subscribe(() => {
-//         console.log("Success!");
-//       },
-//       (error) => {
-//         console.log(error.json());
-//       });
-//   });
+  //ANALYSIS ANSWERS HERE
+  loadQuizAnswers() {
+    return new Promise((resolve, reject) => {
+      firebase.database()
+        .ref('/answersdb').on('value', snapshot => {
+          resolve(snapshot.val());
+        });
+    });
+  }
 
-// }
 
-// //COMPLETE QUIZ LIBRARY HERE PUT
-// loadQuizLibrary(url) {
-//   this.libraryCollection = quizLibrary;
-//   //this.quizLib2 = quizLib;
-//   if (this.data) {
-//     return Promise.resolve(this.data);
-//   }
-//   return new Promise((resolve, reject) => {
-//     firebase.database()
-//       .ref(url).on('value', snapshot => {
-//         resolve(snapshot.val());
-//       });
-//   });
 
-// }
+  //COMPLETE QUIZ LIBRARY HERE GET
+  getQuizLibrary(url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      firebase.database()
+        .ref(url).child('/chapters').on('value', snapshot => {
+          resolve(snapshot.val());
+        });
+    });
+  }
 
-//COMPLETE QUIZ LIBRARY HERE GET
-getQuizLibrary(url: string): Promise < any > {
-  return new Promise((resolve, reject) => {
-    firebase.database()
-      .ref(url).child('/chapters').on('value', snapshot => {
-        resolve(snapshot.val());
-      });
-  });
-}
+
 }

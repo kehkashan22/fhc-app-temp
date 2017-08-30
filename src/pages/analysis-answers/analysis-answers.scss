@@ -1,0 +1,18 @@
+page-analysis-answers {
+  .scroll-content {
+    background: url('../assets/images/quizbg.png');
+  }
+
+      .answers {
+        height: 100%;
+        text-align: left !important;
+      }
+
+
+  .answer-img {
+    text-align: right;
+    img {
+      height: 150px;
+    }
+  }
+}

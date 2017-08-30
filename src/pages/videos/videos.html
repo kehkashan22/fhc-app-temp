@@ -2,7 +2,7 @@
 
 
   <ion-navbar>
-    <ion-title>{{videoGroup?.setId | titlecase}}</ion-title>
+    <ion-title>{{videoGroup?.setId }}</ion-title>
 
   </ion-navbar>
 
@@ -13,7 +13,7 @@
   <ion-card *ngFor="let video of videoGroup?.videos; let i = index">
 
     <ion-card-header text-wrap>
-      {{ video.text | titlecase}}
+      {{ video.text }}
     </ion-card-header>
     <ion-card-content>
       <div class="vid">
@@ -25,10 +25,6 @@
 
       <ion-row>
         <ion-col>
-          <!-- <button ion-button color="primary" clear small icon-start (tap)="shareSheetShare(video)">
-        <ion-icon name='share-alt'></ion-icon>
-        Share
-      </button> -->
           <ion-chip tappable (tap)="shareSheetShare(video)">
             <ion-icon name='share-alt' color="secondary"></ion-icon>
             <ion-label>Share</ion-label>
@@ -36,7 +32,7 @@
         </ion-col>
         <ion-col text-right>
           <ion-chip tappable (tap)="onAddToFavorites(video)" *ngIf="!isFavorite(video)">
-            <ion-icon color="btn" name="heart"></ion-icon>
+            <ion-icon color="header" name="heart"></ion-icon>
             <ion-label>Favourite</ion-label>
           </ion-chip>
 

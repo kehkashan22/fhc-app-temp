@@ -1,7 +1,8 @@
 page-starred {
-@import "../../../node_modules/compass-mixins/lib/compass";
 @import "../../../node_modules/compass-sass-mixins/lib/compass";
-@import url('https://fonts.googleapis.com/css?family=Bangers|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers');
+
+$font-path: "../assets/fonts";
 
 ion-header.header{
   box-sizing: initial !important;
@@ -36,11 +37,9 @@ h1 {
 
 p{
   color: #fff;
-  //text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
 
-// h1{ text-align:center;}
 .scene{position:relative;
   display:block;
   margin:0 auto;
@@ -51,7 +50,6 @@ p{
 .cloud{
   position:absolute;
 }
-/*plane animation*/
 .plane{
   animation-duration: 1s;
   animation-name: anim-plane;
@@ -72,8 +70,6 @@ p{
     transform:translateY(95px);
   }
 }
-
-/* Cloud Animation */
 
 @keyframes fade{
   0%{ opacity: 0;}
