@@ -73,14 +73,13 @@ export class ProfilePage implements OnInit {
         this.email = data.emailId;
         this.phone = data.phoneNumber;
         this.profilePicture = "https://www.gravatar.com/avatar/" +
-          Md5.hashStr(this.email.toLowerCase()) + "?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fprofile.png";
+          Md5.hashStr(this.email.toLowerCase()) + "?d=https%3A%2F%2Fs3-ap-southeast-1.amazonaws.com%2Ffhc.app%2Fnotif.jpg";
         this.loader.dismiss();
 
         let lineData: number[] = [];
         for (let i = 0; i < this.solvedQuizLen; i++) {
           lineData.push(this.solvedQuizzes[i].quiz.marks*100/this.solvedQuizzes[i].quiz.questions.length);
         }
-        console.log(lineData)
         //draw-chart-here
         if (lineData.length > 0) {
 
@@ -142,18 +141,16 @@ export class ProfilePage implements OnInit {
   }
 
   onGoToStarred() {
-    this.navCtrl.push(this.starredPage)
-      .catch((error) => console.log('Access denied, Argument was ' + error));
+    this.navCtrl.push(this.starredPage);
   }
 
   editProfile() {
-    //let updateModal = this.modalCtrl.create('EditProfilePage');
-    //updateModal.present();
     this.navCtrl.push('EditProfilePage');
   }
 
   changePicture(){
-    let url = "https://signup.wordpress.com/signup/?ref=oauth2&user_email="+this.email.toLowerCase()+"&oauth2_redirect=bf551c93d83b96478db51481a9cbe97e%40https%3A%2F%2Fpublic-api.wordpress.com%2Foauth2%2Fauthorize%2F%3Fclient_id%3D1854%26response_type%3Dcode%26blog_id%3D0%26state%3D331f9ecba5fcab15e2168e1231f7be2a4b1b8cd24dd6f90b3672fb5159d7b590%26redirect_uri%3Dhttps%253A%252F%252Fen.gravatar.com%252Fconnect%252F%253Faction%253Drequest_access_token%26jetpack-code%26jetpack-user-id%3D0%26action%3Doauth2-login&wpcom_connect=1";
+   //let url = "https://signup.wordpress.com/signup/?ref=oauth2&user_email="+this.email.toLowerCase()+"&oauth2_redirect=bf551c93d83b96478db51481a9cbe97e%40https%3A%2F%2Fpublic-api.wordpress.com%2Foauth2%2Fauthorize%2F%3Fclient_id%3D1854%26response_type%3Dcode%26blog_id%3D0%26state%3D331f9ecba5fcab15e2168e1231f7be2a4b1b8cd24dd6f90b3672fb5159d7b590%26redirect_uri%3Dhttps%253A%252F%252Fen.gravatar.com%252Fconnect%252F%253Faction%253Drequest_access_token%26jetpack-code%26jetpack-user-id%3D0%26action%3Doauth2-login&wpcom_connect=1";
+    let url = "http://en.gravatar.com/";
     this._iab.redirect(url);
   }
 

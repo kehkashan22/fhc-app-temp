@@ -1,5 +1,4 @@
 import { NetworkProvider } from './../../providers/network/network';
-import { LoaderProvider } from './../../providers/loader';
 import { AuthProvider } from './../../providers/auth';
 import { Videos } from './../../data/videos.interface';
 import { LoadingController, NavParams } from 'ionic-angular';
@@ -46,7 +45,6 @@ export class LibraryPage {
       this._video.loadVideos(this.url).then(snapshot => {
         //let sets: Videos[]  = snapshot;
         if (snapshot) {
-          console.log(snapshot);
           this.videoCollection = snapshot;
           this.tempVideos = this.videoCollection;
         }

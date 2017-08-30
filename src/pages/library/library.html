@@ -20,7 +20,7 @@
   </ion-refresher>
   <!-- <ion-searchbar (ionInput)="getVideoCategoryByTitle($event)"></ion-searchbar> -->
   <ion-list *ngIf="!nothing; else noVids;">
-    <button class="list-grow-animation" ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
+    <button ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
       <ion-icon class="animate-in-primary" [name]="videoGroup.icon" item-left></ion-icon>
       <h2 class="animate-in-primary" text-wrap>{{ videoGroup.setId }}</h2>
       <p class="animate-in-secondary">{{ videoGroup.videos.length }} Videos</p>
@@ -29,7 +29,7 @@
 
   <ng-template #noVids>
 
-    <div class="nothing" ion-fixed no-bounce>
+    <div class="nothing">
       <img src="../assets/images/blank.png" alt="Sorry Cat">
     </div>
 

@@ -88,7 +88,7 @@ export class AnalyseMePage implements OnInit {
       this.expVid = analysis.exp;
       setTimeout(() => {
         this.drawChart(this.max);
-      }, 700);
+      }, 500);
     }
   }
 
@@ -120,7 +120,7 @@ export class AnalyseMePage implements OnInit {
         this.max = this.quizCollection.length;
         setTimeout(() => {
           this.drawChart(this.max);
-        }, 700);
+        }, 500);
       }
     }
 
@@ -150,7 +150,7 @@ export class AnalyseMePage implements OnInit {
       this.question = false;
       setTimeout(() => {
         this.drawChart(this.max);
-      }, 700);
+      }, 500);
     }
 
   }
@@ -226,8 +226,6 @@ export class AnalyseMePage implements OnInit {
     this.analysisVideo = this.getVideoUrl(this.expVid);
     this.video = true;
     this.question = true;
-
-    console.log(this.video);
   }
 
   quesChanged() {
@@ -260,7 +258,6 @@ export class AnalyseMePage implements OnInit {
           text: 'No, I changed my mind!',
           role: 'cancel',
           handler: () => {
-            console.log('Cancelled!');
           }
         }
       ]

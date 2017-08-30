@@ -1,4 +1,4 @@
-/* 
+/*
   Name - Forget Password Component
   Functionality - For sending reset password link to users incase they forget their password.
   Author - Shantanu Kamdi
@@ -28,13 +28,13 @@ export class ForgetPasswordPage {
   /* For Validation purposes */
   private submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
               private _auth: AuthProvider,
               private _logger: Logger,
               private alertCtrl: AlertController,
-              private loadingCtrl: LoadingController            
+              private loadingCtrl: LoadingController
   ) {
     /* Creating form using formBuilder */
     this.forgotPasswordForm = formBuilder.group({
@@ -43,7 +43,6 @@ export class ForgetPasswordPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ForgetPasswordPage');
   }
 
   /* Reset Password Function */
@@ -56,12 +55,12 @@ export class ForgetPasswordPage {
     });
 
     loader.present();
-    
+
     /* Creating user object to pass it to forgetPassword method in Auth Service */
     let userEmailId = {
       emailId: this.forgotPasswordForm.value.emailId
     }
-    
+
     /* Calling Auth Service for resetting password */
     this._auth.forgotPassword(userEmailId).then(()=>{
       this._logger.log("Successfully sent the reset password link");

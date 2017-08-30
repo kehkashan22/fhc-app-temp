@@ -65,19 +65,19 @@ page-profile {
           h1{
             margin-bottom: 0rem;
             margin-top: 3rem;
-            color: map-get($colors, light);
+            color: #5c5c5a;
           }
           p{
              margin-top: 0rem;
               margin-bottom: 3rem;
-              color: map-get($colors, light);
+              color: #3c3c3a;
           }
         }
         .first{
-          background: #F39B6D;
+          background:  #4860a6;
         }
         .second{
-          background: map-get($colors, chapterB);
+          background: #f2888b;
         }
       }
 }

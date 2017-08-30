@@ -46,9 +46,6 @@ export class EditProfilePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EditProfilePage');
-
-
       /* Loader */
     let loader = this.loadingCtrl.create({
       spinner: "bubbles",
@@ -98,8 +95,6 @@ export class EditProfilePage {
         typeOfCourse: this.form.value.typeOfCourse
       }
 
-    console.log("Updated Info");
-    console.log(user);
 
     this._user.updateUserProfile(user).then(() => {
       //loader.dismiss();

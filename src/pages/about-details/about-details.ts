@@ -17,10 +17,6 @@ export class AboutDetailsPage {
 
 
   ionViewDidLoad() {
-    this.title = this.navParams.get('title');
-    this.body = this.navParams.get('body');
-    this.src= this.navParams.get('src')
-    console.log(this.title);
   }
 
   onClose(){

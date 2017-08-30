@@ -1,9 +1,7 @@
-import { ToastController, AlertController } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { NetworkProvider } from './../../providers/network/network';
 import { QuizService } from './../../providers/quiz';
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-
 
 @IonicPage()
 @Component({
@@ -45,7 +43,6 @@ export class ChaptersPage implements OnInit {
       duration: 5000
     });
     this.data = this.navParams.data;
-    console.log(this.data);
     this.url = this.data.url;
     this.loader.present();
     if (this._network.noConnection()) {
@@ -57,7 +54,6 @@ export class ChaptersPage implements OnInit {
         if (snapshot) {
           this.chapters = snapshot;
           this.tempChapters = this.chapters;
-          console.log(this.chapters);
         }
         this.nothing = this.chapters.length > 0 ? false : true;
         this.loader.dismiss();

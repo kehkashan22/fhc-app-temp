@@ -108,9 +108,6 @@ export class AnnouncementsPage {
     let url = annoucement.downloadLink;
     let fileTokens: Array<any> = url.split('/');
     const fileName = fileTokens[fileTokens.length - 1];
-
-    console.log(fileName);
-
     let loader = this._loader.create({
       content: 'Downloading your file, please wait...',
       spinner: 'bubbles'
@@ -122,7 +119,6 @@ export class AnnouncementsPage {
     fileTransfer.download(url, this.storageDirectory + fileName).then((entry) => {
       loader.dismiss();
       if (entry) {
-        console.log('download complete: ' + entry.toURL());
         let alert = this.alertCtrl.create({
           title: 'Download successful!',
           message: 'File downloaded  at ' + entry.toURL(),
@@ -169,10 +165,8 @@ export class AnnouncementsPage {
     loader.present();
     this.socialSharing.share(announcement.message+"\n\nVisit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more at:\n ", announcement.title, announcement.img, playstore).then(() => {
       loader.dismiss();
-      console.log("shareSheetShare: Success");
     }).catch(() => {
       loader.dismiss();
-      console.error("shareSheetShare: Failed");
     });
   }
 
@@ -185,7 +179,7 @@ export class AnnouncementsPage {
           return announcement.type === val;
         });
     }
-    
+
   }
   goToNews(newsUrl){
     this.iab.create(newsUrl, "_system", "location=yes");

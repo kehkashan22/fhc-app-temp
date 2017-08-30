@@ -1,21 +1,8 @@
 page-starred {
-@import "../../../node_modules/compass-mixins/lib/compass";
 @import "../../../node_modules/compass-sass-mixins/lib/compass";
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-//@import url('https://fonts.googleapis.com/css?family=Bangers');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers');
 
 $font-path: "../assets/fonts";
-
-
-// @font-face {
-// font-family: Bangers;
-// src: url('../assets/fonts/Bangers.woff2');
-// }
-
-// h1, h2, h3, h4, h5, h6, p, ion-title {
-// font-family: 'Bangers' !important;
-// }
- 
 
 ion-header.header{
   box-sizing: initial !important;
@@ -50,11 +37,9 @@ h1 {
 
 p{
   color: #fff;
-  //text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
 
-// h1{ text-align:center;}
 .scene{position:relative;
   display:block;
   margin:0 auto;

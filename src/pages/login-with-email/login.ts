@@ -1,12 +1,6 @@
-import { MenuController } from 'ionic-angular';
-/*
-  Name - Login Component
-  Functionality - For authentication of users using firebase.
-  Author - Shantanu Kamdi
-  Date - 06/06/2017
-*/
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { MenuController } from 'ionic-angular';
 /* Forms module */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /* Logger Service */
@@ -14,7 +8,6 @@ import { Logger } from '../../providers/logger';
 /* Auth Service */
 import { AuthProvider } from '../../providers/auth';
 
-import { HomePage } from "../home/home";
 
 
 @IonicPage()
@@ -46,7 +39,6 @@ export class LoginWithEmailPage {
   }
   /* Check for Network - Remaining*/
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Login');
     this._menu.enable(false);
 
   }
@@ -96,7 +88,6 @@ export class LoginWithEmailPage {
 
       }
     }, (error) => {
-        console.log('Error in logging in '+error);
 
         loader.dismiss();
         const alert = this.alertCtrl.create({

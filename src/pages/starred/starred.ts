@@ -70,10 +70,8 @@ export class StarredPage implements OnInit{
     loader.present();
     this.socialSharing.share("Follow Farooq Sir's YouTube channel for more such content:\n", null, null, yourl).then(() => {
       loader.dismiss();
-      console.log("shareSheetShare: Success");
     }).catch(() => {
       loader.dismiss();
-      console.error("shareSheetShare: failed");
     });
   }
 }

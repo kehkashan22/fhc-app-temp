@@ -87,13 +87,23 @@
       </h6>
       <hr />
     <p text-center>Click on this card to get complete report.</p>
-      <div [class]="percentClass" text-center>
+      <!-- <div [class]="percentClass" text-center>
         <span>{{percentage}}%</span>
         <div class="slice">
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-      </div>
+      </div> -->
+       <div class="current">
+                {{percentage}}%
+            </div>
+        <round-progress [current]="percentage"
+            [max]="100"
+            [responsive]="true"
+            [rounded]="true"
+            [color]="percentClass"
+            [stroke]="5"
+            [background]="'#6e6e6e'"></round-progress>
     </div>
     <div class="flash-card-back" padding>
       <div class="back-text">

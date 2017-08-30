@@ -20,7 +20,7 @@
   </ion-header>
   <ion-content id="menu-content">
     <ion-list>
-      <button *ngFor="let page of pages" [class.activeHightlight]="checkActive(page)" ion-item (click)="onLoad(page.component)">
+      <button *ngFor="let page of pages" ion-item (click)="onLoad(page.component)">
         <ion-icon [name]="page.icon" item-left color="btn"></ion-icon>
         {{page.title}}
       </button>

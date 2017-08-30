@@ -30,9 +30,7 @@ export class RootLibraryPage {
 
   ngOnInit() {
     this.caGroup = this._globals.caCollection;
-    console.log(this.caGroup);
     this.csGroup = this._globals.csCollection;
-    console.log(this.csGroup);
 
 
   }
@@ -53,7 +51,6 @@ export class RootLibraryPage {
       type = 'case_laws';
     }
     const url = '/video-library/'+course+'/'+stage+'/'+subject+'/'+type;
-    console.log(url);
     this.navCtrl.push(this.library, {
         url: url,
         subject: subject,

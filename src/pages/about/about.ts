@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, ModalController} from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,9 +15,8 @@ export class AboutPage {
   constructor(private modal: ModalController) {
   }
 
- 
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
   }
 
    openAbout() {
@@ -34,7 +33,7 @@ export class AboutPage {
     const myModal = this.modal.create('TermsPage');
     myModal.present();
   }
-  
+
   openFaq(){
     const myModal = this.modal.create('FaqPage');
     myModal.present();

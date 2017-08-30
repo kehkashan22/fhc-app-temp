@@ -26,7 +26,6 @@ export class UpdatePasswordPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UpdatePasswordPage');
   }
 
   closeModal(){
@@ -46,7 +45,6 @@ export class UpdatePasswordPage {
     let user = firebase.auth().currentUser;
 
     user.updatePassword(newPass).then(() => {
-      console.log('Successfully updated password');
       let toastMessage = this.toast.create({
         message: 'Password updated successfully',
         position: 'bottom',
@@ -57,8 +55,6 @@ export class UpdatePasswordPage {
 
       this.viewCtrl.dismiss();
     }, (err) => {
-      console.log('Error while updating new password');
-      console.log(err);
       let alert = this.alertCtrl.create({
         title: 'Error',
         message: err.message,

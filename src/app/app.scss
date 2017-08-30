@@ -90,13 +90,6 @@
   }
 }
 
-.itemSlidingAnimation {
-    -webkit-animation: slidingAnimation;
-    animation: slidingAnimation;
-    -webkit-animation-duration: 1000ms;
-    animation-duraton: 1000ms;
-}
-//to here
 
 .bounce-animation {
   -webkit-animation: bounce ease-in 1;
@@ -180,12 +173,7 @@
 
 .scroll-content{
  background: map-get($colors, light);
-
-
 }
 
-.activeHightlight{
-  background-color: map-get($colors, header)
-}
 
 
