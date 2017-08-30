@@ -25,7 +25,7 @@
 <ion-content class="card-background-page background" scroll="false">
 <!--CS VIDEOS-->
   <div [ngSwitch]="course">
-    <img src="assets/images/slidervideo.png" alt="Video Library" class="animate-in-secondary">
+    <img src="assets/images/slide4.png" alt="Video Library" class="animate-in-secondary">
     <ion-list *ngSwitchCase="'ca'">
       <ion-item-group *ngFor="let stage of caGroup" >
         <ion-item-divider color="light" class="list-grow-animation">{{ stage.stageId | uppercase }}</ion-item-divider>
@@ -52,7 +52,7 @@
         <ion-item-divider color="light" class="list-grow-animation">{{ stage.stageId | uppercase }}</ion-item-divider>
         <ion-item *ngFor="let subject of stage.subject" (click)="toggleDetails(subject.subjectId)" class="list-grow-animation">
          <ion-icon ios="ios-add" md="md-add" *ngIf="show !== subject.subjectId"></ion-icon>
-          <ion-icon ios="ios-remove" md="md-remove" *ngIf="show === subject.subjectId"></ion-icon> 
+          <ion-icon ios="ios-remove" md="md-remove" *ngIf="show === subject.subjectId"></ion-icon>
           {{subject.subjectName | titlecase}}
           <div *ngIf="show === subject.subjectId">
             <ion-list *ngFor="let type of subject.type" class="inner-list" no-lines>

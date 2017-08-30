@@ -27,7 +27,6 @@ export class FirstProvider {
       .then(
       (count) => {
         this.count = count != null ? count : 0;
-        console.log(this.count);
       }
       )
       .catch(

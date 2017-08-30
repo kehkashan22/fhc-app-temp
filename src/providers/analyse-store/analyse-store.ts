@@ -28,7 +28,6 @@ export class AnalyseStoreProvider {
       .then()
       .catch(
       err => {
-        console.log("Could not store");
       }
     );
   }
@@ -39,7 +38,6 @@ export class AnalyseStoreProvider {
       .then()
       .catch(
       err => {
-        console.log("Could not remove");
       });
   }
 
@@ -49,7 +47,7 @@ export class AnalyseStoreProvider {
       .then(
       (analysis: {solved: boolean, marks1: number, marks2: number, max: number, exp: string}) => {
         this.analysis = analysis != null ? analysis : {solved: false, marks1: 0, marks2: 0, max: 0, exp: ''};
-        console.log(this.analysis);
+
       }
       )
       .catch(
@@ -60,9 +58,6 @@ export class AnalyseStoreProvider {
           position: 'middle'
         });
 
-        toast.onDidDismiss(() => {
-          console.log('Dismissed Toast');
-        });
 
         toast.present();
       }

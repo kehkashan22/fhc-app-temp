@@ -2,7 +2,7 @@
 <widget id="in.fhconline.fhc" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Farooq Haque Classes</name>
     <description>The best app for CA and CS students!</description>
-    <author email="fazal.kehkashan@gmail.com" href="http://fhconline.in/">Kehkashan Fazal for YoEdutech Pvt. Ltd.</author>
+    <author email="kehkashan.f@mnmedutech.com" href="http://mnmedutech.com/">Kehkashan Fazal for MNMTech. Singapore. Pte. Ltd.</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />

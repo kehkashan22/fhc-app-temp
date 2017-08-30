@@ -14,10 +14,10 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..." color="primary">
     </ion-refresher-content>
   </ion-refresher>
-  
+
   <ion-list *ngIf="!nothing; else cat;">
     <ion-searchbar (ionInput)="getChapterByTitle($event)"></ion-searchbar>
-    <button ion-item *ngFor="let chapter of chapters" (tap)="toQuizzes(chapter)" class="list-grow-animation">
+    <button ion-item *ngFor="let chapter of chapters" (tap)="toQuizzes(chapter)" >
     <ion-avatar item-start [ngClass]="chapter.chapterType" class="animate-in-primary">
 
     </ion-avatar>
@@ -26,14 +26,14 @@
     </button>
   </ion-list>
  <ng-template #cat>
-   
+
   <div class="blank" ion-fixed no-bounce *ngIf="nothing">
     <img src="assets/images/blank.png" alt="Sorry Book">
   </div>
  </ng-template>
 </ion-content>
 
-<ion-footer no-border *ngIf="!nothing"> 
+<ion-footer no-border *ngIf="!nothing">
      <button ion-button block color="btn" (tap)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
     <ion-grid>
       <ion-row text-center>

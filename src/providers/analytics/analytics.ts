@@ -3,7 +3,6 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Injectable } from '@angular/core';
 import { Firebase } from '@ionic-native/firebase';
 import * as firebase from 'firebase';
-import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/forkJoin';
 
 @Injectable()
@@ -48,11 +47,6 @@ export class AnalyticsProvider {
         }).catch((error) => {
           console.log('Error calling setUserId -> ' + error);
         });
-        this.ga.addCustomDimension(1, 'DIM-VALUE').then(() => {
-          console.log('Successful call to addCustomDimension key : 1, value : DIM-VALUE');
-        }).catch((error) => {
-          console.log('Error calling addCustomDimension -> ' + error);
-        });
         this.ga.trackView(name).then(() => {
           console.log('Successful call to trackView with name : ' + name);
         }).catch((error) => {
@@ -71,11 +65,6 @@ export class AnalyticsProvider {
           console.log('Successful call to setUserId with userId : user.name');
         }).catch((error) => {
           console.log('Error calling setUserId -> ' + error);
-        });
-        this.ga.addCustomDimension(1, 'DIM-VALUE').then(() => {
-          console.log('Successful call to addCustomDimension key : 1, value : DIM-VALUE');
-        }).catch((error) => {
-          console.log('Error calling addCustomDimension -> ' + error);
         });
         this.ga.trackEvent(category, action, label).then(() => {
           console.log('Successful call to trackEvent with category : ' + category + ', action : ' + action + ', label : ' + label);

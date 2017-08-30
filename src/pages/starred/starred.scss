@@ -1,7 +1,6 @@
 page-starred {
-@import "../../../node_modules/compass-mixins/lib/compass";
 @import "../../../node_modules/compass-sass-mixins/lib/compass";
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers');
 
 $font-path: "../assets/fonts";
 
@@ -38,9 +37,9 @@ h1 {
 
 p{
   color: #fff;
-
   font-family: 'Open Sans', sans-serif;
 }
+
 .scene{position:relative;
   display:block;
   margin:0 auto;

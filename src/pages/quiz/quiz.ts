@@ -205,11 +205,11 @@ export class QuizPage implements OnInit {
     let perInt = +per | 0;
 
     if (perInt >= 60) {
-      this.percentClass = 'c100 p' + perInt + ' green ';
+      this.percentClass = '#00CC99';
     } else if (perInt < 40) {
-      this.percentClass = 'c100 p' + perInt;
+      this.percentClass = '#CA0936';
     } else {
-      this.percentClass = 'c100 p' + perInt + ' orange ';
+      this.percentClass =  '#F57D06';
     }
 
   }
@@ -248,7 +248,6 @@ export class QuizPage implements OnInit {
           text: 'No, I changed my mind!',
           role: 'cancel',
           handler: () => {
-            console.log('Cancelled!');
           }
         }
       ]

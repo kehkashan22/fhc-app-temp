@@ -223,12 +223,12 @@ export class ReportCardPage implements OnInit {
   private getClassString(per) {
     let perInt = +per | 0;
 
-    if (perInt >= 60) {
-      this.percentClass = 'c100 p' + perInt + ' green ';
+   if (perInt >= 60) {
+      this.percentClass = '#17A599';
     } else if (perInt < 40) {
-      this.percentClass = 'c100 p' + perInt;
+      this.percentClass = '#CA0936';
     } else {
-      this.percentClass = 'c100 p' + perInt + ' orange ';
+      this.percentClass =  '#F57D06';
     }
 
   }

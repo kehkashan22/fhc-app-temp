@@ -1,5 +1,4 @@
 page-quiz {
-  @import "../../assets/scss/_circle.scss";
   @import url('https://fonts.googleapis.com/css?family=Barrio');
   @import url('https://fonts.googleapis.com/css?family=Lobster');
   @import url('https://fonts.googleapis.com/css?family=Bad+Script');
@@ -68,14 +67,14 @@ page-quiz {
   }
   .quiz-description {
     font-size: 18px;
-    color: #C8C8C8;
+    color: map-get($colors, light);
   }
   #quiz-image {
-    display: block;
-    border-radius: 100px; //border: 1px solid #fff;
-    width: 175px;
+    display: block; //border-radius: 100px; //border: 1px solid #fff;
+    width: 180px;
     height: 120px;
-    margin: 30px auto 0; //box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+    margin: 30px auto 0; //
+
   }
   .quiz-text {
     color: map-get($colors, light)
@@ -130,5 +129,16 @@ page-quiz {
     padding-right: 16px!important;
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+  .current {
+    position: absolute;
+    color: map-get($colors, light);
+    font-weight: lighter;
+    line-height: 1;
+    top: auto;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
   }
 }

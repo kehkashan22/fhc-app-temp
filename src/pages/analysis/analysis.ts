@@ -74,7 +74,6 @@ export class AnalysisPage implements OnInit {
 
 
     this.quizzes = quizStore;
-    console.log(this.quizzes);
     for (let i = 0; i < this.quizzes.length; i++) {
       if (this.quizzes[i].quiz.nature === 'memory') {
         this.memoryQuizzes.push(this.quizzes[i].quiz);
@@ -123,8 +122,7 @@ export class AnalysisPage implements OnInit {
 
 
     if(this.speedSolved > 0){
-      this.speedPercent = this.totalPercent(this.speedSolved, this.speedQuizzes)
-      console.log("speed "+this.speedPercent);
+      this.speedPercent = this.totalPercent(this.speedSolved, this.speedQuizzes);
       this.options.title.text = this.setTitle(this.speedPercent);
     }else{
        this.options.title.text = 'Hurry up and solve something, buddy!';

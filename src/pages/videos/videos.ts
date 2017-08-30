@@ -46,7 +46,6 @@ private _analytics: AnalyticsProvider) {}
           text: 'No, I changed my mind!',
           role: 'cancel',
           handler: () => {
-            console.log('Cancelled!');
           }
         }
       ]
@@ -71,7 +70,6 @@ private _analytics: AnalyticsProvider) {}
           text: 'No, I changed my mind!',
           role: 'cancel',
           handler: () => {
-            console.log('Cancelled!');
           }
         }
       ]
@@ -99,10 +97,8 @@ private _analytics: AnalyticsProvider) {}
     loader.present();
     this.socialSharing.share("Head over to CA Farooq Haque's YouTube channel for more such content:\n", null, null, yourl).then(() => {
       loader.dismiss();
-      console.log("shareSheetShare: Success");
     }).catch(() => {
       loader.dismiss();
-      console.error("shareSheetShare: failed");
     });
   }
 

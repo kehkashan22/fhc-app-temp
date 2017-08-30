@@ -1,9 +1,3 @@
-/*
-  Name - Toast Service
-  Functionality - Shows Native Toast which is a small message.
-  Author - Shantanu Kamdi
-  Date - 07/06/2017
-*/
 import { Injectable } from '@angular/core';
 import { ToastController, ToastOptions } from 'ionic-angular';
 

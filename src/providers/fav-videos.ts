@@ -72,10 +72,6 @@ export class VideosService {
                   position: 'middle'
                 });
 
-                toast.onDidDismiss(() => {
-                  console.log('Dismissed toast');
-                });
-
                 toast.present();
             }
         );

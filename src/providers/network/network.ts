@@ -9,11 +9,10 @@ import { Network } from "@ionic-native/network";
 export class NetworkProvider {
 
   constructor(public http: Http, private diagnostic: Diagnostic, private network: Network, private alert: AlertController) {
-    console.log('Hello NetworkProvider Provider');
+
   }
 
    noConnection(): boolean {
-     console.log(this.network.type);
     return (this.network.type === 'none');
   }
 
@@ -29,13 +28,12 @@ export class NetworkProvider {
   showNetworkAlert() {
     let networkAlert = this.alert.create({
       title: 'No Internet Connection',
-      message: 'Please check your internet connection. Really '+this.network.type,
+      message: 'Please check your internet connection. You won\'t really be able to see anything on this page otherwise.',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-
           }
         },
         {

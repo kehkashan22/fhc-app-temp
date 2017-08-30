@@ -1,4 +1,3 @@
-import { NetworkProvider } from './network/network';
 import { GlobalsProvider } from './globals/globals';
 import { AuthProvider } from './auth';
 import { Injectable } from '@angular/core';
@@ -22,7 +21,6 @@ export class UserProvider {
     return new Promise((resolve, reject) => {
       firebase.database()
         .ref('/users/'+userId).child('/user').once('value', snapshot => {
-          console.log(snapshot.val());
           resolve(snapshot.val());
         });
     });
