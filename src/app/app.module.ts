@@ -55,12 +55,12 @@ import { RoundProgressService, RoundProgressEase, RoundProgressConfig } from "an
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
-    apiKey: "AIzaSyAutL08qJ8hTPM2860x-LHEAnDmgDEObRA",
-    authDomain: "fhc-ionic-app.firebaseapp.com",
-    databaseURL: "https://fhc-ionic-app.firebaseio.com",
-    projectId: "fhc-ionic-app",
-    storageBucket: "fhc-ionic-app.appspot.com",
-    messagingSenderId: "928506390872"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: ""
 };
 
 @NgModule({
