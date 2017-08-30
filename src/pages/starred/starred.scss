@@ -50,7 +50,6 @@ p{
 .cloud{
   position:absolute;
 }
-/*plane animation*/
 .plane{
   animation-duration: 1s;
   animation-name: anim-plane;
@@ -71,8 +70,6 @@ p{
     transform:translateY(95px);
   }
 }
-
-/* Cloud Animation */
 
 @keyframes fade{
   0%{ opacity: 0;}

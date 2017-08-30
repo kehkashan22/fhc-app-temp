@@ -12,14 +12,7 @@
 <ion-content>
 
     <ion-card *ngFor="let announcement of announcements">
-      <!-- <ion-item>
-      <ion-avatar item-start>
-        <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/notif.jpg">
-      </ion-avatar>
-      <h2 text-wrap>{{announcement.title}}</h2>
-    </ion-item> -->
-
-      <img [src]="announcement.img" *ngIf="announcement.img" />
+         <img [src]="announcement.img" *ngIf="announcement.img" />
         <ion-card-content>
           <ion-card-title>
             {{announcement.title}}

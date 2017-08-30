@@ -18,8 +18,7 @@
 
 
 <ion-content class="card-background-page background" scroll="false">
-  <!--Add a visit store functionality in slider portion-->
-  <div class="slider">
+   <div class="slider">
     <ion-slides pager loop>
       <ion-slide *ngFor="let slide of slides">
           <img [src]="slide.url">
@@ -34,35 +33,23 @@
         <div class="cards card1"  tappable (click)="toAnalysisPage()">
           <img src="assets/images/Analyse.png" />
           <div class="card-title">Learning Skills</div>
-           <!-- <div class="card-subtitle">
-            Determine your learning capability
-          </div> -->
-        </div>
+          </div>
       </ion-col>
       <ion-col col-6>
         <div class="cards card2" tappable [navPush]="quizLibraryPage">
           <img src="assets/images/Quiz.png" />
           <div class="card-title">Quizzes Galore!</div>
-          <!-- <div class="card-subtitle">
-            Practice makes perfect!
-          </div> -->
         </div>
       </ion-col>
       <ion-col col-6>
         <div class="cards card3" tappable [navPush]="rootLibraryPage">
           <img src="assets/images/Video.png" />
           <div class="card-title">Video Library</div>
-          <!-- <div class="card-subtitle">
-            Demo Videos for CA and CS students
-          </div> -->
-        </div>
+         </div>
       </ion-col>
       <ion-col col-6><div class="cards card4" tappable [navPush]="announcements">
          <img src="assets/images/Notification.png" />
           <div class="card-title">Knowledge Center</div>
-          <!-- <div class="card-subtitle">
-            PDFs, News, Offers and mouch more!
-          </div> -->
         </div>
       </ion-col>
     </ion-row>

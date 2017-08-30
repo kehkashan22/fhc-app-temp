@@ -53,8 +53,6 @@
 
 
   </div>
-
-  <!--To Analysis-->
   <ng-template #quizEnd>
     <div *ngIf="results" class="marks">
       <div id="content">
@@ -123,7 +121,6 @@
               <ion-buttons left>
                 <button [disabled]="!secondQuestion" ion-button icon-only clear small (tap)="changeExplanation('previous')" color="light">
                   PREV
-                  <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
                 </button>
               </ion-buttons>
 
@@ -134,7 +131,6 @@
               <ion-buttons left>
                 <button ion-button icon-only clear small (tap)="toResults()" color="light">
                   TO RESULTS
-                  <!--<ion-icon name="md-arrow-round-back" item-left></ion-icon>-->
                 </button>
               </ion-buttons>
 
@@ -144,7 +140,6 @@
             <div>
               <ion-buttons right>
                 <button ion-button icon-only clear small (tap)="changeExplanation('next')" item-right color="light">
-                 <!--<ion-icon name="md-arrow-round-forward" class="item-icon-right"></ion-icon>-->
                   NEXT
               </button>
               </ion-buttons>
@@ -226,6 +221,3 @@
 </ion-content>
 
 
-<!-- <ion-footer *ngIf="!question && results">  -->
-
-<!-- </ion-footer>  -->
