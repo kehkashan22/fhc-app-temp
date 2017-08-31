@@ -2,7 +2,7 @@ import { AnalyticsProvider } from './../../providers/analytics/analytics';
 import { QuizStore } from './../../data/quiz/quiz-store.interface';
 import { QuizStoreProvider } from './../../providers/quiz-store';
 import { Quizzes } from './../../data/quizzes.interface';
-import { LoadingController, AlertController, ViewController } from 'ionic-angular';
+import { LoadingController, AlertController} from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth';
 import { QuizService } from './../../providers/quiz';
 import { Answer } from './../../data/answer.interface';

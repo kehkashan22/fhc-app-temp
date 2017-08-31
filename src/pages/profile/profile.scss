@@ -63,12 +63,12 @@ page-profile {
           h1{
             margin-bottom: 0rem;
             margin-top: 3rem;
-            color: #5c5c5a;
+            color: #fff;
           }
           p{
              margin-top: 0rem;
               margin-bottom: 3rem;
-              color: #3c3c3a;
+              color: map-get($colors, light);
           }
         }
         .first{

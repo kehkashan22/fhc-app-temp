@@ -10,14 +10,14 @@
 
 
 <ion-content fullscreen #mycontent>
-   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..." color="primary">
-    </ion-refresher-content>
-  </ion-refresher>
-
   <ion-list *ngIf="!nothing; else cat;">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..."
+        color="primary">
+      </ion-refresher-content>
+    </ion-refresher>
     <ion-searchbar (ionInput)="getChapterByTitle($event)"></ion-searchbar>
-    <button ion-item *ngFor="let chapter of chapters" (tap)="toQuizzes(chapter)" >
+    <button ion-item *ngFor="let chapter of chapters" (tap)="toQuizzes(chapter)">
     <ion-avatar item-start [ngClass]="chapter.chapterType" class="animate-in-primary">
 
     </ion-avatar>
@@ -25,27 +25,30 @@
       <p class="animate-in-secondary">{{ chapter.quiz.length }} Quizzes</p>
     </button>
   </ion-list>
- <ng-template #cat>
+  <ng-template #cat>
 
-  <div class="blank" ion-fixed no-bounce *ngIf="nothing">
-    <img src="assets/images/blank.png" alt="Sorry Book">
-  </div>
- </ng-template>
+    <div class="blank" ion-fixed no-bounce *ngIf="nothing">
+      <img src="assets/images/blank.png" alt="Sorry Book">
+    </div>
+  </ng-template>
 </ion-content>
 
 <ion-footer no-border *ngIf="!nothing">
-     <button ion-button block color="btn" (tap)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
-    <ion-grid>
-      <ion-row text-center>
-        <ion-col class="a"  (tap)="filterChaps('a')">
-          A
-        </ion-col>
-        <ion-col class="b"  (tap)="filterChaps('b')">
-          B
-        </ion-col>
-        <ion-col class="c"  (tap)="filterChaps('c')">
-          C
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <button ion-button block color="btn" (tap)="toReportCard()">Get your Report for {{subjectName | titlecase}}</button>
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="a" (tap)="filterChaps('a')">
+        A
+      </ion-col>
+      <ion-col class="b" (tap)="filterChaps('b')">
+        B
+      </ion-col>
+      <ion-col class="c" (tap)="filterChaps('c')">
+        C
+      </ion-col>
+       <ion-col class="d" (tap)="filterChaps('all')">
+        All
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

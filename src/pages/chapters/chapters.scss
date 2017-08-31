@@ -40,4 +40,8 @@ page-chapters {
        background-repeat: no-repeat;
      }
 
+     .d{
+       background-color: map-get($colors, primary)
+     }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
 import { NetworkProvider } from './../../providers/network/network';
 import { QuizService } from './../../providers/quiz';
 
@@ -69,7 +69,7 @@ export class ChaptersPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    if(this.loader){
+    if (this.loader) {
       this.loader.dismiss();
     }
   }
@@ -113,7 +113,7 @@ export class ChaptersPage implements OnInit {
     }, 2000);
   }
 
-  presentAlert(){
+  presentAlert() {
     let alert = this._alert.create({
       title: 'A, B, C Breakup:',
       message: 'Chapters marked A are the most important, followed by B which are important and chapters marked C are general chapters.',
@@ -122,11 +122,14 @@ export class ChaptersPage implements OnInit {
     alert.present();
   }
 
-  filterChaps(val){
+  filterChaps(val) {
     this.chapters = this.tempChapters;
-    this.chapters = this.chapters.filter((chapter) => {
-      return (chapter.chapterType.toLowerCase() === val.toLowerCase())
-    });
+    if (val !== 'all') {
+      this.chapters = this.chapters.filter((chapter) => {
+        return (chapter.chapterType.toLowerCase() === val.toLowerCase())
+      });
+    }
+
   }
 
 }
