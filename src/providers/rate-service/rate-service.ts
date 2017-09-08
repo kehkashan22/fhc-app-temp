@@ -11,10 +11,9 @@ export class RateServiceProvider {
     this.platform.ready().then(
       () => {
         this.appRate.preferences.storeAppURL = {
-          ios: '849930087',
           android: 'market://details?id=in.fhconline.fhc'
         };
-        this.appRate.preferences.usesUntilPrompt = 5;
+        this.appRate.preferences.usesUntilPrompt = 11;
         this.appRate.preferences.customLocale = {
           title: 'Like what you see?',
           message: 'Please rate us for a continued impeccable service!',

@@ -182,7 +182,7 @@ export class AnalyseMePage implements OnInit {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'horizontalBar',
       data: {
-        labels: ["Test 1", "Test 2"],
+        labels: ["Quiz 1", "Quiz 2"],
         datasets: [{
           data: [this.marks1, this.marks2],
           backgroundColor: [

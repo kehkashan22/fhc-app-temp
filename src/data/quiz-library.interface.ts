@@ -10,7 +10,7 @@ export interface QuizLibrary {
           subjectId: string, //dt, idt, tax
           fa: [
             {
-              faId: string, //general, ammendments, case laws
+              faId: string, //general, amendments, case laws
               chapters: [
                 {
                   chapterId: string,

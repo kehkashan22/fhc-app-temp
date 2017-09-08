@@ -1,7 +1,7 @@
-import { CustomToast } from './../../providers/custom-toast';
+//import { CustomToast } from './../../providers/custom-toast';
 import { Component } from '@angular/core';
 import { EmailComposer } from '@ionic-native/email-composer';
-import { CallNumber } from '@ionic-native/call-number';
+//import { CallNumber } from '@ionic-native/call-number';
 import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
@@ -12,8 +12,8 @@ import { IonicPage } from 'ionic-angular';
 export class ContactPage {
 
   constructor(private emailComposer: EmailComposer,
-              private callNumber: CallNumber,
-            private _toast: CustomToast) {
+              //private callNumber: CallNumber,
+            ) {
   }
 
 
@@ -28,10 +28,10 @@ export class ContactPage {
                   this.emailComposer.open(email);
    }
 
-   callNow(number: string){
-      this.callNumber.callNumber(number, true)
-      .then()
-      .catch(() => this._toast.show('Could not launch dialler'));
-   }
+  //  callNow(number: string){
+  //     this.callNumber.callNumber(number, true)
+  //     .then()
+  //     .catch(() => this._toast.show('Could not launch dialler'));
+  //  }
 
 }

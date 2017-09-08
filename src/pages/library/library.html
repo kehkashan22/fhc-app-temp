@@ -21,7 +21,7 @@
       </ion-refresher-content>
     </ion-refresher>
     <button ion-item *ngFor="let videoGroup of videoCollection" [navPush]="videosPage" [navParams]="videoGroup">
-      <ion-icon class="animate-in-primary" [name]="videoGroup.icon" item-left></ion-icon>
+      <ion-icon class="animate-in-primary" color="btn" [name]="videoGroup.icon" item-left></ion-icon>
       <h2 class="animate-in-primary" text-wrap>{{ videoGroup.setId }}</h2>
       <p class="animate-in-secondary">{{ videoGroup.videos.length }} Videos</p>
     </button>
@@ -30,7 +30,7 @@
   <ng-template #noVids>
 
     <div class="nothing">
-      <img src="../assets/images/blank.png" alt="Sorry Cat">
+      <img src="assets/images/blank.png" alt="Sorry Cat">
     </div>
 
 

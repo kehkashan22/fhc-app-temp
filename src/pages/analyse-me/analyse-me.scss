@@ -1,4 +1,11 @@
 page-analyse-me {
+  .scroll-content{
+     background:transparent url('../assets/images/profilebg.png') no-repeat 0 0;
+      -webkit-background-size:cover;
+      -moz-background-size:cover;
+      -o-background-size:cover;
+      background-size:cover;
+  }
   vg-player {
       font-family: 'videogular';
       position: relative;
@@ -101,6 +108,10 @@ page-analyse-me {
         }
         .second{
           background: #CA0936;
+        }
+
+        hr{
+          border-top-width: 3px;
         }
 }
 

@@ -8,11 +8,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppRate } from '@ionic-native/app-rate';
 import { Firebase } from '@ionic-native/firebase';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { CallNumber } from '@ionic-native/call-number';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'
 import { Network } from '@ionic-native/network';
 import { Keyboard } from '@ionic-native/Keyboard';
@@ -20,7 +18,6 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Transfer  } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { FCM } from "@ionic-native/fcm";
-import { Badge } from '@ionic-native/badge'
 
 //Modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -55,12 +52,12 @@ import { RoundProgressService, RoundProgressEase, RoundProgressConfig } from "an
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
 const firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: ""
+    apiKey: "AIzaSyAutL08qJ8hTPM2860x-LHEAnDmgDEObRA",
+    authDomain: "fhc-ionic-app.firebaseapp.com",
+    databaseURL: "https://fhc-ionic-app.firebaseio.com",
+    projectId: "fhc-ionic-app",
+    storageBucket: "fhc-ionic-app.appspot.com",
+    messagingSenderId: "928506390872"
 };
 
 @NgModule({
@@ -89,13 +86,11 @@ const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Firebase,
-    GoogleAnalytics,
     VideosService,
     QuizService,
     VideosProvider,
     EmailComposer,
     InAppBrowser,
-    CallNumber,
     Logger,
     AuthProvider,
     AngularFireDatabase,
@@ -108,7 +103,6 @@ const firebaseConfig = {
     YoutubeVideoPlayer,
     FCM,
     Diagnostic,
-    Badge,
     Network,
     NetworkProvider,
     SocialSharing,

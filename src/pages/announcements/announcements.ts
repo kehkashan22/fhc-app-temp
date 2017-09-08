@@ -56,7 +56,7 @@ export class AnnouncementsPage {
       }
       else if (this.platform.is('android')) {
         this.diagnostic.requestExternalStorageAuthorization().then(() => {
-          this.storageDirectory = this.file.externalRootDirectory + 'FHC/';
+          this.storageDirectory = this.file.externalRootDirectory + 'Downloads/';
         }).catch(error => {
           this.storageDirectory = this.file.externalApplicationStorageDirectory;
         });
@@ -129,26 +129,12 @@ export class AnnouncementsPage {
         alert.present();
       }
       else {
-        let alert = this.alertCtrl.create({
-          title: 'Sorry, could not download your file!',
-          message: '' + entry.Error,
-          buttons: [{
-            text: 'Ok',
-          }]
-        });
-        alert.present();
+        this.iab.create(url, "_system", "location=yes");
       }
     },
       (err) => {
         loader.dismiss();
-        let alert = this.alertCtrl.create({
-          title: 'Sorry, could not download your file!',
-          message: err.json(),
-          buttons: [{
-            text: 'Ok',
-          }]
-        });
-        alert.present();
+        this.iab.create(url, "_system", "location=yes");
       });
   }
 
@@ -157,7 +143,7 @@ export class AnnouncementsPage {
   }
 
   shareSheetShare(announcement) {
-    const playstore = "https://play.google.com/store/apps/topic?id=editors_choice";
+    const playstore = "https://goo.gl/Xd7R9K";
     let loader = this._loader.create({
       spinner: 'bubbles',
       content: 'breathe in...breathe out...'

@@ -1,6 +1,6 @@
 /*
   Name - Videos Provider
-  Functionality - Provider for all videos and ammendments fetched from server database
+  Functionality - Provider for all videos and amendments fetched from server database
   Author - Kehkashan Fazal
   Date - 08/06/2017
 */

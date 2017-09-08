@@ -72,10 +72,10 @@ page-profile {
           }
         }
         .first{
-          background: #EB5777;
+          background: map-get($colors, profile1);
         }
         .second{
-          background: #6EB4DF;
+          background: map-get($colors, profile2);
         }
       }
 }

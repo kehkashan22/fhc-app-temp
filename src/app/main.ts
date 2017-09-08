@@ -4,10 +4,10 @@ import { AppModule } from './app.module';
 
 import 'web-animations-js/web-animations.min';
 // Uncomment it for production
-/*import { enableProdMode } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 
 
-enableProdMode();*/
+enableProdMode();
 
 
 platformBrowserDynamic().bootstrapModule(AppModule);
