@@ -25,4 +25,5 @@ export class AnalyticsProvider {
       .catch((error: any) => console.error(error));
 
   }
+
 }

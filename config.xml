@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="in.fhconline.fhc" version="0.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="in.fhconline.fhc" version="0.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Farooq Haque Classes</name>
     <description>Best app for CA/CS Students to practice, learn and stay updated w/ DT, IDT and Tax!</description>
     <author email="kehkashan.f@mnmedutech.com" href="http://mnmedutech.com/">Kehkashan Fazal for MNMTech. Singapore. Pte. Ltd.</author>
@@ -99,14 +99,13 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
-    <engine name="android" spec="^6.2.3" />
-    <engine name="browser" spec="^4.1.0" />
     <plugin name="com.moust.cordova.videoplayer" spec="https://github.com/moust/cordova-plugin-videoplayer.git">
         <variable name="locator" value="https://github.com/moust/cordova-plugin-videoplayer.git" />
         <variable name="id" value="com.moust.cordova.videoplayer" />
     </plugin>
     <plugin name="cordova-plugin-apprate" spec="^1.3.0" />
-    <plugin name="cordova-plugin-console" spec="^1.0.7" />
+    <plugin name="cordova-plugin-badge" spec="^0.8.1" />
+    <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-email" spec="^1.2.6" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.4" />
@@ -126,4 +125,5 @@
     <plugin name="cordova.plugins.diagnostic" spec="^3.6.5" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <engine name="browser" spec="~4.1.0" />
 </widget>

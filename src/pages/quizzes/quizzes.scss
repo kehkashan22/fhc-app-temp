@@ -25,7 +25,7 @@ page-quizzes {
     b{
       color:white;
     }
-    
+
   }
   .center {
     display: flex;
@@ -41,7 +41,7 @@ page-quizzes {
     width: 0;
 	  height: 0;
     border-top: 65px solid  map-get($colors, checked);
-    opacity:0.90;  
+    opacity:0.90;
     border-right: 65px solid transparent;
   }
 
@@ -63,6 +63,13 @@ page-quizzes {
     ion-fab[right] {
     right: 0px !important;
 }
-  
+
+.blank{
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 }
 

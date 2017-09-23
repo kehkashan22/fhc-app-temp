@@ -29,6 +29,7 @@ export class SignUp {
   private form: FormGroup;
 
   fireStore = firebase.database().ref('/pushTokens');
+  typeOfCourse = '';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -47,7 +48,7 @@ export class SignUp {
         password: [ '', Validators.compose([Validators.required, Validators.minLength(6)])],
         confirmPassword: [ '', Validators.required, this.validatePasswordConfirmation.bind(this)],
         address: [''],
-        attemptNo: ['', Validators.required],
+        attemptNo: [''],
         pincode: [ '', Validators.compose([Validators.minLength(6), Validators.maxLength(6)])],
         attemptDate: [ new Date().toISOString(), Validators.compose([ Validators.required ]) ],
         dob: [''],

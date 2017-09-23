@@ -2,138 +2,129 @@
   <img src="https://s3-ap-southeast-1.amazonaws.com/fhc.app/icon.png" alt="Farooq Haque Classes">
   <hr>
   <h6><b>Sign Up</b></h6>
-  <form [formGroup] = "form">
-  <ion-list>
-  <ion-item>
-    <ion-label floating>
-        *Full Name
-    </ion-label>
-      <ion-input type="text" formControlName = "fullName" [class.invalid] = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!form.controls.fullName.valid && (form.controls.fullName.dirty || submitAttempt)" >
-    <p>Please enter proper Full Name</p>
-  </ion-item>
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>
+          *Full Name
+        </ion-label>
+        <ion-input type="text" formControlName="fullName" [class.invalid]="!form.controls.fullName.valid && (form.controls.fullName.dirty)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.fullName.valid && (form.controls.fullName.dirty)">
+        <p>Please enter proper Full Name</p>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        *Email
-      </ion-label>
-      <ion-input type="email"  formControlName = "emailId" [class.invalid] = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!form.controls.emailId.valid && (form.controls.emailId.dirty || submitAttempt)" >
-    <p>Please enter proper Email</p>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          *Email
+        </ion-label>
+        <ion-input type="email" formControlName="emailId" [class.invalid]="!form.controls.emailId.valid && (form.controls.emailId.dirty)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.emailId.valid && (form.controls.emailId.dirty)">
+        <p>Please enter proper Email</p>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        *Phone Number
-      </ion-label>
-      <ion-input type="number"  formControlName = "phoneNumber" [class.invalid] = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty || submitAttempt)" >
-    <p>Phone Number should be 10 digits long</p>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          *Phone Number
+        </ion-label>
+        <ion-input type="number" formControlName="phoneNumber" [class.invalid]="!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.phoneNumber.valid && (form.controls.phoneNumber.dirty)">
+        <p>Phone Number should be 10 digits long</p>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        Address
-    </ion-label>
-      <ion-input type="text" formControlName = "address" [class.invalid] = "!form.controls.address.valid && (form.controls.address.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!form.controls.address.valid && (form.controls.address.dirty || submitAttempt)" >
-    <p>Please enter address</p>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          Address
+        </ion-label>
+        <ion-input type="text" formControlName="address" [class.invalid]="!form.controls.address.valid && (form.controls.address.dirty)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.address.valid && (form.controls.address.dirty)">
+        <p>Please enter address</p>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        *Pincode
-    </ion-label>
-    <ion-input type="number" formControlName = "pincode" [class.invalid] = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!form.controls.pincode.valid && (form.controls.pincode.dirty || submitAttempt)" >
-    <p>Pin code should be 6 digits long</p>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          *Pincode
+        </ion-label>
+        <ion-input type="number" formControlName="pincode" [class.invalid]="!form.controls.pincode.valid && (form.controls.pincode.dirty)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.pincode.valid && (form.controls.pincode.dirty)">
+        <p>Pin code should be 6 digits long</p>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        *Password
-    </ion-label>
-    <ion-input type="password" formControlName = "password" [class.invalid] = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!form.controls.password.valid && (form.controls.password.dirty || submitAttempt)" >
-    <p>Password should be atleast 6 characters long</p>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          *Password
+        </ion-label>
+        <ion-input type="password" formControlName="password" [class.invalid]="!form.controls.password.valid && (form.controls.password.dirty)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.password.valid && (form.controls.password.dirty)">
+        <p>Password should be atleast 6 characters long</p>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        *Confirm Password
-    </ion-label>
-    <ion-input type="password" formControlName = "confirmPassword" [class.invalid] = "!form.controls.confirmPassword.valid && (form.controls.confirmPassword.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-   <ion-item *ngIf="form.controls.confirmPassword.hasError('notSame')">
-    <p>Passwords do not match!</p>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          *Confirm Password
+        </ion-label>
+        <ion-input type="password" formControlName="confirmPassword" [class.invalid]="!form.controls.confirmPassword.valid && (form.controls.confirmPassword.dirty)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="form.controls.confirmPassword.hasError('notSame')">
+        <p>Passwords do not match!</p>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        *Attempt Number
-    </ion-label>
-    <ion-input type="number" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
-  </ion-item>
-  <ion-item *ngIf = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)" >
-    <p>Please enter attempt number</p>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          Number of Attempts given
+        </ion-label>
+        <ion-input type="number" formControlName="attemptNo"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        *Attempt Date
-    </ion-label>
-    <ion-datetime displayFormat="MMMM-YYYY"  max="2025" formControlName="attemptDate"></ion-datetime>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          *Attempt Date
+        </ion-label>
+        <ion-datetime displayFormat="MMMM-YYYY" max="2025" formControlName="attemptDate"></ion-datetime>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>
-        Date of Birth
-    </ion-label>
-    <ion-datetime displayFormat="DD-MM-YYYY" formControlName="dob"></ion-datetime>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>
+          Date of Birth
+        </ion-label>
+        <ion-datetime displayFormat="DD-MM-YYYY" formControlName="dob"></ion-datetime>
+      </ion-item>
 
-  <ion-item>
-    <ion-label>
+      <ion-item>
+        <ion-label>
+          Gender
+        </ion-label>
+        <ion-select formControlName="gender" mode="ios">
+          <ion-option value="f">Female</ion-option>
+          <ion-option value="m">Male</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list radio-group [(ngModel)]="typeOfCourse" formControlName="typeOfCourse" mode="ios" >
+      <ion-list-header>
         *Type of Course
-    </ion-label>
-    <ion-select formControlName = "typeOfCourse" interface="popover">
-      <ion-option value="ca">CA</ion-option>
-      <ion-option value="cs">CS</ion-option>
-    </ion-select>
-  </ion-item>
+      </ion-list-header>
+      <ion-item>
+        <ion-label> CA </ion-label>
+        <ion-radio value="ca"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label> CS </ion-label>
+        <ion-radio type="radio" value="cs"></ion-radio>
+      </ion-item>
+    </ion-list>
 
-  <ion-item>
-    <ion-label>
-        Gender
-    </ion-label>
-    <ion-select formControlName = "gender" interface="popover">
-      <ion-option value="f">Female</ion-option>
-      <ion-option value="m">Male</ion-option>
-    </ion-select>
-  </ion-item>
-
-  </ion-list>
-
-  <div>
-    <button
-    ion-button
-    block
-    color = "btn"
-    (tap) = "signupUser()"
-    [disabled]="!form.valid">Sign Up</button><hr>
-    <button
-    ion-button
-    block
-    color = "btn"
-    outline
-    (tap) = "navigateToLogin()"
-    >Cancel</button>
-  </div>
-</form>
+    <div>
+      <button ion-button block color="btn" (tap)="signupUser()" [disabled]="!form.valid">Sign Up</button>
+      <hr>
+      <button ion-button block color="btn" outline (tap)="navigateToLogin()">Cancel</button>
+    </div>
+  </form>
 </ion-content>

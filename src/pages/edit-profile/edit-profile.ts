@@ -35,7 +35,7 @@ export class EditProfilePage {
         phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
         password: [ '', Validators.required],
         address: [''],
-        attemptNo: ['', Validators.required],
+        attemptNo: [''],
         pincode: [ '', Validators.minLength(6)],
         attemptDate: ['', Validators.required],
         dob: [''],

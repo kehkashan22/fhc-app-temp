@@ -62,13 +62,13 @@ export class StarredPage implements OnInit{
   }
 
     shareSheetShare(video){
-    const yourl = "https://goo.gl/Xd7R9K";
+    const yourl = "http://youtu.be/"+video.url;
     let loader = this._loader.create({
       spinner: 'bubbles',
       content: 'breathe in...breathe out...'
     });
     loader.present();
-    this.socialSharing.share("Follow Farooq Sir's YouTube channel for more such content. Or download our app for videos, pdf, quizzes and more at:\n", null, null, yourl).then(() => {
+    this.socialSharing.share("Follow Farooq Sir's YouTube channel for more such content. Or download our app for videos, pdf, quizzes and more at:\nhttps://goo.gl/Xd7R9K", null, null, yourl).then(() => {
       loader.dismiss();
     }).catch(() => {
       loader.dismiss();
