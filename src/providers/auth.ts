@@ -25,7 +25,7 @@ export class AuthProvider {
   /* Register method
      params: user - fullName, emailId,phoneNumber, password, address, pincode, attemptNumber, attemptDate, dob
   */
-  registerUser(user, password): firebase.Promise<any>{
+  registerUser(user, password): Promise<any>{
     this.logger.log('registerUser()');
     this.logger.log('User in registerUser() '+user);
 
@@ -58,7 +58,7 @@ export class AuthProvider {
     return this.af.auth.signInWithEmailAndPassword(emailId, password);
   }
 
-  forgotPassword(userEmailId): firebase.Promise<void> {
+  forgotPassword(userEmailId): Promise<void> {
 
     let email = userEmailId.emailId;
 
@@ -66,7 +66,7 @@ export class AuthProvider {
 
   }
 
-  logout(): firebase.Promise<any>{
+  logout(): Promise<any>{
     firebase.database().ref('/users'+firebase.auth().currentUser.uid)
     .child('/user').off();
 

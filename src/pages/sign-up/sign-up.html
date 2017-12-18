@@ -74,12 +74,12 @@
         <p>Passwords do not match!</p>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label floating>
           Number of Attempts given
         </ion-label>
         <ion-input type="number" formControlName="attemptNo"></ion-input>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item>
         <ion-label floating>
@@ -99,27 +99,42 @@
         <ion-label>
           Gender
         </ion-label>
-        <ion-select formControlName="gender" mode="ios">
+        <ion-select formControlName="gender" mode = "ios">
           <ion-option value="f">Female</ion-option>
           <ion-option value="m">Male</ion-option>
         </ion-select>
       </ion-item>
 
+      <ion-item>
+        <ion-label>
+          *Course
+        </ion-label>
+        <ion-select [(ngModel)]="typeOfCourse" formControlName="typeOfCourse" mode="ios">
+          <ion-option [value]="level" *ngFor="let level of levels">{{level}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- <ion-list radio-group [(ngModel)]="typeOfCourse" formControlName="typeOfCourse" mode="ios" >
+        <ion-list-header>
+          *Course
+        </ion-list-header>
+        <ion-item *ngFor="let level of levels" >
+          <ion-label> {{level}} </ion-label>
+          <ion-radio [value]="level"></ion-radio>
+        </ion-item>
+      </ion-list> -->
+
     </ion-list>
 
-    <ion-list radio-group [(ngModel)]="typeOfCourse" formControlName="typeOfCourse" mode="ios" >
+    <!-- <ion-list radio-group [(ngModel)]="typeOfCourse" formControlName="typeOfCourse" mode="ios" >
       <ion-list-header>
-        *Type of Course
+        *Course
       </ion-list-header>
-      <ion-item>
-        <ion-label> CA </ion-label>
-        <ion-radio value="ca"></ion-radio>
+      <ion-item *ngFor="let level of levels" >
+        <ion-label> {{level}} </ion-label>
+        <ion-radio [value]="level"></ion-radio>
       </ion-item>
-      <ion-item>
-        <ion-label> CS </ion-label>
-        <ion-radio type="radio" value="cs"></ion-radio>
-      </ion-item>
-    </ion-list>
+    </ion-list> -->
 
     <div>
       <button ion-button block color="btn" (tap)="signupUser()" [disabled]="!form.valid">Sign Up</button>

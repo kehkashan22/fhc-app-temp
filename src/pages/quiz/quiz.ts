@@ -80,6 +80,7 @@ export class QuizPage implements OnInit {
     this.chapterId = this.navParams.get('chapterId');
     this.tempQuiz = _.cloneDeep(this.navParams.get('quiz'));
     this.chapterType = this.navParams.get('chapterType');
+    console.log('CHAPTER TYPE', this.chapterType);
     if (isSolved) {
       let tempQuizStore: QuizStore = {
         subjectId: this.subjectId,
@@ -198,6 +199,7 @@ export class QuizPage implements OnInit {
       chapterType: this.chapterType,
       quiz: _.cloneDeep(this.quiz),
     };
+    console.log('QUIZ STORE', quizStore);
     this._quizStore.addToQuizCollection(quizStore);
   }
 

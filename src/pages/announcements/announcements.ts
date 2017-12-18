@@ -83,11 +83,10 @@ export class AnnouncementsPage {
       this.loader.dismiss();
       this._network.showNetworkAlert();
     } else {
-      this.afd.list('/posts', {
-        query: {
-          orderByChild: 'date'
-        }
-      }).subscribe(data => {
+      this.afd.list('/posts',
+      ref =>
+        ref.orderByChild('date')
+      ).valueChanges().subscribe(data => {
         data = data.reverse();
         this.announcements = data;
         this.temp=this.announcements;
@@ -154,16 +153,16 @@ export class AnnouncementsPage {
 Shares using the share sheet
 
 Param	Type	Details
-message	string	
+message	string
 The message you would like to share.
-subject	string	
+subject	string
 The subject
-file	string|Array.<string>	
+file	string|Array.<string>
 URL(s) to file(s) or image(s), local path(s) to file(s) or image(s), or base64 data of an image. Only the first file/image will be used on Windows Phone.
-url	string	
+url	string
 A URL to share
      */
-    
+
     this.socialSharing.share(announcement.message+"\n\nVisit http://fhconline.in for our products, or download our app for videos, quizzes, news and pdf and much more at:\n ", announcement.title, announcement.img, playstore).then(() => {
       loader.dismiss();
     }).catch(() => {

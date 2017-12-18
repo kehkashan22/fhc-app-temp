@@ -18,6 +18,15 @@ export class EditProfilePage {
   private user: User;
   /* FormGroup which will be used in html */
   private form: FormGroup;
+  time: any = '';
+  levels = [
+    "CA Final",
+    "CA Intermediate",
+    "CA Foundation",
+    "CS Professional",
+    "CS Executive",
+    "CS Foundation"
+  ];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -35,12 +44,12 @@ export class EditProfilePage {
         phoneNumber: [ '', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
         password: [ '', Validators.required],
         address: [''],
-        attemptNo: [''],
         pincode: [ '', Validators.minLength(6)],
         attemptDate: ['', Validators.required],
         dob: [''],
         gender: [''],
-        typeOfCourse: ['', Validators.required]
+        typeOfCourse: ['', Validators.required],
+
     });
 
   }
@@ -56,13 +65,12 @@ export class EditProfilePage {
 
     this._user.getUser().then((data: User) => {
       this.user = data;
-
+      console.log(this.user);
 
       this.form.get('fullName').setValue(this.user.fullName);
       this.form.get('emailId').setValue(this.user.emailId);
       this.form.get('phoneNumber').setValue(this.user.phoneNumber);
       this.form.get('address').setValue(this.user.address);
-      this.form.get('attemptNo').setValue(this.user.attemptNo);
       this.form.get('attemptDate').setValue(this.user.attemptDate);
       this.form.get('pincode').setValue(this.user.pincode);
       this.form.get('dob').setValue(this.user.dob);
@@ -87,12 +95,12 @@ export class EditProfilePage {
         emailId: this.form.value.emailId,
         phoneNumber: this.form.value.phoneNumber,
         address: this.form.value.address,
-        attemptNo: this.form.value.attemptNo,
         pincode: this.form.value.pincode,
         attemptDate: this.form.value.attemptDate,
         dob: this.form.value.dob,
         gender: this.form.value.gender,
-        typeOfCourse: this.form.value.typeOfCourse
+        typeOfCourse: this.form.value.typeOfCourse,
+        timeOfCreation: this.user.timeOfCreation
       }
 
 

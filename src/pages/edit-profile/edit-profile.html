@@ -81,20 +81,6 @@
       <ion-row>
         <ion-col col-4>
           <ion-label  >
-        Number of Attempts given
-    </ion-label>
-
-        </ion-col>
-        <ion-col col-8>
-          <ion-input type="number" formControlName = "attemptNo" [class.invalid] = "!form.controls.attemptNo.valid && (form.controls.attemptNo.dirty || submitAttempt)"></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col col-4>
-          <ion-label  >
         *Attempt Date
     </ion-label>
         </ion-col>
@@ -127,8 +113,7 @@
         </ion-col>
         <ion-col col-8>
           <ion-select formControlName = "typeOfCourse" interface="popover">
-            <ion-option value="ca">CA</ion-option>
-            <ion-option value="cs">CS</ion-option>
+            <ion-option [value]="level" *ngFor="let level of levels">{{level}}</ion-option>
           </ion-select>
         </ion-col>
       </ion-row>
