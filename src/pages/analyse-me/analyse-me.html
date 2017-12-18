@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Analyse Yourself!</ion-title>
+    <ion-title>Learn 'Yo' Way!</ion-title>
     <ion-buttons right>
       <button ion-button (tap)="presentInstructions()">
         <ion-icon name="help"></ion-icon>
@@ -46,7 +46,7 @@
 
       <!--QUIZ PORTION-->
     </ng-template>
-    <div *ngIf="!video; else videoTag" horizontal-padding>
+    <div *ngIf="!video; else videoTag" horizontal-padding class="last">
       <progress-bar [progress]="progressIndex" [total]="quizCollection?.length"></progress-bar>
       <ion-item text-wrap no-lines>
         <p>Based on what you just heard, answer the following questions:</p>
@@ -79,7 +79,7 @@
                 </ion-grid>
 
               </ion-label>
-              <ion-radio [value]="answer" (tap)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
+              <ion-radio [value]="answer" (click)="changeQuestion(i, j)" mode="ios" color="headerColor"></ion-radio>
             </ion-item>
           </ion-list>
         </ion-slide>
@@ -92,32 +92,43 @@
     <div class="quiz" padding>
 
       <div class="div-img">
-  <img src="assets/images/grad.png" alt="Great!">
-</div>
-          <ion-card>
-            <ion-card-header text-center>Your Analysis is complete</ion-card-header>
-            <ion-card-content>
-              <p text-center>Compare your scores:</p>
-                 <canvas #barCanvas></canvas>
-            </ion-card-content>
-          </ion-card>
+        <img src="assets/images/grad.png" alt="Great!">
+      </div>
+      <ion-card>
+        <ion-card-header text-center>Your Analysis is complete</ion-card-header>
+        <ion-card-content>
+          <p text-center>Compare your scores:</p>
+          <canvas #barCanvas></canvas>
+        </ion-card-content>
+      </ion-card>
 
-<ion-grid>
-      <ion-row>
-        <ion-col col-6 class="first">
-          <h1>{{marks1*100/max}}%</h1>
-          <p>in Quiz 1</p>
-        </ion-col>
-        <ion-col col-6 class="second">
-          <h1>{{marks2*100/max}}%</h1>
-          <p>in Quiz 2</p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-     <button ion-button block outline (tap)="getExplanation()" color="btn">Get Overview</button>
-      <button ion-button block outline (tap)="getAnswers()" >Check correct answers</button>
-      <button ion-button block outline (tap)="resetScore()" color="btn">Re-try Analysis</button>
-      <button ion-button block outline (tap)="visitStore()" >Visit Store</button>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 class="first">
+            <h1>{{marks1*100/max}}%</h1>
+            <p>in Quiz 1</p>
+          </ion-col>
+          <ion-col col-6 class="second">
+            <h1>{{marks2*100/max}}%</h1>
+            <p>in Quiz 2</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <button ion-button block round outline (tap)="getExplanation()" color="chapterB">Get Overview</button> -->
+      <hr>
+      <ion-grid>
+        <ion-row>
+          <ion-grid col-6>
+            <button ion-button (tap)="getAnswers()" color="chapterB">Check answers</button>
+
+          </ion-grid>
+          <ion-grid col-6>
+            <button ion-button (tap)="resetScore()" color="chapterA">Re-try Analysis</button>
+
+          </ion-grid>
+        </ion-row>
+      </ion-grid>
+      <button ion-button round block outline (tap)="visitStore()" color="btn">View our Products</button>
 
 
     </div>

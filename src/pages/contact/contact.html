@@ -11,34 +11,36 @@
 
 
 <ion-content fullscreen>
-   <ion-list>
-  <button class="content text" ion-item (tap)="callNow('00919422107444')">
+  <ion-list>
+    <ion-item class="content text" ion-item>
     Mobile:
     <p class="text">+91-9422107444</p>
     <ion-icon name="phone-portrait" item-end></ion-icon>
-  </button>
+  </ion-item>
 
-  <button class="content text" ion-item (tap)="callNow('07122521444')">
-    Landline:
+    <ion-item class="content text" ion-item>
+    Landline 1:
     <p class="text">+712-2521444</p>
     <ion-icon name="call" item-end></ion-icon>
-  </button>
+  </ion-item>
 
- <button class="content text" ion-item (tap)="mailTo('info@fhconline.in')">
+  <ion-item class="content text" ion-item>
+    Landline 2:
+    <p class="text">+712-2531444</p>
+    <ion-icon name="call" item-end></ion-icon>
+  </ion-item>
+
+    <button class="content text" ion-item (tap)="mailTo('info@fhconline.in')">
       For Enquiries:
       <p class="text">info@fhconline.in</p>
       <ion-icon name="mail" item-end></ion-icon>
 </button>
-</ion-list>
+  </ion-list>
 
-<div class="address">
-  <ion-item class="content text" no-lines>
-    <h3 >Address:</h3>
-    <p text-wrap>F.N. 308, Mangalam Arcade Shivaji Nagar Nagpur Nagpur MH 440010 IN</p>
-  </ion-item>
-</div>
-
- <ion-item class="content text" no-lines>
-    <h3 >Please contact us in case of any queries.</h3>
-  </ion-item>
+  <div class="address">
+    <ion-item class="content text" no-lines>
+      <h3>Address:</h3>
+      <p text-wrap> 3rd Floor, Mangalam Arcade, North Ambazari Road, Gokulpeth, Nagpur – 440010</p>
+    </ion-item>
+  </div>
 </ion-content>

@@ -10,14 +10,14 @@ export class GlobalsProvider {
         {
           subjectId: 'dt',
           subjectName: 'direct tax',
-          type: ['general', 'ammendments', 'case laws'], //TYPE
+          type: ['general', 'amendments', 'case laws'], //TYPE
           fa: ['fa2016', 'fa2017']
         },
 
         {
           subjectId: 'idt',
           subjectName: 'indirect tax',
-          type: ['general', 'ammendments', 'case laws'], //TYPE
+          type: ['general', 'amendments', 'case laws'], //TYPE
           fa: ['fa2016', 'fa2017'] // TYPE
         }
       ] //SUBJECT
@@ -27,7 +27,7 @@ export class GlobalsProvider {
         {
           subjectId: 'tax',
           subjectName: 'tax',
-          type: ['general', 'ammendments', 'case laws'], //TYPE
+          type: ['general', 'amendments', 'case laws'], //TYPE
           fa: ['fa2016', 'fa2017'] //TYPE
         }
       ] //SUBJECT
@@ -41,7 +41,7 @@ export class GlobalsProvider {
         {
           subjectId: 'altp',
           subjectName: 'advanced tax laws and practices',
-          type: ['general', 'ammendments', 'case laws'], //TYPE
+          type: ['general', 'amendments', 'case laws'], //TYPE
           fa: ['fa2016', 'fa2017'] //TYPE
         }
       ] //SUBJECT
@@ -51,7 +51,7 @@ export class GlobalsProvider {
         {
           subjectId: 'ltp',
           subjectName: 'tax laws and practices',
-          type: ['general', 'ammendments', 'case laws'], //TYPE
+          type: ['general', 'amendments', 'case laws'], //TYPE
           fa: ['fa2016', 'fa2017'] //TYPE
         }
       ] //SUBJECT

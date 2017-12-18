@@ -1,5 +1,4 @@
 import { AnalyticsProvider } from './../providers/analytics/analytics';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { IabProvider } from './../providers/iab/iab';
 
 import { Component, ViewChild, NgZone } from '@angular/core';
@@ -53,7 +52,6 @@ export class MyApp {
     public authProvider: AuthProvider,
     private app: App,
     private _iab: IabProvider,
-  private ga:  GoogleAnalytics,
 private _analytics: AnalyticsProvider) {
 
 
