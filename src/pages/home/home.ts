@@ -53,7 +53,8 @@ export class HomePage {
     { url: this.url+"slide4.png", text: "Test Slide3" }
   ];
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     private _auth: AuthProvider,
     private _videosStore: VideosService,
     private _quizStore: QuizStoreProvider,

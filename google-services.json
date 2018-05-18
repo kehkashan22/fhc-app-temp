@@ -8,37 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:928506390872:android:764d2cb7da3280eb",
-        "android_client_info": {
-          "package_name": "io.ionic.starter"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "928506390872-frdice4p9nm187f30omk23kh0ujmrgrm.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAfzUJp2NKlxloSc7eq8Ir1o_X8Qn6l-Dc"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:928506390872:android:1dc67939fab05a0c",
         "android_client_info": {
           "package_name": "in.fhconline.fhc"
@@ -46,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "928506390872-d7rsbtb54s59632emaun4sn2okc7kv3h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.fhconline.fhc",
+            "certificate_hash": "d3326f43c8db15fa7e58a0ffc0102223b43b0763"
+          }
+        },
+        {
           "client_id": "928506390872-frdice4p9nm187f30omk23kh0ujmrgrm.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -60,8 +37,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928506390872-5h9n2bj0mhq635gdip11njb1gbs64jnm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dg.gfhfghfgh.tgh"
+              }
+            },
+            {
+              "client_id": "928506390872-frdice4p9nm187f30omk23kh0ujmrgrm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

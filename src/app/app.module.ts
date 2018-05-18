@@ -7,7 +7,6 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppRate } from '@ionic-native/app-rate';
-import { Firebase } from '@ionic-native/firebase';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Diagnostic } from '@ionic-native/diagnostic';
@@ -43,22 +42,16 @@ import { NetworkProvider } from '../providers/network/network';
 
 /* For Firebase Related */
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalsProvider } from '../providers/globals/globals';
 
 //Round progress bar
 import { RoundProgressService, RoundProgressEase, RoundProgressConfig } from "angular-svg-round-progressbar/dist";
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { FIREBASE_CONFIG } from './firebase.credentials';
 
 /* Firebase config object. Need to make it dynamic. Temp hack*/
-const firebaseConfig = {
-    apiKey: "AIzaSyAutL08qJ8hTPM2860x-LHEAnDmgDEObRA",
-    authDomain: "fhc-ionic-app.firebaseapp.com",
-    databaseURL: "https://fhc-ionic-app.firebaseio.com",
-    projectId: "fhc-ionic-app",
-    storageBucket: "fhc-ionic-app.appspot.com",
-    messagingSenderId: "928506390872"
-};
+
 
 @NgModule({
   declarations: [
@@ -74,8 +67,9 @@ const firebaseConfig = {
       scrollAssist: false,
       swipeBackEnabled: false
     }),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -85,7 +79,6 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Firebase,
     VideosService,
     QuizService,
     VideosProvider,
@@ -93,7 +86,6 @@ const firebaseConfig = {
     InAppBrowser,
     Logger,
     AuthProvider,
-    AngularFireDatabase,
     Keyboard,
     UserProvider,
     GlobalsProvider,

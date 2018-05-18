@@ -17,7 +17,7 @@ import { AuthProvider } from '../../providers/auth';
 })
 export class LoginWithEmailPage {
 
-  private loginForm: FormGroup;
+ loginForm: FormGroup;
 
   /* For Validation purposes */
   private submitAttempt: boolean = false;

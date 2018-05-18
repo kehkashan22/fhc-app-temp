@@ -12,7 +12,7 @@ import * as firebase from 'firebase';
 })
 export class UpdatePasswordPage {
 
-  private newPassword: string;
+  newPassword: string;
 
 
   constructor(public navCtrl: NavController,
